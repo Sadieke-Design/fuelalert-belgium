@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { base44 } from "@/api/base44Client";
 import { FUEL_TYPES } from "@/lib/fuelConfig";
 import PriceCard from "@/components/PriceCard";
 import { Link } from "react-router-dom";
@@ -15,14 +14,15 @@ export default function Dashboard() {
     (async () => {
       try {
         // Haal de laatste brandstofprijzen op uit je eigen API
-       const response = await fetch("/api/fuel-prices/latest");
+        const response = await fetch("/api/fuel-prices/latest");
         const result = await response.json();
 
         console.log("Fuel API:", result);
-
         if (result.success) {
           setToday(result.data);
-          setYesterday(null); // later vervangen we dit door de vorige dag
+          setYesterday(result.yesterday);
+        } else {
+          console.error("Geen prijsgegevens ontvangen");
         }
 
         // Meldingen voorlopig leeg
@@ -53,7 +53,8 @@ export default function Dashboard() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Actuele prijzen</h1>
         <p className="text-sm text-white/40">
-          Nationaal gemiddelde · {today?.date || "vandaag"}
+          Nationaal gemiddelde ·{" "}
+          {today?.price_date?.substring(0, 10) || "vandaag"}
         </p>
       </div>
 
