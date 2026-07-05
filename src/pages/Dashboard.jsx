@@ -13,24 +13,48 @@ export default function Dashboard() {
 
   useEffect(() => {
     (async () => {
-      const prices = await base44.entities.FuelPrice.list("-date", 2);
-      setToday(prices[0] || null);
-      setYesterday(prices[1] || null);
-      const n = await base44.entities.Notification.list("-created_date", 3).catch(() => []);
-      setNotifs(n);
-      setLoading(false);
+      try {
+        // Haal de laatste brandstofprijzen op uit je eigen API
+       const response = await fetch("/api/fuel-prices/latest");
+        const result = await response.json();
+
+        console.log("Fuel API:", result);
+
+        if (result.success) {
+          setToday(result.data);
+          setYesterday(null); // later vervangen we dit door de vorige dag
+        }
+
+        // Meldingen voorlopig leeg
+        setNotifs([]);
+      } catch (e) {
+        console.error("API ERROR", e);
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
   if (loading) {
-    return <div className="grid grid-cols-2 gap-3">{[0, 1, 2, 3].map(i => <div key={i} className="h-32 rounded-2xl bg-white/[0.04] animate-pulse" />)}</div>;
+    return (
+      <div className="grid grid-cols-2 gap-3">
+        {[0, 1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className="h-32 rounded-2xl bg-white/[0.04] animate-pulse"
+          />
+        ))}
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Actuele prijzen</h1>
-        <p className="text-sm text-white/40">Nationaal gemiddelde · {today?.date || "vandaag"}</p>
+        <p className="text-sm text-white/40">
+          Nationaal gemiddelde · {today?.date || "vandaag"}
+        </p>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
@@ -39,7 +63,11 @@ export default function Dashboard() {
             key={f.key}
             fuel={f}
             price={today?.[f.key]}
-            diff={today && yesterday ? today[f.key] - yesterday[f.key] : null}
+            diff={
+              today && yesterday
+                ? Number(today[f.key]) - Number(yesterday[f.key])
+                : null
+            }
           />
         ))}
       </div>
@@ -49,7 +77,9 @@ export default function Dashboard() {
           <Crown className="w-6 h-6" />
           <div className="flex-1">
             <div className="font-bold text-sm">Word Premium · €2,99/maand</div>
-            <div className="text-xs opacity-80">Geen advertenties · realtime alerts · prijsvoorspellingen</div>
+            <div className="text-xs opacity-80">
+              Geen advertenties · realtime alerts · prijsvoorspellingen
+            </div>
           </div>
           <ChevronRight className="w-5 h-5" />
         </div>
@@ -67,7 +97,10 @@ export default function Dashboard() {
         ) : (
           <div className="space-y-2">
             {notifs.map((n) => (
-              <div key={n.id} className="rounded-2xl bg-white/[0.04] border border-white/5 p-4">
+              <div
+                key={n.id}
+                className="rounded-2xl bg-white/[0.04] border border-white/5 p-4"
+              >
                 <div className="font-semibold text-sm">{n.title}</div>
                 <div className="text-xs text-white/50 mt-0.5">{n.body}</div>
               </div>
@@ -78,8 +111,12 @@ export default function Dashboard() {
 
       {/* Free version ad banner */}
       <div className="rounded-2xl border border-dashed border-white/10 p-4 text-center">
-        <div className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Advertentie</div>
-        <div className="text-sm text-white/50">Gratis versie · upgrade naar Premium om advertenties te verbergen</div>
+        <div className="text-[10px] uppercase tracking-widest text-white/30 mb-1">
+          Advertentie
+        </div>
+        <div className="text-sm text-white/50">
+          Gratis versie · upgrade naar Premium om advertenties te verbergen
+        </div>
       </div>
     </div>
   );
