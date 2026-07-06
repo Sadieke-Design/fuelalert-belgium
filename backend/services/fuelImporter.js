@@ -40,6 +40,9 @@ export async function importFuelPrices() {
       .replace(/\u00a0/g, " ")
       .replace(/\s+/g, " ")
       .trim();
+    const index = body.indexOf("Diesel - B7");
+
+    console.log(body.substring(index - 250, index + 500));
 
     const prijzen = {
       benzine95: extractPrice(body, "Benzine 95 RON - E10"),
