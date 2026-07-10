@@ -41,3 +41,8 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+# OpenStreetMap bestanden
+backend/data/*.osm.pbf
+backend/data/*.pbf
+backend/data/*.osm
+backend/data/*.geojson

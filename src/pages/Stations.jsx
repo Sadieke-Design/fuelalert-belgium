@@ -81,7 +81,9 @@ export default function Stations() {
   }, [stations, fuelKey, maxDist, userLocation]);
 
   const favIds = new Set(favs.map((f) => f.station_id));
+  console.log("User location:", userLocation);
 
+  console.log("Stations:", stations.slice(0, 5));
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
@@ -147,7 +149,11 @@ export default function Stations() {
           ))}
         </div>
       ) : view === "map" ? (
-        <StationMap stations={enriched} fuelKey={fuelKey} />
+        <StationMap
+          stations={enriched}
+          fuelKey={fuelKey}
+          userLocation={userLocation}
+        />
       ) : (
         <div className="space-y-2">
           {enriched.map((s, i) => (
