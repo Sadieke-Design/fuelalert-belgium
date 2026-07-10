@@ -31,13 +31,18 @@ export default function Stations() {
   const [loading, setLoading] = useState(true);
 
   const load = async () => {
-    const s = await base44.entities.FuelStation.list();
+    try {
+      const response = await fetch("/api/stations");
 
-    console.log("Stations geladen:", s);
+      const json = await response.json();
 
-    setStations(s);
-    const f = await base44.entities.Favorite.list().catch(() => []);
-    setFavs(f);
+      setStations(json.data || []);
+
+      setFavs([]);
+    } catch (err) {
+      console.error(err);
+    }
+
     setLoading(false);
   };
   useEffect(() => {
@@ -61,19 +66,8 @@ export default function Stations() {
   }, []);
 
   const toggleFav = async (station) => {
-    const existing = favs.find((f) => f.station_id === station.id);
-    if (existing) {
-      await base44.entities.Favorite.delete(existing.id);
-    } else {
-      await base44.entities.Favorite.create({
-        station_id: station.id,
-        station_name: station.name,
-      });
-    }
-    const f = await base44.entities.Favorite.list();
-    setFavs(f);
+    console.log("Favorieten komen later via MySQL:", station.name);
   };
-
   const enriched = useMemo(() => {
     return stations
       .map((s) => ({
@@ -82,8 +76,8 @@ export default function Stations() {
           ? dist(userLocation, { lat: s.lat, lng: s.lng })
           : 9999,
       }))
-      .filter((s) => s._d <= maxDist && s[`price_${fuelKey}`] != null)
-      .sort((a, b) => a[`price_${fuelKey}`] - b[`price_${fuelKey}`]);
+      .filter((s) => s._d <= maxDist && s[fuelKey] != null)
+      .sort((a, b) => a[fuelKey] - b[fuelKey]);
   }, [stations, fuelKey, maxDist, userLocation]);
 
   const favIds = new Set(favs.map((f) => f.station_id));
