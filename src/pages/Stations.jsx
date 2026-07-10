@@ -32,6 +32,9 @@ export default function Stations() {
 
   const load = async () => {
     const s = await base44.entities.FuelStation.filter({ is_active: true });
+
+    console.log("Stations geladen:", s);
+
     setStations(s);
     const f = await base44.entities.Favorite.list().catch(() => []);
     setFavs(f);
