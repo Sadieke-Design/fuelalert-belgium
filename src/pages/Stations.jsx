@@ -31,7 +31,7 @@ export default function Stations() {
   const [loading, setLoading] = useState(true);
 
   const load = async () => {
-    const s = await base44.entities.FuelStation.filter({ is_active: true });
+    const s = await base44.entities.FuelStation.list();
 
     console.log("Stations geladen:", s);
 
