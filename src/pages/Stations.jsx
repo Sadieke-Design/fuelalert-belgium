@@ -6,7 +6,7 @@ import StationMap from "@/components/StationMap";
 import { Map as MapIcon, List } from "lucide-react";
 
 // Brussels city center as reference for distance
-const [userLocation, setUserLocation] = useState(null);
+
 function dist(a, b) {
   const R = 6371,
     dLat = ((b.lat - a.lat) * Math.PI) / 180,
@@ -22,6 +22,9 @@ function dist(a, b) {
 export default function Stations() {
   const [stations, setStations] = useState([]);
   const [favs, setFavs] = useState([]);
+
+  const [userLocation, setUserLocation] = useState(null);
+
   const [fuelKey, setFuelKey] = useState("diesel");
   const [maxDist, setMaxDist] = useState(200);
   const [view, setView] = useState("list");
@@ -78,7 +81,7 @@ export default function Stations() {
       }))
       .filter((s) => s._d <= maxDist && s[`price_${fuelKey}`] != null)
       .sort((a, b) => a[`price_${fuelKey}`] - b[`price_${fuelKey}`]);
-  }, [stations, fuelKey, maxDist]);
+  }, [stations, fuelKey, maxDist, userLocation]);
 
   const favIds = new Set(favs.map((f) => f.station_id));
 
