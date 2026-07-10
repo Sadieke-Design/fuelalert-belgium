@@ -2,12 +2,14 @@ import express from "express";
 import cors from "cors";
 import pool from "./config/database.js";
 import fuelRoutes from "./routes/fuel.js";
+import stationRoutes from "./routes/stations.js";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use("/api/fuel-prices", fuelRoutes);
+app.use("/api/stations", stationRoutes);
 
 app.get("/", (req, res) => {
     res.json({
