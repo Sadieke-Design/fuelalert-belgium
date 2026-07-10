@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FUEL_TYPES, FUEL_MAP } from "@/lib/fuelConfig";
+import { historyDays, currentPlan } from "@/lib/access";
 import {
   ResponsiveContainer,
   LineChart,
@@ -78,10 +79,13 @@ export default function History() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [range, setRange] = useState(30);
+  const maxDays = historyDays();
+  const plan = currentPlan();
+
+  const [range, setRange] = useState(maxDays >= 30 ? 30 : maxDays);
 
   const [fuelKey, setFuelKey] = useState("diesel");
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     loadHistory(range);
   }, [range]);
@@ -90,7 +94,11 @@ export default function History() {
     setLoading(true);
 
     try {
-      const response = await fetch(`/api/fuel-prices/history?days=${days}`);
+      const allowedDays = Math.min(days, maxDays);
+
+      const response = await fetch(
+        `/api/fuel-prices/history?days=${allowedDays}`,
+      );
 
       const json = await response.json();
 
@@ -288,11 +296,26 @@ export default function History() {
           </div>
         )}
       </div>
+      {plan !== "premium" && (
+        <div className="rounded-2xl border border-amber-400/20 bg-amber-400/10 p-4">
+          <div className="text-lg font-semibold text-amber-400">
+            Premium Historiek
+          </div>
 
+          <div className="text-sm text-white/60 mt-2">
+            Upgrade naar Premium voor onbeperkte historiek, tankstationkaarten
+            zonder advertenties, prijsalerts en toekomstige AI voorspellingen.
+          </div>
+
+          <button className="mt-4 bg-amber-400 text-black px-5 py-2 rounded-xl font-semibold">
+            Upgrade naar Premium
+          </button>
+        </div>
+      )}
       {/* Periode selector */}
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {RANGES.map((item) => (
+        {RANGES.filter((item) => item.key <= maxDays).map((item) => (
           <button
             key={item.key}
             onClick={() => setRange(item.key)}
