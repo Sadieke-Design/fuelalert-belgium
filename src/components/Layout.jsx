@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { Fuel, MapPin, Star, LineChart, Settings, Shield } from "lucide-react";
+import { Fuel, MapPin, Star, LineChart, Settings } from "lucide-react";
 
 const NAV = [
   { to: "/", icon: Fuel, label: "Prijzen" },
@@ -25,9 +25,7 @@ export default function Layout() {
               <span className="block text-[10px] text-amber-400 font-medium tracking-widest uppercase">Belgium</span>
             </div>
           </Link>
-          <Link to="/admin" className="p-2 rounded-lg text-white/40 hover:text-amber-400 hover:bg-white/5 transition-colors">
-            <Shield className="w-5 h-5" />
-          </Link>
+         
         </div>
       </header>
 
