@@ -73,10 +73,13 @@ export default function Stations() {
       .map((s) => ({
         ...s,
         _d: userLocation
-          ? dist(userLocation, { lat: s.lat, lng: s.lng })
+          ? dist(userLocation, {
+              lat: Number(s.lat),
+              lng: Number(s.lng),
+            })
           : 9999,
       }))
-      .filter((s) => s._d <= maxDist && s[fuelKey] != null)
+      .filter((s) => s._d <= maxDist)
       .sort((a, b) => a[fuelKey] - b[fuelKey]);
   }, [stations, fuelKey, maxDist, userLocation]);
 
@@ -84,6 +87,12 @@ export default function Stations() {
   console.log("User location:", userLocation);
 
   console.log("Stations:", stations.slice(0, 5));
+  console.log("Aantal stations:", stations.length);
+  console.log("Aantal enriched:", enriched.length);
+
+  if (stations.length > 0) {
+    console.log("Eerste station:", stations[0]);
+  }
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
