@@ -12,8 +12,13 @@ export default function VerifyEmail() {
     }
 
     fetch(`${import.meta.env.VITE_API_URL}/api/auth/verify-email/${token}`)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(async (res) => {
+        console.log("HTTP status:", res.status);
+
+        const data = await res.json();
+
+        console.log("Response data:", data);
+
         if (data.success) {
           setStatus("success");
 
@@ -24,7 +29,8 @@ export default function VerifyEmail() {
           setStatus("error");
         }
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error(error);
         setStatus("error");
       });
   }, []);
