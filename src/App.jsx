@@ -26,6 +26,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import VerifyEmail from "./pages/VerifyEmail";
 
 /* Terms and Privacy */
 import Terms from "./pages/Terms";
@@ -49,7 +50,12 @@ const AuthenticatedApp = () => {
     */
   const currentPath = window.location.pathname;
 
-  const publicRoutes = ["/login", "/register", "/forgot-password"];
+  const publicRoutes = [
+    "/login",
+    "/register",
+    "/forgot-password",
+    "/verify-email",
+  ];
 
   const isPublicRoute =
     publicRoutes.includes(currentPath) ||
@@ -80,6 +86,7 @@ const AuthenticatedApp = () => {
       <Route path="/forgot-password" element={<ForgotPassword />} />
 
       <Route path="/reset-password/:token" element={<ResetPassword />} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/terms" element={<Terms />} />
 
       <Route path="/privacy" element={<Privacy />} />
