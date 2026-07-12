@@ -86,6 +86,10 @@ export default function Register() {
       setConfirmPassword("");
       setTermsAccepted(false);
       setPrivacyAccepted(false);
+
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 5000);
     } catch (err) {
       setError(err.message || "Registration failed");
     } finally {
