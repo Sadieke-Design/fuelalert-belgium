@@ -5,7 +5,7 @@ import fuelRoutes from "./routes/fuel.js";
 import stationRoutes from "./routes/stations.js";
 import registerRoutes from "./routes/auth/register.js";
 import verifyEmailRoutes from "./routes/auth/verify-email.js";
-
+import loginRoutes from "./routes/auth/login.js";
 
 const app = express();
 
@@ -15,35 +15,35 @@ app.use("/api/fuel-prices", fuelRoutes);
 app.use("/api/stations", stationRoutes);
 app.use("/api/auth/register", registerRoutes);
 app.use("/api/auth/verify-email", verifyEmailRoutes);
+app.use("/api/auth/login", loginRoutes);
 
 app.get("/", (req, res) => {
-    res.json({
-        app: "FuelAlert Belgium API",
-        status: "online"
-    });
+  res.json({
+    app: "FuelAlert Belgium API",
+    status: "online",
+  });
 });
 
 app.get("/api/test", async (req, res) => {
-    try {
-        const [rows] = await pool.query("SELECT NOW() AS server_time");
+  try {
+    const [rows] = await pool.query("SELECT NOW() AS server_time");
 
-        res.json({
-            success: true,
-            serverTime: rows[0].server_time
-        });
+    res.json({
+      success: true,
+      serverTime: rows[0].server_time,
+    });
+  } catch (err) {
+    console.error(err);
 
-    } catch (err) {
-        console.error(err);
-
-        res.status(500).json({
-            success: false,
-            error: err.message
-        });
-    }
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
+  }
 });
 
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-    console.log(`🚀 FuelAlert API draait op poort ${PORT}`);
+  console.log(`🚀 FuelAlert API draait op poort ${PORT}`);
 });

@@ -37,9 +37,11 @@ export default function Login() {
 
       localStorage.setItem("fuelalert_token", data.token);
 
+      localStorage.setItem("fuelalert_user", JSON.stringify(data.user));
+
       navigate("/");
     } catch (err) {
-      setError(err.message || "Onjuiste email of wachtwoord");
+      setError(err.message || "Onjuist emailadres of wachtwoord");
     } finally {
       setLoading(false);
     }
@@ -90,6 +92,8 @@ export default function Login() {
                   placeholder-slate-500
                   focus:outline-none
                   focus:border-blue-500
+                  focus:ring-2
+                  focus:ring-blue-500/20
                 "
               />
             </div>
@@ -129,6 +133,8 @@ export default function Login() {
                   placeholder-slate-500
                   focus:outline-none
                   focus:border-blue-500
+                  focus:ring-2
+                  focus:ring-blue-500/20
                 "
               />
             </div>
@@ -145,8 +151,9 @@ export default function Login() {
               rounded-xl
               text-white
               font-semibold
-              transition
+              transition-all
               disabled:opacity-50
+              disabled:cursor-not-allowed
               flex
               items-center
               justify-center
