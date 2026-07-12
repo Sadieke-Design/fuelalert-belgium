@@ -7,50 +7,54 @@ import pool from "../../config/database.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.json({
-        success: true,
-        message: "Register API online",
-    });
+  res.json({
+    success: true,
+    message: "Register API online",
+  });
 });
 
 router.post("/", async (req, res) => {
-    try {
+  try {
+    const {
+      first_name,
+      last_name,
+      email,
+      password,
+      termsAccepted,
+      privacyAccepted,
+    } = req.body;
 
-        const {
-            first_name,
-            last_name,
-            email,
-            password,
-            termsAccepted,
-            privacyAccepted,
-        } = req.body;
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
 
-        const hashedPassword =
-            await bcrypt.hash(password, 10);
+    if (!passwordRegex.test(password)) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Password must contain at least 8 characters, 1 uppercase letter, 1 number and 1 special character.",
+      });
+    }
 
-        const verificationToken =
-            crypto.randomBytes(32).toString("hex");
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-        const [existingUsers] =
-            await pool.query(
-                "SELECT id FROM users WHERE email = ?",
-                [email]
-            );
+    const verificationToken = crypto.randomBytes(32).toString("hex");
 
-        if (existingUsers.length > 0) {
-            return res.status(400).json({
-                success: false,
-                message: "Email bestaat al"
-            });
-        }
+    const [existingUsers] = await pool.query(
+      "SELECT id FROM users WHERE email = ?",
+      [email],
+    );
 
-        console.log(
-            "Nieuwe registratie:",
-            req.body
-        );
+    if (existingUsers.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Email bestaat al",
+      });
+    }
 
-        await pool.query(
-    `INSERT INTO users (
+    console.log("Nieuwe registratie:", req.body);
+
+    await pool.query(
+      `INSERT INTO users (
         first_name,
         last_name,
         email,
@@ -62,37 +66,31 @@ router.post("/", async (req, res) => {
         privacy_accepted,
         privacy_accepted_at
     ) VALUES (?, ?, ?, ?, ?, 0, ?, NOW(), ?, NOW())`,
-    [
+      [
         first_name,
         last_name,
         email,
         hashedPassword,
         verificationToken,
         termsAccepted,
-        privacyAccepted
-    ]
-);
+        privacyAccepted,
+      ],
+    );
 
-      await sendVerificationMail(
-    email,
-    verificationToken,
-    first_name
-);
+    await sendVerificationMail(email, verificationToken, first_name);
 
-        res.json({
-            success: true,
-            message: "Gebruiker aangemaakt"
-        });
+    res.json({
+      success: true,
+      message: "Gebruiker aangemaakt",
+    });
+  } catch (error) {
+    console.error(error);
 
-    } catch (error) {
-
-        console.error(error);
-
-        res.status(500).json({
-            success: false,
-            message: "Server fout"
-        });
-    }
+    res.status(500).json({
+      success: false,
+      message: "Server fout",
+    });
+  }
 });
 
 export default router;

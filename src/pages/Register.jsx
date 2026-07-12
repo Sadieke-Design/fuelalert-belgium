@@ -29,7 +29,15 @@ export default function Register() {
     e.preventDefault();
 
     setError("");
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
 
+    if (!passwordRegex.test(password)) {
+      setError(
+        "Password must contain at least 8 characters, 1 uppercase letter, 1 number and 1 special character.",
+      );
+      return;
+    }
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
