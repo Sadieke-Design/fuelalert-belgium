@@ -76,7 +76,7 @@ export default function Privacy() {
                         </p>
 
                         <p className="text-yellow-500 mt-2">
-                            info@fuelalertbe.app
+                            support@fuelalertbe.app
                         </p>
                     </section>
 
