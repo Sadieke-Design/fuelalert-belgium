@@ -1,82 +1,82 @@
 import axios from "axios";
-import * as cheerio from "cheerio";
 import pool from "../config/database.js";
 
-async function extractPrice(html, fuelName) {
-  const regex = new RegExp(
-      `${fuelName}[\\s\\S]*?Pompprijs.*?([0-9]+\\.[0-9]{3})`,
-          "i"
-            );
+async function run() {
+  const [stations] = await pool.query(`
+    SELECT id, q8_code, name
+    FROM stations
+    WHERE q8_code IS NOT NULL
+  `);
 
-              const match = html.match(regex);
+  console.log(`🚗 ${stations.length} gekoppelde Q8 stations gevonden`);
 
-                return match ? parseFloat(match[1]) : null;
-                }
+  let updated = 0;
 
-                async function run() {
-                  const [stations] = await pool.query(`
-                      SELECT id, name, website
-                          FROM stations
-                              WHERE brand LIKE '%Q8%'
-                                    AND website IS NOT NULL
-                                      `);
+  for (const station of stations) {
+    try {
+      const response = await axios.post(
+        "https://www.q8.be/api/poi/location/fresh",
+        {
+          id: station.q8_code.replace("00BE", ""),
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          timeout: 15000,
+        },
+      );
 
-                                        console.log(`🚗 ${stations.length} Q8 stations gevonden`);
+      const prices = response.data.fuelingLos?.fuelPrices || [];
 
-                                          let updated = 0;
-                                            let failed = 0;
+      let diesel = null;
+      let benzine95 = null;
+      let benzine98 = null;
 
-                                              for (const station of stations) {
-                                                  try {
-                                                        const response = await axios.get(station.website, {
-                                                                timeout: 15000,
-                                                                      });
+      for (const fuel of prices) {
+        const pumpPrice = fuel.price - fuel.discountPrice;
 
-                                                                            const html = cheerio.load(response.data)("body").text();
+        if (fuel.code === "DIESEL") {
+          diesel = pumpPrice;
+        }
 
-                                                                                  const benzine95 = await extractPrice(html, "Euro 95");
-                                                                                        const diesel = await extractPrice(html, "Diesel");
-                                                                                              const benzine98 = await extractPrice(html, "Superplus 98");
+        if (fuel.code === "PETROL_EURO_95") {
+          benzine95 = pumpPrice;
+        }
 
-                                                                                                    await pool.query(
-                                                                                                            `
-                                                                                                                    UPDATE stations
-                                                                                                                            SET
-                                                                                                                                      benzine95 = ?,
-                                                                                                                                                diesel = ?,
-                                                                                                                                                          benzine98 = ?,
-                                                                                                                                                                    last_update = NOW()
-                                                                                                                                                                            WHERE id = ?
-                                                                                                                                                                                  `,
-                                                                                                                                                                                          [
-                                                                                                                                                                                                    benzine95,
-                                                                                                                                                                                                              diesel,
-                                                                                                                                                                                                                        benzine98,
-                                                                                                                                                                                                                                  station.id,
-                                                                                                                                                                                                                                          ]
-                                                                                                                                                                                                                                                );
+        if (fuel.code === "PETROL_SUPERPLUS_98") {
+          benzine98 = pumpPrice;
+        }
+      }
 
-                                                                                                                                                                                                                                                      updated++;
+      await pool.query(
+        `
+        UPDATE stations
+        SET
+          diesel=?,
+          benzine95=?,
+          benzine98=?,
+          last_update=NOW()
+        WHERE id=?
+      `,
+        [diesel, benzine95, benzine98, station.id],
+      );
 
-                                                                                                                                                                                                                                                            console.log(
-                                                                                                                                                                                                                                                                    `✅ ${station.name} | 95=${benzine95} | D=${diesel} | 98=${benzine98}`
-                                                                                                                                                                                                                                                                          );
-                                                                                                                                                                                                                                                                              } catch (err) {
-                                                                                                                                                                                                                                                                                    failed++;
+      updated++;
 
-                                                                                                                                                                                                                                                                                          console.log(
-                                                                                                                                                                                                                                                                                                  `❌ ${station.name} -> ${err.message}`
-                                                                                                                                                                                                                                                                                                        );
-                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                              }
+      console.log(
+        `✅ ${station.name} -> 95=${benzine95} D=${diesel} 98=${benzine98}`,
+      );
+    } catch (err) {
+      console.log(`❌ ${station.name}: ${err.message}`);
+    }
+  }
 
-                                                                                                                                                                                                                                                                                                                console.log("");
-                                                                                                                                                                                                                                                                                                                  console.log("=================================");
-                                                                                                                                                                                                                                                                                                                    console.log(`✅ Bijgewerkt: ${updated}`);
-                                                                                                                                                                                                                                                                                                                      console.log(`❌ Mislukt: ${failed}`);
-                                                                                                                                                                                                                                                                                                                        console.log("=================================");
+  console.log("");
+  console.log("==============================");
+  console.log(`✅ ${updated} stations bijgewerkt`);
+  console.log("==============================");
+}
 
-                                                                                                                                                                                                                                                                                                                          process.exit(0);
-                                                                                                                                                                                                                                                                                                                          }
-
-                                                                                                                                                                                                                                                                                                                          run().catch(console.error);
+run();
