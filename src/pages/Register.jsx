@@ -71,11 +71,13 @@ export default function Register() {
         "Registration successful! Please check your email to activate your account before logging in.",
       );
 
+      setFirstName("");
+      setLastName("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
-
-      window.location.href = "/login";
+      setTermsAccepted(false);
+      setPrivacyAccepted(false);
     } catch (err) {
       setError(err.message || "Registration failed");
     } finally {
