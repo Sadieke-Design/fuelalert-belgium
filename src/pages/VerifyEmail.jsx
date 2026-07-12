@@ -11,9 +11,7 @@ export default function VerifyEmail() {
       return;
     }
 
-    fetch(
-      `${import.meta.env.VITE_API_URL}/api/auth/verify-email?token=${token}`
-    )
+    fetch(`${import.meta.env.VITE_API_URL}/api/auth/verify-email/${token}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
