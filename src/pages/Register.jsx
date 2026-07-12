@@ -7,14 +7,13 @@ import { Label } from "@/components/ui/label";
 
 import { UserPlus, Mail, Lock, Loader2, Eye, EyeOff } from "lucide-react";
 
-
-
 export default function Register() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
@@ -68,9 +67,13 @@ export default function Register() {
         throw new Error(data.message || "Registration failed");
       }
 
-      alert(
-        "Registration successful. Check your email to activate your account.",
+      setSuccessMessage(
+        "Registration successful! Please check your email to activate your account.",
       );
+
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 4000);
 
       window.location.href = "/login";
     } catch (err) {
@@ -96,6 +99,11 @@ export default function Register() {
         </div>
 
         <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 shadow-xl">
+          {successMessage && (
+            <div className="mb-6 p-4 rounded-2xl bg-green-500/10 border border-green-500/20 text-green-400">
+              {successMessage}
+            </div>
+          )}
           {error && (
             <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400">
               {error}
