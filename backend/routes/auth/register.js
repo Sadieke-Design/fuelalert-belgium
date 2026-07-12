@@ -36,10 +36,30 @@ if (existingUsers.length > 0) {
 
   console.log("Nieuwe registratie:", req.body);
 
-  res.json({
+ await pool.query(
+    `INSERT INTO users (
+        first_name,
+        last_name,
+        email,
+        password,
+        terms_accepted,
+        terms_accepted_at,
+        privacy_accepted,
+        privacy_accepted_at
+    ) VALUES (?, ?, ?, ?, ?, NOW(), ?, NOW())`,
+    [
+        first_name,
+        last_name,
+        email,
+        hashedPassword,
+        termsAccepted,
+        privacyAccepted
+    ]
+);
+
+res.json({
     success: true,
-    email,
-    hashedPassword
+    message: "Gebruiker aangemaakt"
 });
 });
 
