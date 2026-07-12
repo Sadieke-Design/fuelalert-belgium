@@ -4,6 +4,8 @@ import pool from "./config/database.js";
 import fuelRoutes from "./routes/fuel.js";
 import stationRoutes from "./routes/stations.js";
 import registerRoutes from "./routes/auth/register.js";
+import verifyEmailRoutes from "./routes/auth/verify-email.js";
+
 
 const app = express();
 
@@ -12,6 +14,7 @@ app.use(express.json());
 app.use("/api/fuel-prices", fuelRoutes);
 app.use("/api/stations", stationRoutes);
 app.use("/api/auth/register", registerRoutes);
+app.use("/api/auth/verify-email", verifyEmailRoutes);
 
 app.get("/", (req, res) => {
     res.json({
