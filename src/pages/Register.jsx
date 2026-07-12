@@ -12,60 +12,31 @@ import {
     Loader2
 } from "lucide-react";
 
-import AuthLayout from "@/components/AuthLayout";
-
 export default function Register() {
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-
     const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
-    const [password, setPassword] =
-        useState("");
+    const [termsAccepted, setTermsAccepted] = useState(false);
+    const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
-    const [
-        confirmPassword,
-        setConfirmPassword
-    ] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    const [
-        termsAccepted,
-        setTermsAccepted
-    ] = useState(false);
-
-    const [
-        privacyAccepted,
-        setPrivacyAccepted
-    ] = useState(false);
-
-    const [error, setError] =
-        useState("");
-
-    const [loading, setLoading] =
-        useState(false);
-
-    const handleSubmit =
-        async (e) => {
-
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         setError("");
 
-        if (
-            password !==
-            confirmPassword
-        ) {
-            setError(
-                "Passwords do not match"
-            );
+        if (password !== confirmPassword) {
+            setError("Passwords do not match");
             return;
         }
 
-        if (
-            !termsAccepted ||
-            !privacyAccepted
-        ) {
+        if (!termsAccepted || !privacyAccepted) {
             setError(
                 "You must accept the Terms and Privacy Policy"
             );
@@ -81,17 +52,13 @@ export default function Register() {
                     "https://fuelalertbe.app/api/auth/register",
                     {
                         method: "POST",
-
                         headers: {
                             "Content-Type":
                                 "application/json",
                         },
-
                         body: JSON.stringify({
-                            first_name:
-                                firstName,
-                            last_name:
-                                lastName,
+                            first_name: firstName,
+                            last_name: lastName,
                             email,
                             password,
                             termsAccepted,
@@ -103,9 +70,7 @@ export default function Register() {
             const data =
                 await response.json();
 
-            if (
-                !response.ok
-            ) {
+            if (!response.ok) {
                 throw new Error(
                     data.message ||
                     "Registration failed"
@@ -133,217 +98,226 @@ export default function Register() {
     };
 
     return (
-        <AuthLayout
-            icon={UserPlus}
-            title="Create your account"
-            subtitle="Create your FuelAlert Belgium account"
-            footer={
-                <>
-                    Already have an account?{" "}
-                    <Link
-                        to="/login"
-                        className="text-primary font-medium hover:underline"
-                    >
-                        Log in
-                    </Link>
-                </>
-            }
-        >
+        <div className="min-h-screen bg-black text-white px-6 py-10 pb-32">
 
-            {error && (
-                <div className="mb-4 p-3 rounded-lg bg-destructive/10 text-destructive text-sm">
-                    {error}
-                </div>
-            )}
+            <div className="max-w-2xl mx-auto">
 
-            <form
-                onSubmit={handleSubmit}
-                className="space-y-4"
-            >
+                <div className="flex items-center gap-4 mb-8">
 
-                <div className="grid grid-cols-2 gap-4">
-
-                    <div className="space-y-2">
-                        <Label>
-                            First Name
-                        </Label>
-
-                        <Input
-                            value={firstName}
-                            onChange={(e) =>
-                                setFirstName(
-                                    e.target.value
-                                )
-                            }
-                            placeholder="John"
-                            required
-                        />
+                    <div className="w-16 h-16 rounded-2xl bg-yellow-500 flex items-center justify-center">
+                        <UserPlus className="w-8 h-8 text-black" />
                     </div>
 
-                    <div className="space-y-2">
-                        <Label>
-                            Last Name
-                        </Label>
+                    <div>
+                        <h1 className="text-4xl font-bold">
+                            Create account
+                        </h1>
 
-                        <Input
-                            value={lastName}
-                            onChange={(e) =>
-                                setLastName(
-                                    e.target.value
-                                )
-                            }
-                            placeholder="Doe"
-                            required
-                        />
+                        <p className="text-zinc-400">
+                            Join FuelAlert Belgium
+                        </p>
                     </div>
 
                 </div>
 
-                <div className="space-y-2">
+                <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 shadow-xl">
 
-                    <Label>
-                        Email
-                    </Label>
-
-                    <div className="relative">
-
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-
-                        <Input
-                            type="email"
-                            autoComplete="email"
-                            value={email}
-                            onChange={(e) =>
-                                setEmail(
-                                    e.target.value
-                                )
-                            }
-                            className="pl-10 h-12"
-                            placeholder="you@example.com"
-                            required
-                        />
-
-                    </div>
-
-                </div>
-
-                <div className="space-y-2">
-
-                    <Label>
-                        Password
-                    </Label>
-
-                    <div className="relative">
-
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-
-                        <Input
-                            type="password"
-                            value={password}
-                            onChange={(e) =>
-                                setPassword(
-                                    e.target.value
-                                )
-                            }
-                            className="pl-10 h-12"
-                            placeholder="••••••••"
-                            required
-                        />
-
-                    </div>
-
-                </div>
-
-                <div className="space-y-2">
-
-                    <Label>
-                        Confirm Password
-                    </Label>
-
-                    <div className="relative">
-
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-
-                        <Input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) =>
-                                setConfirmPassword(
-                                    e.target.value
-                                )
-                            }
-                            className="pl-10 h-12"
-                            placeholder="••••••••"
-                            required
-                        />
-
-                    </div>
-
-                </div>
-
-                <div className="space-y-3 text-sm">
-
-                    <label className="flex gap-2 items-start">
-
-                        <input
-                            type="checkbox"
-                            checked={
-                                termsAccepted
-                            }
-                            onChange={(e) =>
-                                setTermsAccepted(
-                                    e.target.checked
-                                )
-                            }
-                        />
-
-                        <span>
-                            I accept the Terms and Conditions
-                        </span>
-
-                    </label>
-
-                    <label className="flex gap-2 items-start">
-
-                        <input
-                            type="checkbox"
-                            checked={
-                                privacyAccepted
-                            }
-                            onChange={(e) =>
-                                setPrivacyAccepted(
-                                    e.target.checked
-                                )
-                            }
-                        />
-
-                        <span>
-                            I accept the Privacy Policy
-                        </span>
-
-                    </label>
-
-                </div>
-
-                <Button
-                    type="submit"
-                    className="w-full h-12 font-medium"
-                    disabled={loading}
-                >
-
-                    {loading ? (
-                        <>
-                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                            Creating account...
-                        </>
-                    ) : (
-                        "Create account"
+                    {error && (
+                        <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400">
+                            {error}
+                        </div>
                     )}
 
-                </Button>
+                    <form
+                        onSubmit={handleSubmit}
+                        className="space-y-5"
+                    >
 
-            </form>
+                        <div className="grid grid-cols-2 gap-4">
 
-        </AuthLayout>
+                            <div>
+                                <Label className="text-zinc-300 mb-2 block">
+                                    First Name
+                                </Label>
+
+                                <Input
+                                    value={firstName}
+                                    onChange={(e) =>
+                                        setFirstName(
+                                            e.target.value
+                                        )
+                                    }
+                                    placeholder="John"
+                                    className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 h-12"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <Label className="text-zinc-300 mb-2 block">
+                                    Last Name
+                                </Label>
+
+                                <Input
+                                    value={lastName}
+                                    onChange={(e) =>
+                                        setLastName(
+                                            e.target.value
+                                        )
+                                    }
+                                    placeholder="Doe"
+                                    className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 h-12"
+                                    required
+                                />
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <Label className="text-zinc-300 mb-2 block">
+                                Email
+                            </Label>
+
+                            <div className="relative">
+
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
+
+                                <Input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) =>
+                                        setEmail(
+                                            e.target.value
+                                        )
+                                    }
+                                    placeholder="you@example.com"
+                                    className="pl-12 bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 h-12"
+                                    required
+                                />
+
+                            </div>
+                        </div>
+
+                        <div>
+                            <Label className="text-zinc-300 mb-2 block">
+                                Password
+                            </Label>
+
+                            <div className="relative">
+
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
+
+                                <Input
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(
+                                            e.target.value
+                                        )
+                                    }
+                                    placeholder="••••••••"
+                                    className="pl-12 bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 h-12"
+                                    required
+                                />
+
+                            </div>
+                        </div>
+
+                        <div>
+                            <Label className="text-zinc-300 mb-2 block">
+                                Confirm Password
+                            </Label>
+
+                            <div className="relative">
+
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
+
+                                <Input
+                                    type="password"
+                                    value={confirmPassword}
+                                    onChange={(e) =>
+                                        setConfirmPassword(
+                                            e.target.value
+                                        )
+                                    }
+                                    placeholder="••••••••"
+                                    className="pl-12 bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 h-12"
+                                    required
+                                />
+
+                            </div>
+                        </div>
+
+                        <div className="space-y-3 pt-2">
+
+                            <label className="flex items-center gap-3 text-zinc-300">
+                                <input
+                                    type="checkbox"
+                                    checked={termsAccepted}
+                                    onChange={(e) =>
+                                        setTermsAccepted(
+                                            e.target.checked
+                                        )
+                                    }
+                                />
+
+                                <span>
+                                    I accept the Terms and Conditions
+                                </span>
+                            </label>
+
+                            <label className="flex items-center gap-3 text-zinc-300">
+                                <input
+                                    type="checkbox"
+                                    checked={privacyAccepted}
+                                    onChange={(e) =>
+                                        setPrivacyAccepted(
+                                            e.target.checked
+                                        )
+                                    }
+                                />
+
+                                <span>
+                                    I accept the Privacy Policy
+                                </span>
+                            </label>
+
+                        </div>
+
+                        <Button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full h-14 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-2xl text-lg"
+                        >
+                            {loading ? (
+                                <>
+                                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                                    Creating account...
+                                </>
+                            ) : (
+                                "Create account"
+                            )}
+                        </Button>
+
+                    </form>
+
+                    <div className="mt-8 text-center text-zinc-400">
+
+                        Already have an account?{" "}
+
+                        <Link
+                            to="/login"
+                            className="text-yellow-500 hover:text-yellow-400 font-semibold"
+                        >
+                            Log in
+                        </Link>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
     );
 }
