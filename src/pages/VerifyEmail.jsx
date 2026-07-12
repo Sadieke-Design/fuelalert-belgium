@@ -12,7 +12,7 @@ export default function VerifyEmail() {
     }
     console.log("API URL =", import.meta.env.VITE_API_URL);
 
-    fetch(`${import.meta.env.VITE_API_URL}/api/auth/verify-email/${token}`)
+    fetch(`/api/auth/verify-email/${token}`)
       .then(async (res) => {
         console.log("HTTP status:", res.status);
 
