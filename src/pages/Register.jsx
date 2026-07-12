@@ -68,12 +68,12 @@ export default function Register() {
       }
 
       setSuccessMessage(
-        "Registration successful! Please check your email to activate your account.",
+        "Registration successful! Please check your email to activate your account before logging in.",
       );
 
-      setTimeout(() => {
-        window.location.href = "/login";
-      }, 4000);
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
 
       window.location.href = "/login";
     } catch (err) {
