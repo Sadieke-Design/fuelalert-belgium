@@ -25,6 +25,7 @@
     "jsonwebtoken": "^9.0.3",
     "leaflet": "^1.9.4",
     "mysql2": "^3.22.5",
+    "nodemailer": "^9.0.3",
     "react-leaflet": "^5.0.0"
   },
   "devDependencies": {
