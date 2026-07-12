@@ -1,14 +1,34 @@
-import { createClient } from '@base44/sdk';
-import { appParams } from '@/lib/app-params';
+export const base44 = {
+  auth: {
+    me: async () => null,
+    logout: () => {},
+  },
 
-const { appId, token, functionsVersion, appBaseUrl } = appParams;
+  entities: {
+    Favorite: {
+      list: async () => [],
+      create: async () => {},
+      delete: async () => {},
+    },
 
-//Create a client with authentication required
-export const base44 = createClient({
-  appId,
-  token,
-  functionsVersion,
-  serverUrl: '',
-  requiresAuth: false,
-  appBaseUrl
-});
+    AlertSetting: {
+      list: async () => [],
+      create: async () => {},
+      update: async () => {},
+    },
+
+    FuelPrice: {
+      list: async () => [],
+      create: async () => {},
+      update: async () => {},
+    },
+
+    FuelStation: {
+      list: async () => [],
+    },
+
+    Notification: {
+      create: async () => {},
+    },
+  },
+};

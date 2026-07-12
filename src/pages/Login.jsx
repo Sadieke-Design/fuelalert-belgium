@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Mail, Lock, Loader2, LogIn } from "lucide-react";
+import { Mail, Lock, Loader2, LogIn, Eye, EyeOff } from "lucide-react";
 
 export default function Login() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -75,6 +76,7 @@ export default function Login() {
 
               <input
                 type="email"
+                autoComplete="email"
                 placeholder="naam@email.be"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -115,28 +117,49 @@ export default function Login() {
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
 
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 className="
-                  w-full
-                  bg-slate-800
-                  border
-                  border-slate-700
-                  rounded-xl
-                  h-14
-                  pl-12
-                  pr-4
-                  text-white
-                  placeholder-slate-500
-                  focus:outline-none
-                  focus:border-blue-500
-                  focus:ring-2
-                  focus:ring-blue-500/20
-                "
+      w-full
+      bg-slate-800
+      border
+      border-slate-700
+      rounded-xl
+      h-14
+      pl-12
+      pr-12
+      text-white
+      placeholder-slate-500
+      focus:outline-none
+      focus:border-blue-500
+      focus:ring-2
+      focus:ring-blue-500/20
+    "
               />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="
+      absolute
+      right-4
+      top-1/2
+      -translate-y-1/2
+      text-slate-400
+      hover:text-white
+      transition-colors
+    "
+              >
+                {showPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
+              </button>
             </div>
           </div>
 
@@ -144,20 +167,20 @@ export default function Login() {
             type="submit"
             disabled={loading}
             className="
-              w-full
-              h-14
-              bg-blue-600
-              hover:bg-blue-700
-              rounded-xl
-              text-white
-              font-semibold
-              transition-all
-              disabled:opacity-50
-              disabled:cursor-not-allowed
-              flex
-              items-center
-              justify-center
-            "
+    w-full
+    h-14
+    bg-blue-600
+    hover:bg-blue-700
+    rounded-xl
+    text-white
+    font-semibold
+    transition-all
+    disabled:opacity-50
+    disabled:cursor-not-allowed
+    flex
+    items-center
+    justify-center
+  "
           >
             {loading ? (
               <>
@@ -169,7 +192,6 @@ export default function Login() {
             )}
           </button>
         </form>
-
         <div className="text-center mt-8 text-slate-400">
           Nog geen account?
           <Link

@@ -6,6 +6,8 @@ import stationRoutes from "./routes/stations.js";
 import registerRoutes from "./routes/auth/register.js";
 import verifyEmailRoutes from "./routes/auth/verify-email.js";
 import loginRoutes from "./routes/auth/login.js";
+import forgotPasswordRoutes from "./routes/auth/forgot-password.js";
+import resetPasswordRoutes from "./routes/auth/reset-password.js";
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use("/api/stations", stationRoutes);
 app.use("/api/auth/register", registerRoutes);
 app.use("/api/auth/verify-email", verifyEmailRoutes);
 app.use("/api/auth/login", loginRoutes);
+app.use("/api/auth/forgot-password", forgotPasswordRoutes);
+app.use("/api/auth/reset-password", resetPasswordRoutes);
 
 app.get("/", (req, res) => {
   res.json({
