@@ -2,18 +2,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClientInstance } from "@/lib/query-client";
 
-import {
-    BrowserRouter as Router,
-    Route,
-    Routes
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import PageNotFound from "./lib/PageNotFound";
 
-import {
-    AuthProvider,
-    useAuth
-} from "@/lib/AuthContext";
+import { AuthProvider, useAuth } from "@/lib/AuthContext";
 
 import UserNotRegisteredError from "@/components/UserNotRegisteredError";
 import ScrollToTop from "./components/ScrollToTop";
@@ -34,173 +27,99 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 
+/* Terms and Privacy */
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+
 const AuthenticatedApp = () => {
+  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } =
+    useAuth();
 
-    const {
-        isLoadingAuth,
-        isLoadingPublicSettings,
-        authError,
-        navigateToLogin
-    } = useAuth();
+  /* Loading */
+  if (isLoadingPublicSettings || isLoadingAuth) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
-    /* Loading */
-    if (
-        isLoadingPublicSettings ||
-        isLoadingAuth
-    ) {
-        return (
-            <div className="fixed inset-0 flex items-center justify-center">
-                <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
-            </div>
-        );
-    }
-
-    /*
+  /*
        Laat publieke pagina's altijd toe
     */
-    const currentPath =
-        window.location.pathname;
+  const currentPath = window.location.pathname;
 
-    const publicRoutes = [
-        "/login",
-        "/register",
-        "/forgot-password"
-    ];
+  const publicRoutes = ["/login", "/register", "/forgot-password"];
 
-    const isPublicRoute =
-        publicRoutes.includes(
-            currentPath
-        ) ||
-        currentPath.startsWith(
-            "/reset-password/"
-        );
+  const isPublicRoute =
+    publicRoutes.includes(currentPath) ||
+    currentPath.startsWith("/reset-password/");
 
-    /*
+  /*
        Enkel beveiligde pagina's blokkeren
     */
-    if (
-        authError &&
-        !isPublicRoute
-    ) {
-
-        if (
-            authError.type ===
-            "user_not_registered"
-        ) {
-            return (
-                <UserNotRegisteredError />
-            );
-        }
-
-        if (
-            authError.type ===
-            "auth_required"
-        ) {
-
-            navigateToLogin();
-
-            return null;
-        }
+  if (authError && !isPublicRoute) {
+    if (authError.type === "user_not_registered") {
+      return <UserNotRegisteredError />;
     }
 
-    return (
-        <Routes>
+    if (authError.type === "auth_required") {
+      navigateToLogin();
 
-            {/* Public */}
-            <Route
-                path="/login"
-                element={<Login />}
-            />
+      return null;
+    }
+  }
 
-            <Route
-                path="/register"
-                element={<Register />}
-            />
+  return (
+    <Routes>
+      {/* Public */}
+      <Route path="/login" element={<Login />} />
 
-            <Route
-                path="/forgot-password"
-                element={<ForgotPassword />}
-            />
+      <Route path="/register" element={<Register />} />
 
-            <Route
-                path="/reset-password/:token"
-                element={<ResetPassword />}
-            />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
 
-            {/* Protected */}
-            <Route element={<Layout />}>
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
+      <Route path="/terms" element={<Terms />} />
 
-                <Route
-                    path="/"
-                    element={<Dashboard />}
-                />
+      <Route path="/privacy" element={<Privacy />} />
 
-                <Route
-                    path="/stations"
-                    element={<Stations />}
-                />
+      {/* Protected */}
+      <Route element={<Layout />}>
+        <Route path="/" element={<Dashboard />} />
 
-                <Route
-                    path="/favorites"
-                    element={<Favorites />}
-                />
+        <Route path="/stations" element={<Stations />} />
 
-                <Route
-                    path="/history"
-                    element={<History />}
-                />
+        <Route path="/favorites" element={<Favorites />} />
 
-                <Route
-                    path="/settings"
-                    element={<Settings />}
-                />
+        <Route path="/history" element={<History />} />
 
-                <Route
-                    path="/premium"
-                    element={<Premium />}
-                />
+        <Route path="/settings" element={<Settings />} />
 
-                <Route
-                    path="/admin"
-                    element={<Admin />}
-                />
+        <Route path="/premium" element={<Premium />} />
 
-            </Route>
+        <Route path="/admin" element={<Admin />} />
+      </Route>
 
-            <Route
-                path="*"
-                element={<PageNotFound />}
-            />
-
-        </Routes>
-    );
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
+  );
 };
 
 function App() {
+  return (
+    <AuthProvider>
+      <QueryClientProvider client={queryClientInstance}>
+        <Router>
+          <ScrollToTop />
 
-    return (
-        <AuthProvider>
+          <AuthenticatedApp />
+        </Router>
 
-            <QueryClientProvider
-                client={
-                    queryClientInstance
-                }
-            >
-
-                <Router>
-
-                    <ScrollToTop />
-
-                    <AuthenticatedApp />
-
-                </Router>
-
-                <Toaster />
-
-            </QueryClientProvider>
-
-        </AuthProvider>
-    );
+        <Toaster />
+      </QueryClientProvider>
+    </AuthProvider>
+  );
 }
 
 export default App;
