@@ -36,7 +36,7 @@ if (existingUsers.length > 0) {
 
   console.log("Nieuwe registratie:", req.body);
 
- await pool.query(
+await pool.query(
     `INSERT INTO users (
         first_name,
         last_name,
