@@ -10,21 +10,23 @@ export default function VerifyEmail() {
       setStatus("error");
       return;
     }
-    console.log("API URL =", import.meta.env.VITE_API_URL);
 
     fetch(`/api/auth/verify-email/${token}`)
       .then(async (res) => {
-        console.log("HTTP status:", res.status);
+        const data = await res.json();
 
-        const text = await res.text();
+        if (data.success) {
+          setStatus("success");
 
-        console.log("Response text:", text);
-
-        setStatus("error");
+          setTimeout(() => {
+            window.location.href = "/login";
+          }, 5000);
+        } else {
+          setStatus("error");
+        }
       })
       .catch((error) => {
-        console.error("Fetch error:", error);
-
+        console.error(error);
         setStatus("error");
       });
   }, []);
