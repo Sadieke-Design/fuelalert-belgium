@@ -1,13 +1,17 @@
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
+
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { fmtEur, FUEL_MAP } from "@/lib/fuelConfig";
 
 function priceIcon(price, color) {
   return L.divIcon({
-      className: "",
-          html: `
+    className: "",
+    html: `
                 <div style="
                         background:${color};
                                 color:#000;
@@ -22,64 +26,70 @@ function priceIcon(price, color) {
                                                                                                       €${Number(price).toFixed(3)}
                                                                                                             </div>
                                                                                                                 `,
-                                                                                                                    iconSize: [60, 24],
-                                                                                                                        iconAnchor: [30, 12],
-                                                                                                                          });
-                                                                                                                          }
+    iconSize: [60, 24],
+    iconAnchor: [30, 12],
+  });
+}
 
-                                                                                                                          export default function StationMap({ stations, fuelKey, userLocation }) {
-                                                                                                                            const color = FUEL_MAP[fuelKey]?.color || "#fbbf24";
+export default function StationMap({ stations, fuelKey, userLocation }) {
+  const color = FUEL_MAP[fuelKey]?.color || "#fbbf24";
 
-                                                                                                                              const center = userLocation
-                                                                                                                                  ? [userLocation.lat, userLocation.lng]
-                                                                                                                                      : [50.8503, 4.3517];
+  const center = userLocation
+    ? [userLocation.lat, userLocation.lng]
+    : [50.8503, 4.3517];
 
-                                                                                                                                        return (
-                                                                                                                                            <div className="rounded-2xl overflow-hidden border border-white/5 h-[420px]">
-                                                                                                                                                  <MapContainer
-                                                                                                                                                          center={center}
-                                                                                                                                                                  zoom={9}
-                                                                                                                                                                          scrollWheelZoom={true}
-                                                                                                                                                                                  style={{
-                                                                                                                                                                                            height: "100%",
-                                                                                                                                                                                                      width: "100%",
-                                                                                                                                                                                                              }}
-                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                            <TileLayer
-                                                                                                                                                                                                                                      url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                                                                                                                                                                                                                                                attribution="&copy; OpenStreetMap &copy; CARTO"
-                                                                                                                                                                                                                                                        />
+  return (
+    <div className="rounded-2xl overflow-hidden border border-white/5 h-[420px]">
+      <MapContainer
+        center={center}
+        zoom={9}
+        scrollWheelZoom={true}
+        style={{
+          height: "100%",
+          width: "100%",
+        }}
+      >
+        <TileLayer
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution="&copy; OpenStreetMap &copy; CARTO"
+        />
 
-                                                                                                                                                                                                                                                                {stations.map((s) => (
-                                                                                                                                                                                                                                                                          <Marker
-                                                                                                                                                                                                                                                                                      key={s.id}
-                                                                                                                                                                                                                                                                                                  position={[Number(s.lat), Number(s.lng)]}
-                                                                                                                                                                                                                                                                                                              icon={priceIcon(s[fuelKey], color)}
-                                                                                                                                                                                                                                                                                                                        >
-                                                                                                                                                                                                                                                                                                                                    <Popup>
-                                                                                                                                                                                                                                                                                                                                                  <div className="min-w-[180px] text-sm">
-                                                                                                                                                                                                                                                                                                                                                                  <div className="font-bold text-base mb-1">{s.name}</div>
+        <MarkerClusterGroup
+          chunkedLoading
+          maxClusterRadius={50}
+          spiderfyOnMaxZoom
+          showCoverageOnHover={false}
+        >
+          {stations.map((s) => (
+            <Marker
+              key={s.id}
+              position={[Number(s.lat), Number(s.lng)]}
+              icon={priceIcon(s[fuelKey], color)}
+            >
+              <Popup>
+                <div className="min-w-[180px] text-sm">
+                  <div className="font-bold text-base mb-1">{s.name}</div>
 
-                                                                                                                                                                                                                                                                                                                                                                                  <div className="text-gray-600">
-                                                                                                                                                                                                                                                                                                                                                                                                    {s.brand} · {s.city}
-                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+                  <div className="text-gray-600">
+                    {s.brand} · {s.city}
+                  </div>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                    <div className="mt-2">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                      {FUEL_MAP[fuelKey].label}:{" "}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <strong>{fmtEur(s[fuelKey])}</strong>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                  <div className="mt-2">
+                    {FUEL_MAP[fuelKey].label}:{" "}
+                    <strong>{fmtEur(s[fuelKey])}</strong>
+                  </div>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div className="text-xs text-gray-500 mt-2">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          {s.street}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <br />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              {s.zip} {s.city}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </Popup>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </Marker>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ))}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </MapContainer>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                  <div className="text-xs text-gray-500 mt-2">
+                    {s.street}
+                    <br />
+                    {s.zip} {s.city}
+                  </div>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
+      </MapContainer>
+    </div>
+  );
+}
