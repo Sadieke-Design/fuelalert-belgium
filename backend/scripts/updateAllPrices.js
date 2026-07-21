@@ -21,5 +21,14 @@ execSync("node scripts/updateStationPrices.js", {
 
 console.log("");
 console.log("==================================");
-console.log("✅ Alle prijzen bijgewerkt.");
+console.log("Stap 3: MAES prijzen bijwerken...");
+console.log("==================================");
+
+execSync("node scripts/updateMaesPrices.js", {
+  stdio: "inherit",
+});
+
+console.log("");
+console.log("==================================");
+console.log("✅ Alle prijzen succesvol bijgewerkt.");
 console.log("==================================");

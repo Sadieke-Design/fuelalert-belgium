@@ -39,6 +39,10 @@ async function updateStationPrices() {
     let updated = 0;
 
     for (const station of stations) {
+      // Maes gebruikt echte gescrapete prijzen
+      if (station.brand === "Maes") {
+        continue;
+      }
       const offset = offsetMap[station.brand] || {
         benzine95_offset: 0,
         benzine98_offset: 0,
@@ -52,11 +56,9 @@ async function updateStationPrices() {
       const benzine98 =
         Number(fuel.benzine98) + Number(offset.benzine98_offset);
 
-      const diesel =
-        Number(fuel.diesel) + Number(offset.diesel_offset);
+      const diesel = Number(fuel.diesel) + Number(offset.diesel_offset);
 
-      const lpg =
-        Number(fuel.lpg) + Number(offset.lpg_offset);
+      const lpg = Number(fuel.lpg) + Number(offset.lpg_offset);
 
       await pool.query(
         `
@@ -75,7 +77,7 @@ async function updateStationPrices() {
           diesel.toFixed(3),
           lpg.toFixed(3),
           station.id,
-        ]
+        ],
       );
 
       updated++;

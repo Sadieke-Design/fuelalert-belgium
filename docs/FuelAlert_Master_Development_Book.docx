@@ -1,0 +1,73 @@
+FuelAlert Belgium - Master Development Book
+Versie: 8.3.0
+Status: Levend document (wordt continu bijgewerkt)
+Startdatum: 21 juli 2026
+Doel
+Dit document is de centrale technische documentatie van FuelAlert Belgium. Alle toekomstige ontwikkelingen, beslissingen, architectuur, bestanden, API’s en checklists worden hierin bijgehouden.
+Projectregels
+1. Code en documentatie blijven altijd synchroon.
+2. Elke fase krijgt een versienummer.
+3. Elke belangrijke beslissing komt in het Decision Log.
+4. Elke taak krijgt een unieke ID.
+5. Na elke ontwikkelsessie worden checklist en changelog bijgewerkt.
+Hoofdstukken
+- Projectoverzicht
+- Architectuur
+- Backend
+- Frontend
+- Database
+- API
+- Scraper Platform
+- DataSource Engine
+- Validator
+- Scheduler
+- Historiek
+- Notificaties
+- Premium
+- Admin
+- Deployment
+- Testen
+- Bugs
+- Decision Log
+- Changelog
+- Master Checklist
+Huidige status
+✓ ES Modules
+✓ ScraperManager
+✓ BaseScraper
+✓ Registry
+✓ Logger
+✓ Retry
+✓ Normalisatie
+✓ MAES scraper
+⏳ Q8
+⏳ DATS24
+⏳ DataSourceManager
+⏳ Validator
+⏳ Carbu onderzoek
+Beslissingen
+DEC-001: Genspark-architectuur blijft de basis.
+DEC-002: FuelAlert evolueert naar een DataSource Engine.
+DEC-003: Carbu wordt onderzocht als aanvullende bron, niet als enige bron.
+DEC-004: Officiële websites hebben voorrang op aggregators.
+Master Checklist
+SCR-001 MAES ✅
+SCR-002 Q8 ⏳
+SCR-003 DATS24 ⏳
+SCR-004 Esso ⏳
+SCR-005 TotalEnergies ⏳
+SCR-006 Lukoil ⏳
+SCR-007 Texaco ⏳
+SCR-008 Gabriels ⏳
+ENG-001 DataSourceManager ⏳
+ENG-002 Validator ⏳
+ENG-003 Scheduler ⏳
+API-001 /api/prices/latest ✅
+API-002 /api/brands ✅
+API-003 /api/health ✅
+API-004 /api/history ⏳
+Changelog v8.3.0
+- Officiële start van het Master Development Book.
+- Nieuwe visie: DataSource Engine.
+- Onderzoek naar Carbu gepland.
+- Master Checklist en Decision Log ingevoerd.
