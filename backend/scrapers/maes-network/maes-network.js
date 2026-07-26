@@ -98,26 +98,51 @@ class MaesNetworkScraper extends BaseScraper {
     });
   }
 
-  async collectRecords(options = {}) {
-    const urls = await this.discoverUrls(
-      options.limit || (options.smokeTest ? 3 : undefined),
-    );
+ async collectRecords(options = {}) {
+  const urls = await this.discoverUrls(
+    options.limit || (options.smokeTest ? 3 : undefined),
+  );
+
+  this.log("info", `${urls.length} urls ontdekt`);
+
+  const batchSize = 20;
+  const records = [];
+  let errors = 0;
+
+  for (let i = 0; i < urls.length; i += batchSize) {
+    const batch = urls.slice(i, i + batchSize);
+
     const results = await Promise.allSettled(
-      urls.map(async (url) => this.parseRecord(url, await fetchText(url))),
+      batch.map(async (url) => {
+        const html = await fetchText(url);
+        return this.parseRecord(url, html);
+      }),
     );
-    const records = [];
-    let errors = 0;
 
     for (const result of results) {
-      if (result.status === "fulfilled" && result.value)
+      if (result.status === "fulfilled" && result.value) {
         records.push(result.value);
-      if (result.status === "rejected") errors += 1;
+      } else if (result.status === "rejected") {
+        errors++;
+      }
     }
 
-    this.log("info", `${records.length} prijzen succesvol`);
-    if (errors) this.log("warn", `${errors} fouten`);
-    return records;
+    this.log(
+      "info",
+      `Batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(urls.length / batchSize)} verwerkt`,
+    );
   }
+
+  this.log("info", `${records.length} prijzen succesvol`);
+
+  if (errors > 0) {
+    this.log("warn", `${errors} fouten`);
+  }
+
+  this.log("info", `${records.length} stations gevonden`);
+
+  return records;
+}
 }
 
 export default MaesNetworkScraper;

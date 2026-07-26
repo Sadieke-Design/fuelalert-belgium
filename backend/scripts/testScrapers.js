@@ -4,7 +4,7 @@ const manager = new ScraperManager();
 
 const result = await manager.run({
   persist: false,
-  smokeTest: true,
+  smokeTest: false,
 });
 
 console.log(JSON.stringify(result, null, 2));
