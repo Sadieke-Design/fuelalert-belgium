@@ -1,0 +1,2125 @@
+{
+  "scraper": "MAES_NETWORK",
+  "generated_at": "2026-07-26T12:46:26.635Z",
+  "stations": 275,
+  "duplicate": {
+    "total": 275,
+    "unique": 275,
+    "duplicates": [],
+    "valid": true
+  },
+  "address": {
+    "total": 275,
+    "complete": 275,
+    "missing": [],
+    "valid": true
+  },
+  "gps": {
+    "total": 275,
+    "valid": 275,
+    "invalid": [],
+    "success": true
+  },
+  "price": {
+    "total": 275,
+    "valid": 1,
+    "invalid": [
+      {
+        "station_id": "grandhan-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "acoz-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "boortmeerbeek-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "bornem-hingene-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "brecht-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "brussel-haren-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "buggenhout-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "deinze-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "ekeren-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "emblem-maes",
+        "issues": [
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "geel-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "haacht-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "heffen-mechelen-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "heist-op-den-berg-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "hekelgem-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "hever-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "hoboken-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "kampenhout-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "londerzeel-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "londerzeel-ramsdonk-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "londerzeel-maes-truck",
+        "issues": [
+          "e95: <= 0",
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "malderen-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "malderen-lippelo-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "merchtem-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "nieuwenrode-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "olv-waver-maes",
+        "issues": [
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "opwijk-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "puurs-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "rumst-maes",
+        "issues": [
+          "lpg: <= 0"
+        ]
+      },
+      {
+        "station_id": "schepdaal-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "sint-katelijne-waver-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "tienen-hakendover-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "waasmunster-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "wijnegem-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "wolvertem-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "wuustwezel-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "zele-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "zwijndrecht-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "opwijk-mazenzele-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "kruibeke-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "lier-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "tienen-kumtich-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "sint-katelijne-waver-veiling-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "schoten-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "temse-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "sint-niklaas-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "hooglede-gits-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "belsele-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "beveren-esso",
+        "issues": [
+          "lpg: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "grembergen-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "brussel-vilvoorde-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "steenokkerzeel-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "antwerpen-kielsbroek-esso",
+        "issues": [
+          "lpg: <= 0"
+        ]
+      },
+      {
+        "station_id": "antwerpen-groenendaallaan-esso-express",
+        "issues": [
+          "e95: <= 0",
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "wijnegem-esso",
+        "issues": [
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "wommelgem-esso-express",
+        "issues": [
+          "lpg: <= 0"
+        ]
+      },
+      {
+        "station_id": "ekeren-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "heist-op-den-berg-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "turnhout-esso-express",
+        "issues": [
+          "e98: <= 0",
+          "lpg: <= 0"
+        ]
+      },
+      {
+        "station_id": "rijkevorsel-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "geel-esso-express",
+        "issues": [
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "emblem-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "wilrijk-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "mechelen-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "willebroek-mechelsesteenweg-esso-express",
+        "issues": [
+          "lpg: <= 0"
+        ]
+      },
+      {
+        "station_id": "essen-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "brasschaat-bredabaan-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "brasschaat-kapelsesteenweg-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "sint-job-in-het-goor-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "schilde-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "grobbendonk-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "deurne-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "duffel-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "begijnendijk-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "bonheiden-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "edegem-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "lokeren-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "zoutleeuw-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "rumst-esso",
+        "issues": [
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "dessel-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "ruisbroek-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "assenede-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "evergem-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "deerlijk-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "dergneau-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "oostende-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "oudenaarde-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "roeselare-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "kalmthout-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "opwijk-maes-2",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "tervuren-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "wetteren-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "liedekerke-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "leopoldsburg-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "rijkevorsel-esso-express-2",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "lontzen-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "harelbeke-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "kruishoutem-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "lummen-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "wingene-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "avelgem-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "kortrijk-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "lichtervelde-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "sijsele-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "vremde-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "asse-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "essen-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "wortel-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "gilly-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "maes-brussel-etterbeek",
+        "issues": [
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "midi-shell",
+        "issues": [
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "laken-anne-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "maes-brussel-chazal",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "schaarbeek-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "brussel-molenbeek-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "koekelberg-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "jette-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "neder-over-heembeek-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "evere-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "auderghem-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "watermael-boitsfort-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "woluwe-st-lambert-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "vorst-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "bierges-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "rixensart-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "perwez-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "nivelles-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "waterloo-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "braine-lalleud-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "mont-st-guibert-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "genappe-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "halle-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "hoeilaart-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "sint-genesius-rode-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "perk-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "zwijndrecht-pastoor-coplaan-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "deurne-venneborglaan-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "borgerhout-vrijgewei-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "bouwel-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "balen-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "lint-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "wilrijk-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "mortsel-maes",
+        "issues": [
+          "e95: <= 0",
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "edegem-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "bornem-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "aarschot-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "rillaar-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "scherpenheuvel-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "schaffen-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "tienen-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "boutersem-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "tielt-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "zolder-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "lanaken-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "dilsen-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "neeroeteren-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "riemst-herderen-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "overpelt-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "neerpelt-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "hechtel-maes",
+        "issues": [
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "tessenderlo-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "glain-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "dolembreux-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "flemalle-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "huy-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "amay-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "petit-rechain-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "champion-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "sauveniere-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "fosses-la-ville-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "erpent-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "ligny-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "sombreffe-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "eghezee-shell-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "maillen-esso",
+        "issues": [
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "cortil-wodon-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "hingeon-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "anhee-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "hastiere-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "ciney-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "philippeville-esso",
+        "issues": [
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "mettet-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "mariembourg-octa",
+        "issues": [
+          "e95: <= 0",
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "marcinelle-octa",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "gosselies-esso",
+        "issues": [
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "anderlues-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "longlier-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "neufchateau-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "jemappes-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "estinnes-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "hornu-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "tournai-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "petit-enghien-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "brugge-maes",
+        "issues": [
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "loppem-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "knokke-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "ramskapelle-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "sint-kruis-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "zeebrugge-shell",
+        "issues": [
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "eernegem-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "kortrijk-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "koolskamp-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "laarne-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "aalst-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "de-pinte-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "oosteeklo-esso-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "brugge-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "desselgem-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "destelbergen-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "kaaskerke-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "eernegem-shell",
+        "issues": [
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "gentbrugge-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "gits-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "kortemark-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "kortrijk-noordstraat-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "merelbeke-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "roeselare-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "sint-eloois-winkel-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "sint-martens-latem-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "vleteren-shell",
+        "issues": [
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "woumen-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "zarren-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "zedelgem-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "nieuwerkerken-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "zulte-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "herenthout-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "wilsele-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "puurs-ruisbroek-maes-truck",
+        "issues": [
+          "e95: <= 0",
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "borsbeek-maes",
+        "issues": [
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "le-roeulx-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "kalmthout-esso-express-2",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "erembodegem-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "kalken-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "minderhout-maes",
+        "issues": [
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "de-panne-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "haine-st-paul-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "assebroek-shell-express",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "wijchmaal-esso",
+        "issues": [
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "morkhoven-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "tongeren-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "geetbets-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "rotem-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "wiekevorst-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "londerzeel-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "sint-niklaas-esso",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "kalmthout-shell",
+        "issues": [
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-arendonk",
+        "issues": [
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "willebroek-shell",
+        "issues": [
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-wijnegem",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "aartselaar-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "maes-truck-gosselies",
+        "issues": [
+          "e95: <= 0",
+          "e98: <= 0",
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-mortsel",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-mechelen",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-edegem",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-malonne",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-bassilly",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "kaprijke-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-eeklo",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-hoboken",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-brustem",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "chatelet-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-rijkevorsel",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "moorsele-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "walcourt-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-stambruges",
+        "issues": [
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "zele-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "tessenderlo-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-saintes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "brasschaat-shell",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "shell-couvin",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "maes-sterrebeek",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "chimay-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      },
+      {
+        "station_id": "maes-gaurain-ramecroix",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0"
+        ]
+      },
+      {
+        "station_id": "booischot-maes",
+        "issues": [
+          "lpg: <= 0",
+          "cng: <= 0",
+          "adblue: <= 0"
+        ]
+      }
+    ],
+    "success": false
+  }
+}
