@@ -1,0 +1,30 @@
+{
+  "scraper": "MAES_NETWORK",
+  "generated_at": "2026-07-26T13:16:03.302Z",
+  "mode": "live",
+  "stations": 275,
+  "duplicate": {
+    "total": 275,
+    "unique": 275,
+    "duplicates": [],
+    "valid": true
+  },
+  "address": {
+    "total": 275,
+    "complete": 275,
+    "missing": [],
+    "valid": true
+  },
+  "gps": {
+    "total": 275,
+    "valid": 275,
+    "invalid": [],
+    "success": true
+  },
+  "price": {
+    "total": 275,
+    "valid": 275,
+    "invalid": [],
+    "success": true
+  }
+}

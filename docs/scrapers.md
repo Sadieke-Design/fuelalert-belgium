@@ -8,3 +8,16 @@
 | Brand | Status | Methode | Stations | Opmerking |
 |--------|--------|----------|---------:|-----------|
 | MAES Network | ✅ Production Ready | Sitemap + HTML + JSON-LD | 275 | Batch processing + uniforme output |
+
+## Official Data Sources
+
+FuelAlert supports both scraper-based and official API integrations.
+
+Current status:
+
+| Source | Status |
+|---------|--------|
+| MAES | ✅ Working |
+| ESSO | ⛔ No official public API found |
+| Fuel Media Service | ⏳ Contacted |
+| CARBU API | Commercial |

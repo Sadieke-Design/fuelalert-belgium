@@ -10,8 +10,15 @@ import PriceValidator from "../validators/PriceValidator.js";
 
 import ReportGenerator from "../reports/ReportGenerator.js";
 
+import CacheManager from "../cache/CacheManager.js";
+
 async function main() {
   const scraperName = process.argv[2];
+
+  const useCache = process.argv.includes("--cache");
+  const refreshCache = process.argv.includes("--refresh");
+
+  const cache = new CacheManager();
 
   if (!scraperName) {
     console.log("Gebruik:");
@@ -29,11 +36,33 @@ async function main() {
 
   console.log(`Scraper : ${scraperName}`);
   console.log("");
-  console.log("Scraper uitvoeren...");
+  if (useCache && cache.exists(scraperName) && !refreshCache) {
+    console.log("📦 Modus : CACHE");
+  } else if (refreshCache) {
+    console.log("🔄 Modus : REFRESH");
+  } else {
+    console.log("🌐 Modus : LIVE");
+  }
+
   console.log("");
 
-  const records = await manager.getScraperRecords(scraperName);
- 
+  let records;
+
+  if (useCache && cache.exists(scraperName) && !refreshCache) {
+    console.log("📦 Cache laden...");
+    records = cache.load(scraperName);
+  } else {
+    if (refreshCache) {
+      console.log("🔄 Cache vernieuwen...");
+    } else {
+      console.log("🌐 Live scraper uitvoeren...");
+    }
+
+    records = await manager.getScraperRecords(scraperName);
+
+    console.log("💾 Cache opslaan...");
+    cache.save(scraperName, records);
+  }
 
   console.log(`✅ ${records.length} records ontvangen`);
   console.log("");
@@ -118,6 +147,7 @@ async function main() {
   const output = {
     scraper: scraperName,
     generated_at: now.toISOString(),
+    mode: useCache ? "cache" : refreshCache ? "refresh" : "live",
     stations: records.length,
 
     duplicate: duplicateResult,
@@ -144,7 +174,16 @@ async function main() {
   console.log(`📄 JSON rapport opgeslagen: reports/${filename}`);
   console.log("");
   console.log("========================================");
-  console.log("Validatie voltooid");
+  if (
+    duplicateResult.valid &&
+    addressResult.valid &&
+    gpsResult.success &&
+    priceResult.success
+  ) {
+    console.log("🎉 Validatie succesvol");
+  } else {
+    console.log("⚠️ Validatie voltooid met fouten");
+  }
   console.log("========================================");
 }
 
