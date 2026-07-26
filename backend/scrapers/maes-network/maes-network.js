@@ -51,28 +51,39 @@ class MaesNetworkScraper extends BaseScraper {
       $("h1").first().text() || $("title").text().split("-")[0],
     );
     const name = title || "MAES network station";
-    const addressLine =
-      normalizeWhitespace(
-        $('a[href*="google.com/maps"], a[href*="destination="]').first().text(),
-      ) ||
-      normalizeWhitespace(
-        $("p, div")
-          .filter((_, el) => /\d{4}\s+/.test($(el).text()))
-          .first()
-          .text(),
-      );
     const coordsHref = $('a[href*="destination="]').attr("href") || "";
     const coordsMatch = coordsHref.match(
       /destination=([0-9.\-]+),([0-9.\-]+)/i,
     );
 
-    const addressMatch = addressLine.match(
-      /^(.*?)(?:\s+(\d+[A-Za-z0-9\/-]*))?,\s*(\d{4})\s+(.+)$/,
-    );
-    const street = addressMatch?.[1]?.trim() || null;
-    const number = addressMatch?.[2]?.trim() || null;
-    const postalCode = addressMatch?.[3] || null;
-    const city = addressMatch?.[4]?.trim() || null;
+    // JSON-LD adres uitlezen
+    const jsonLd = $('script[type="application/ld+json"]').first().html();
+
+    let street = null;
+    let number = null;
+    let postalCode = null;
+    let city = null;
+
+    if (jsonLd) {
+      try {
+        const data = JSON.parse(jsonLd);
+        const address = data.address || {};
+
+        postalCode = address.postalCode || null;
+        city = normalizeWhitespace(address.addressLocality);
+
+        const streetAddress = normalizeWhitespace(address.streetAddress || "");
+
+        const match = streetAddress.match(
+          /^(.*?)(?:\s+(\d+[A-Za-z0-9\/-]*))?$/,
+        );
+
+        street = match?.[1]?.trim() || null;
+        number = match?.[2]?.trim() || null;
+      } catch (err) {
+        this.log("warn", `JSON-LD adres kon niet gelezen worden: ${url}`);
+      }
+    }
     const prices = emptyPrices();
 
     $("h4").each((_, el) => {
@@ -98,51 +109,61 @@ class MaesNetworkScraper extends BaseScraper {
     });
   }
 
- async collectRecords(options = {}) {
-  const urls = await this.discoverUrls(
-    options.limit || (options.smokeTest ? 3 : undefined),
-  );
-
-  this.log("info", `${urls.length} urls ontdekt`);
-
-  const batchSize = 20;
-  const records = [];
-  let errors = 0;
-
-  for (let i = 0; i < urls.length; i += batchSize) {
-    const batch = urls.slice(i, i + batchSize);
-
-    const results = await Promise.allSettled(
-      batch.map(async (url) => {
-        const html = await fetchText(url);
-        return this.parseRecord(url, html);
-      }),
+  async collectRecords(options = {}) {
+    const urls = await this.discoverUrls(
+      options.limit || (options.smokeTest ? 3 : undefined),
     );
 
-    for (const result of results) {
-      if (result.status === "fulfilled" && result.value) {
-        records.push(result.value);
-      } else if (result.status === "rejected") {
-        errors++;
+    this.log("info", `${urls.length} urls ontdekt`);
+
+    const batchSize = 20;
+    const records = [];
+    let errors = 0;
+
+    for (let i = 0; i < urls.length; i += batchSize) {
+      const batch = urls.slice(i, i + batchSize);
+
+      const results = await Promise.allSettled(
+        batch.map(async (url) => {
+          const html = await fetchText(url);
+          return this.parseRecord(url, html);
+        }),
+      );
+
+      for (const result of results) {
+        if (result.status === "fulfilled" && result.value) {
+          records.push(result.value);
+        } else if (result.status === "rejected") {
+          errors++;
+        }
       }
+
+      this.log(
+        "info",
+        `Batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(urls.length / batchSize)} verwerkt`,
+      );
     }
 
-    this.log(
-      "info",
-      `Batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(urls.length / batchSize)} verwerkt`,
-    );
+    this.log("info", `${records.length} prijzen succesvol`);
+
+    if (errors > 0) {
+      this.log("warn", `${errors} fouten`);
+    }
+
+    this.log("info", `${records.length} stations gevonden`);
+    const ids = records.map((r) => r.station_id);
+    const uniqueIds = new Set(ids);
+
+    console.log("Stations:", ids.length);
+    console.log("Unieke IDs:", uniqueIds.size);
+
+    if (ids.length !== uniqueIds.size) {
+      const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+      console.log("Dubbele IDs:", [...new Set(duplicates)]);
+    }
+
+    return records;
   }
-
-  this.log("info", `${records.length} prijzen succesvol`);
-
-  if (errors > 0) {
-    this.log("warn", `${errors} fouten`);
-  }
-
-  this.log("info", `${records.length} stations gevonden`);
-
-  return records;
-}
 }
 
 export default MaesNetworkScraper;

@@ -49,7 +49,17 @@ class ScraperManager {
 
     return summary;
   }
+  async getScraperRecords(scraperName, { smokeTest = false } = {}) {
+    const scraper = this.scrapers.find(
+      (s) => s.sourceName.toLowerCase() === scraperName.toLowerCase(),
+    );
 
+    if (!scraper) {
+      throw new Error(`Scraper '${scraperName}' niet gevonden.`);
+    }
+
+    return await scraper.scrape({ smokeTest });
+  }
   static getScrapers() {
     return activeScrapers;
   }
