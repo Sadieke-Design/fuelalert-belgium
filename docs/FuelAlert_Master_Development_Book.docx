@@ -1,73 +1,326 @@
-FuelAlert Belgium - Master Development Book
-Versie: 8.3.0
-Status: Levend document (wordt continu bijgewerkt)
-Startdatum: 21 juli 2026
-Doel
-Dit document is de centrale technische documentatie van FuelAlert Belgium. Alle toekomstige ontwikkelingen, beslissingen, architectuur, bestanden, API’s en checklists worden hierin bijgehouden.
-Projectregels
+# FuelAlert Belgium
+# Master Development Book
+
+Versie: 8.4.0
+Status: Active Development – Single Source of Truth
+Laatste update: 27 juli 2026
+Project gestart: 21 juli 2026
+
+======================================================================
+1. DOEL
+======================================================================
+
+Dit document is de officiële technische documentatie van FuelAlert Belgium
+en vormt de centrale kennisbank van het volledige project.
+
+Alle belangrijke architectuurkeuzes, ontwikkelbeslissingen, projectstatus,
+roadmap, API's, databronnen, scrapers, deploymentprocedures en toekomstige
+uitbreidingen worden hierin bijgehouden.
+
+Dit document is de Single Source of Truth voor het project.
+Alle andere documentatie verwijst naar dit document of werkt een specifiek
+onderdeel verder uit.
+
+======================================================================
+2. PROJECTDOEL
+======================================================================
+
+FuelAlert Belgium ontwikkelt een modern platform voor Belgische
+brandstofprijzen.
+
+Het doel is een betrouwbaar systeem te bouwen dat automatisch prijzen
+verzamelt van Belgische tankstations via:
+
+• Officiële API's
+• Commerciële databronnen
+• Eigen scrapers
+
+Het platform bestaat uit:
+
+• Backend API
+• Webapp
+• Progressive Web App (PWA)
+• Adminportaal
+• Premiumfunctionaliteiten
+• Meldingssysteem
+• Historische prijsanalyse
+• Publieke API (toekomst)
+
+======================================================================
+3. PROJECTREGELS
+======================================================================
+
+DOCUMENTATIE
+
 1. Code en documentatie blijven altijd synchroon.
-2. Elke fase krijgt een versienummer.
-3. Elke belangrijke beslissing komt in het Decision Log.
-4. Elke taak krijgt een unieke ID.
-5. Na elke ontwikkelsessie worden checklist en changelog bijgewerkt.
-Hoofdstukken
-- Projectoverzicht
-- Architectuur
-- Backend
-- Frontend
-- Database
-- API
-- Scraper Platform
-- DataSource Engine
-- Validator
-- Scheduler
-- Historiek
-- Notificaties
-- Premium
-- Admin
-- Deployment
-- Testen
-- Bugs
-- Decision Log
-- Changelog
-- Master Checklist
-Huidige status
-✓ ES Modules
-✓ ScraperManager
-✓ BaseScraper
-✓ Registry
-✓ Logger
-✓ Retry
-✓ Normalisatie
-✓ MAES scraper
-⏳ Q8
+2. Elke afgeronde fase krijgt een nieuw versienummer.
+3. Elke belangrijke beslissing wordt geregistreerd in het Decision Log.
+4. Iedere taak krijgt een unieke ID.
+5. Na iedere ontwikkelsessie worden Checklist en Changelog bijgewerkt.
+
+ONTWIKKELING
+
+1. Architectuur gaat altijd boven snelle oplossingen.
+2. Betrouwbaarheid is belangrijker dan snelheid.
+3. Officiële databronnen hebben voorrang op scraping.
+4. Nieuwe scrapers moeten plug-and-play toegevoegd kunnen worden.
+5. Alle componenten blijven modulair.
+6. Geen duplicate code.
+7. Elke nieuwe feature krijgt documentatie.
+
+======================================================================
+4. PROJECTSTATUS
+======================================================================
+
+BACKEND
+
+✅ ES Modules
+✅ Express REST API
+✅ Scraper Framework
+✅ ScraperManager
+✅ BaseScraper
+✅ BrowserScraper
+✅ Registry
+✅ Validation Engine
+✅ CacheManager
+✅ Report Engine
+✅ Scheduler
+✅ Retry Engine
+✅ Persistence Layer
+✅ Station Bootstrap (Overpass)
+✅ REST API
+✅ MAES scraper volledig operationeel
+
+IN ONTWIKKELING
+
+⏳ Capability Registry
+⏳ Health Engine
+⏳ Smart Rate Limiter
+⏳ Source Statistics
+⏳ Gabriëls scraper
+⏳ Fuel Media Service API
+
+ON HOLD
+
+⏸ Q8
+⏸ Esso
+
+FRONTEND
+
+✅ Dashboard
+✅ Stationspagina
+✅ Kaart
+✅ Login
+✅ Registratie
+✅ Wachtwoord vergeten
+✅ Reset wachtwoord
+
+⏳ Favorieten
+⏳ Historiek
+⏳ Filters
+⏳ Premium
+
+======================================================================
+5. DATA BRONNEN
+======================================================================
+
+MAES ......................... ✅ Productie
+
+Fuel Media Service ........... ⏳ Contact opgenomen
+
+Gabriëls ..................... ⏳ Gepland
+
+Shell ........................ ⏳ Gepland
+
+Texaco ....................... ⏳ Gepland
+
+Gulf ......................... ⏳ Gepland
+
+Avia ......................... ⏳ Gepland
+
+DATS24 ....................... ⏳ Onderzoek
+
+Q8 ........................... ⏸ On Hold
+
+Esso ......................... ⏸ On Hold
+
+======================================================================
+6. ARCHITECTUUR
+======================================================================
+
+De backend is opgebouwd als een modulair scraperplatform.
+
+Belangrijkste componenten:
+
+• ScraperManager
+• BaseScraper
+• BrowserScraper
+• Registry
+• Validation Engine
+• Scheduler
+• Persistence Layer
+• CacheManager
+• Report Engine
+
+Nieuwe scrapers kunnen zonder wijziging aan bestaande code worden
+toegevoegd.
+
+======================================================================
+7. REST API
+======================================================================
+
+Beschikbaar
+
+✅ /api/prices/latest
+
+✅ /api/brands
+
+✅ /api/health
+
+Gepland
+
+⏳ /api/history
+
+⏳ /api/stations
+
+⏳ /api/statistics
+
+======================================================================
+8. DECISION LOG
+======================================================================
+
+DEC-001
+Genspark-architectuur blijft de basis.
+
+DEC-002
+FuelAlert evolueert naar een DataSource Engine.
+
+DEC-003
+Carbu / Fuel Media Service wordt onderzocht als aanvullende databron.
+
+DEC-004
+Officiële websites hebben voorrang op aggregators.
+
+DEC-005
+FuelAlert wordt een multi-source platform.
+
+DEC-006
+Officiële API's krijgen altijd voorrang op scraping.
+
+DEC-007
+Reverse engineering van Esso wordt stopgezet.
+
+DEC-008
+Q8 wordt voorlopig on hold gezet.
+
+DEC-009
+Fuel Media Service werd gecontacteerd voor een officiële commerciële API.
+
+DEC-010
+Het Master Development Book is de Single Source of Truth.
+
+======================================================================
+9. MASTER CHECKLIST
+======================================================================
+
+SCRAPERS
+
+✅ MAES
+
+⏳ Gabriëls
+
+⏳ Lukoil
+
+⏳ Texaco
+
+⏳ Gulf
+
+⏳ Avia
+
 ⏳ DATS24
-⏳ DataSourceManager
-⏳ Validator
-⏳ Carbu onderzoek
-Beslissingen
-DEC-001: Genspark-architectuur blijft de basis.
-DEC-002: FuelAlert evolueert naar een DataSource Engine.
-DEC-003: Carbu wordt onderzocht als aanvullende bron, niet als enige bron.
-DEC-004: Officiële websites hebben voorrang op aggregators.
-Master Checklist
-SCR-001 MAES ✅
-SCR-002 Q8 ⏳
-SCR-003 DATS24 ⏳
-SCR-004 Esso ⏳
-SCR-005 TotalEnergies ⏳
-SCR-006 Lukoil ⏳
-SCR-007 Texaco ⏳
-SCR-008 Gabriels ⏳
-ENG-001 DataSourceManager ⏳
-ENG-002 Validator ⏳
-ENG-003 Scheduler ⏳
-API-001 /api/prices/latest ✅
-API-002 /api/brands ✅
-API-003 /api/health ✅
-API-004 /api/history ⏳
-Changelog v8.3.0
-- Officiële start van het Master Development Book.
-- Nieuwe visie: DataSource Engine.
-- Onderzoek naar Carbu gepland.
-- Master Checklist en Decision Log ingevoerd.
+
+⏳ Shell
+
+⏳ TotalEnergies
+
+⏸ Esso
+
+⏸ Q8
+
+BACKEND ENGINE
+
+✅ ScraperManager
+
+✅ BrowserScraper
+
+✅ Validation Engine
+
+✅ CacheManager
+
+✅ Report Engine
+
+✅ Scheduler
+
+⏳ Capability Registry
+
+⏳ Health Engine
+
+⏳ Smart Rate Limiter
+
+⏳ Source Statistics
+
+API
+
+✅ /api/prices/latest
+
+✅ /api/brands
+
+✅ /api/health
+
+⏳ /api/history
+
+⏳ /api/stations
+
+⏳ /api/statistics
+
+======================================================================
+10. CHANGELOG
+======================================================================
+
+v8.4.0
+
+• Backend omgevormd tot een modulair scraperplatform.
+• BrowserScraper toegevoegd.
+• Validation Engine uitgebreid.
+• CacheManager geïmplementeerd.
+• Report Engine toegevoegd.
+• Scheduler geïntegreerd.
+• Retry Engine uitgebreid.
+• Persistence Layer toegevoegd.
+• MAES scraper volledig operationeel gemaakt.
+• Onderzoek naar Esso afgerond.
+• Q8 voorlopig on hold gezet.
+• Fuel Media Service gecontacteerd voor een officiële API.
+• PROJECT_VISION.md toegevoegd.
+• ARCHITECTURE.md toegevoegd.
+• fuel-media-service-api.md toegevoegd.
+• Master Development Book aangewezen als centrale projectdocumentatie.
+
+======================================================================
+11. VOLGENDE PRIORITEITEN
+======================================================================
+
+1. Capability Registry
+2. Health Engine
+3. Smart Rate Limiter
+4. Gabriëls scraper
+5. Fuel Media Service API-integratie (indien beschikbaar)
+6. Frontend verder afwerken
+7. Historiek en grafieken
+8. Premiumfunctionaliteiten
+9. Pushnotificaties
+10. Publieke API
+
+======================================================================
+EINDE MASTER DEVELOPMENT BOOK
+======================================================================
