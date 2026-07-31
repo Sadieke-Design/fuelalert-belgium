@@ -1,39 +1,43 @@
 # FuelAlert Belgium
 # Master Development Book
 
-Versie: 8.4.0
+Versie: 8.4.1
 Status: Active Development – Single Source of Truth
-Laatste update: 27 juli 2026
+Laatste update: 31 juli 2026
 Project gestart: 21 juli 2026
 
 ======================================================================
 1. DOEL
 ======================================================================
 
-Dit document is de officiële technische documentatie van FuelAlert Belgium
-en vormt de centrale kennisbank van het volledige project.
+Dit document is de officiële technische documentatie van FuelAlert Belgium.
 
-Alle belangrijke architectuurkeuzes, ontwikkelbeslissingen, projectstatus,
-roadmap, API's, databronnen, scrapers, deploymentprocedures en toekomstige
-uitbreidingen worden hierin bijgehouden.
+Het vormt de centrale kennisbank van het volledige project en is de
+Single Source of Truth.
 
-Dit document is de Single Source of Truth voor het project.
-Alle andere documentatie verwijst naar dit document of werkt een specifiek
-onderdeel verder uit.
+Alle architectuur, beslissingen, ontwikkelstatus, roadmap, databronnen,
+API's, scrapers, deploymentprocedures en toekomstige uitbreidingen worden
+hier bijgehouden.
+
+Iedere ontwikkelsessie eindigt met een update van dit document.
 
 ======================================================================
-2. PROJECTDOEL
+2. PROJECTVISIE
 ======================================================================
 
-FuelAlert Belgium ontwikkelt een modern platform voor Belgische
-brandstofprijzen.
+FuelAlert Belgium ontwikkelt het meest complete platform voor
+brandstofprijzen en tankstationinformatie in België.
 
-Het doel is een betrouwbaar systeem te bouwen dat automatisch prijzen
-verzamelt van Belgische tankstations via:
+Het systeem verzamelt gegevens uit meerdere databronnen en combineert
+deze automatisch tot één betrouwbare dataset.
+
+Databronnen:
 
 • Officiële API's
 • Commerciële databronnen
 • Eigen scrapers
+• Geverifieerde tankstationhouders (toekomst)
+• Communitymeldingen (toekomst)
 
 Het platform bestaat uit:
 
@@ -42,8 +46,8 @@ Het platform bestaat uit:
 • Progressive Web App (PWA)
 • Adminportaal
 • Premiumfunctionaliteiten
-• Meldingssysteem
 • Historische prijsanalyse
+• Pushnotificaties
 • Publieke API (toekomst)
 
 ======================================================================
@@ -53,20 +57,20 @@ Het platform bestaat uit:
 DOCUMENTATIE
 
 1. Code en documentatie blijven altijd synchroon.
-2. Elke afgeronde fase krijgt een nieuw versienummer.
-3. Elke belangrijke beslissing wordt geregistreerd in het Decision Log.
-4. Iedere taak krijgt een unieke ID.
-5. Na iedere ontwikkelsessie worden Checklist en Changelog bijgewerkt.
+2. Elke release krijgt een nieuw versienummer.
+3. Elke architectuurbeslissing komt in het Decision Log.
+4. Iedere module krijgt documentatie.
+5. Iedere release krijgt een ZIP-back-up.
 
 ONTWIKKELING
 
-1. Architectuur gaat altijd boven snelle oplossingen.
-2. Betrouwbaarheid is belangrijker dan snelheid.
-3. Officiële databronnen hebben voorrang op scraping.
-4. Nieuwe scrapers moeten plug-and-play toegevoegd kunnen worden.
-5. Alle componenten blijven modulair.
-6. Geen duplicate code.
-7. Elke nieuwe feature krijgt documentatie.
+1. Architectuur boven snelheid.
+2. Modulaire opbouw.
+3. Geen duplicate code.
+4. Plug-and-play scrapers.
+5. Officiële bronnen hebben voorrang.
+6. Elke scraper gebruikt dezelfde infrastructuur.
+7. Eerst platform, daarna nieuwe databronnen.
 
 ======================================================================
 4. PROJECTSTATUS
@@ -84,19 +88,21 @@ BACKEND
 ✅ Validation Engine
 ✅ CacheManager
 ✅ Report Engine
-✅ Scheduler
+✅ Scheduler Engine
 ✅ Retry Engine
 ✅ Persistence Layer
-✅ Station Bootstrap (Overpass)
-✅ REST API
-✅ MAES scraper volledig operationeel
+✅ Station Bootstrap
+✅ Capability Registry
+✅ Health Engine
+✅ MAES Network scraper
 
 IN ONTWIKKELING
 
-⏳ Capability Registry
-⏳ Health Engine
-⏳ Smart Rate Limiter
-⏳ Source Statistics
+⏳ Metrics Engine
+⏳ Validator Engine
+⏳ Cache optimalisatie
+⏳ Rate Limiter
+⏳ DataSource Manager
 ⏳ Gabriëls scraper
 ⏳ Fuel Media Service API
 
@@ -108,7 +114,7 @@ ON HOLD
 FRONTEND
 
 ✅ Dashboard
-✅ Stationspagina
+✅ Stations
 ✅ Kaart
 ✅ Login
 ✅ Registratie
@@ -117,22 +123,26 @@ FRONTEND
 
 ⏳ Favorieten
 ⏳ Historiek
-⏳ Filters
 ⏳ Premium
+⏳ Filters
 
 ======================================================================
 5. DATA BRONNEN
 ======================================================================
 
-MAES ......................... ✅ Productie
+MAES Network ................. ✅ Productie
 
 Fuel Media Service ........... ⏳ Contact opgenomen
 
 Gabriëls ..................... ⏳ Gepland
 
+TotalEnergies ................. ⏳ Gepland
+
 Shell ........................ ⏳ Gepland
 
 Texaco ....................... ⏳ Gepland
+
+Lukoil ....................... ⏳ Gepland
 
 Gulf ......................... ⏳ Gepland
 
@@ -145,25 +155,29 @@ Q8 ........................... ⏸ On Hold
 Esso ......................... ⏸ On Hold
 
 ======================================================================
-6. ARCHITECTUUR
+6. DATA SOURCE ENGINE
 ======================================================================
 
-De backend is opgebouwd als een modulair scraperplatform.
+De volledige backend evolueert naar één centrale DataSource Engine.
 
-Belangrijkste componenten:
+Architectuur:
 
-• ScraperManager
-• BaseScraper
-• BrowserScraper
-• Registry
-• Validation Engine
-• Scheduler
-• Persistence Layer
-• CacheManager
-• Report Engine
+DataSource Engine
 
-Nieuwe scrapers kunnen zonder wijziging aan bestaande code worden
-toegevoegd.
+├── Capability Registry ✅
+├── Scheduler Engine ✅
+├── Health Engine ✅
+├── Metrics Engine ⏳
+├── Validator Engine ⏳
+├── Cache Engine ⏳
+├── Rate Limiter ⏳
+├── DataSource Manager ⏳
+├── ScraperManager ✅
+├── BaseScraper ✅
+├── BrowserScraper ✅
+└── Persistence Layer ✅
+
+Nieuwe databronnen gebruiken automatisch deze infrastructuur.
 
 ======================================================================
 7. REST API
@@ -172,18 +186,17 @@ toegevoegd.
 Beschikbaar
 
 ✅ /api/prices/latest
-
 ✅ /api/brands
-
+✅ /api/capabilities
 ✅ /api/health
+✅ /api/scheduler
 
 Gepland
 
+⏳ /api/metrics
 ⏳ /api/history
-
-⏳ /api/stations
-
 ⏳ /api/statistics
+⏳ Publieke API
 
 ======================================================================
 8. DECISION LOG
@@ -196,7 +209,7 @@ DEC-002
 FuelAlert evolueert naar een DataSource Engine.
 
 DEC-003
-Carbu / Fuel Media Service wordt onderzocht als aanvullende databron.
+Fuel Media Service wordt onderzocht als aanvullende databron.
 
 DEC-004
 Officiële websites hebben voorrang op aggregators.
@@ -214,10 +227,25 @@ DEC-008
 Q8 wordt voorlopig on hold gezet.
 
 DEC-009
-Fuel Media Service werd gecontacteerd voor een officiële commerciële API.
+Fuel Media Service werd gecontacteerd.
 
 DEC-010
 Het Master Development Book is de Single Source of Truth.
+
+DEC-011
+Nieuwe scrapers worden pas ontwikkeld nadat de DataSource Engine
+volledig operationeel is.
+
+DEC-012
+Iedere databron moet automatisch integreren met:
+
+• Capability Registry
+• Scheduler Engine
+• Health Engine
+• Metrics Engine
+• Validator Engine
+• Rate Limiter
+• DataSource Manager
 
 ======================================================================
 9. MASTER CHECKLIST
@@ -225,13 +253,17 @@ Het Master Development Book is de Single Source of Truth.
 
 SCRAPERS
 
-✅ MAES
+✅ MAES Network
 
 ⏳ Gabriëls
 
-⏳ Lukoil
+⏳ TotalEnergies
+
+⏳ Shell
 
 ⏳ Texaco
+
+⏳ Lukoil
 
 ⏳ Gulf
 
@@ -239,15 +271,11 @@ SCRAPERS
 
 ⏳ DATS24
 
-⏳ Shell
-
-⏳ TotalEnergies
-
 ⏸ Esso
 
 ⏸ Q8
 
-BACKEND ENGINE
+DATA SOURCE ENGINE
 
 ✅ ScraperManager
 
@@ -259,15 +287,19 @@ BACKEND ENGINE
 
 ✅ Report Engine
 
-✅ Scheduler
+✅ Scheduler Engine
 
-⏳ Capability Registry
+✅ Capability Registry
 
-⏳ Health Engine
+✅ Health Engine
 
-⏳ Smart Rate Limiter
+⏳ Metrics Engine
 
-⏳ Source Statistics
+⏳ Validator Engine
+
+⏳ Rate Limiter
+
+⏳ DataSource Manager
 
 API
 
@@ -275,11 +307,15 @@ API
 
 ✅ /api/brands
 
+✅ /api/capabilities
+
 ✅ /api/health
 
-⏳ /api/history
+✅ /api/scheduler
 
-⏳ /api/stations
+⏳ /api/metrics
+
+⏳ /api/history
 
 ⏳ /api/statistics
 
@@ -287,39 +323,73 @@ API
 10. CHANGELOG
 ======================================================================
 
+v8.4.1
+
+• Capability Registry geïmplementeerd.
+• Endpoint /api/capabilities toegevoegd.
+• Health Engine gebouwd.
+• Endpoint /api/health toegevoegd.
+• Scheduler Engine gebouwd.
+• Endpoint /api/scheduler toegevoegd.
+• Scheduler voert scrapers automatisch uit.
+• Eerste automatische scraper monitoring.
+• Start van de DataSource Engine.
+• Architectuur volledig herwerkt naar een modulair platform.
+
 v8.4.0
 
-• Backend omgevormd tot een modulair scraperplatform.
 • BrowserScraper toegevoegd.
 • Validation Engine uitgebreid.
 • CacheManager geïmplementeerd.
 • Report Engine toegevoegd.
-• Scheduler geïntegreerd.
+• Scheduler voorbereid.
 • Retry Engine uitgebreid.
 • Persistence Layer toegevoegd.
-• MAES scraper volledig operationeel gemaakt.
-• Onderzoek naar Esso afgerond.
-• Q8 voorlopig on hold gezet.
-• Fuel Media Service gecontacteerd voor een officiële API.
+• MAES scraper volledig operationeel.
 • PROJECT_VISION.md toegevoegd.
 • ARCHITECTURE.md toegevoegd.
-• fuel-media-service-api.md toegevoegd.
-• Master Development Book aangewezen als centrale projectdocumentatie.
+• Fuel Media Service documentatie toegevoegd.
 
 ======================================================================
 11. VOLGENDE PRIORITEITEN
 ======================================================================
 
-1. Capability Registry
-2. Health Engine
-3. Smart Rate Limiter
-4. Gabriëls scraper
-5. Fuel Media Service API-integratie (indien beschikbaar)
-6. Frontend verder afwerken
-7. Historiek en grafieken
-8. Premiumfunctionaliteiten
+FASE 8.5
+
+1. Metrics Engine
+2. Validator Engine
+3. Rate Limiter
+4. DataSource Manager
+5. Gabriëls scraper
+6. Fuel Media Service API
+7. Historiek
+8. Premium
 9. Pushnotificaties
 10. Publieke API
+
+======================================================================
+12. LANGE TERMIJNVISIE
+======================================================================
+
+FuelAlert Belgium groeit uit tot een volledig platform voor
+Belgische tankstationinformatie.
+
+Toekomstige uitbreidingen:
+
+• Verified Station Portal
+• Bedrijfsaccounts
+• Zelf prijzen beheren
+• EV-laadprijzen
+• HVO100
+• AdBlue
+• Carwash
+• Shop
+• Restaurant
+• Openingsuren
+• Promoties
+• Foto's
+• Tijdelijke meldingen
+• Publieke Developer API
 
 ======================================================================
 EINDE MASTER DEVELOPMENT BOOK

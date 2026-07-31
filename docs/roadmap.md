@@ -15,3 +15,26 @@ In Progress
 □ DATS24 scraper
 □ TotalEnergies scraper
 □ Shell scraper
+# Fase 8.4 — DataSource Engine
+
+## Voltooid
+
+- ✅ Capability Registry
+- ✅ Scheduler
+- ✅ Health Engine
+
+## In ontwikkeling
+
+- ⏳ Metrics Engine
+- ⏳ Validator Engine
+- ⏳ Cache Engine
+- ⏳ Rate Limiter
+- ⏳ DataSource Manager
+
+## Daarna
+
+- Gabriëls
+- TotalEnergies
+- Q8
+- DATS24
+- Fuel Media API

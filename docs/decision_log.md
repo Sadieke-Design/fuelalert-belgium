@@ -59,3 +59,21 @@ No additional reverse engineering of Esso or CARBU will be performed unless Fuel
 
 Status:
 Pending response from Fuel Media Service.
+## DEC-005
+
+De DataSource Engine wordt modulair opgebouwd.
+
+Nieuwe modules worden eerst generiek ontwikkeld voordat nieuwe scrapers worden toegevoegd.
+
+Volgorde:
+
+1. Capability Registry
+2. Scheduler
+3. Health Engine
+4. Metrics Engine
+5. Validator Engine
+6. Cache Engine
+7. Rate Limiter
+8. DataSource Manager
+
+Pas daarna worden nieuwe databronnen geïntegreerd.

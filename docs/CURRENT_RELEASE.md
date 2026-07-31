@@ -110,3 +110,11 @@ Uitgesloten van releases:
 # Opmerking
 
 Deze release is bedoeld als ontwikkelversie en vormt een momentopname van het project op de hierboven vermelde releasedatum.
+
+### Nieuw
+
+✅ Capability Registry
+
+- Centrale registratie van scraper-capabilities.
+- API endpoint `/api/capabilities`.
+- Eerste implementatie met MAES Network.

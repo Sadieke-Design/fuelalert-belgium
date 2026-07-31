@@ -8,6 +8,7 @@
  */
 import * as cheerio from "cheerio";
 import BaseScraper from "../BaseScraper.js";
+import CapabilityRegistry from "../../core/CapabilityRegistry.js";
 import { flattenSitemap } from "../../utils/sitemap.js";
 import { fetchText } from "../../utils/httpClient.js";
 import {
@@ -34,6 +35,17 @@ class MaesNetworkScraper extends BaseScraper {
         "PMO",
         "Power",
       ],
+    });
+
+    CapabilityRegistry.register("MAES_NETWORK", {
+      prices: true,
+      stations: true,
+      coordinates: true,
+      address: true,
+      openingHours: false,
+      ev: false,
+      promotions: false,
+      source: "official",
     });
   }
 

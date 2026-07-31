@@ -28,3 +28,27 @@
 - Researched Fuel Media Service and CARBU API.
 - Contacted Fuel Media Service regarding commercial API access.
 - Confirmed FuelAlert will follow a hybrid multi-source architecture.
+
+## v8.4.0
+
+### Nieuw
+
+- Capability Registry toegevoegd.
+- Nieuw endpoint `/api/capabilities`.
+- Scrapers registreren nu automatisch hun mogelijkheden.
+- Eerste implementatie voor MAES Network.
+- Eerste bouwsteen van de DataSource Engine gerealiseerd.
+
+## v8.4.1
+
+### Nieuw
+
+- Capability Registry geïmplementeerd.
+- Nieuw endpoint `/api/capabilities`.
+- Health Registry toegevoegd.
+- Nieuw endpoint `/api/health`.
+- Scheduler Engine toegevoegd.
+- Nieuw endpoint `/api/scheduler`.
+- MAES scraper draait automatisch via de Scheduler.
+- Eerste automatische Health-monitoring geïmplementeerd.
+- Fundament van de DataSource Engine gerealiseerd.

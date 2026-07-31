@@ -1,61 +1,43 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
+import CapabilityRegistry from "../../core/CapabilityRegistry.js";
 
 export default async function scrapeMaes(url) {
+  try {
+    const { data } = await axios.get(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+      },
+    });
 
-    try {
+    const $ = cheerio.load(data);
 
-        const { data } = await axios.get(url, {
-            headers: {
-                "User-Agent": "Mozilla/5.0"
-            }
-        });
+    const prices = {};
 
-        const $ = cheerio.load(data);
+    $(".gasstation-price-box").each((i, el) => {
+      const fuel = $(el).find("h4").text().trim();
 
-        const prices = {};
+      const priceText = $(el)
+        .find(".price-box")
+        .text()
+        .replace("€", "")
+        .trim()
+        .replace(",", ".");
 
-        $(".gasstation-price-box").each((i, el) => {
+      const price = parseFloat(priceText);
 
-            const fuel = $(el).find("h4").text().trim();
+      if (fuel.includes("95")) prices.benzine95 = price;
+      else if (fuel.includes("98")) prices.benzine98 = price;
+      else if (fuel.includes("Diesel B7")) prices.diesel = price;
+      else if (fuel.includes("LPG")) prices.lpg = price;
+      else if (fuel.includes("AdBlue")) prices.adblue = price;
+      else if (fuel.includes("Supremium Diesel")) prices.supremium = price;
+    });
 
-            const priceText = $(el)
-                .find(".price-box")
-                .text()
-                .replace("€", "")
-                .trim()
-                .replace(",", ".");
+    return prices;
+  } catch (err) {
+    console.error(err);
 
-            const price = parseFloat(priceText);
-
-            if (fuel.includes("95"))
-                prices.benzine95 = price;
-
-            else if (fuel.includes("98"))
-                prices.benzine98 = price;
-
-            else if (fuel.includes("Diesel B7"))
-                prices.diesel = price;
-
-            else if (fuel.includes("LPG"))
-                prices.lpg = price;
-
-            else if (fuel.includes("AdBlue"))
-                prices.adblue = price;
-
-            else if (fuel.includes("Supremium Diesel"))
-                prices.supremium = price;
-
-        });
-
-        return prices;
-
-    } catch (err) {
-
-        console.error(err);
-
-        return null;
-
-    }
-
+    return null;
+  }
 }

@@ -1,6 +1,7 @@
 import activeScrapers from "./registry.js";
 
 import logger from "../utils/logger.js";
+import HealthRegistry from "../health/HealthRegistry.js";
 
 class ScraperManager {
   constructor(scrapers = activeScrapers) {
@@ -21,6 +22,13 @@ class ScraperManager {
       if (result.status === "fulfilled") {
         const records = result.value;
 
+        HealthRegistry.update(scraper.sourceName, {
+          status: "ONLINE",
+          stations: records.length,
+          errors: 0,
+          successRate: 100,
+        });
+
         const persistence = {
           updatedCount: 0,
           mergedDuplicates: 0,
@@ -34,6 +42,12 @@ class ScraperManager {
           merged_duplicates: persistence.mergedDuplicates,
         });
       } else {
+        HealthRegistry.update(scraper.sourceName, {
+          status: "OFFLINE",
+          stations: 0,
+          errors: 1,
+          successRate: 0,
+        });
         logger.error(`[${scraper.sourceName}] ${result.reason.message}`);
 
         summary.push({
