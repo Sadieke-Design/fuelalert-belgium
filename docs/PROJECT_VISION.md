@@ -204,3 +204,86 @@ FuelAlert will be considered successful when it provides:
 FuelAlert is not built to become the largest fuel app.
 
 FuelAlert is built to become the most trusted fuel platform in Belgium.
+
+## Verified Station Portal (Future)
+
+### Visie
+
+FuelAlert Belgium zal in een latere fase een officieel partnerportaal aanbieden voor geverifieerde tankstationhouders en netwerkbeheerders.
+
+Het doel is om een directe samenwerking met de Belgische tankstationsector op te bouwen, zodat actuele en betrouwbare informatie rechtstreeks door de eigenaar of netwerkbeheerder kan worden beheerd.
+
+### Doelstellingen
+
+- Stationhouders kunnen zelf hun actuele brandstofprijzen beheren.
+- Prijswijzigingen worden onmiddellijk zichtbaar in FuelAlert.
+- Geverifieerde prijzen krijgen een hogere betrouwbaarheidsscore dan gebruikersmeldingen.
+- Eigenaars kunnen bijkomende informatie over hun station beheren.
+- Netwerkbeheerders kunnen meerdere stations vanuit één account beheren.
+
+### Mogelijke functionaliteiten
+
+#### Brandstof
+
+- Brandstofprijzen
+- Beschikbare brandstoffen
+- Tijdelijke promoties
+
+#### Stationinformatie
+
+- Openingsuren
+- Contactgegevens
+- Foto's
+- Diensten
+- Carwash
+- Shop
+- Restaurant
+- Truck parking
+- Toiletten
+- Luchtpomp
+
+#### Alternatieve brandstoffen
+
+- EV-laders
+- AdBlue
+- HVO100
+- CNG
+- LNG
+- Waterstof
+
+#### Meldingen
+
+- Tijdelijke sluiting
+- Werken aan het station
+- Defecte pompen
+- Tijdelijke acties
+- Belangrijke mededelingen
+
+### Authenticatie
+
+Toegang tot het portaal gebeurt uitsluitend na verificatie.
+
+Mogelijke verificatiemethoden:
+
+- Bedrijfsregistratie
+- BTW-validatie
+- Controle door FuelAlert
+- Admin-goedkeuring
+
+Een gebruiker krijgt uitsluitend toegang tot de stations waarvoor hij eigenaar of gemachtigde beheerder is.
+
+### Prioriteit van databronnen
+
+FuelAlert gebruikt steeds de meest betrouwbare beschikbare databron.
+
+1. Officiële API's
+2. Geverifieerde netwerkbeheerders
+3. Geverifieerde stationhouders
+4. Eigen scrapers
+5. Gebruikersmeldingen
+
+### Langetermijnvisie
+
+FuelAlert Belgium wil uitgroeien tot het meest complete platform voor Belgische tankstationinformatie.
+
+Naast actuele brandstofprijzen zal het platform ook uitgebreide stationinformatie, officiële partnerschappen en een professioneel beheerportaal aanbieden voor de Belgische tankstationsector.
