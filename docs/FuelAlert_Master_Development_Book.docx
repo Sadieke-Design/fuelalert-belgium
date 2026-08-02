@@ -1,7 +1,8 @@
 # FuelAlert Belgium
 # Master Development Book
 
-Versie: 8.4.1
+Versie: 8.5.0
+Laatste update: 2 augustus 2026
 Status: Active Development – Single Source of Truth
 Laatste update: 31 juli 2026
 Project gestart: 21 juli 2026
@@ -78,33 +79,32 @@ ONTWIKKELING
 
 BACKEND
 
-✅ ES Modules
-✅ Express REST API
-✅ Scraper Framework
-✅ ScraperManager
-✅ BaseScraper
-✅ BrowserScraper
-✅ Registry
 ✅ Validation Engine
-✅ CacheManager
+✅ Validator Engine
+✅ Price Validator
+✅ GPS Validator
+✅ Address Validator
+✅ Duplicate Validator
+✅ Persistence Engine
+✅ Station Repository
 ✅ Report Engine
 ✅ Scheduler Engine
-✅ Retry Engine
-✅ Persistence Layer
 ✅ Station Bootstrap
 ✅ Capability Registry
-✅ Health Engine
+✅ Health Registry
+✅ Metrics Registry
+✅ Rate Limiter
 ✅ MAES Network scraper
+✅ stations_v2 pipeline
 
 IN ONTWIKKELING
 
-⏳ Metrics Engine
-⏳ Validator Engine
 ⏳ Cache optimalisatie
-⏳ Rate Limiter
 ⏳ DataSource Manager
 ⏳ Gabriëls scraper
 ⏳ Fuel Media Service API
+⏳ Price History
+⏳ Frontend migratie naar stations_v2
 
 ON HOLD
 
@@ -164,13 +164,13 @@ Architectuur:
 
 DataSource Engine
 
-├── Capability Registry ✅
-├── Scheduler Engine ✅
-├── Health Engine ✅
-├── Metrics Engine ⏳
-├── Validator Engine ⏳
+├── ├── Health Registry ✅
+├── Metrics Registry ✅
+├── Validator Engine ✅
 ├── Cache Engine ⏳
-├── Rate Limiter ⏳
+├── Rate Limiter ✅
+├── Persistence Engine ✅
+├── Repository Pattern ✅
 ├── DataSource Manager ⏳
 ├── ScraperManager ✅
 ├── BaseScraper ✅
@@ -193,7 +193,9 @@ Beschikbaar
 
 Gepland
 
-⏳ /api/metrics
+Beschikbaar
+
+✅ /api/metrics
 ⏳ /api/history
 ⏳ /api/statistics
 ⏳ Publieke API
@@ -233,19 +235,30 @@ DEC-010
 Het Master Development Book is de Single Source of Truth.
 
 DEC-011
-Nieuwe scrapers worden pas ontwikkeld nadat de DataSource Engine
-volledig operationeel is.
+
+Alle scrapers leveren één uniform recordformaat.
 
 DEC-012
-Iedere databron moet automatisch integreren met:
 
-• Capability Registry
-• Scheduler Engine
-• Health Engine
-• Metrics Engine
-• Validator Engine
-• Rate Limiter
-• DataSource Manager
+Database-opslag verloopt uitsluitend via
+PersistenceEngine en StationRepository.
+
+DEC-013
+
+Iedere validator implementeert dezelfde interface:
+
+• total
+• valid
+• invalid
+• success
+
+DEC-014
+
+stations_v2 wordt de nieuwe backenddatabase.
+
+De bestaande productie blijft voorlopig
+op stations draaien totdat alle scrapers
+zijn gemigreerd.
 
 ======================================================================
 9. MASTER CHECKLIST
@@ -293,11 +306,15 @@ DATA SOURCE ENGINE
 
 ✅ Health Engine
 
-⏳ Metrics Engine
+✅ Metrics Registry
 
-⏳ Validator Engine
+✅ Validator Engine
 
-⏳ Rate Limiter
+✅ Rate Limiter
+
+✅ Persistence Engine
+
+✅ Station Repository
 
 ⏳ DataSource Manager
 
@@ -313,7 +330,7 @@ API
 
 ✅ /api/scheduler
 
-⏳ /api/metrics
+✅ /api/metrics
 
 ⏳ /api/history
 
@@ -322,6 +339,26 @@ API
 ======================================================================
 10. CHANGELOG
 ======================================================================
+
+v8.5.0
+
+• Validator Engine volledig afgerond.
+• Uniform validator-framework toegevoegd.
+• Price Validator toegevoegd.
+• GPS Validator toegevoegd.
+• Address Validator toegevoegd.
+• Duplicate Validator toegevoegd.
+• Metrics Registry geïmplementeerd.
+• Health Registry uitgebreid.
+• Rate Limiter geïntegreerd.
+• Persistence Engine gebouwd.
+• Station Repository toegevoegd.
+• Nieuwe stations_v2 databasepipeline gebouwd.
+• Eerste succesvolle end-to-end import.
+• MAES Network volledig geïntegreerd.
+• 275 stations succesvol opgeslagen.
+• 0 fouten tijdens volledige import.
+
 
 v8.4.1
 
@@ -356,16 +393,15 @@ v8.4.0
 
 FASE 8.5
 
-1. Metrics Engine
-2. Validator Engine
-3. Rate Limiter
-4. DataSource Manager
-5. Gabriëls scraper
-6. Fuel Media Service API
-7. Historiek
-8. Premium
-9. Pushnotificaties
-10. Publieke API
+1. Gabriëls scraper
+2. Fuel Media Service API
+3. Price History
+4. Frontend migreren naar stations_v2
+5. Scheduler V2 volledig uitrollen
+6. Oude cronjobs vervangen
+7. Premium
+8. Pushnotificaties
+9. Publieke API
 
 ======================================================================
 12. LANGE TERMIJNVISIE

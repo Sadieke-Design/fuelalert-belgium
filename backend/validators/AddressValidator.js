@@ -26,10 +26,10 @@ export default class AddressValidator {
     }
 
     return {
-      total: records.length,
-      complete: records.length - missing.length,
-      missing,
-      valid: missing.length === 0,
-    };
+  total: records.length,
+  valid: records.length - missing.length,
+  invalid: missing,
+  success: missing.length === 0,
+};
   }
 }

@@ -12,10 +12,10 @@ export default class DuplicateValidator {
     }
 
     return {
-      total: records.length,
-      unique: seen.size,
-      duplicates,
-      valid: duplicates.length === 0
-    };
+  total: records.length,
+  valid: seen.size,
+  invalid: duplicates,
+  success: duplicates.length === 0,
+};
   }
 }

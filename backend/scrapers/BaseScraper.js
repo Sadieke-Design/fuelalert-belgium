@@ -1,4 +1,9 @@
 import logger from "../utils/logger.js";
+import HealthRegistry from "../health/HealthRegistry.js";
+import MetricsRegistry from "../metrics/MetricsRegistry.js";
+import ValidatorEngine from "../validator/ValidatorEngine.js";
+import RateLimiter from "../ratelimiter/RateLimiter.js";
+import { clear } from "console";
 
 export default class BaseScraper {
   constructor({ sourceName, supportsLivePrices = true, supportedBrands = [] }) {
@@ -38,17 +43,61 @@ export default class BaseScraper {
   async scrape(options = {}) {
     const started = Date.now();
 
-    const records = await this.collectRecords(options);
-    const validated = records.map((r) => this.validateRecord(r));
+    await RateLimiter.wait(this.sourceName);
 
-    this.log("info", `${validated.length} stations gevonden`, {
-      duration_ms: Date.now() - started,
-    });
+    try {
+      const records = await this.collectRecords(options);
 
-    return validated;
-  }
+      const validation = ValidatorEngine.validate(records);
 
-  async collectRecords() {
-    throw new Error("collectRecords() must be implemented by subclass");
+      if (!validation.success) {
+        this.log("warn", "Validator Engine heeft fouten gevonden", {
+          validation,
+        });
+      }
+
+      const validated = records.map((r) => this.validateRecord(r));
+
+      const duration = Date.now() - started;
+
+      HealthRegistry.update(this.sourceName, {
+        status: "ONLINE",
+        stations: validated.length,
+        errors: 0,
+        successRate: 100,
+        duration,
+      });
+      console.log(">>> Metrics schrijven:", this.sourceName);
+
+      MetricsRegistry.record(this.sourceName, {
+        success: true,
+        stations: validated.length,
+        duration,
+      });
+
+      this.log("info", `${validated.length} stations gevonden`, {
+        duration_ms: duration,
+      });
+
+      return validated;
+    } catch (err) {
+      const duration = Date.now() - started;
+
+      HealthRegistry.update(this.sourceName, {
+        status: "OFFLINE",
+        stations: 0,
+        errors: 1,
+        successRate: 0,
+        duration,
+      });
+
+      MetricsRegistry.record(this.sourceName, {
+        success: false,
+        stations: 0,
+        duration,
+      });
+
+      throw err;
+    }
   }
 }

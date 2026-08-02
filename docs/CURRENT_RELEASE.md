@@ -1,10 +1,10 @@
 # FuelAlert Belgium - Release Information
 
-## Release
+# Release
 
-**Versie:** 8.4.0  
-**Releasedatum:** 27 juli 2026  
-**Status:** Development Release
+**Versie:** 8.5.0  
+**Releasedatum:** 2 augustus 2026  
+**Status:** Development Release (V2 Backend)
 
 ---
 
@@ -12,7 +12,11 @@
 
 FuelAlert Belgium is een modulair platform voor het verzamelen, verwerken en publiceren van Belgische brandstofprijzen.
 
-De backend is opgebouwd als een uitbreidbaar scraperplatform waarbij officiële API's, commerciële databronnen en eigen scrapers gecombineerd kunnen worden.
+De backend is opgebouwd rond een uitbreidbare scraperarchitectuur met een uniforme dataflow:
+
+Scraper → Validator Engine → Persistence Engine → Repository → Database → REST API
+
+De oorspronkelijke productieomgeving blijft voorlopig actief terwijl de nieuwe V2-architectuur parallel wordt ontwikkeld en getest.
 
 ---
 
@@ -21,15 +25,23 @@ De backend is opgebouwd als een uitbreidbaar scraperplatform waarbij officiële 
 ## Backend
 
 - ✅ Express REST API
-- ✅ Scraper Framework
+- ✅ Modulaire Scraper Framework
 - ✅ ScraperManager
 - ✅ BaseScraper
-- ✅ BrowserScraper
-- ✅ Validation Engine
-- ✅ CacheManager
+- ✅ Capability Registry
+- ✅ Validator Engine
+- ✅ Price Validator
+- ✅ GPS Validator
+- ✅ Address Validator
+- ✅ Duplicate Validator
+- ✅ Persistence Engine
+- ✅ Station Repository
+- ✅ Metrics Registry
+- ✅ Health Registry
 - ✅ Report Engine
 - ✅ Scheduler
-- ✅ Persistence Layer
+- ✅ Rate Limiter
+- ✅ stations_v2 databasepipeline
 
 ## Frontend
 
@@ -42,79 +54,90 @@ De backend is opgebouwd als een uitbreidbaar scraperplatform waarbij officiële 
 
 # Ondersteunde databronnen
 
-| Bron               | Status               |
-| ------------------ | -------------------- |
-| MAES               | ✅ Productie         |
+| Bron | Status |
+|------|--------|
+| MAES Network | ✅ Productie |
 | Fuel Media Service | ⏳ Contact opgenomen |
-| Gabriëls           | ⏳ Gepland           |
-| Q8                 | ⏸ On Hold            |
-| Esso               | ⏸ On Hold            |
+| Gabriëls | ⏳ Gepland |
+| Q8 | ⏸ On Hold |
+| Esso | ⏸ On Hold |
 
 ---
 
 # Belangrijkste wijzigingen in deze release
 
-- Modulaire scraperarchitectuur verder uitgewerkt.
-- BrowserScraper toegevoegd.
-- Validation Engine uitgebreid.
-- CacheManager toegevoegd.
-- Report Engine toegevoegd.
-- Scheduler geïntegreerd.
-- MAES scraper volledig operationeel.
-- Esso-onderzoek afgerond.
-- Q8 voorlopig on hold.
-- Fuel Media Service gecontacteerd.
+- Validator Framework volledig geïmplementeerd.
+- Uniforme validatorinterface ingevoerd.
+- Persistence Layer volledig gebouwd.
+- Repository Pattern geïmplementeerd.
+- Metrics Registry toegevoegd.
+- Health Registry toegevoegd.
+- Report Engine uitgebreid.
+- Rate Limiter geïntegreerd.
+- Nieuwe database `stations_v2` toegevoegd.
+- MAES Network volledig geïntegreerd in de nieuwe architectuur.
+- Eerste succesvolle end-to-end V2-import uitgevoerd.
+
+---
+
+# Resultaten
+
+- ✅ 1740 URLs ontdekt via sitemap.
+- ✅ 275 stations succesvol gescrapet.
+- ✅ 275 records succesvol gevalideerd.
+- ✅ 275 records succesvol opgeslagen.
+- ✅ 0 validatiefouten.
+- ✅ 0 databasefouten.
 
 ---
 
 # Openstaande prioriteiten
 
-1. Capability Registry
-2. Health Engine
-3. Smart Rate Limiter
-4. Gabriëls scraper
-5. Fuel Media Service API (indien beschikbaar)
+1. Gabriëls scraper
+2. Fuel Media Service API (indien beschikbaar)
+3. Extra brand-scrapers (Shell, Esso, Q8, TotalEnergies, ...)
+4. Price History
+5. Frontend migreren naar `stations_v2`
+6. Oude cronjobs vervangen door Scheduler V2
+7. `stations_old` uitfaseren na volledige migratie
 
 ---
 
 # Documentatie
 
-De volledige projectdocumentatie staat in:
+De volledige projectdocumentatie staat in de map `docs/`.
 
-- Master Development Book
-- docs/PROJECT_VISION.md
-- docs/ARCHITECTURE.md
-- docs/scrapers.md
-- docs/roadmap.md
-- docs/deployment.md
+Belangrijkste documenten:
 
-Het **Master Development Book** is de officiële _Single Source of Truth_ van het project.
+- PROJECT_VISION.md
+- System Architecture.md
+- database.md
+- scrapers.md
+- roadmap.md
+- changelog.md
+- decision_log.md
+- api.md
+
+Daarnaast is het **FuelAlert Master Development Book** de officiële *Single Source of Truth* van het project.
 
 ---
 
 # Git
 
-Repository bevat uitsluitend de broncode.
+Repository bevat uitsluitend broncode.
 
-Uitgesloten van releases:
+Uitgesloten van versiebeheer:
 
 - node_modules/
 - dist/
 - build/
-- .git/
 - logs/
-- backend/data/\*.osm.pbf
+- backend/data/*.osm.pbf
 
 ---
 
 # Opmerking
 
-Deze release is bedoeld als ontwikkelversie en vormt een momentopname van het project op de hierboven vermelde releasedatum.
+Deze release vormt de eerste volledig werkende V2-backendarchitectuur.
 
-### Nieuw
-
-✅ Capability Registry
-
-- Centrale registratie van scraper-capabilities.
-- API endpoint `/api/capabilities`.
-- Eerste implementatie met MAES Network.
+De productieomgeving blijft voorlopig gebruikmaken van de bestaande database en cronjobs, terwijl de nieuwe `stations_v2`-architectuur parallel verder wordt uitgebreid en getest.

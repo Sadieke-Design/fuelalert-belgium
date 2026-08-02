@@ -18,6 +18,13 @@ import schedulerRoutes from "./routes/scheduler.js";
 import Scheduler from "./scheduler/Scheduler.js";
 import ScraperManager from "./scrapers/ScraperManager.js";
 
+import metricsRoutes from "./routes/metrics.js";
+import validationRoutes from "./routes/validation.js";
+
+import rateLimiterRoutes from "./routes/ratelimiter.js";
+import RateLimiter from "./ratelimiter/RateLimiter.js";
+import persistenceRoutes from "./routes/persistence.js";
+
 const app = express();
 
 app.use(cors());
@@ -32,6 +39,10 @@ app.use("/api/auth/login", loginRoutes);
 app.use("/api/auth/forgot-password", forgotPasswordRoutes);
 app.use("/api/auth/reset-password", resetPasswordRoutes);
 app.use("/api/scheduler", schedulerRoutes);
+app.use("/api/metrics", metricsRoutes);
+app.use("/api/validation", validationRoutes);
+app.use("/api/ratelimiter", rateLimiterRoutes);
+app.use("/api/persistence", persistenceRoutes);
 
 app.get("/", (req, res) => {
   res.json({
@@ -64,6 +75,13 @@ app.listen(PORT, () => {
   console.log(`🚀 FuelAlert API draait op poort ${PORT}`);
 
   const manager = new ScraperManager();
+
+  RateLimiter.register("MAES_NETWORK", {
+    delay: 1500,
+    retries: 3,
+    timeout: 30000,
+    concurrent: 1,
+  });
 
   Scheduler.register("MAES Network", 15 * 60 * 1000, async () => {
     console.log("MAES scraper gestart...");

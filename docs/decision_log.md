@@ -1,79 +1,172 @@
 # Decision Log
 
+---
+
 ## 2026-07-25
 
-### MAES Scraper
+### DEC-001 — MAES Batch Processing
 
-Besloten om de scraper niet langer alle URL's gelijktijdig te laten verwerken.
+**Beslissing**
 
-Reden:
+De MAES scraper verwerkt niet langer alle URLs gelijktijdig.
+
+**Reden**
+
 - Minder geheugenverbruik.
 - Minder kans op rate limiting.
 - Betere stabiliteit.
 - Schaalbaar voor grote netwerken.
 
-Implementatie:
-- Batchverwerking.
-- Batchgrootte: 20.
+**Implementatie**
 
-# Decision 008 - Official Fuel Data Sources
+- Batch processing.
+- Batchgrootte: 20 requests.
 
-Date: 2026-07-26
+---
 
-## Context
+## 2026-07-26
 
-FuelAlert requires reliable fuel prices for Belgian fuel stations.
+### DEC-002 — Official Fuel Data Sources
 
-Several approaches were evaluated:
+**Context**
 
-- Own web scrapers
-- Official APIs
-- Commercial data providers
+FuelAlert vereist betrouwbare Belgische brandstofprijzen.
 
-## Investigation
+Onderzocht:
 
-Research was performed on:
+- Eigen scrapers
+- Officiële API's
+- Commerciële databronnen
+
+**Onderzoek**
+
+Geanalyseerd:
 
 - Esso Belgium
-- ExxonMobil locator services
+- ExxonMobil
 - CARBU
 - Fuel Media Service
 
-Results:
+**Beslissing**
 
-- No stable public Esso API was identified.
-- Fuel Media Service offers a commercial API.
-- Contact has been made with Fuel Media Service requesting technical documentation and licensing information.
+FuelAlert blijft een multi-source platform.
 
-## Decision
+Prioriteit:
 
-FuelAlert will remain a multi-source platform.
+1. Officiële API's
+2. Eigen scrapers
+3. Commerciële databronnen
 
-Priority:
-
-1. Official APIs
-2. Own Scrapers
-3. Commercial data providers
-
-No additional reverse engineering of Esso or CARBU will be performed unless Fuel Media Service declines cooperation.
+Geen verdere reverse engineering zolang Fuel Media Service nog in gesprek is.
 
 Status:
-Pending response from Fuel Media Service.
-## DEC-005
 
-De DataSource Engine wordt modulair opgebouwd.
+- Wacht op antwoord Fuel Media Service.
 
-Nieuwe modules worden eerst generiek ontwikkeld voordat nieuwe scrapers worden toegevoegd.
+---
+
+## DEC-003 — Modulaire DataSource Engine
+
+De DataSource Engine wordt volledig modulair opgebouwd.
+
+Nieuwe componenten worden eerst generiek ontwikkeld voordat nieuwe scrapers worden toegevoegd.
 
 Volgorde:
 
 1. Capability Registry
 2. Scheduler
-3. Health Engine
-4. Metrics Engine
+3. Health Registry
+4. Metrics Registry
 5. Validator Engine
-6. Cache Engine
-7. Rate Limiter
-8. DataSource Manager
+6. Persistence Engine
+7. Repository Pattern
+8. Rate Limiter
+9. DataSource Manager
 
-Pas daarna worden nieuwe databronnen geïntegreerd.
+---
+
+## DEC-004 — Uniform Scraper Output
+
+Alle scrapers leveren exact hetzelfde recordformaat aan.
+
+Hierdoor blijven validators, persistence en rapportage volledig generiek.
+
+Scrapers bevatten geen databasespecifieke logica.
+
+---
+
+## DEC-005 — Validator Framework
+
+Iedere validator implementeert dezelfde interface.
+
+```javascript
+{
+    total,
+    valid,
+    invalid,
+    success
+}
+```
+
+Hierdoor kan ValidatorEngine volledig generiek werken.
+
+---
+
+## DEC-006 — Repository Pattern
+
+Databasebewerkingen verlopen uitsluitend via StationRepository.
+
+Scrapers communiceren nooit rechtstreeks met MySQL.
+
+---
+
+## DEC-007 — Persistence Layer
+
+Alle opslag verloopt uitsluitend via PersistenceEngine.
+
+PersistenceEngine bepaalt:
+
+- insert
+- update
+- foutafhandeling
+- statistieken
+- rapportage
+
+---
+
+## DEC-008 — stations_v2
+
+De nieuwe backend gebruikt uitsluitend `stations_v2`.
+
+De bestaande tabel `stations` blijft voorlopig actief voor productie totdat alle scrapers zijn gemigreerd.
+
+Hierdoor kunnen oud en nieuw parallel blijven draaien zonder risico.
+
+---
+
+## DEC-009 — V2 Migratiestrategie
+
+De migratie gebeurt gefaseerd.
+
+Fase 1
+
+- Nieuwe scraperarchitectuur
+- Validators
+- Persistence
+- Monitoring
+
+Fase 2
+
+- Alle scrapers migreren
+
+Fase 3
+
+- Frontend laten werken op `stations_v2`
+
+Fase 4
+
+- Oude cronjobs uitschakelen
+
+Fase 5
+
+- `stations` uit productie halen
