@@ -24,6 +24,7 @@ import validationRoutes from "./routes/validation.js";
 import rateLimiterRoutes from "./routes/ratelimiter.js";
 import RateLimiter from "./ratelimiter/RateLimiter.js";
 import persistenceRoutes from "./routes/persistence.js";
+import schedulerMonitorRoutes from "./routes/schedulerMonitorRoutes.js";
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use("/api/metrics", metricsRoutes);
 app.use("/api/validation", validationRoutes);
 app.use("/api/ratelimiter", rateLimiterRoutes);
 app.use("/api/persistence", persistenceRoutes);
+app.use("/api/scheduler-monitor", schedulerMonitorRoutes);
 
 app.get("/", (req, res) => {
   res.json({

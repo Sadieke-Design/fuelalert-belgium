@@ -20,6 +20,7 @@ import History from "./pages/History";
 import Settings from "./pages/Settings";
 import Premium from "./pages/Premium";
 import Admin from "./pages/Admin";
+import SchedulerMonitor from "./pages/SchedulerMonitor";
 
 /* Public pages */
 import Login from "./pages/Login";
@@ -106,6 +107,7 @@ const AuthenticatedApp = () => {
         <Route path="/premium" element={<Premium />} />
 
         <Route path="/admin" element={<Admin />} />
+        <Route path="/scheduler-monitor" element={<SchedulerMonitor />} />
       </Route>
 
       <Route path="*" element={<PageNotFound />} />
