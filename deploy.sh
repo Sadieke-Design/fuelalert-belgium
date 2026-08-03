@@ -59,19 +59,28 @@ echo ""
 rm -rf "${DEPLOY_DIR:?}"/*
 cp -r dist/* "$DEPLOY_DIR/"
 
+# Forceer alle writes naar disk
+sync
+
 echo "✅ Frontend gedeployed."
 echo ""
 
 ####################################################
-# 4. Restart API
+# 4. Restart API + Reload Nginx
 ####################################################
 
-echo "🔄 Stap 4/5 - API herstarten..."
+echo "🔄 Stap 4/5 - Services herstarten..."
 echo ""
 
 pm2 restart fuelalert-api
 
-echo "✅ API opnieuw gestart."
+echo "Controle Nginx configuratie..."
+nginx -t
+
+echo "Nginx herladen..."
+systemctl reload nginx
+
+echo "✅ API en Nginx opnieuw gestart."
 echo ""
 
 ####################################################
@@ -108,6 +117,7 @@ echo "Git       : ✔"
 echo "Build     : ✔"
 echo "Deploy    : ✔"
 echo "API       : ✔"
+echo "Nginx     : ✔"
 echo "Release   : ✔"
 echo ""
 echo "Releasebestand:"
