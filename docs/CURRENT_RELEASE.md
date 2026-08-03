@@ -54,13 +54,13 @@ De oorspronkelijke productieomgeving blijft voorlopig actief terwijl de nieuwe V
 
 # Ondersteunde databronnen
 
-| Bron | Status |
-|------|--------|
-| MAES Network | ✅ Productie |
+| Bron               | Status               |
+| ------------------ | -------------------- |
+| MAES Network       | ✅ Productie         |
 | Fuel Media Service | ⏳ Contact opgenomen |
-| Gabriëls | ⏳ Gepland |
-| Q8 | ⏸ On Hold |
-| Esso | ⏸ On Hold |
+| Gabriëls           | ⏳ Gepland           |
+| Q8                 | ⏸ On Hold            |
+| Esso               | ⏸ On Hold            |
 
 ---
 
@@ -77,6 +77,14 @@ De oorspronkelijke productieomgeving blijft voorlopig actief terwijl de nieuwe V
 - Nieuwe database `stations_v2` toegevoegd.
 - MAES Network volledig geïntegreerd in de nieuwe architectuur.
 - Eerste succesvolle end-to-end V2-import uitgevoerd.
+- SchedulerRunRepository toegevoegd.
+- Scheduler Monitor API (`/api/scheduler-monitor`) toegevoegd.
+- Realtime Scheduler Monitor frontend gebouwd.
+- Automatische logging van iedere scraper-run naar `scheduler_runs`.
+- Historiek van scheduler-runs beschikbaar.
+- Live statistieken (Runs, Success, Failed, Gemiddelde duur).
+- Laatste uitgevoerde scraper-run zichtbaar.
+- Automatische refresh van de monitor iedere 30 seconden.
 
 ---
 
@@ -118,7 +126,7 @@ Belangrijkste documenten:
 - decision_log.md
 - api.md
 
-Daarnaast is het **FuelAlert Master Development Book** de officiële *Single Source of Truth* van het project.
+Daarnaast is het **FuelAlert Master Development Book** de officiële _Single Source of Truth_ van het project.
 
 ---
 
@@ -132,7 +140,7 @@ Uitgesloten van versiebeheer:
 - dist/
 - build/
 - logs/
-- backend/data/*.osm.pbf
+- backend/data/\*.osm.pbf
 
 ---
 

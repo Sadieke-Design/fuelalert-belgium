@@ -96,3 +96,21 @@
 - 0 databasefouten.
 - 0 validatiefouten.
 - Nieuwe backend-architectuur operationeel.
+
+## v8.5
+
+Nieuw
+
+- Scheduler Monitor toegevoegd
+- SchedulerRunRepository
+- scheduler_runs database
+- Live monitoring
+- Historiek
+- Auto refresh
+- Scheduler statistieken
+
+Verbeteringen
+
+- Nieuwe monitoringarchitectuur
+- Repository uitgebreid
+- API endpoint scheduler-monitor

@@ -478,3 +478,52 @@ Every architectural decision must improve:
 - Scalability
 - Extensibility
 - Reusability
+
+# Scheduler & Monitoring
+
+## Overzicht
+
+De Scheduler is verantwoordelijk voor het automatisch uitvoeren van alle actieve scrapers.
+
+Architectuur:
+
+Scheduler
+    │
+    ▼
+ScraperManager
+    │
+    ▼
+PersistenceEngine
+    │
+    ▼
+SchedulerRunRepository
+    │
+    ▼
+scheduler_runs
+    │
+    ▼
+REST API
+    │
+    ▼
+React Scheduler Monitor
+
+## Scheduler Monitor
+
+De Scheduler Monitor is een realtime dashboard dat de status van alle scraper-runs toont.
+
+Functionaliteiten:
+
+- Live refresh (30 seconden)
+- Runs van vandaag
+- Success / Failed statistieken
+- Gemiddelde duur
+- Laatste uitgevoerde run
+- Historiek van scraper-runs
+
+Bestanden
+
+backend/routes/schedulerMonitorRoutes.js
+
+backend/repositories/SchedulerRunRepository.js
+
+src/pages/SchedulerMonitor.jsx

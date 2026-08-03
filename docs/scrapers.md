@@ -21,3 +21,23 @@ Current status:
 | ESSO | ⛔ No official public API found |
 | Fuel Media Service | ⏳ Contacted |
 | CARBU API | Commercial |
+
+## Monitoring
+
+Elke scraper-run wordt automatisch geregistreerd.
+
+Per run wordt opgeslagen:
+
+- scraper
+- status
+- stations
+- inserted
+- updated
+- skipped
+- duplicates
+- errors
+- duration
+- started_at
+- finished_at
+
+Deze gegevens worden gebruikt door de Scheduler Monitor.
