@@ -78,17 +78,24 @@ app.listen(PORT, () => {
 
   const manager = new ScraperManager();
 
-  RateLimiter.register("MAES_NETWORK", {
-    delay: 1500,
-    retries: 3,
-    timeout: 30000,
-    concurrent: 1,
-  });
+RateLimiter.register("MAES_NETWORK", {
+  delay: 1500,
+  retries: 3,
+  timeout: 30000,
+  concurrent: 1,
+});
 
-  Scheduler.register("MAES Network", 15 * 60 * 1000, async () => {
-    console.log("MAES scraper gestart...");
-    await manager.run();
-  });
+RateLimiter.register("DATS24", {
+  delay: 500,
+  retries: 3,
+  timeout: 30000,
+  concurrent: 1,
+});
 
-  Scheduler.start();
+Scheduler.register("Fuel Scrapers", 15 * 60 * 1000, async () => {
+  console.log("MAES + DATS24 scrapers gestart...");
+  await manager.run();
+});
+
+Scheduler.start();
 });

@@ -112,6 +112,15 @@ export default function SchedulerMonitor() {
   };
 
   const latestRun = summary.lastRun;
+  const latestRunsByScraper = {};
+
+for (const run of runs) {
+  if (!latestRunsByScraper[run.scraper]) {
+    latestRunsByScraper[run.scraper] = run;
+  }
+}
+
+const latestScraperRuns = Object.values(latestRunsByScraper);
 
   const goToPage = (newPage) => {
     if (newPage < 1) return;
@@ -189,85 +198,123 @@ export default function SchedulerMonitor() {
         </div>
       </div>
 
-      {/* =========================================
-          LAST RUN
-      ========================================= */}
+    {/* =========================================
+    LATEST SCRAPER RUNS
+========================================= */}
 
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 mb-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-7">
-          <h2 className="text-2xl font-bold text-white">
-            Laatste uitgevoerde run
-          </h2>
+<div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 mb-8">
+  <div className="mb-7">
+    <h2 className="text-2xl font-bold text-white">
+      Laatste scraper-runs
+    </h2>
 
-          {latestRun && (
-            <span
-              className={`inline-flex w-fit px-4 py-2 rounded-full text-sm font-bold ${statusClass(
-                latestRun.status,
-              )}`}
-            >
-              {latestRun.status}
-            </span>
-          )}
-        </div>
+    <p className="text-slate-400 mt-1">
+      Laatste uitvoering per brandstofstation-netwerk.
+    </p>
+  </div>
 
-        {latestRun ? (
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+  {latestScraperRuns.length === 0 ? (
+    <div className="text-slate-400">
+      Nog geen scheduler-runs beschikbaar.
+    </div>
+  ) : (
+    <div className="space-y-4">
+      {latestScraperRuns.map((run) => (
+        <div
+          key={run.scraper}
+          className="rounded-xl border border-slate-800 bg-slate-950/40 p-5"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-5 items-center">
+
             <div className="min-w-0">
-              <div className="text-sm text-slate-400">Scraper</div>
+              <div className="text-sm text-slate-400">
+                Scraper
+              </div>
 
               <div
-                className="text-xl font-bold text-white mt-2 truncate"
-                title={latestRun.scraper}
+                className="text-lg font-bold text-white mt-1 truncate"
+                title={run.scraper}
               >
-                {latestRun.scraper ?? "-"}
+                {run.scraper ?? "-"}
               </div>
             </div>
 
             <div>
-              <div className="text-sm text-slate-400">Stations</div>
+              <div className="text-sm text-slate-400">
+                Status
+              </div>
 
-              <div className="text-3xl font-bold text-yellow-400 mt-2">
-                {latestRun.stations ?? 0}
+              <span
+                className={`inline-flex mt-1 px-3 py-1 rounded-full text-sm font-bold ${statusClass(
+                  run.status,
+                )}`}
+              >
+                {run.status}
+              </span>
+            </div>
+
+            <div>
+              <div className="text-sm text-slate-400">
+                Stations
+              </div>
+
+              <div className="text-2xl font-bold text-yellow-400 mt-1">
+                {run.stations ?? 0}
               </div>
             </div>
 
             <div>
-              <div className="text-sm text-slate-400">Updated</div>
+              <div className="text-sm text-slate-400">
+                Updated
+              </div>
 
-              <div className="text-3xl font-bold text-green-400 mt-2">
-                {latestRun.updated ?? 0}
+              <div className="text-2xl font-bold text-green-400 mt-1">
+                {run.updated ?? 0}
               </div>
             </div>
 
             <div>
-              <div className="text-sm text-slate-400">Errors</div>
+              <div className="text-sm text-slate-400">
+                Errors
+              </div>
 
               <div
-                className={`text-3xl font-bold mt-2 ${
-                  Number(latestRun.errors) > 0
+                className={`text-2xl font-bold mt-1 ${
+                  Number(run.errors) > 0
                     ? "text-red-400"
                     : "text-green-400"
                 }`}
               >
-                {latestRun.errors ?? 0}
+                {run.errors ?? 0}
               </div>
             </div>
 
             <div>
-              <div className="text-sm text-slate-400">Duur</div>
+              <div className="text-sm text-slate-400">
+                Duur
+              </div>
 
-              <div className="text-3xl font-bold text-white mt-2">
-                {latestRun.duration_ms ?? 0}
-                <span className="text-lg text-slate-400 ml-1">ms</span>
+              <div className="text-xl font-bold text-white mt-1">
+                {run.duration_ms ?? 0}
+                <span className="text-sm text-slate-400 ml-1">
+                  ms
+                </span>
               </div>
             </div>
+
           </div>
-        ) : (
-          <div className="text-slate-400">
-            Nog geen scheduler-run beschikbaar.
+
+          <div className="mt-4 pt-4 border-t border-slate-800 text-sm text-slate-500">
+            Laatste uitvoering:{" "}
+            <span className="text-slate-300">
+              {formatDate(run.started_at)}
+            </span>
           </div>
-        )}
-      </div>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
 
       {/* =========================================
           HISTORY

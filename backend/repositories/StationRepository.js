@@ -11,6 +11,32 @@ class StationRepository {
   }
 
   async insert(record) {
+    const benzine95 =
+      record.prices?.benzine95 ??
+      record.prices?.e95 ??
+      null;
+
+    const benzine98 =
+      record.prices?.benzine98 ??
+      record.prices?.e98 ??
+      null;
+
+    const diesel =
+      record.prices?.diesel ??
+      null;
+
+    const lpg =
+      record.prices?.lpg ??
+      null;
+
+    const cng =
+      record.prices?.cng ??
+      null;
+
+    const adblue =
+      record.prices?.adblue ??
+      null;
+
     await pool.query(
       `
       INSERT INTO stations_v2 (
@@ -26,11 +52,13 @@ class StationRepository {
         benzine98,
         diesel,
         lpg,
+        cng,
+        adblue,
         currency,
         source,
         last_update
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
       [
         record.station_id,
@@ -41,10 +69,12 @@ class StationRepository {
         record.city,
         record.latitude,
         record.longitude,
-        record.prices?.benzine95 ?? null,
-        record.prices?.benzine98 ?? null,
-        record.prices?.diesel ?? null,
-        record.prices?.lpg ?? null,
+        benzine95,
+        benzine98,
+        diesel,
+        lpg,
+        cng,
+        adblue,
         record.currency,
         record.source,
         new Date(record.updated_at),
@@ -53,6 +83,32 @@ class StationRepository {
   }
 
   async update(record) {
+    const benzine95 =
+      record.prices?.benzine95 ??
+      record.prices?.e95 ??
+      null;
+
+    const benzine98 =
+      record.prices?.benzine98 ??
+      record.prices?.e98 ??
+      null;
+
+    const diesel =
+      record.prices?.diesel ??
+      null;
+
+    const lpg =
+      record.prices?.lpg ??
+      null;
+
+    const cng =
+      record.prices?.cng ??
+      null;
+
+    const adblue =
+      record.prices?.adblue ??
+      null;
+
     await pool.query(
       `
       UPDATE stations_v2
@@ -68,6 +124,8 @@ class StationRepository {
         benzine98 = ?,
         diesel = ?,
         lpg = ?,
+        cng = ?,
+        adblue = ?,
         currency = ?,
         source = ?,
         last_update = ?,
@@ -82,10 +140,12 @@ class StationRepository {
         record.city,
         record.latitude,
         record.longitude,
-        record.prices?.benzine95 ?? null,
-        record.prices?.benzine98 ?? null,
-        record.prices?.diesel ?? null,
-        record.prices?.lpg ?? null,
+        benzine95,
+        benzine98,
+        diesel,
+        lpg,
+        cng,
+        adblue,
         record.currency,
         record.source,
         new Date(record.updated_at),
@@ -95,7 +155,9 @@ class StationRepository {
   }
 
   async upsert(record) {
-    const existing = await this.findByStationId(record.station_id);
+    const existing = await this.findByStationId(
+      record.station_id,
+    );
 
     if (!existing) {
       await this.insert(record);

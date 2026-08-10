@@ -4,8 +4,10 @@ import Dats24Scraper from "./dats24/dats24.js";
 import EssoNetworkScraper from "./esso-network/esso-network.js";
 
 const activeScrapers = [
-    new MaesScraper(),
-    // new EssoNetworkScraper(),
+  new MaesScraper(),
+  new Dats24Scraper(),
+  // new Q8Scraper(),
+  // new EssoNetworkScraper(),
 ];
 
 export default activeScrapers;
