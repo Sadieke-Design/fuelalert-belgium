@@ -25,6 +25,7 @@ export default function SchedulerMonitor() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [selectedScraper, setSelectedScraper] = useState("MAES_NETWORK");
   const [lastRefresh, setLastRefresh] = useState(new Date());
   const [countdown, setCountdown] = useState(30);
 
@@ -114,13 +115,19 @@ export default function SchedulerMonitor() {
   const latestRun = summary.lastRun;
   const latestRunsByScraper = {};
 
-for (const run of runs) {
-  if (!latestRunsByScraper[run.scraper]) {
-    latestRunsByScraper[run.scraper] = run;
+  for (const run of runs) {
+    if (!latestRunsByScraper[run.scraper]) {
+      latestRunsByScraper[run.scraper] = run;
+    }
   }
-}
 
-const latestScraperRuns = Object.values(latestRunsByScraper);
+  const latestScraperRuns = Object.values(latestRunsByScraper);
+
+  const scraperNames = [
+    ...new Set(runs.map((run) => run.scraper).filter(Boolean)),
+  ];
+
+  const filteredRuns = runs.filter((run) => run.scraper === selectedScraper);
 
   const goToPage = (newPage) => {
     if (newPage < 1) return;
@@ -198,123 +205,107 @@ const latestScraperRuns = Object.values(latestRunsByScraper);
         </div>
       </div>
 
-    {/* =========================================
+      {/* =========================================
     LATEST SCRAPER RUNS
 ========================================= */}
 
-<div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 mb-8">
-  <div className="mb-7">
-    <h2 className="text-2xl font-bold text-white">
-      Laatste scraper-runs
-    </h2>
+      <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 mb-8">
+        <div className="mb-7">
+          <h2 className="text-2xl font-bold text-white">
+            Laatste scraper-runs
+          </h2>
 
-    <p className="text-slate-400 mt-1">
-      Laatste uitvoering per brandstofstation-netwerk.
-    </p>
-  </div>
-
-  {latestScraperRuns.length === 0 ? (
-    <div className="text-slate-400">
-      Nog geen scheduler-runs beschikbaar.
-    </div>
-  ) : (
-    <div className="space-y-4">
-      {latestScraperRuns.map((run) => (
-        <div
-          key={run.scraper}
-          className="rounded-xl border border-slate-800 bg-slate-950/40 p-5"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-5 items-center">
-
-            <div className="min-w-0">
-              <div className="text-sm text-slate-400">
-                Scraper
-              </div>
-
-              <div
-                className="text-lg font-bold text-white mt-1 truncate"
-                title={run.scraper}
-              >
-                {run.scraper ?? "-"}
-              </div>
-            </div>
-
-            <div>
-              <div className="text-sm text-slate-400">
-                Status
-              </div>
-
-              <span
-                className={`inline-flex mt-1 px-3 py-1 rounded-full text-sm font-bold ${statusClass(
-                  run.status,
-                )}`}
-              >
-                {run.status}
-              </span>
-            </div>
-
-            <div>
-              <div className="text-sm text-slate-400">
-                Stations
-              </div>
-
-              <div className="text-2xl font-bold text-yellow-400 mt-1">
-                {run.stations ?? 0}
-              </div>
-            </div>
-
-            <div>
-              <div className="text-sm text-slate-400">
-                Updated
-              </div>
-
-              <div className="text-2xl font-bold text-green-400 mt-1">
-                {run.updated ?? 0}
-              </div>
-            </div>
-
-            <div>
-              <div className="text-sm text-slate-400">
-                Errors
-              </div>
-
-              <div
-                className={`text-2xl font-bold mt-1 ${
-                  Number(run.errors) > 0
-                    ? "text-red-400"
-                    : "text-green-400"
-                }`}
-              >
-                {run.errors ?? 0}
-              </div>
-            </div>
-
-            <div>
-              <div className="text-sm text-slate-400">
-                Duur
-              </div>
-
-              <div className="text-xl font-bold text-white mt-1">
-                {run.duration_ms ?? 0}
-                <span className="text-sm text-slate-400 ml-1">
-                  ms
-                </span>
-              </div>
-            </div>
-
-          </div>
-
-          <div className="mt-4 pt-4 border-t border-slate-800 text-sm text-slate-500">
-            Laatste uitvoering:{" "}
-            <span className="text-slate-300">
-              {formatDate(run.started_at)}
-            </span>
-          </div>
+          <p className="text-slate-400 mt-1">
+            Laatste uitvoering per brandstofstation-netwerk.
+          </p>
         </div>
-      ))}
-    </div>
-  )}
-</div>
+
+        {latestScraperRuns.length === 0 ? (
+          <div className="text-slate-400">
+            Nog geen scheduler-runs beschikbaar.
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {latestScraperRuns.map((run) => (
+              <div
+                key={run.scraper}
+                className="rounded-xl border border-slate-800 bg-slate-950/40 p-5"
+              >
+                <div className="grid grid-cols-2 md:grid-cols-6 gap-5 items-center">
+                  <div className="min-w-0">
+                    <div className="text-sm text-slate-400">Scraper</div>
+
+                    <div
+                      className="text-lg font-bold text-white mt-1 truncate"
+                      title={run.scraper}
+                    >
+                      {run.scraper ?? "-"}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-sm text-slate-400">Status</div>
+
+                    <span
+                      className={`inline-flex mt-1 px-3 py-1 rounded-full text-sm font-bold ${statusClass(
+                        run.status,
+                      )}`}
+                    >
+                      {run.status}
+                    </span>
+                  </div>
+
+                  <div>
+                    <div className="text-sm text-slate-400">Stations</div>
+
+                    <div className="text-2xl font-bold text-yellow-400 mt-1">
+                      {run.stations ?? 0}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-sm text-slate-400">Updated</div>
+
+                    <div className="text-2xl font-bold text-green-400 mt-1">
+                      {run.updated ?? 0}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-sm text-slate-400">Errors</div>
+
+                    <div
+                      className={`text-2xl font-bold mt-1 ${
+                        Number(run.errors) > 0
+                          ? "text-red-400"
+                          : "text-green-400"
+                      }`}
+                    >
+                      {run.errors ?? 0}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-sm text-slate-400">Duur</div>
+
+                    <div className="text-xl font-bold text-white mt-1">
+                      {run.duration_ms ?? 0}
+                      <span className="text-sm text-slate-400 ml-1">ms</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-slate-800 text-sm text-slate-500">
+                  Laatste uitvoering:{" "}
+                  <span className="text-slate-300">
+                    {formatDate(run.started_at)}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* =========================================
           HISTORY
@@ -327,12 +318,32 @@ const latestScraperRuns = Object.values(latestRunsByScraper);
           <div>
             <h2 className="text-2xl font-bold text-white">Historiek</h2>
 
-            <p className="text-slate-400 mt-1">Laatste scheduler-runs</p>
+            <p className="text-slate-400 mt-1">Scheduler-runs per scraper</p>
           </div>
 
           <div className="text-slate-400">{pagination.totalRuns} runs</div>
         </div>
+        {/* SCRAPER FILTER */}
 
+        <div className="px-6 py-4 border-b border-slate-800 flex flex-wrap gap-3">
+          {scraperNames.map((scraper) => (
+            <button
+              key={scraper}
+              type="button"
+              onClick={() => {
+                setSelectedScraper(scraper);
+                setPage(1);
+              }}
+              className={`px-5 py-2.5 rounded-xl border font-semibold transition ${
+                selectedScraper === scraper
+                  ? "bg-yellow-500/10 border-yellow-500/40 text-yellow-400"
+                  : "bg-slate-900 border-slate-700 text-slate-400 hover:text-white hover:border-slate-600"
+              }`}
+            >
+              {scraper === "MAES_NETWORK" ? "MAES NETWORK" : scraper}
+            </button>
+          ))}
+        </div>
         {/* HISTORY TABLE */}
 
         <div className="w-full overflow-hidden">
@@ -370,7 +381,7 @@ const latestScraperRuns = Object.values(latestRunsByScraper);
             </thead>
 
             <tbody>
-              {runs.length === 0 ? (
+              {filteredRuns.length === 0 ? (
                 <tr>
                   <td
                     colSpan={7}
@@ -380,7 +391,7 @@ const latestScraperRuns = Object.values(latestRunsByScraper);
                   </td>
                 </tr>
               ) : (
-                runs.map((run) => (
+                filteredRuns.map((run) => (
                   <tr
                     key={run.id}
                     className="border-b border-slate-800 hover:bg-slate-800/40 transition"
