@@ -8,17 +8,18 @@ const formatDate = (value) => {
   return new Date(value).toLocaleString("nl-BE", {
     day: "2-digit",
     month: "2-digit",
-    year: "numeric",
     hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit",
   });
 };
 
-const badgeClass = (status) =>
-  status === "SUCCESS"
-    ? "bg-green-500/10 text-green-400 border border-green-500/30"
-    : "bg-red-500/10 text-red-400 border border-red-500/30";
+const statusClass = (status) => {
+  if (status === "SUCCESS") {
+    return "bg-green-500/10 text-green-400 border border-green-500/30";
+  }
+
+  return "bg-red-500/10 text-red-400 border border-red-500/30";
+};
 
 export default function SchedulerMonitor() {
   const [data, setData] = useState(null);
@@ -45,6 +46,7 @@ export default function SchedulerMonitor() {
 
       setData({
         success: false,
+
         summary: {
           totalRuns: 0,
           successRuns: 0,
@@ -52,12 +54,14 @@ export default function SchedulerMonitor() {
           averageDuration: 0,
           lastRun: null,
         },
+
         pagination: {
           page: currentPage,
           limit: 50,
           totalRuns: 0,
           totalPages: 1,
         },
+
         runs: [],
       });
     } finally {
@@ -68,11 +72,11 @@ export default function SchedulerMonitor() {
   useEffect(() => {
     loadData(page);
 
-    const refresh = setInterval(() => {
+    const refreshTimer = setInterval(() => {
       loadData(page);
     }, REFRESH_INTERVAL);
 
-    const timer = setInterval(() => {
+    const countdownTimer = setInterval(() => {
       setCountdown((value) => {
         if (value <= 1) {
           return 30;
@@ -83,26 +87,15 @@ export default function SchedulerMonitor() {
     }, 1000);
 
     return () => {
-      clearInterval(refresh);
-      clearInterval(timer);
+      clearInterval(refreshTimer);
+      clearInterval(countdownTimer);
     };
   }, [page]);
-
-  function goToPage(newPage) {
-    if (!data?.pagination) return;
-
-    if (newPage < 1 || newPage > data.pagination.totalPages) {
-      return;
-    }
-
-    setLoading(true);
-    setPage(newPage);
-  }
 
   if (loading && !data) {
     return (
       <div className="min-h-[400px] flex items-center justify-center">
-        <div className="text-slate-400 text-lg">Scheduler Monitor laden...</div>
+        <div className="text-lg text-slate-400">Scheduler Monitor laden...</div>
       </div>
     );
   }
@@ -120,9 +113,19 @@ export default function SchedulerMonitor() {
 
   const latestRun = summary.lastRun;
 
+  const goToPage = (newPage) => {
+    if (newPage < 1) return;
+
+    if (newPage > pagination.totalPages) return;
+
+    setPage(newPage);
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* HEADER */}
+      {/* =========================================
+          HEADER
+      ========================================= */}
 
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
         <div>
@@ -147,7 +150,9 @@ export default function SchedulerMonitor() {
         </div>
       </div>
 
-      {/* SUMMARY */}
+      {/* =========================================
+          SUMMARY CARDS
+      ========================================= */}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
         <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
@@ -179,12 +184,14 @@ export default function SchedulerMonitor() {
 
           <div className="text-4xl font-bold text-white mt-2">
             {summary.averageDuration ?? 0}
-            <span className="text-xl text-slate-400 ml-1">ms</span>
+            <span className="text-lg text-slate-400 ml-1">ms</span>
           </div>
         </div>
       </div>
 
-      {/* LATEST RUN */}
+      {/* =========================================
+          LAST RUN
+      ========================================= */}
 
       <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-7">
@@ -192,21 +199,26 @@ export default function SchedulerMonitor() {
             Laatste uitgevoerde run
           </h2>
 
-          <span
-            className={`inline-flex w-fit px-4 py-2 rounded-full text-sm font-bold ${badgeClass(
-              latestRun?.status,
-            )}`}
-          >
-            {latestRun?.status ?? "-"}
-          </span>
+          {latestRun && (
+            <span
+              className={`inline-flex w-fit px-4 py-2 rounded-full text-sm font-bold ${statusClass(
+                latestRun.status,
+              )}`}
+            >
+              {latestRun.status}
+            </span>
+          )}
         </div>
 
         {latestRun ? (
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-            <div>
+            <div className="min-w-0">
               <div className="text-sm text-slate-400">Scraper</div>
 
-              <div className="text-xl font-bold text-white mt-2 truncate">
+              <div
+                className="text-xl font-bold text-white mt-2 truncate"
+                title={latestRun.scraper}
+              >
                 {latestRun.scraper ?? "-"}
               </div>
             </div>
@@ -257,9 +269,13 @@ export default function SchedulerMonitor() {
         )}
       </div>
 
-      {/* HISTORY */}
+      {/* =========================================
+          HISTORY
+      ========================================= */}
 
       <div className="rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden">
+        {/* HISTORY HEADER */}
+
         <div className="px-6 py-5 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div>
             <h2 className="text-2xl font-bold text-white">Historiek</h2>
@@ -270,37 +286,37 @@ export default function SchedulerMonitor() {
           <div className="text-slate-400">{pagination.totalRuns} runs</div>
         </div>
 
-        {/* TABLE */}
+        {/* HISTORY TABLE */}
 
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[900px] text-sm">
+        <div className="w-full overflow-hidden">
+          <table className="w-full table-fixed text-sm">
             <thead className="bg-slate-950/80 border-b border-slate-800">
               <tr>
-                <th className="px-6 py-4 text-left text-slate-400 font-semibold">
+                <th className="w-[20%] px-4 py-4 text-left text-slate-400 font-semibold">
                   Start
                 </th>
 
-                <th className="px-6 py-4 text-left text-slate-400 font-semibold">
+                <th className="w-[28%] px-4 py-4 text-left text-slate-400 font-semibold">
                   Scraper
                 </th>
 
-                <th className="px-6 py-4 text-center text-slate-400 font-semibold">
+                <th className="w-[12%] px-4 py-4 text-center text-slate-400 font-semibold">
                   Status
                 </th>
 
-                <th className="px-6 py-4 text-right text-slate-400 font-semibold">
+                <th className="w-[13%] px-4 py-4 text-right text-slate-400 font-semibold">
                   Stations
                 </th>
 
-                <th className="px-6 py-4 text-right text-slate-400 font-semibold">
+                <th className="w-[13%] px-4 py-4 text-right text-slate-400 font-semibold">
                   Updated
                 </th>
 
-                <th className="px-6 py-4 text-right text-slate-400 font-semibold">
-                  Errors
+                <th className="w-[7%] px-4 py-4 text-right text-slate-400 font-semibold">
+                  Fout
                 </th>
 
-                <th className="px-6 py-4 text-right text-slate-400 font-semibold">
+                <th className="w-[12%] px-4 py-4 text-right text-slate-400 font-semibold">
                   Duur
                 </th>
               </tr>
@@ -322,46 +338,61 @@ export default function SchedulerMonitor() {
                     key={run.id}
                     className="border-b border-slate-800 hover:bg-slate-800/40 transition"
                   >
-                    <td className="px-6 py-4 whitespace-nowrap text-white">
+                    <td className="px-4 py-4 whitespace-nowrap text-white">
                       {formatDate(run.started_at)}
                     </td>
 
-                    <td className="px-6 py-4 font-semibold text-white">
+                    <td
+                      className="px-4 py-4 font-semibold text-white truncate"
+                      title={run.scraper}
+                    >
                       {run.scraper}
                     </td>
 
-                    <td className="px-6 py-4 text-center">
-                      <span
-                        className={`inline-flex px-3 py-1 rounded-full text-xs font-bold ${badgeClass(
-                          run.status,
-                        )}`}
-                      >
-                        {run.status}
-                      </span>
+                    <td className="px-4 py-4 text-center">
+                      {run.status === "SUCCESS" ? (
+                        <span
+                          title="SUCCESS"
+                          aria-label="SUCCESS"
+                          className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 font-bold"
+                        >
+                          ✓
+                        </span>
+                      ) : (
+                        <span
+                          title="FAILED"
+                          aria-label="FAILED"
+                          className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 font-bold"
+                        >
+                          ✕
+                        </span>
+                      )}
                     </td>
 
-                    <td className="px-6 py-4 text-right text-white">
+                    <td className="px-4 py-4 text-right text-white">
                       {run.stations ?? 0}
                     </td>
 
-                    <td className="px-6 py-4 text-right text-green-400 font-semibold">
+                    <td className="px-4 py-4 text-right text-green-400 font-semibold">
                       {run.updated ?? 0}
                     </td>
 
-                    <td className="px-6 py-4 text-right">
+                    <td className="px-4 py-4 text-right">
                       <span
                         className={
                           Number(run.errors) > 0
                             ? "text-red-400 font-bold"
-                            : "text-green-400"
+                            : "text-slate-400"
                         }
                       >
                         {run.errors ?? 0}
                       </span>
                     </td>
 
-                    <td className="px-6 py-4 text-right whitespace-nowrap text-white">
-                      {run.duration_ms ?? 0} ms
+                    <td className="px-4 py-4 text-right whitespace-nowrap text-white">
+                      {run.duration_ms ?? 0}
+
+                      <span className="text-slate-500 ml-1">ms</span>
                     </td>
                   </tr>
                 ))
@@ -401,6 +432,18 @@ export default function SchedulerMonitor() {
               Volgende →
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* FOOTER */}
+
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-6 px-1">
+        <div className="text-sm text-slate-500">
+          FuelAlert Belgium • Scheduler Monitor
+        </div>
+
+        <div className="text-sm text-slate-500">
+          Automatische refresh: 30 sec
         </div>
       </div>
     </div>
