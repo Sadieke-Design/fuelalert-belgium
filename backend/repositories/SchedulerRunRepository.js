@@ -25,19 +25,28 @@ class SchedulerRunRepository {
     };
   }
 
-  async getRuns(limit = 100) {
-    const [rows] = await pool.query(
-      `
-      SELECT *
-      FROM scheduler_runs
-      ORDER BY started_at DESC
-      LIMIT ?
-      `,
-      [Number(limit)],
-    );
+async getRuns(limit = 50, offset = 0) {
+  const [rows] = await pool.query(
+    `
+    SELECT *
+    FROM scheduler_runs
+    ORDER BY started_at DESC
+    LIMIT ? OFFSET ?
+    `,
+    [Number(limit), Number(offset)],
+  );
 
-    return rows;
-  }
+  return rows;
+}
+
+async getTotalRuns() {
+  const [[result]] = await pool.query(`
+    SELECT COUNT(*) AS total
+    FROM scheduler_runs
+  `);
+
+  return Number(result.total);
+}
 
   async create(run) {
     await pool.query(

@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 const REFRESH_INTERVAL = 30000;
 
-function formatDate(date) {
-  if (!date) return "-";
+const formatDate = (value) => {
+  if (!value) return "-";
 
-  return new Date(date).toLocaleString("nl-BE", {
+  return new Date(value).toLocaleString("nl-BE", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
@@ -13,355 +13,393 @@ function formatDate(date) {
     minute: "2-digit",
     second: "2-digit",
   });
-}
+};
 
-function formatDuration(ms) {
-  if (ms == null) return "-";
-
-  if (ms >= 1000) {
-    return `${(ms / 1000).toFixed(2)} s`;
-  }
-
-  return `${ms} ms`;
-}
-
-function statusColor(status) {
-  switch (status) {
-    case "SUCCESS":
-      return "bg-green-500/20 text-green-400 border border-green-500/30";
-
-    case "FAILED":
-      return "bg-red-500/20 text-red-400 border border-red-500/30";
-
-    default:
-      return "bg-slate-700 text-slate-300";
-  }
-}
+const badgeClass = (status) =>
+  status === "SUCCESS"
+    ? "bg-green-500/10 text-green-400 border border-green-500/30"
+    : "bg-red-500/10 text-red-400 border border-red-500/30";
 
 export default function SchedulerMonitor() {
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const [data, setData] = useState({
-    summary: {},
-    runs: [],
-  });
-
+  const [page, setPage] = useState(1);
   const [lastRefresh, setLastRefresh] = useState(new Date());
-
   const [countdown, setCountdown] = useState(30);
 
-  async function loadData() {
+  async function loadData(currentPage = page) {
     try {
-      const response = await fetch("/api/scheduler-monitor");
+      const res = await fetch(`/api/scheduler-monitor?page=${currentPage}`);
 
-      if (!response.ok) {
-        throw new Error("API Error");
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
       }
 
-      const json = await response.json();
+      const json = await res.json();
 
       setData(json);
-
       setLastRefresh(new Date());
-
       setCountdown(30);
     } catch (err) {
-      console.error(err);
+      console.error("Scheduler Monitor:", err);
+
+      setData({
+        success: false,
+        summary: {
+          totalRuns: 0,
+          successRuns: 0,
+          failedRuns: 0,
+          averageDuration: 0,
+          lastRun: null,
+        },
+        pagination: {
+          page: currentPage,
+          limit: 50,
+          totalRuns: 0,
+          totalPages: 1,
+        },
+        runs: [],
+      });
     } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => {
-    loadData();
+    loadData(page);
 
-    const refreshTimer = setInterval(loadData, REFRESH_INTERVAL);
+    const refresh = setInterval(() => {
+      loadData(page);
+    }, REFRESH_INTERVAL);
 
-    const countdownTimer = setInterval(() => {
-      setCountdown((v) => (v > 0 ? v - 1 : 30));
+    const timer = setInterval(() => {
+      setCountdown((value) => {
+        if (value <= 1) {
+          return 30;
+        }
+
+        return value - 1;
+      });
     }, 1000);
 
     return () => {
-      clearInterval(refreshTimer);
-      clearInterval(countdownTimer);
+      clearInterval(refresh);
+      clearInterval(timer);
     };
-  }, []);
+  }, [page]);
 
-  if (loading) {
+  function goToPage(newPage) {
+    if (!data?.pagination) return;
+
+    if (newPage < 1 || newPage > data.pagination.totalPages) {
+      return;
+    }
+
+    setLoading(true);
+    setPage(newPage);
+  }
+
+  if (loading && !data) {
     return (
-      <div className="flex justify-center items-center h-screen text-white text-xl">
-        Scheduler Monitor laden...
+      <div className="min-h-[400px] flex items-center justify-center">
+        <div className="text-slate-400 text-lg">Scheduler Monitor laden...</div>
       </div>
     );
   }
 
-  const summary = data.summary || {};
+  const summary = data?.summary ?? {};
 
-  const runs = data.runs || [];
+  const runs = data?.runs ?? [];
+
+  const pagination = data?.pagination ?? {
+    page: 1,
+    limit: 50,
+    totalRuns: 0,
+    totalPages: 1,
+  };
+
+  const latestRun = summary.lastRun;
+
   return (
-    <div className="min-h-screen bg-[#0f172a] text-white">
-      <div className="max-w-7xl mx-auto px-8 py-10">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
-          <div>
-            <h1 className="text-5xl font-bold tracking-tight">
-              Scheduler Monitor
-            </h1>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* HEADER */}
 
-            <p className="text-slate-400 mt-3 text-lg">
-              Live monitoring van alle FuelAlert scrapers.
-            </p>
+      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
+        <div>
+          <h1 className="text-4xl font-bold text-white">Scheduler Monitor</h1>
+
+          <p className="text-slate-400 mt-2">
+            Live monitoring van alle FuelAlert scrapers.
+          </p>
+        </div>
+
+        <div className="text-left lg:text-right">
+          <div className="text-sm text-slate-400">Laatste refresh</div>
+
+          <div className="font-semibold text-white">
+            {formatDate(lastRefresh)}
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-xl px-6 py-5 text-right min-w-[280px]">
-            <div className="text-slate-400 text-sm">Laatste refresh</div>
+          <div className="text-sm text-slate-400 mt-2">
+            Volgende refresh over{" "}
+            <span className="font-bold text-yellow-400">{countdown}s</span>
+          </div>
+        </div>
+      </div>
 
-            <div className="text-xl font-semibold mt-1">
-              {formatDate(lastRefresh)}
-            </div>
+      {/* SUMMARY */}
 
-            <div className="border-t border-slate-800 my-4"></div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+          <div className="text-sm text-slate-400">Runs vandaag</div>
 
-            <div className="text-slate-400 text-sm">Volgende refresh</div>
-
-            <div className="text-2xl font-bold text-amber-400 mt-1">
-              {countdown}s
-            </div>
+          <div className="text-4xl font-bold text-white mt-2">
+            {summary.totalRuns ?? 0}
           </div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-            <div className="text-slate-400 text-sm uppercase tracking-wide">
-              Runs vandaag
-            </div>
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+          <div className="text-sm text-slate-400">Success</div>
 
-            <div className="text-5xl font-bold mt-4">
-              {summary.totalRuns ?? 0}
-            </div>
-          </div>
-
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-            <div className="text-slate-400 text-sm uppercase tracking-wide">
-              Success
-            </div>
-
-            <div className="text-5xl font-bold text-green-400 mt-4">
-              {summary.successRuns ?? 0}
-            </div>
-          </div>
-
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-            <div className="text-slate-400 text-sm uppercase tracking-wide">
-              Failed
-            </div>
-
-            <div className="text-5xl font-bold text-red-400 mt-4">
-              {summary.failedRuns ?? 0}
-            </div>
-          </div>
-
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-            <div className="text-slate-400 text-sm uppercase tracking-wide">
-              Gemiddelde duur
-            </div>
-
-            <div className="text-5xl font-bold mt-4">
-              {formatDuration(summary.averageDuration)}
-            </div>
+          <div className="text-4xl font-bold text-green-400 mt-2">
+            {summary.successRuns ?? 0}
           </div>
         </div>
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-10">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-semibold">Laatste uitgevoerde run</h2>
 
-            {summary.lastRun && (
-              <span
-                className={`px-4 py-2 rounded-full text-sm font-semibold ${statusColor(summary.lastRun.status)}`}
-              >
-                {summary.lastRun.status}
-              </span>
-            )}
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+          <div className="text-sm text-slate-400">Failed</div>
+
+          <div className="text-4xl font-bold text-red-400 mt-2">
+            {summary.failedRuns ?? 0}
           </div>
-
-          {summary.lastRun ? (
-            <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
-              <div>
-                <div className="text-slate-500 text-xs uppercase mb-2">
-                  Scraper
-                </div>
-
-                <div className="text-xl font-bold">
-                  {summary.lastRun.scraper}
-                </div>
-              </div>
-
-              <div>
-                <div className="text-slate-500 text-xs uppercase mb-2">
-                  Stations
-                </div>
-
-                <div className="text-3xl font-bold text-amber-400">
-                  {summary.lastRun.stations}
-                </div>
-              </div>
-
-              <div>
-                <div className="text-slate-500 text-xs uppercase mb-2">
-                  Updated
-                </div>
-
-                <div className="text-3xl font-bold text-green-400">
-                  {summary.lastRun.updated}
-                </div>
-              </div>
-
-              <div>
-                <div className="text-slate-500 text-xs uppercase mb-2">
-                  Errors
-                </div>
-
-                <div
-                  className={`text-3xl font-bold ${
-                    summary.lastRun.errors > 0
-                      ? "text-red-400"
-                      : "text-green-400"
-                  }`}
-                >
-                  {summary.lastRun.errors}
-                </div>
-              </div>
-
-              <div>
-                <div className="text-slate-500 text-xs uppercase mb-2">
-                  Duur
-                </div>
-
-                <div className="text-3xl font-bold">
-                  {formatDuration(summary.lastRun.duration_ms)}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="text-slate-400">
-              Nog geen scheduler-run uitgevoerd.
-            </div>
-          )}
         </div>
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-          <div className="px-6 py-5 border-b border-slate-800 flex items-center justify-between">
+
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+          <div className="text-sm text-slate-400">Gemiddelde duur</div>
+
+          <div className="text-4xl font-bold text-white mt-2">
+            {summary.averageDuration ?? 0}
+            <span className="text-xl text-slate-400 ml-1">ms</span>
+          </div>
+        </div>
+      </div>
+
+      {/* LATEST RUN */}
+
+      <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-7">
+          <h2 className="text-2xl font-bold text-white">
+            Laatste uitgevoerde run
+          </h2>
+
+          <span
+            className={`inline-flex w-fit px-4 py-2 rounded-full text-sm font-bold ${badgeClass(
+              latestRun?.status,
+            )}`}
+          >
+            {latestRun?.status ?? "-"}
+          </span>
+        </div>
+
+        {latestRun ? (
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             <div>
-              <h2 className="text-2xl font-semibold">Historiek</h2>
+              <div className="text-sm text-slate-400">Scraper</div>
 
-              <p className="text-slate-400 text-sm mt-1">
-                Laatste scheduler-runs
-              </p>
+              <div className="text-xl font-bold text-white mt-2 truncate">
+                {latestRun.scraper ?? "-"}
+              </div>
             </div>
 
-            <div className="text-slate-400 text-sm">{runs.length} runs</div>
+            <div>
+              <div className="text-sm text-slate-400">Stations</div>
+
+              <div className="text-3xl font-bold text-yellow-400 mt-2">
+                {latestRun.stations ?? 0}
+              </div>
+            </div>
+
+            <div>
+              <div className="text-sm text-slate-400">Updated</div>
+
+              <div className="text-3xl font-bold text-green-400 mt-2">
+                {latestRun.updated ?? 0}
+              </div>
+            </div>
+
+            <div>
+              <div className="text-sm text-slate-400">Errors</div>
+
+              <div
+                className={`text-3xl font-bold mt-2 ${
+                  Number(latestRun.errors) > 0
+                    ? "text-red-400"
+                    : "text-green-400"
+                }`}
+              >
+                {latestRun.errors ?? 0}
+              </div>
+            </div>
+
+            <div>
+              <div className="text-sm text-slate-400">Duur</div>
+
+              <div className="text-3xl font-bold text-white mt-2">
+                {latestRun.duration_ms ?? 0}
+                <span className="text-lg text-slate-400 ml-1">ms</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="text-slate-400">
+            Nog geen scheduler-run beschikbaar.
+          </div>
+        )}
+      </div>
+
+      {/* HISTORY */}
+
+      <div className="rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden">
+        <div className="px-6 py-5 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div>
+            <h2 className="text-2xl font-bold text-white">Historiek</h2>
+
+            <p className="text-slate-400 mt-1">Laatste scheduler-runs</p>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-slate-950 border-b border-slate-800 text-slate-400 text-sm uppercase tracking-wide">
-                  <th className="px-6 py-4 text-left">Start</th>
+          <div className="text-slate-400">{pagination.totalRuns} runs</div>
+        </div>
 
-                  <th className="px-6 py-4 text-left">Scraper</th>
+        {/* TABLE */}
 
-                  <th className="px-6 py-4 text-center">Status</th>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[900px] text-sm">
+            <thead className="bg-slate-950/80 border-b border-slate-800">
+              <tr>
+                <th className="px-6 py-4 text-left text-slate-400 font-semibold">
+                  Start
+                </th>
 
-                  <th className="px-6 py-4 text-right">Stations</th>
+                <th className="px-6 py-4 text-left text-slate-400 font-semibold">
+                  Scraper
+                </th>
 
-                  <th className="px-6 py-4 text-right">Inserted</th>
+                <th className="px-6 py-4 text-center text-slate-400 font-semibold">
+                  Status
+                </th>
 
-                  <th className="px-6 py-4 text-right">Updated</th>
+                <th className="px-6 py-4 text-right text-slate-400 font-semibold">
+                  Stations
+                </th>
 
-                  <th className="px-6 py-4 text-right">Skipped</th>
+                <th className="px-6 py-4 text-right text-slate-400 font-semibold">
+                  Updated
+                </th>
 
-                  <th className="px-6 py-4 text-right">Duplicates</th>
+                <th className="px-6 py-4 text-right text-slate-400 font-semibold">
+                  Errors
+                </th>
 
-                  <th className="px-6 py-4 text-right">Errors</th>
+                <th className="px-6 py-4 text-right text-slate-400 font-semibold">
+                  Duur
+                </th>
+              </tr>
+            </thead>
 
-                  <th className="px-6 py-4 text-right">Duration</th>
+            <tbody>
+              {runs.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={7}
+                    className="px-6 py-12 text-center text-slate-500"
+                  >
+                    Nog geen scheduler-runs geregistreerd.
+                  </td>
                 </tr>
-              </thead>
+              ) : (
+                runs.map((run) => (
+                  <tr
+                    key={run.id}
+                    className="border-b border-slate-800 hover:bg-slate-800/40 transition"
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap text-white">
+                      {formatDate(run.started_at)}
+                    </td>
 
-              <tbody>
-                {runs.length === 0 ? (
-                  <tr>
-                    <td
-                      colSpan={10}
-                      className="text-center py-20 text-slate-500"
-                    >
-                      Nog geen scheduler-runs geregistreerd.
+                    <td className="px-6 py-4 font-semibold text-white">
+                      {run.scraper}
+                    </td>
+
+                    <td className="px-6 py-4 text-center">
+                      <span
+                        className={`inline-flex px-3 py-1 rounded-full text-xs font-bold ${badgeClass(
+                          run.status,
+                        )}`}
+                      >
+                        {run.status}
+                      </span>
+                    </td>
+
+                    <td className="px-6 py-4 text-right text-white">
+                      {run.stations ?? 0}
+                    </td>
+
+                    <td className="px-6 py-4 text-right text-green-400 font-semibold">
+                      {run.updated ?? 0}
+                    </td>
+
+                    <td className="px-6 py-4 text-right">
+                      <span
+                        className={
+                          Number(run.errors) > 0
+                            ? "text-red-400 font-bold"
+                            : "text-green-400"
+                        }
+                      >
+                        {run.errors ?? 0}
+                      </span>
+                    </td>
+
+                    <td className="px-6 py-4 text-right whitespace-nowrap text-white">
+                      {run.duration_ms ?? 0} ms
                     </td>
                   </tr>
-                ) : (
-                  runs.map((run) => (
-                    <tr
-                      key={run.id}
-                      className="border-b border-slate-800 hover:bg-slate-800/40 transition-colors"
-                    >
-                      <td className="px-6 py-5 whitespace-nowrap">
-                        {formatDate(run.started_at)}
-                      </td>
-
-                      <td className="px-6 py-5 font-semibold">{run.scraper}</td>
-
-                      <td className="px-6 py-5 text-center">
-                        <span
-                          className={`inline-flex px-3 py-1 rounded-full text-xs font-bold ${statusColor(run.status)}`}
-                        >
-                          {run.status}
-                        </span>
-                      </td>
-
-                      <td className="px-6 py-5 text-right">{run.stations}</td>
-
-                      <td className="px-6 py-5 text-right text-green-400">
-                        {run.inserted}
-                      </td>
-
-                      <td className="px-6 py-5 text-right text-cyan-400">
-                        {run.updated}
-                      </td>
-
-                      <td className="px-6 py-5 text-right">{run.skipped}</td>
-
-                      <td className="px-6 py-5 text-right">{run.duplicates}</td>
-
-                      <td
-                        className={`px-6 py-5 text-right font-semibold ${
-                          run.errors > 0 ? "text-red-400" : "text-green-400"
-                        }`}
-                      >
-                        {run.errors}
-                      </td>
-
-                      <td className="px-6 py-5 text-right whitespace-nowrap">
-                        {formatDuration(run.duration_ms)}
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
-        <div className="mt-8 flex flex-col md:flex-row md:items-center md:justify-between text-sm text-slate-500 gap-3">
-          <div>FuelAlert Belgium • Scheduler Monitor • Backend v8.5</div>
 
-          <div className="flex items-center gap-6">
-            <span>
-              Refresh elke <strong className="text-slate-300">30 sec</strong>
-            </span>
+        {/* PAGINATION */}
 
-            <span>
-              Laatste update{" "}
-              <strong className="text-slate-300">
-                {formatDate(lastRefresh)}
-              </strong>
+        <div className="px-6 py-5 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-sm text-slate-400">
+            Pagina{" "}
+            <span className="font-semibold text-white">{pagination.page}</span>{" "}
+            van{" "}
+            <span className="font-semibold text-white">
+              {pagination.totalPages}
             </span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => goToPage(pagination.page - 1)}
+              disabled={pagination.page <= 1}
+              className="px-4 py-2 rounded-lg border border-slate-700 text-white hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition"
+            >
+              ← Vorige
+            </button>
+
+            <button
+              type="button"
+              onClick={() => goToPage(pagination.page + 1)}
+              disabled={pagination.page >= pagination.totalPages}
+              className="px-4 py-2 rounded-lg border border-slate-700 text-white hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition"
+            >
+              Volgende →
+            </button>
           </div>
         </div>
       </div>
