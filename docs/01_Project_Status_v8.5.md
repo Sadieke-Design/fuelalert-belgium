@@ -18,6 +18,8 @@
 
 ✅ MAES
 
+✅ DATS24
+
 ⏳ Gabriëls
 
 ⏳ Esso

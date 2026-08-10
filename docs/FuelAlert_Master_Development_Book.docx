@@ -89,12 +89,17 @@ BACKEND
 ✅ Station Repository
 ✅ Report Engine
 ✅ Scheduler Engine
+✅ Scheduler Monitor
 ✅ Station Bootstrap
 ✅ Capability Registry
 ✅ Health Registry
 ✅ Metrics Registry
 ✅ Rate Limiter
+✅ ScraperManager
+✅ BaseScraper
+✅ BrowserScraper
 ✅ MAES Network scraper
+✅ DATS24 scraper
 ✅ stations_v2 pipeline
 
 IN ONTWIKKELING
@@ -120,25 +125,42 @@ FRONTEND
 ✅ Registratie
 ✅ Wachtwoord vergeten
 ✅ Reset wachtwoord
+✅ Scheduler Monitor
 
 ⏳ Favorieten
 ⏳ Historiek
 ⏳ Premium
 ⏳ Filters
+⏳ Station Detail
+⏳ Kaart optimalisatie
 
+ADMIN
+
+❌ Dashboard
+❌ Scheduler beheer
+❌ Users
+❌ Analytics
+❌ Logs
 ======================================================================
 5. DATA BRONNEN
 ======================================================================
 
 MAES Network ................. ✅ Productie
+275 stations
+Sitemap + HTML + JSON-LD
+
+DATS24 ....................... ✅ Productie
+147 stations
+HTML + embedded station JSON
+Live prijzen, GPS en adresgegevens
 
 Fuel Media Service ........... ⏳ Contact opgenomen
 
 Gabriëls ..................... ⏳ Gepland
 
-TotalEnergies ................. ⏳ Gepland
+TotalEnergies ................ ⏳ Gepland
 
-Shell ........................ ⏳ Gepland
+Shell ......................... ⏳ Gepland
 
 Texaco ....................... ⏳ Gepland
 
@@ -148,11 +170,27 @@ Gulf ......................... ⏳ Gepland
 
 Avia ......................... ⏳ Gepland
 
-DATS24 ....................... ⏳ Onderzoek
-
 Q8 ........................... ⏸ On Hold
 
 Esso ......................... ⏸ On Hold
+
+
+DATS24 VALIDATIE
+
+147 stations gevonden
+147 unieke station IDs
+147 stations met GPS
+147 stations met volledig adres
+146 stations met E95
+146 stations met E98
+146 stations met diesel
+92 stations met CNG
+87 stations met AdBlue
+0 stations met LPG aangetroffen tijdens de validatierun
+0 scraper-errors
+
+Alle 147 DATS24 records zijn succesvol via de
+PersistenceEngine in stations_v2 verwerkt.
 
 ======================================================================
 6. DATA SOURCE ENGINE
@@ -178,6 +216,53 @@ DataSource Engine
 └── Persistence Layer ✅
 
 Nieuwe databronnen gebruiken automatisch deze infrastructuur.
+----------------------------------------------------------------------
+SCRAPER EXECUTION ARCHITECTURE
+----------------------------------------------------------------------
+
+Actieve scrapers worden geregistreerd in:
+
+backend/scrapers/registry.js
+
+Momenteel actief:
+
+• MAES_NETWORK
+• DATS24
+
+De ScraperManager voert alle geregistreerde scrapers uit.
+
+Flow:
+
+Scheduler
+    ↓
+ScraperManager
+    ↓
+MAES_NETWORK / DATS24
+    ↓
+Uniforme station records
+    ↓
+PersistenceEngine
+    ↓
+StationRepository
+    ↓
+stations_v2
+
+Iedere scraper levert dezelfde uniforme recordstructuur.
+
+De PersistenceEngine ondersteunt zowel de bestaande
+FuelAlert-velden als de DATS24-benamingen:
+
+• benzine95 / e95
+• benzine98 / e98
+• diesel
+• lpg
+
+Iedere scraper-run wordt geregistreerd in:
+
+scheduler_runs
+
+Deze gegevens worden gebruikt voor monitoring,
+historiek, statistieken en debugging.
 
 ======================================================================
 7. REST API
@@ -235,16 +320,13 @@ DEC-010
 Het Master Development Book is de Single Source of Truth.
 
 DEC-011
-
 Alle scrapers leveren één uniform recordformaat.
 
 DEC-012
-
 Database-opslag verloopt uitsluitend via
 PersistenceEngine en StationRepository.
 
 DEC-013
-
 Iedere validator implementeert dezelfde interface:
 
 • total
@@ -253,13 +335,46 @@ Iedere validator implementeert dezelfde interface:
 • success
 
 DEC-014
+stations_v2 wordt de centrale backenddatabase voor de nieuwe
+scraperarchitectuur.
 
-stations_v2 wordt de nieuwe backenddatabase.
+DEC-015
+MAES Network is volledig geïntegreerd in de nieuwe
+ScraperManager → PersistenceEngine → StationRepository pipeline.
 
-De bestaande productie blijft voorlopig
-op stations draaien totdat alle scrapers
-zijn gemigreerd.
+DEC-016
+DATS24 is toegevoegd als tweede productie-scraper.
 
+DEC-017
+DATS24 gebruikt dezelfde uniforme scraperarchitectuur als MAES.
+
+DEC-018
+De PersistenceEngine ondersteunt zowel benzine95/benzine98 als
+e95/e98 zodat verschillende scrapers hun eigen bronbenamingen
+kunnen behouden.
+
+DEC-019
+Alle actieve scrapers worden centraal geregistreerd in
+backend/scrapers/registry.js.
+
+DEC-020
+De Scheduler voert de actieve scrapers automatisch uit en registreert
+iedere uitvoering in scheduler_runs.
+
+DEC-021
+De Scheduler Monitor wordt gebruikt als centrale monitoringinterface
+voor de scraper-runs.
+
+DEC-022
+De Scheduler Monitor ondersteunt afzonderlijke monitoring van
+MAES_NETWORK en DATS24.
+
+DEC-023
+De Scheduler Monitor ververst automatisch iedere 30 seconden.
+
+DEC-024
+De eerste productievalidatie van DATS24 leverde 147 stations op,
+waarvan 147 succesvol naar stations_v2 werden verwerkt.
 ======================================================================
 9. MASTER CHECKLIST
 ======================================================================
@@ -267,6 +382,14 @@ zijn gemigreerd.
 SCRAPERS
 
 ✅ MAES Network
+   275 stations
+   Productie
+   Sitemap + HTML + JSON-LD
+
+✅ DATS24
+   147 stations
+   Productie
+   HTML + embedded station JSON
 
 ⏳ Gabriëls
 
@@ -282,15 +405,16 @@ SCRAPERS
 
 ⏳ Avia
 
-⏳ DATS24
-
 ⏸ Esso
 
 ⏸ Q8
 
+
 DATA SOURCE ENGINE
 
 ✅ ScraperManager
+
+✅ BaseScraper
 
 ✅ BrowserScraper
 
@@ -304,7 +428,7 @@ DATA SOURCE ENGINE
 
 ✅ Capability Registry
 
-✅ Health Engine
+✅ Health Registry
 
 ✅ Metrics Registry
 
@@ -317,6 +441,41 @@ DATA SOURCE ENGINE
 ✅ Station Repository
 
 ⏳ DataSource Manager
+
+
+DATABASE
+
+✅ stations_v2
+
+✅ PersistenceEngine
+
+✅ StationRepository
+
+✅ MAES import/update pipeline
+
+✅ DATS24 import/update pipeline
+
+✅ scheduler_runs
+
+⏳ Price History
+
+
+MONITORING
+
+✅ Health Monitoring
+
+✅ Scheduler Monitor
+
+✅ Scheduler Run History
+
+✅ Per-scraper run registratie
+
+✅ MAES_NETWORK monitoring
+
+✅ DATS24 monitoring
+
+✅ Automatische refresh iedere 30 seconden
+
 
 API
 
@@ -332,9 +491,115 @@ API
 
 ✅ /api/metrics
 
+✅ /api/scheduler-monitor
+
 ⏳ /api/history
 
 ⏳ /api/statistics
+
+⏳ Publieke API
+
+
+FRONTEND
+
+✅ Dashboard
+
+✅ Stations
+
+✅ Kaart
+
+✅ Login
+
+✅ Registratie
+
+✅ Wachtwoord vergeten
+
+✅ Reset wachtwoord
+
+✅ Scheduler Monitor
+
+⏳ Station Detail
+
+⏳ Favorieten
+
+⏳ Historiek
+
+⏳ Premium
+
+⏳ Filters
+
+⏳ Kaart optimalisatie
+
+
+ADMIN
+
+❌ Dashboard
+
+❌ Scheduler beheer
+
+❌ Users
+
+❌ Analytics
+
+❌ Logs
+
+======================================================================
+9A. SCHEDULER MONITOR
+======================================================================
+
+De Scheduler Monitor registreert en toont de resultaten van alle
+automatische scraper-runs.
+
+Endpoint:
+
+/api/scheduler-monitor
+
+De monitor gebruikt de tabel:
+
+scheduler_runs
+
+Per run worden opgeslagen:
+
+• scraper
+• status
+• stations
+• inserted
+• updated
+• skipped
+• duplicates
+• errors
+• duration_ms
+• started_at
+• finished_at
+
+De Scheduler Monitor toont:
+
+• Runs vandaag
+• Success runs
+• Failed runs
+• Gemiddelde duur
+• Laatste uitgevoerde run
+• Historiek
+• Resultaten per scraper
+
+De frontend ververst automatisch iedere 30 seconden.
+
+Frontend:
+
+src/pages/SchedulerMonitor.jsx
+
+Backend route:
+
+backend/routes/schedulerMonitorRoutes.js
+
+Repository:
+
+backend/repositories/SchedulerRunRepository.js
+
+Momenteel worden afzonderlijke resultaten geregistreerd voor:
+
+• MAES_NETWORK
+• DATS24
 
 ======================================================================
 10. CHANGELOG
@@ -386,6 +651,30 @@ v8.4.0
 • PROJECT_VISION.md toegevoegd.
 • ARCHITECTURE.md toegevoegd.
 • Fuel Media Service documentatie toegevoegd.
+v8.5.1
+
+• DATS24 scraper volledig gevalideerd.
+• DATS24 toegevoegd aan de actieve scraper registry.
+• 147 DATS24 stations succesvol gevonden.
+• 147 unieke DATS24 station IDs.
+• 147 DATS24 stations met GPS.
+• 147 DATS24 stations met volledig adres.
+• 146 stations met E95.
+• 146 stations met E98.
+• 146 stations met diesel.
+• 92 stations met CNG.
+• 87 stations met AdBlue.
+• Geen LPG-stations aangetroffen tijdens de validatierun.
+• Geen scraper-errors tijdens de validatierun.
+• DATS24 volledig geïntegreerd met ScraperManager.
+• DATS24 volledig geïntegreerd met PersistenceEngine.
+• DATS24 volledig geïntegreerd met StationRepository.
+• DATS24 succesvol opgeslagen in stations_v2.
+• Scheduler uitgebreid zodat MAES en DATS24 automatisch worden uitgevoerd.
+• Scheduler Monitor uitgebreid voor meerdere scrapers.
+• Scheduler Monitor toont resultaten per scraper.
+• Scheduler Monitor ondersteunt automatische refresh.
+• scheduler_runs wordt gebruikt voor volledige scraperhistoriek.
 
 ======================================================================
 11. VOLGENDE PRIORITEITEN
@@ -393,15 +682,19 @@ v8.4.0
 
 FASE 8.5
 
-1. Gabriëls scraper
-2. Fuel Media Service API
-3. Price History
-4. Frontend migreren naar stations_v2
-5. Scheduler V2 volledig uitrollen
-6. Oude cronjobs vervangen
-7. Premium
-8. Pushnotificaties
-9. Publieke API
+1. Stationsmodule volledig afronden
+2. Frontend migreren naar stations_v2
+3. Station Detail
+4. Historiek
+5. Kaart optimalisatie
+6. Gabriëls scraper
+7. Fuel Media Service API
+8. Price History
+9. Scheduler V2 verder uitbreiden
+10. Oude cronjobs vervangen
+11. Premium
+12. Pushnotificaties
+13. Publieke API
 
 ======================================================================
 12. LANGE TERMIJNVISIE

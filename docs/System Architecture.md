@@ -1,8 +1,8 @@
 # FuelAlert Belgium - System Architecture
 
-Version: 2.0
+Version: 2.1
 Status: Living Document
-Last Updated: 2026-07-31
+Last Updated: 2026-08-10
 
 ---
 
@@ -37,77 +37,74 @@ The platform focuses on:
 - Modularity
 - Extensibility
 
+Current production data sources:
+
+- MAES Network
+- DATS24
+
 ---
 
 # High Level Architecture
 
-                        Frontend (React + Vite)
+                    Frontend (React + Vite)
 
-                                   │
+                               │
 
-                           REST API (Express)
+                       REST API (Express)
 
-                                   │
+                               │
 
-                     Authentication / Authorization
+                 Authentication / Authorization
 
-                                   │
+                               │
 
-                            Business Services
+                        Business Services
 
-                                   │
+                               │
 
-                          DataSource Engine
+                      DataSource Engine
 
-                                   │
+                               │
 
-       ┌──────────────┬──────────────┬──────────────┐
-       │              │              │              │
+        ┌──────────────┬──────────────┬──────────────┐
+        │              │              │              │
+   Capability      Scheduler        Health        Metrics
+   Registry         Engine          Engine         Engine
+        │              │              │              │
+        └──────────────┴──────────────┴──────────────┘
 
-Capability      Scheduler      Health      Metrics
+                         Scraper Manager
 
-Registry         Engine        Engine       Engine
+                               │
 
-       │              │              │              │
+              ┌────────────────┴────────────────┐
+              │                                 │
+         MAES Network                         DATS24
 
-       └──────────────┴──────────────┴──────────────┘
+              │                                 │
+              └────────────────┬────────────────┘
 
-                      DataSource Manager
+                         Uniform Output
 
-                                   │
+                               │
 
-                          Scraper Manager
+                       Persistence Engine
 
-                                   │
+                               │
 
-        ┌─────────────┬──────────────┬───────────────┐
-        │             │              │               │
+                       Station Repository
 
-     MAES        Gabriëls      TotalEnergies   Fuel Media
+                               │
 
-                                   │
+                             MySQL
 
-                            Validation Engine
+                               │
 
-                                   │
+                          REST Endpoints
 
-                             Cache Engine
+                               │
 
-                                   │
-
-                            Persistence Layer
-
-                                   │
-
-                                 MySQL
-
-                                   │
-
-                              REST Endpoints
-
-                                   │
-
-                                Frontend
+                            Frontend
 
 ---
 
@@ -119,7 +116,7 @@ Every data source automatically integrates with the same infrastructure.
 
 Current modules:
 
-✅ Capability Registry
+## Capability Registry
 
 Describes what each data source supports.
 
@@ -135,7 +132,7 @@ Examples:
 
 ---
 
-✅ Scheduler Engine
+## Scheduler Engine
 
 Automatically executes registered data sources.
 
@@ -146,23 +143,32 @@ Responsibilities:
 - Startup execution
 - Background processing
 
+Current production interval:
+
+- 15 minutes
+- First execution immediately after startup
+
 Endpoint:
 
 /api/scheduler
 
 ---
 
-✅ Health Engine
+## Health Engine
 
 Continuously monitors all data sources.
 
 Tracks:
 
 - Status
-- Last execution
 - Number of stations
 - Errors
 - Success rate
+
+Current statuses:
+
+- ONLINE
+- OFFLINE
 
 Endpoint:
 
@@ -170,24 +176,30 @@ Endpoint:
 
 ---
 
-⏳ Metrics Engine
+## Metrics Engine
 
-Will collect:
+Collects scraper execution information.
+
+Tracks:
 
 - Runtime
 - Average duration
 - Total executions
 - Failed executions
 - Stations processed
-- Historical performance
+- Inserted records
+- Updated records
+- Skipped records
+- Duplicate records
+- Errors
 
-Future endpoint:
+Endpoint:
 
 /api/metrics
 
 ---
 
-⏳ Validator Engine
+## Validator Engine
 
 Responsible for:
 
@@ -198,9 +210,13 @@ Responsible for:
 - Invalid addresses
 - Data quality scoring
 
+Status:
+
+Development / further expansion
+
 ---
 
-⏳ Cache Engine
+## Cache Engine
 
 Responsible for:
 
@@ -209,9 +225,13 @@ Responsible for:
 - Faster updates
 - Cached API responses
 
+Status:
+
+Planned
+
 ---
 
-⏳ Rate Limiter
+## Rate Limiter
 
 Protects external data sources.
 
@@ -221,10 +241,16 @@ Responsibilities:
 - Retry strategy
 - Prevent blocking
 - Respect source limitations
+- Control concurrent requests
+- Configure request timeouts
+
+Status:
+
+Active
 
 ---
 
-⏳ DataSource Manager
+## DataSource Manager
 
 Acts as the intelligence layer.
 
@@ -236,13 +262,16 @@ Chooses the best available data source based on:
 4. Verified station owners
 5. Community reports
 
+Status:
+
+Planned
 ---
 
 # Backend Layers
 
 FuelAlert separates every responsibility into independent layers.
 
-API Layer
+## API Layer
 
 - Authentication
 - Authorization
@@ -250,42 +279,254 @@ API Layer
 - Validation
 - Responses
 
-Business Layer
+## Business Layer
 
 - Business rules
 - Scheduling
 - Orchestration
 - Notifications
 
-DataSource Layer
+## DataSource Layer
 
 - Source management
 - Source prioritisation
 - Source selection
 
-Scraper Layer
+## Scraper Layer
 
 Every scraper implements BaseScraper.
 
-Examples:
+Current production scrapers:
 
 - MAES Network
-- Gabriëls
-- TotalEnergies
-- Fuel Media API
+- DATS24
 
-Validation Layer
+Development scrapers:
+
+- Q8
+- ESSO Network
+
+## Validation Layer
 
 - Data validation
 - Duplicate detection
 - Quality control
 
-Persistence Layer
+## Persistence Layer
 
 - Database writes
+- Inserts
 - Updates
-- Transactions
+- Station upsert
 - History
+
+---
+
+# Scraper Registry
+
+Active scrapers are registered in:
+
+backend/scrapers/registry.js
+
+Current active production scrapers:
+
+- MAES_NETWORK
+- DATS24
+
+New scrapers can be activated by registering them in the scraper registry.
+
+---
+
+# Scraper Manager
+
+The ScraperManager is responsible for executing all active scrapers.
+
+File:
+
+backend/scrapers/ScraperManager.js
+
+Responsibilities:
+
+- Execute active scrapers
+- Process scraper results
+- Handle scraper failures
+- Update Health Registry
+- Pass records to PersistenceEngine
+- Generate execution summaries
+- Register scheduler run results
+
+Scrapers are executed through the common ScraperManager architecture.
+
+---
+
+# Uniform Scraper Output
+
+All active scrapers return a common station record structure.
+
+Core fields include:
+
+- station_id
+- brand
+- name
+- address
+- postal_code
+- city
+- latitude
+- longitude
+- prices
+- currency
+- source
+- updated_at
+
+Fuel naming differences between sources are normalized by the
+persistence layer.
+
+Examples:
+
+MAES:
+
+- benzine95
+- benzine98
+- diesel
+- lpg
+
+DATS24:
+
+- e95
+- e98
+- diesel
+- lpg
+- cng
+- adblue
+
+---
+
+# Persistence Architecture
+
+Scrapers do not write directly to MySQL.
+
+Architecture:
+
+Scraper
+   │
+   ▼
+ScraperManager
+   │
+   ▼
+PersistenceEngine
+   │
+   ▼
+StationRepository
+   │
+   ▼
+stations_v2
+
+Files:
+
+backend/persistence/PersistenceEngine.js
+
+backend/repositories/StationRepository.js
+
+---
+
+# PersistenceEngine
+
+The Persistence Engine processes all scraper records.
+
+For every record it calls:
+
+StationRepository.upsert()
+
+The result is counted as:
+
+- inserted
+- updated
+- errors
+
+The execution duration is recorded.
+
+---
+
+# StationRepository
+
+The StationRepository is responsible for storing station data.
+
+Database table:
+
+stations_v2
+
+The station identifier is:
+
+station_id
+
+station_id is unique.
+
+The repository performs:
+
+Find station
+     │
+     ├── Not found → INSERT
+     │
+     └── Found     → UPDATE
+
+---
+
+# Database
+
+The primary station table is:
+
+stations_v2
+
+Important fields include:
+
+- id
+- station_id
+- brand
+- name
+- address
+- postal_code
+- city
+- latitude
+- longitude
+- benzine95
+- benzine98
+- diesel
+- lpg
+- cng
+- adblue
+- currency
+- source
+- website
+- operator
+- active
+- last_update
+- last_price_change
+- created_at
+- updated_at
+
+Fuel-specific fields may contain NULL when a particular station does
+not provide that fuel.
+
+---
+
+# Brandstof Mapping
+
+The persistence layer supports different naming conventions used by
+individual data sources.
+
+DATS24:
+
+e95 → benzine95
+
+e98 → benzine98
+
+MAES:
+
+benzine95 → benzine95
+
+benzine98 → benzine98
+
+This allows multiple scrapers to use the same persistence architecture.
 
 ---
 
@@ -303,37 +544,80 @@ Scraper Manager
 
 ↓
 
-Parallel Scrapers
+Active Scrapers
 
 ↓
 
-Validation Engine
+Persistence Engine
 
 ↓
 
-Persistence Layer
+Station Repository
 
 ↓
 
-Health Engine
+MySQL
 
 ↓
 
-Metrics Engine
+Health Registry
 
 ↓
 
-Reports
+Scheduler Run Repository
 
+↓
+
+Reports / Monitoring
+
+---
+
+# Scheduler
+
+The Scheduler is responsible for automatically executing all active
+scrapers.
+
+File:
+
+backend/scheduler/Scheduler.js
+
+Current production interval:
+
+900000 ms
+
+This equals:
+
+15 minutes
+
+At backend startup:
+
+1. Scheduler starts.
+2. First execution runs immediately.
+3. Subsequent executions run every 15 minutes.
+
+Current scheduler job:
+
+Fuel Scrapers
+
+The scheduler starts the ScraperManager, which executes:
+
+- MAES_NETWORK
+- DATS24
 ---
 
 # Capability Registry
 
 Every scraper registers its own capabilities.
 
-Example:
+Current production sources provide:
 
-MAES
+MAES:
+
+- Prices
+- Stations
+- Coordinates
+
+DATS24:
 
 - Prices
 - Stations
@@ -363,26 +647,37 @@ Current status:
 - ONLINE
 - OFFLINE
 
-Future information:
+Tracked information:
 
-- Last run
-- Next run
-- Duration
-- Average duration
+- Status
+- Number of stations
+- Errors
 - Success rate
-- Error count
+
+Endpoint:
+
+/api/health
 
 ---
 
 # Metrics Engine
 
-Future metrics include:
+Metrics include:
 
 - Total executions
 - Failed executions
 - Average runtime
 - Processed stations
-- Historical trends
+- Inserted records
+- Updated records
+- Skipped records
+- Duplicate records
+- Errors
+- Historical performance
+
+Endpoint:
+
+/api/metrics
 
 ---
 
@@ -396,6 +691,72 @@ Examples:
 - Health Report
 - Performance Report
 - Import Report
+- Scheduler Run Report
+
+---
+
+# Scheduler Run Repository
+
+Every scraper execution is registered in:
+
+scheduler_runs
+
+File:
+
+backend/repositories/SchedulerRunRepository.js
+
+Stored information includes:
+
+- scraper
+- status
+- stations
+- inserted
+- updated
+- skipped
+- duplicates
+- errors
+- duration_ms
+- started_at
+- finished_at
+
+---
+
+# Scheduler Monitor
+
+The Scheduler Monitor is a realtime dashboard for scraper execution
+monitoring.
+
+Backend route:
+
+backend/routes/schedulerMonitorRoutes.js
+
+Repository:
+
+backend/repositories/SchedulerRunRepository.js
+
+Frontend:
+
+src/pages/SchedulerMonitor.jsx
+
+Functionaliteiten:
+
+- Live refresh every 30 seconds
+- Runs today
+- Success statistics
+- Failed statistics
+- Average duration
+- Latest executed run
+- Number of stations
+- Number of updated records
+- Error count
+- Scheduler history
+- Pagination
+- Separate scraper history
+
+Available scraper histories:
+
+- MAES_NETWORK
+- DATS24
 
 ---
 
@@ -409,23 +770,23 @@ Scraper
 
 ↓
 
-Validation
+Uniform Output
 
 ↓
 
-Cache
+ScraperManager
 
 ↓
 
-Persistence
+PersistenceEngine
 
 ↓
 
-Health
+StationRepository
 
 ↓
 
-Metrics
+MySQL
 
 ↓
 
@@ -435,17 +796,76 @@ REST API
 
 Frontend
 
+Monitoring flow:
+
+Scheduler
+    │
+    ▼
+ScraperManager
+    │
+    ▼
+Scraper
+    │
+    ▼
+SchedulerRunRepository
+    │
+    ▼
+scheduler_runs
+    │
+    ▼
+Scheduler Monitor API
+    │
+    ▼
+React Scheduler Monitor
+
 ---
 
 # Scalability
 
-Adding a new data source should require only:
+Adding a new data source should require:
 
 1. New scraper
 2. Registration
 3. Configuration
+4. Validation
+5. Activation
 
-Everything else is handled automatically by the DataSource Engine.
+The existing architecture handles:
+
+- Scraper execution
+- Persistence
+- Health monitoring
+- Metrics
+- Scheduler monitoring
+
+automatically.
+
+---
+
+# Current Production Sources
+
+| Source | Status | Stations | Method |
+|---|---|---:|---|
+| MAES Network | ✅ Production Ready | 275 | Sitemap + HTML + embedded data |
+| DATS24 | ✅ Production Ready | 147 | HTML + embedded station data |
+| Q8 | 🚧 Development | - | Playwright |
+| ESSO Network | 🚧 Development | - | Pending validation |
+
+---
+
+# Official Data Sources
+
+FuelAlert supports both scraper-based and official API integrations.
+
+Current status:
+
+| Source | Status |
+|---|---|
+| MAES | ✅ Working |
+| DATS24 | ✅ Working |
+| ESSO | ⛔ No official public API found |
+| Fuel Media Service | ⏳ Contacted |
+| CARBU API | Commercial |
 
 ---
 
@@ -478,52 +898,3 @@ Every architectural decision must improve:
 - Scalability
 - Extensibility
 - Reusability
-
-# Scheduler & Monitoring
-
-## Overzicht
-
-De Scheduler is verantwoordelijk voor het automatisch uitvoeren van alle actieve scrapers.
-
-Architectuur:
-
-Scheduler
-    │
-    ▼
-ScraperManager
-    │
-    ▼
-PersistenceEngine
-    │
-    ▼
-SchedulerRunRepository
-    │
-    ▼
-scheduler_runs
-    │
-    ▼
-REST API
-    │
-    ▼
-React Scheduler Monitor
-
-## Scheduler Monitor
-
-De Scheduler Monitor is een realtime dashboard dat de status van alle scraper-runs toont.
-
-Functionaliteiten:
-
-- Live refresh (30 seconden)
-- Runs van vandaag
-- Success / Failed statistieken
-- Gemiddelde duur
-- Laatste uitgevoerde run
-- Historiek van scraper-runs
-
-Bestanden
-
-backend/routes/schedulerMonitorRoutes.js
-
-backend/repositories/SchedulerRunRepository.js
-
-src/pages/SchedulerMonitor.jsx
