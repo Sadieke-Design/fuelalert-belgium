@@ -5,9 +5,8 @@ import EssoNetworkScraper from "./esso-network/esso-network.js";
 
 const activeScrapers = [
   new MaesScraper(),
-  new Dats24Scraper(),
-  // new Q8Scraper(),
-  // new EssoNetworkScraper(),
-];
+    new Dats24Scraper(),
+      
+      ];
 
-export default activeScrapers;
+      export default activeScrapers;
