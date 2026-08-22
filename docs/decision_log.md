@@ -59,7 +59,7 @@ Prioriteit:
 
 Geen verdere reverse engineering zolang Fuel Media Service nog in gesprek is.
 
-Status:
+**Status**
 
 - Wacht op antwoord Fuel Media Service.
 
@@ -69,9 +69,10 @@ Status:
 
 De DataSource Engine wordt volledig modulair opgebouwd.
 
-Nieuwe componenten worden eerst generiek ontwikkeld voordat nieuwe scrapers worden toegevoegd.
+Nieuwe componenten worden eerst generiek ontwikkeld voordat nieuwe scrapers
+worden toegevoegd.
 
-Volgorde:
+**Oorspronkelijke volgorde**
 
 1. Capability Registry
 2. Scheduler
@@ -83,48 +84,87 @@ Volgorde:
 8. Rate Limiter
 9. DataSource Manager
 
+**Huidige status**
+
+De belangrijkste generieke componenten zijn inmiddels geïmplementeerd.
+
+Aanvullend zijn toegevoegd:
+
+- ScraperManager
+- Report Engine
+- SchedulerRunRepository
+- Scheduler Monitor
+- station_source_links
+- StationSourceLinkRepository
+- StationPriceResolver
+
+De DataSource Manager blijft gepland voor een latere fase.
+
 ---
 
 ## DEC-004 — Uniform Scraper Output
 
-Alle scrapers leveren exact hetzelfde recordformaat aan.
+Alle scrapers leveren een uniforme stationrecordstructuur aan.
 
-Hierdoor blijven validators, persistence en rapportage volledig generiek.
+Hierdoor blijven validators, persistence, monitoring en rapportage generiek.
 
-Scrapers bevatten geen databasespecifieke logica.
+Scrapers bevatten geen databasespecifieke persistence-logica.
+
+De uniforme output wordt door de centrale backendarchitectuur verwerkt.
 
 ---
 
 ## DEC-005 — Validator Framework
 
-Iedere validator implementeert dezelfde interface.
+Iedere validator implementeert dezelfde generieke interface.
 
-```javascript
-{
-    total,
-    valid,
-    invalid,
-    success
-}
-```
+Voorbeelden van validators:
 
-Hierdoor kan ValidatorEngine volledig generiek werken.
+- Price Validator
+- GPS Validator
+- Address Validator
+- Duplicate Validator
+
+De Validator Engine kan hierdoor verschillende databronnen op dezelfde
+manier verwerken.
+
+De validatielaag blijft onafhankelijk van de individuele scraper.
 
 ---
 
 ## DEC-006 — Repository Pattern
 
-Databasebewerkingen verlopen uitsluitend via StationRepository.
+Databasebewerkingen verlopen via repositories.
 
-Scrapers communiceren nooit rechtstreeks met MySQL.
+Voor stations wordt hiervoor `StationRepository` gebruikt.
+
+Scrapers communiceren niet rechtstreeks met MySQL.
+
+De persistencearchitectuur blijft:
+
+```text
+Scraper
+    ↓
+ScraperManager
+    ↓
+PersistenceEngine
+    ↓
+StationRepository
+    ↓
+stations_v2
+```
+
+Voor schedulerhistoriek wordt `SchedulerRunRepository` gebruikt.
+
+Voor cross-source stationlinks wordt `StationSourceLinkRepository` gebruikt.
 
 ---
 
 ## DEC-007 — Persistence Layer
 
-Alle opslag verloopt uitsluitend via PersistenceEngine.
+Alle stationopslag verloopt via `PersistenceEngine`.
 
-PersistenceEngine bepaalt:
+PersistenceEngine bepaalt onder andere:
 
 - insert
 - update
@@ -132,15 +172,28 @@ PersistenceEngine bepaalt:
 - statistieken
 - rapportage
 
+De Persistence Engine levert uniforme resultaten zoals:
+
+- inserted
+- updated
+- skipped
+- duplicates
+- errors
+- duration
+
+Hierdoor kunnen alle scrapers dezelfde persistence-infrastructuur gebruiken.
+
 ---
 
 ## DEC-008 — stations_v2
 
-De nieuwe backend gebruikt uitsluitend `stations_v2`.
+De nieuwe backend gebruikt `stations_v2` als centrale stationstabel voor de
+nieuwe architectuur.
 
-De bestaande tabel `stations` blijft voorlopig actief voor productie totdat alle scrapers zijn gemigreerd.
+De oorspronkelijke productiedatabase blijft voorlopig bestaan zolang de
+volledige frontend- en productiemigratie nog niet is afgerond.
 
-Hierdoor kunnen oud en nieuw parallel blijven draaien zonder risico.
+De migratie naar `stations_v2` gebeurt gefaseerd.
 
 ---
 
@@ -148,25 +201,399 @@ Hierdoor kunnen oud en nieuw parallel blijven draaien zonder risico.
 
 De migratie gebeurt gefaseerd.
 
-Fase 1
+### Fase 1
 
 - Nieuwe scraperarchitectuur
 - Validators
 - Persistence
 - Monitoring
 
-Fase 2
+**Status: voltooid**
 
-- Alle scrapers migreren
+### Fase 2
 
-Fase 3
+- Scrapers integreren in de nieuwe architectuur
+- MAES Network
+- DATS24
+- SHELL
+
+**Status: voltooid**
+
+### Fase 3
 
 - Frontend laten werken op `stations_v2`
 
-Fase 4
+**Status: gepland / volgende grote mijlpaal**
 
-- Oude cronjobs uitschakelen
+### Fase 4
 
-Fase 5
+- Oude cronjobs vervangen door de nieuwe Schedulerarchitectuur
 
-- `stations` uit productie halen
+**Status: nog te migreren waar nodig**
+
+### Fase 5
+
+- Oude stationdata en oude productiearchitectuur uitfaseren
+
+**Status: gepland**
+
+---
+
+## DEC-010 — Scheduler als centrale execution layer
+
+Alle actieve productie-scrapers worden uitgevoerd via één centrale Scheduler.
+
+**Beslissing**
+
+De Scheduler moet niet per scraper afzonderlijk worden geïmplementeerd.
+
+De Scheduler start de `ScraperManager`, waarna de actieve scrapers via de
+registry worden uitgevoerd.
+
+**Huidige productie-scrapers**
+
+- `MAES_NETWORK`
+- `DATS24`
+- `SHELL`
+
+**Interval**
+
+15 minuten.
+
+De eerste uitvoering gebeurt bij backend-startup.
+
+Daarna worden de actieve scrapers iedere 15 minuten uitgevoerd.
+
+---
+
+## DEC-011 — Scheduler Run History
+
+Elke normale scraper-run wordt geregistreerd in:
+
+`scheduler_runs`
+
+De registratie gebeurt via:
+
+`SchedulerRunRepository`
+
+Een scheduler-run bevat onder andere:
+
+- scraper
+- status
+- stations
+- inserted
+- updated
+- skipped
+- duplicates
+- errors
+- duration_ms
+- started_at
+- finished_at
+
+**Belangrijke beslissing**
+
+Smoke tests mogen de schedulerhistoriek niet vervuilen.
+
+Wanneer `smokeTest = true` wordt gebruikt, wordt geen record aangemaakt in
+`scheduler_runs`.
+
+---
+
+## DEC-012 — Scheduler Monitor
+
+Er wordt een centrale Scheduler Monitor gebruikt voor controle van de
+scraperuitvoeringen.
+
+De monitor toont onder andere:
+
+- runs
+- success
+- failed
+- gemiddelde duur
+- laatste run
+- stations
+- updates
+- fouten
+- historiek
+- pagination
+- filter per scraper
+
+De monitor gebruikt `scheduler_runs` als bron.
+
+De frontend wordt automatisch ververst.
+
+De monitor ondersteunt afzonderlijke historie voor:
+
+- `MAES_NETWORK`
+- `DATS24`
+- `SHELL`
+
+---
+
+## DEC-013 — Shell als Production Scraper
+
+De Shell-bron is toegevoegd aan de actieve scraperarchitectuur.
+
+**Beslissing**
+
+Shell wordt behandeld als een volwaardige productie-databron en volgt
+dezelfde architectuur als MAES Network en DATS24.
+
+**Shell-integratie**
+
+- Officiële Shell stationdata
+- Officiële Shell XLSX-prijsdata
+- Uniforme scraper-output
+- PersistenceEngine
+- Scheduler
+- Health Registry
+- Metrics
+- Scheduler Monitor
+- Scheduler history
+
+**Huidige gecontroleerde omvang**
+
+- 200 stations
+- 200 updates tijdens de laatste volledige run
+- 0 errors
+
+---
+
+## DEC-014 — Cross-Source Station Matching
+
+FuelAlert moet hetzelfde fysieke station uit verschillende databronnen
+kunnen herkennen.
+
+Daarom is gekozen voor een aparte relatiearchitectuur:
+
+`station_source_links`
+
+**Beslissing**
+
+Cross-source relaties worden niet rechtstreeks in de individuele scraper
+hardcoded.
+
+De koppelingen worden centraal beheerd.
+
+De matching kan gebruikmaken van:
+
+- station-ID
+- bron
+- geografische afstand
+- confidence score
+- stationgegevens
+
+---
+
+## DEC-015 — Shell ↔ MAES Matching
+
+Voor Shell wordt gebruikgemaakt van cross-source matching met MAES waar een
+betrouwbare overeenkomst kan worden vastgesteld.
+
+De koppeling bevat onder andere:
+
+- source
+- station_id
+- name
+- distance_m
+- confidence
+- last_update
+
+De `StationPriceResolver` kan deze koppelingen gebruiken om actuele prijzen
+uit de gekoppelde MAES-bron te verkrijgen.
+
+---
+
+## DEC-016 — StationPriceResolver
+
+Omdat één station meerdere databronnen kan hebben, is een centrale
+prijsresolutielaag ingevoerd.
+
+Component:
+
+`StationPriceResolver`
+
+**Doel**
+
+Bepalen welke prijsbron per station en brandstof moet worden gebruikt.
+
+Ondersteunde bronprioriteiten omvatten:
+
+- `linked_live`
+- `official`
+- `original`
+
+De resolver ondersteunt ook fallback per brandstof.
+
+Hierdoor kan bijvoorbeeld een gekoppeld Shell-station actuele MAES-prijzen
+gebruiken terwijl ontbrekende brandstoffen terugvallen op de officiële
+Shell-prijs.
+
+---
+
+## DEC-017 — Rate Limiting
+
+Externe databronnen worden beschermd via de centrale `RateLimiter`.
+
+Per databron kunnen onder andere worden ingesteld:
+
+- delay
+- retries
+- timeout
+- concurrent
+
+De configuratie wordt per bron bepaald op basis van de eigenschappen en
+beperkingen van de externe bron.
+
+---
+
+## DEC-018 — Productie Ready Criteria
+
+Een scraper wordt pas als **Production Ready** beschouwd wanneer:
+
+- de bron betrouwbaar werkt
+- de data correct wordt verzameld
+- de data gevalideerd is
+- de uniforme output correct is
+- persistence werkt
+- Scheduler-integratie werkt
+- monitoring werkt
+- meerdere succesvolle runs zijn uitgevoerd
+- resultaten gecontroleerd zijn
+- documentatie is bijgewerkt
+
+Een scraper die technisch werkt maar nog onvoldoende gevalideerd is, blijft
+in Development.
+
+---
+
+## DEC-019 — Multi-Source Architectuur
+
+FuelAlert wordt niet gebouwd rond één enkele brandstofdatabron.
+
+**Beslissing**
+
+Meerdere bronnen mogen gelijktijdig actief zijn.
+
+Momenteel zijn actief:
+
+- MAES Network
+- DATS24
+- SHELL
+
+Toekomstige bronnen kunnen worden toegevoegd zonder de centrale
+persistence-, monitoring- en schedulerarchitectuur opnieuw te bouwen.
+
+---
+
+## DEC-020 — Fuel Media Service
+
+Fuel Media Service wordt onderzocht als potentiële commerciële databron.
+
+**Huidige status**
+
+- Informatieaanvraag verstuurd
+- Wachten op API-documentatie
+- Wachten op prijsinformatie
+- Wachten op licentievoorwaarden
+- Wachten op API-toegang
+
+**Beslissing**
+
+Er wordt geen implementatie gestart voordat de technische, commerciële en
+licentievoorwaarden zijn geëvalueerd.
+
+Fuel Media Service wordt pas Production Ready wanneer dezelfde
+kwaliteitscriteria gelden als voor andere databronnen.
+
+---
+
+## DEC-021 — Documentation First
+
+Architectuurwijzigingen en belangrijke technische beslissingen moeten worden
+vastgelegd in de projectdocumentatie.
+
+Belangrijke documenten:
+
+- `PROJECT_VISION.md`
+- `System Architecture.md`
+- `database.md`
+- `scrapers.md`
+- `roadmap.md`
+- `changelog.md`
+- `decision_log.md`
+- `api.md`
+
+Het FuelAlert Master Development Book blijft de officiële Single Source of
+Truth voor de projectontwikkeling.
+
+---
+
+## DEC-022 — Stations First
+
+De stationsarchitectuur wordt eerst volledig gestabiliseerd voordat
+grotere gebruikersfunctionaliteiten worden uitgebreid.
+
+**Beslissing**
+
+De huidige prioriteit is:
+
+1. Stationsmodule volledig afronden
+2. Frontend migreren naar `stations_v2`
+3. Station Detail
+4. Price History
+5. Verdere databronnen
+6. Geavanceerde frontendfunctionaliteit
+7. Premium functies
+8. Developer API
+
+De stationslaag vormt het fundament voor de verdere ontwikkeling van
+FuelAlert.
+
+---
+
+# Huidige architectuurstatus
+
+De belangrijkste architectuurcomponenten zijn momenteel:
+
+- `ScraperManager`
+- `BaseScraper`
+- `Scheduler`
+- `ValidatorEngine`
+- `PersistenceEngine`
+- `StationRepository`
+- `HealthRegistry`
+- `MetricsRegistry`
+- `ReportEngine`
+- `RateLimiter`
+- `SchedulerRunRepository`
+- `StationSourceLinkRepository`
+- `StationPriceResolver`
+- `Scheduler Monitor`
+- `stations_v2`
+- `scheduler_runs`
+- `station_source_links`
+
+De huidige productiebronnen zijn:
+
+| Bron         | Stations | Status              |
+| ------------ | -------: | ------------------- |
+| MAES Network |      275 | ✅ Production Ready |
+| DATS24       |      147 | ✅ Production Ready |
+| SHELL        |      200 | ✅ Production Ready |
+
+---
+
+# Openstaande architectuurbeslissingen
+
+De volgende onderwerpen blijven open voor toekomstige beslissingen:
+
+- DataSource Manager
+- Cache Engine
+- Verdere cross-source matching
+- Gabriëls-integratie
+- Fuel Media Service-integratie
+- TotalEnergies-integratie
+- Verdere databronnen
+- Frontendmigratie naar `stations_v2`
+- Uitfasering van de oude productiearchitectuur
