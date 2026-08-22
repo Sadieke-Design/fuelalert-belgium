@@ -1,23 +1,34 @@
 import pool from "../config/database.js";
 
 class SchedulerRunRepository {
-  async getSummary() {
-    const [[stats]] = await pool.query(`
-      SELECT
-        COUNT(*) totalRuns,
-        SUM(status='SUCCESS') successRuns,
-        SUM(status='FAILED') failedRuns,
-        ROUND(AVG(duration_ms),0) averageDuration
-      FROM scheduler_runs
-      WHERE DATE(started_at)=CURDATE()
-    `);
+  async getSummary(scraper = null) {
+    const whereClause = scraper ? "WHERE scraper = ?" : "WHERE 1 = 1";
+    const params = scraper ? [scraper] : [];
 
-    const [[lastRun]] = await pool.query(`
+    const [[stats]] = await pool.query(
+      `
+      SELECT
+        COUNT(*) AS totalRuns,
+        COALESCE(SUM(status = 'SUCCESS'), 0) AS successRuns,
+        COALESCE(SUM(status = 'FAILED'), 0) AS failedRuns,
+        COALESCE(ROUND(AVG(duration_ms), 0), 0) AS averageDuration
+      FROM scheduler_runs
+      ${whereClause}
+        AND DATE(started_at) = CURDATE()
+      `,
+      params,
+    );
+
+    const [[lastRun]] = await pool.query(
+      `
       SELECT *
       FROM scheduler_runs
+      ${whereClause}
       ORDER BY started_at DESC
       LIMIT 1
-    `);
+      `,
+      params,
+    );
 
     return {
       ...stats,
@@ -26,50 +37,37 @@ class SchedulerRunRepository {
   }
 
   async getRuns(limit = 50, offset = 0, scraper = null) {
-    let sql = `
+    const whereClause = scraper ? "WHERE scraper = ?" : "";
+    const params = scraper
+      ? [scraper, Number(limit), Number(offset)]
+      : [Number(limit), Number(offset)];
+
+    const [rows] = await pool.query(
+      `
       SELECT *
       FROM scheduler_runs
-    `;
-
-    const params = [];
-
-    if (scraper) {
-      sql += `
-        WHERE scraper = ?
-      `;
-
-      params.push(scraper);
-    }
-
-    sql += `
+      ${whereClause}
       ORDER BY started_at DESC
       LIMIT ? OFFSET ?
-    `;
-
-    params.push(Number(limit), Number(offset));
-
-    const [rows] = await pool.query(sql, params);
+      `,
+      params,
+    );
 
     return rows;
   }
 
   async getTotalRuns(scraper = null) {
-    let sql = `
+    const whereClause = scraper ? "WHERE scraper = ?" : "";
+    const params = scraper ? [scraper] : [];
+
+    const [[result]] = await pool.query(
+      `
       SELECT COUNT(*) AS total
       FROM scheduler_runs
-    `;
-
-    const params = [];
-
-    if (scraper) {
-      sql += `
-        WHERE scraper = ?
-      `;
-
-      params.push(scraper);
-    }
-
-    const [[result]] = await pool.query(sql, params);
+      ${whereClause}
+      `,
+      params,
+    );
 
     return Number(result.total);
   }

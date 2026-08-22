@@ -9,14 +9,24 @@ router.get("/", async (req, res) => {
     const limit = 50;
     const offset = (page - 1) * limit;
 
-    const summary = await SchedulerRunRepository.getSummary();
-    const runs = await SchedulerRunRepository.getRuns(limit, offset);
-    const totalRuns = await SchedulerRunRepository.getTotalRuns();
+    const scraper = req.query.scraper
+      ? String(req.query.scraper).trim().toUpperCase()
+      : null;
+
+    const summary = await SchedulerRunRepository.getSummary(scraper);
+
+    const runs = await SchedulerRunRepository.getRuns(limit, offset, scraper);
+
+    const totalRuns = await SchedulerRunRepository.getTotalRuns(scraper);
 
     const totalPages = Math.max(Math.ceil(totalRuns / limit), 1);
 
     res.json({
       success: true,
+
+      filter: {
+        scraper,
+      },
 
       pagination: {
         page,
