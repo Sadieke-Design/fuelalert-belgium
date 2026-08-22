@@ -54,19 +54,21 @@ class ScraperManager {
           errors: persistence.errors.length,
         });
 
-        await SchedulerRunRepository.create({
-          scraper: scraper.sourceName,
-          status: "SUCCESS",
-          stations: records.length,
-          inserted: persistence.inserted,
-          updated: persistence.updated,
-          skipped: persistence.skipped,
-          duplicates: persistence.duplicates,
-          errors: persistence.errors.length,
-          duration_ms: persistence.duration,
-          started_at: new Date(),
-          finished_at: new Date(),
-        });
+        if (!smokeTest) {
+          await SchedulerRunRepository.create({
+            scraper: scraper.sourceName,
+            status: "SUCCESS",
+            stations: records.length,
+            inserted: persistence.inserted,
+            updated: persistence.updated,
+            skipped: persistence.skipped,
+            duplicates: persistence.duplicates,
+            errors: persistence.errors.length,
+            duration_ms: persistence.duration,
+            started_at: new Date(),
+            finished_at: new Date(),
+          });
+        }
       } else {
         HealthRegistry.update(scraper.sourceName, {
           status: "OFFLINE",
@@ -90,19 +92,21 @@ class ScraperManager {
           errors: 1,
         });
 
-        await SchedulerRunRepository.create({
-          scraper: scraper.sourceName,
-          status: "FAILED",
-          stations: 0,
-          inserted: 0,
-          updated: 0,
-          skipped: 0,
-          duplicates: 0,
-          errors: 1,
-          duration_ms: 0,
-          started_at: new Date(),
-          finished_at: new Date(),
-        });
+        if (!smokeTest) {
+          await SchedulerRunRepository.create({
+            scraper: scraper.sourceName,
+            status: "FAILED",
+            stations: 0,
+            inserted: 0,
+            updated: 0,
+            skipped: 0,
+            duplicates: 0,
+            errors: 1,
+            duration_ms: 0,
+            started_at: new Date(),
+            finished_at: new Date(),
+          });
+        }
       }
     }
 

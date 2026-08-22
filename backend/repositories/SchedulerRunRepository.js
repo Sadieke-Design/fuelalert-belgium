@@ -25,28 +25,54 @@ class SchedulerRunRepository {
     };
   }
 
-async getRuns(limit = 50, offset = 0) {
-  const [rows] = await pool.query(
-    `
-    SELECT *
-    FROM scheduler_runs
-    ORDER BY started_at DESC
-    LIMIT ? OFFSET ?
-    `,
-    [Number(limit), Number(offset)],
-  );
+  async getRuns(limit = 50, offset = 0, scraper = null) {
+    let sql = `
+      SELECT *
+      FROM scheduler_runs
+    `;
 
-  return rows;
-}
+    const params = [];
 
-async getTotalRuns() {
-  const [[result]] = await pool.query(`
-    SELECT COUNT(*) AS total
-    FROM scheduler_runs
-  `);
+    if (scraper) {
+      sql += `
+        WHERE scraper = ?
+      `;
 
-  return Number(result.total);
-}
+      params.push(scraper);
+    }
+
+    sql += `
+      ORDER BY started_at DESC
+      LIMIT ? OFFSET ?
+    `;
+
+    params.push(Number(limit), Number(offset));
+
+    const [rows] = await pool.query(sql, params);
+
+    return rows;
+  }
+
+  async getTotalRuns(scraper = null) {
+    let sql = `
+      SELECT COUNT(*) AS total
+      FROM scheduler_runs
+    `;
+
+    const params = [];
+
+    if (scraper) {
+      sql += `
+        WHERE scraper = ?
+      `;
+
+      params.push(scraper);
+    }
+
+    const [[result]] = await pool.query(sql, params);
+
+    return Number(result.total);
+  }
 
   async create(run) {
     await pool.query(
