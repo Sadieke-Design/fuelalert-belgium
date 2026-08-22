@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 const REFRESH_INTERVAL = 30000;
 
+const SCRAPERS = ["SHELL", "DATS24", "MAES_NETWORK"];
+
 const formatDate = (value) => {
   if (!value) return "-";
 
@@ -21,8 +23,17 @@ const statusClass = (status) => {
   return "bg-red-500/10 text-red-400 border border-red-500/30";
 };
 
+const scraperLabel = (scraper) => {
+  if (scraper === "MAES_NETWORK") {
+    return "MAES NETWORK";
+  }
+
+  return scraper;
+};
+
 export default function SchedulerMonitor() {
   const [data, setData] = useState(null);
+  const [overviewData, setOverviewData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [selectedScraper, setSelectedScraper] = useState("MAES_NETWORK");
@@ -31,15 +42,65 @@ export default function SchedulerMonitor() {
 
   async function loadData(currentPage = page) {
     try {
-      const res = await fetch(`/api/scheduler-monitor?page=${currentPage}`);
+      setLoading(true);
 
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
+      /*
+       * =========================================
+       * FILTERED DATA
+       * =========================================
+       *
+       * Deze request bevat de geselecteerde scraper.
+       *
+       * Daardoor worden:
+       * - summary
+       * - pagination
+       * - totalRuns
+       * - totalPages
+       * - runs
+       *
+       * allemaal gebaseerd op de geselecteerde scraper.
+       */
+
+      const filteredUrl =
+        `/api/scheduler-monitor?page=${currentPage}` +
+        `&scraper=${encodeURIComponent(selectedScraper)}`;
+
+      /*
+       * =========================================
+       * OVERVIEW DATA
+       * =========================================
+       *
+       * Deze request blijft zonder scraper-filter.
+       * Deze data wordt gebruikt voor:
+       * "Laatste scraper-runs"
+       *
+       * zodat daar nog steeds de laatste run van
+       * iedere scraper zichtbaar blijft.
+       */
+
+      const overviewUrl = `/api/scheduler-monitor?page=1`;
+
+      const [filteredResponse, overviewResponse] = await Promise.all([
+        fetch(filteredUrl),
+        fetch(overviewUrl),
+      ]);
+
+      if (!filteredResponse.ok) {
+        throw new Error(`HTTP ${filteredResponse.status}`);
       }
 
-      const json = await res.json();
+      if (!overviewResponse.ok) {
+        throw new Error(`HTTP ${overviewResponse.status}`);
+      }
 
-      setData(json);
+      const [filteredJson, overviewJson] = await Promise.all([
+        filteredResponse.json(),
+        overviewResponse.json(),
+      ]);
+
+      setData(filteredJson);
+      setOverviewData(overviewJson);
+
       setLastRefresh(new Date());
       setCountdown(30);
     } catch (err) {
@@ -58,6 +119,27 @@ export default function SchedulerMonitor() {
 
         pagination: {
           page: currentPage,
+          limit: 50,
+          totalRuns: 0,
+          totalPages: 1,
+        },
+
+        runs: [],
+      });
+
+      setOverviewData({
+        success: false,
+
+        summary: {
+          totalRuns: 0,
+          successRuns: 0,
+          failedRuns: 0,
+          averageDuration: 0,
+          lastRun: null,
+        },
+
+        pagination: {
+          page: 1,
           limit: 50,
           totalRuns: 0,
           totalPages: 1,
@@ -91,7 +173,7 @@ export default function SchedulerMonitor() {
       clearInterval(refreshTimer);
       clearInterval(countdownTimer);
     };
-  }, [page]);
+  }, [page, selectedScraper]);
 
   if (loading && !data) {
     return (
@@ -101,9 +183,32 @@ export default function SchedulerMonitor() {
     );
   }
 
+  /*
+   * =========================================
+   * FILTERED SUMMARY
+   * =========================================
+   *
+   * Deze summary hoort bij de geselecteerde
+   * scraper.
+   */
+
   const summary = data?.summary ?? {};
 
+  /*
+   * =========================================
+   * FILTERED HISTORY
+   * =========================================
+   */
+
   const runs = data?.runs ?? [];
+
+  /*
+   * =========================================
+   * PAGINATION
+   * =========================================
+   *
+   * Deze pagination is nu scraper-specifiek.
+   */
 
   const pagination = data?.pagination ?? {
     page: 1,
@@ -112,10 +217,19 @@ export default function SchedulerMonitor() {
     totalPages: 1,
   };
 
-  const latestRun = summary.lastRun;
+  /*
+   * =========================================
+   * OVERVIEW / LATEST SCRAPER RUNS
+   * =========================================
+   *
+   * Deze lijst blijft alle scrapers tonen.
+   */
+
+  const overviewRuns = overviewData?.runs ?? [];
+
   const latestRunsByScraper = {};
 
-  for (const run of runs) {
+  for (const run of overviewRuns) {
     if (!latestRunsByScraper[run.scraper]) {
       latestRunsByScraper[run.scraper] = run;
     }
@@ -123,11 +237,24 @@ export default function SchedulerMonitor() {
 
   const latestScraperRuns = Object.values(latestRunsByScraper);
 
-  const scraperNames = [
-    ...new Set(runs.map((run) => run.scraper).filter(Boolean)),
-  ];
+  /*
+   * =========================================
+   * FILTERED RUNS
+   * =========================================
+   *
+   * De backend levert al gefilterde runs.
+   * De extra filter hier zorgt ervoor dat de
+   * frontend nooit per ongeluk een andere scraper
+   * toont.
+   */
 
   const filteredRuns = runs.filter((run) => run.scraper === selectedScraper);
+
+  /*
+   * =========================================
+   * PAGINATION
+   * =========================================
+   */
 
   const goToPage = (newPage) => {
     if (newPage < 1) return;
@@ -135,6 +262,19 @@ export default function SchedulerMonitor() {
     if (newPage > pagination.totalPages) return;
 
     setPage(newPage);
+  };
+
+  /*
+   * =========================================
+   * SCRAPER SELECTIE
+   * =========================================
+   */
+
+  const selectScraper = (scraper) => {
+    if (scraper === selectedScraper) return;
+
+    setSelectedScraper(scraper);
+    setPage(1);
   };
 
   return (
@@ -172,7 +312,9 @@ export default function SchedulerMonitor() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
         <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-          <div className="text-sm text-slate-400">Runs vandaag</div>
+          <div className="text-sm text-slate-400">
+            Runs {scraperLabel(selectedScraper)}
+          </div>
 
           <div className="text-4xl font-bold text-white mt-2">
             {summary.totalRuns ?? 0}
@@ -200,14 +342,15 @@ export default function SchedulerMonitor() {
 
           <div className="text-4xl font-bold text-white mt-2">
             {summary.averageDuration ?? 0}
+
             <span className="text-lg text-slate-400 ml-1">ms</span>
           </div>
         </div>
       </div>
 
       {/* =========================================
-    LATEST SCRAPER RUNS
-========================================= */}
+          LATEST SCRAPER RUNS
+      ========================================= */}
 
       <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 mb-8">
         <div className="mb-7">
@@ -239,7 +382,7 @@ export default function SchedulerMonitor() {
                       className="text-lg font-bold text-white mt-1 truncate"
                       title={run.scraper}
                     >
-                      {run.scraper ?? "-"}
+                      {scraperLabel(run.scraper)}
                     </div>
                   </div>
 
@@ -290,6 +433,7 @@ export default function SchedulerMonitor() {
 
                     <div className="text-xl font-bold text-white mt-1">
                       {run.duration_ms ?? 0}
+
                       <span className="text-sm text-slate-400 ml-1">ms</span>
                     </div>
                   </div>
@@ -321,30 +465,42 @@ export default function SchedulerMonitor() {
             <p className="text-slate-400 mt-1">Scheduler-runs per scraper</p>
           </div>
 
-          <div className="text-slate-400">{pagination.totalRuns} runs</div>
+          {/* =========================================
+              SCRAPER-SPECIFIEKE RUN TELLER
+          ========================================= */}
+
+          <div className="text-slate-400">
+            <span className="font-semibold text-white">
+              {pagination.totalRuns}
+            </span>{" "}
+            {scraperLabel(selectedScraper)} runs
+          </div>
         </div>
-        {/* SCRAPER FILTER */}
+
+        {/* =========================================
+            SCRAPER FILTER
+        ========================================= */}
 
         <div className="px-6 py-4 border-b border-slate-800 flex flex-wrap gap-3">
-          {scraperNames.map((scraper) => (
+          {SCRAPERS.map((scraper) => (
             <button
               key={scraper}
               type="button"
-              onClick={() => {
-                setSelectedScraper(scraper);
-                setPage(1);
-              }}
+              onClick={() => selectScraper(scraper)}
               className={`px-5 py-2.5 rounded-xl border font-semibold transition ${
                 selectedScraper === scraper
                   ? "bg-yellow-500/10 border-yellow-500/40 text-yellow-400"
                   : "bg-slate-900 border-slate-700 text-slate-400 hover:text-white hover:border-slate-600"
               }`}
             >
-              {scraper === "MAES_NETWORK" ? "MAES NETWORK" : scraper}
+              {scraperLabel(scraper)}
             </button>
           ))}
         </div>
-        {/* HISTORY TABLE */}
+
+        {/* =========================================
+            HISTORY TABLE
+        ========================================= */}
 
         <div className="w-full overflow-hidden">
           <table className="w-full table-fixed text-sm">
@@ -387,7 +543,8 @@ export default function SchedulerMonitor() {
                     colSpan={7}
                     className="px-6 py-12 text-center text-slate-500"
                   >
-                    Nog geen scheduler-runs geregistreerd.
+                    Nog geen scheduler-runs geregistreerd voor{" "}
+                    {scraperLabel(selectedScraper)}.
                   </td>
                 </tr>
               ) : (
@@ -404,7 +561,7 @@ export default function SchedulerMonitor() {
                       className="px-4 py-4 font-semibold text-white truncate"
                       title={run.scraper}
                     >
-                      {run.scraper}
+                      {scraperLabel(run.scraper)}
                     </td>
 
                     <td className="px-4 py-4 text-center">
@@ -459,7 +616,9 @@ export default function SchedulerMonitor() {
           </table>
         </div>
 
-        {/* PAGINATION */}
+        {/* =========================================
+            PAGINATION
+        ========================================= */}
 
         <div className="px-6 py-5 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-sm text-slate-400">
@@ -493,7 +652,9 @@ export default function SchedulerMonitor() {
         </div>
       </div>
 
-      {/* FOOTER */}
+      {/* =========================================
+          FOOTER
+      ========================================= */}
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-6 px-1">
         <div className="text-sm text-slate-500">
