@@ -11,102 +11,187 @@ class ScraperManager {
   }
 
   async run({ persist = true, smokeTest = false } = {}) {
-    const results = await Promise.allSettled(
-      this.scrapers.map((scraper) => scraper.scrape({ smokeTest })),
-    );
+    /*
+     * Iedere scraper krijgt zijn eigen starttijd.
+     * De scraper + persistence worden in dezelfde Promise uitgevoerd,
+     * zodat de uiteindelijke duration uitsluitend de echte duur
+     * van die scraper vertegenwoordigt.
+     */
+    const jobs = this.scrapers.map((scraper) => {
+      return (async () => {
+        const startedAt = new Date();
 
-    const summary = [];
+        try {
+          const records = await scraper.scrape({ smokeTest });
 
-    for (let i = 0; i < results.length; i++) {
-      const scraper = this.scrapers[i];
-      const result = results[i];
+          /*
+           * 0 stations = geen geldige succesvolle run.
+           */
+          if (!records || records.length === 0) {
+            const finishedAt = new Date();
+            const durationMs = finishedAt.getTime() - startedAt.getTime();
 
-      if (result.status === "fulfilled") {
-        const records = result.value;
+            HealthRegistry.update(scraper.sourceName, {
+              status: "OFFLINE",
+              stations: 0,
+              errors: 1,
+              successRate: 0,
+              duration: durationMs,
+            });
 
-        HealthRegistry.update(scraper.sourceName, {
-          status: "ONLINE",
-          stations: records.length,
-          errors: 0,
-          successRate: 100,
-        });
+            logger.error(
+              `[${scraper.sourceName}] Scraper leverde 0 stations op`,
+            );
 
-        const persistence = persist
-          ? await PersistenceEngine.save(records)
-          : {
+            return {
+              scraper,
+              success: false,
+              records: [],
+              persistence: {
+                inserted: 0,
+                updated: 0,
+                skipped: 0,
+                duplicates: 0,
+                errors: ["Scraper leverde 0 stations op"],
+              },
+              startedAt,
+              finishedAt,
+              durationMs,
+              error: "Scraper leverde 0 stations op",
+            };
+          }
+
+          /*
+           * Persistence hoort bij de volledige scraper-run.
+           */
+          const persistence = persist
+            ? await PersistenceEngine.save(records)
+            : {
+                inserted: 0,
+                updated: 0,
+                skipped: 0,
+                duplicates: 0,
+                duration: 0,
+                errors: [],
+              };
+
+          const finishedAt = new Date();
+
+          const durationMs = finishedAt.getTime() - startedAt.getTime();
+
+          const persistenceErrors = Array.isArray(persistence.errors)
+            ? persistence.errors.length
+            : 0;
+
+          HealthRegistry.update(scraper.sourceName, {
+            status: "ONLINE",
+            stations: records.length,
+            errors: persistenceErrors,
+            successRate: persistenceErrors > 0 ? 0 : 100,
+            duration: durationMs,
+          });
+
+          return {
+            scraper,
+            success: true,
+            records,
+            persistence,
+            startedAt,
+            finishedAt,
+            durationMs,
+            error: null,
+          };
+        } catch (err) {
+          const finishedAt = new Date();
+
+          const durationMs = finishedAt.getTime() - startedAt.getTime();
+
+          HealthRegistry.update(scraper.sourceName, {
+            status: "OFFLINE",
+            stations: 0,
+            errors: 1,
+            successRate: 0,
+            duration: durationMs,
+          });
+
+          logger.error(`[${scraper.sourceName}] ${err.message}`);
+
+          return {
+            scraper,
+            success: false,
+            records: [],
+            persistence: {
               inserted: 0,
               updated: 0,
               skipped: 0,
               duplicates: 0,
-              duration: 0,
-              errors: [],
-            };
+              errors: [err.message],
+            },
+            startedAt,
+            finishedAt,
+            durationMs,
+            error: err.message,
+          };
+        }
+      })();
+    });
 
-        summary.push({
-          source: scraper.sourceName,
-          success: true,
-          station_count: records.length,
+    /*
+     * Alle scrapers blijven parallel draaien.
+     */
+    const results = await Promise.all(jobs);
+
+    const summary = [];
+
+    for (const result of results) {
+      const {
+        scraper,
+        success,
+        records,
+        persistence,
+        startedAt,
+        finishedAt,
+        durationMs,
+        error,
+      } = result;
+
+      const persistenceErrors = Array.isArray(persistence.errors)
+        ? persistence.errors.length
+        : 0;
+
+      const summaryRecord = {
+        source: scraper.sourceName,
+        success,
+        error: error || undefined,
+        station_count: records.length,
+        inserted: persistence.inserted,
+        updated: persistence.updated,
+        skipped: persistence.skipped,
+        duplicates: persistence.duplicates,
+        duration: durationMs,
+        errors: persistenceErrors,
+      };
+
+      summary.push(summaryRecord);
+
+      /*
+       * Scheduler database alleen bij een echte scheduler-run.
+       * Smoke tests worden bewust niet opgeslagen.
+       */
+      if (!smokeTest) {
+        await SchedulerRunRepository.create({
+          scraper: scraper.sourceName,
+          status: success ? "SUCCESS" : "FAILED",
+          stations: records.length,
           inserted: persistence.inserted,
           updated: persistence.updated,
           skipped: persistence.skipped,
           duplicates: persistence.duplicates,
-          duration: persistence.duration,
-          errors: persistence.errors.length,
+          errors: persistenceErrors,
+          duration_ms: durationMs,
+          started_at: startedAt,
+          finished_at: finishedAt,
         });
-
-        if (!smokeTest) {
-          await SchedulerRunRepository.create({
-            scraper: scraper.sourceName,
-            status: "SUCCESS",
-            stations: records.length,
-            inserted: persistence.inserted,
-            updated: persistence.updated,
-            skipped: persistence.skipped,
-            duplicates: persistence.duplicates,
-            errors: persistence.errors.length,
-            duration_ms: persistence.duration,
-            started_at: new Date(),
-            finished_at: new Date(),
-          });
-        }
-      } else {
-        HealthRegistry.update(scraper.sourceName, {
-          status: "OFFLINE",
-          stations: 0,
-          errors: 1,
-          successRate: 0,
-        });
-
-        logger.error(`[${scraper.sourceName}] ${result.reason.message}`);
-
-        summary.push({
-          source: scraper.sourceName,
-          success: false,
-          error: result.reason.message,
-          station_count: 0,
-          inserted: 0,
-          updated: 0,
-          skipped: 0,
-          duplicates: 0,
-          duration: 0,
-          errors: 1,
-        });
-
-        if (!smokeTest) {
-          await SchedulerRunRepository.create({
-            scraper: scraper.sourceName,
-            status: "FAILED",
-            stations: 0,
-            inserted: 0,
-            updated: 0,
-            skipped: 0,
-            duplicates: 0,
-            errors: 1,
-            duration_ms: 0,
-            started_at: new Date(),
-            finished_at: new Date(),
-          });
-        }
       }
     }
 
@@ -124,7 +209,9 @@ class ScraperManager {
       throw new Error(`Scraper '${scraperName}' niet gevonden.`);
     }
 
-    return await scraper.scrape({ smokeTest });
+    return await scraper.scrape({
+      smokeTest,
+    });
   }
 
   static getScrapers() {

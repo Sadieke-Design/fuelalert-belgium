@@ -9,8 +9,72 @@ class Scheduler {
       interval,
       job,
       timer: null,
+
+      // Scheduler status
+      running: false,
+
+      // Tijdstippen
       lastRun: null,
+      lastCompletedRun: null,
+
+      // Laatste fout
+      lastError: null,
     });
+  }
+
+  async executeJob(job, trigger = "scheduled") {
+    // =========================================================
+    // RUN LOCK
+    // =========================================================
+    // Als deze job nog bezig is, starten we GEEN tweede run.
+    if (job.running) {
+      console.warn(
+        `⚠️ ${job.name} wordt overgeslagen: vorige run is nog bezig.`,
+      );
+
+      return {
+        skipped: true,
+        reason: "previous_run_still_running",
+      };
+    }
+
+    job.running = true;
+    job.lastRun = new Date();
+    job.lastError = null;
+
+    const startedAt = job.lastRun;
+
+    console.log("");
+    console.log("========================================");
+    console.log(`🚀 ${job.name} gestart (${trigger})`);
+    console.log(`🕐 Start: ${startedAt.toISOString()}`);
+    console.log("========================================");
+
+    try {
+      const result = await job.job();
+
+      job.lastCompletedRun = new Date();
+
+      console.log("");
+      console.log("========================================");
+      console.log(`✅ ${job.name} voltooid`);
+      console.log(`🕐 Klaar: ${job.lastCompletedRun.toISOString()}`);
+      console.log("========================================");
+
+      return result;
+    } catch (err) {
+      job.lastError = err.message;
+
+      console.error("");
+      console.error("========================================");
+      console.error(`❌ ${job.name} mislukt`);
+      console.error(`Fout: ${err.message}`);
+      console.error("========================================");
+
+      throw err;
+    } finally {
+      job.running = false;
+    }
   }
 
   start() {
@@ -19,38 +83,34 @@ class Scheduler {
     for (const job of this.jobs) {
       console.log(`▶ ${job.name} (${job.interval} ms)`);
 
-      // Eerste uitvoering onmiddellijk na opstart
-      (async () => {
-        try {
-          console.log(`🚀 Eerste uitvoering: ${job.name}`);
+      // =========================================================
+      // EERSTE UITVOERING
+      // =========================================================
 
-          job.lastRun = new Date();
+      this.executeJob(job, "startup").catch((err) => {
+        console.error(`${job.name}:`, err.message);
+      });
 
-          await job.job();
-        } catch (err) {
+      // =========================================================
+      // PERIODIEKE UITVOERING
+      // =========================================================
+
+      job.timer = setInterval(() => {
+        this.executeJob(job, "scheduled").catch((err) => {
           console.error(`${job.name}:`, err.message);
-        }
-      })();
-
-      // Daarna volgens interval
-      job.timer = setInterval(async () => {
-        try {
-          console.log(`⏱ ${job.name} uitvoeren...`);
-
-          job.lastRun = new Date();
-
-          await job.job();
-        } catch (err) {
-          console.error(`${job.name}:`, err.message);
-        }
+        });
       }, job.interval);
     }
   }
 
   stop() {
+    console.log("🛑 Scheduler stoppen...");
+
     for (const job of this.jobs) {
-      clearInterval(job.timer);
-      job.timer = null;
+      if (job.timer) {
+        clearInterval(job.timer);
+        job.timer = null;
+      }
     }
   }
 
@@ -58,8 +118,18 @@ class Scheduler {
     return this.jobs.map((job) => ({
       name: job.name,
       interval: job.interval,
-      running: job.timer !== null,
+
+      // Echte status
+      running: job.running,
+
+      // Laatste start
       lastRun: job.lastRun,
+
+      // Laatste succesvolle/afgeronde run
+      lastCompletedRun: job.lastCompletedRun,
+
+      // Laatste fout
+      lastError: job.lastError,
     }));
   }
 }

@@ -26,37 +26,15 @@ class Q8Scraper extends BaseScraper {
   }
 
   extractStationData(html) {
-    /*
-     * Q8 stationdata staat in de Next.js HTML
-     * als escaped JSON binnen q8Los.
-     *
-     * Voorbeeld:
-     *
-     * q8Los\":{
-     *   \"code\":\"00BE109523\",
-     *   \"name\":\"Q8 easy Anderlecht\",
-     *   \"address\":{
-     *     \"street\":\"Drevé Olympique 15\",
-     *     \"city\":\"Anderlecht\",
-     *     \"zipCode\":\"1070\"
-     *   },
-     *   ...
-     * }
-     */
-
     const q8Index = html.indexOf('\\"q8Los\\"');
 
     if (q8Index === -1) {
       return null;
     }
 
-    /*
-     * We nemen voldoende HTML rond q8Los zodat
-     * alle stationgegevens beschikbaar zijn.
-     */
     const snippet = html.slice(
       Math.max(0, q8Index - 500),
-      Math.min(html.length, q8Index + 12000),
+      Math.min(html.length, q8Index + 8000),
     );
 
     const q8Code = snippet.match(/\\"code\\":\\"(00BE\d+)\\"/)?.[1] || null;
@@ -98,15 +76,6 @@ class Q8Scraper extends BaseScraper {
       return prices;
     }
 
-    /*
-     * De Q8 stationpagina gebruikt bijvoorbeeld:
-     *
-     * 00BE109523
-     *
-     * De officiële API verwacht:
-     *
-     * 109523
-     */
     const id = q8Code.replace("00BE", "");
 
     try {
@@ -128,12 +97,7 @@ class Q8Scraper extends BaseScraper {
 
       for (const fuel of fuelPrices) {
         const officialPrice = Number(fuel.price);
-
         const discountPrice = Number(fuel.discountPrice || 0);
-
-        if (!Number.isFinite(officialPrice)) {
-          continue;
-        }
 
         const effectivePrice = officialPrice - discountPrice;
 
@@ -177,75 +141,103 @@ class Q8Scraper extends BaseScraper {
 
     console.log(`[Q8] Station URLs gevonden: ${urls.length}`);
 
+    if (urls.length === 0) {
+      throw new Error("Q8 sitemap leverde 0 station-URLs op.");
+    }
+
     const records = [];
 
-    for (const url of urls) {
-      try {
-        const html = await fetchRenderedText(
-          url,
-          async (page) => await page.content(),
-        );
+    let nextIndex = 0;
+    let errors = 0;
+    let noQ8Code = 0;
 
-        const station = this.extractStationData(html);
+    /*
+     * Q8 gebruikt rendered pages.
+     *
+     * 5 workers is bewust gekozen:
+     * - minder browserbelasting
+     * - minder kans op timeouts
+     * - nog steeds veel sneller dan sequentieel
+     *
+     * De eerdere 8 workers werkten technisch,
+     * maar 5 is veiliger voor de scheduler.
+     */
+    const CONCURRENCY = options.smokeTest ? 3 : 5;
 
-        if (!station?.q8Code) {
-          this.log("warn", `Geen Q8-code gevonden: ${url}`);
+    const worker = async (workerNumber) => {
+      while (true) {
+        const index = nextIndex++;
 
-          continue;
+        if (index >= urls.length) {
+          return;
         }
 
-        console.log(`[Q8] ${station.q8Code} → ${station.name || "Q8"}`);
+        const url = urls[index];
 
-        const prices = await this.fetchPrices(station.q8Code);
+        try {
+          const html = await fetchRenderedText(
+            url,
+            async (page) => await page.content(),
+          );
 
-        const hasPrices = Object.values(prices).some((price) => price !== null);
+          const station = this.extractStationData(html);
 
-        if (hasPrices) {
-          console.log(`[Q8] Prijzen gevonden: ${station.q8Code}`);
-        } else {
-          console.log(`[Q8] Geen prijzen beschikbaar: ${station.q8Code}`);
+          if (!station?.q8Code) {
+            noQ8Code++;
+
+            this.log("warn", `Geen Q8-code gevonden: ${url}`);
+
+            continue;
+          }
+
+          console.log(`[Q8] ${station.q8Code} → ${station.name || "Q8"}`);
+
+          const prices = await this.fetchPrices(station.q8Code);
+
+          const hasPrices = Object.values(prices || {}).some(
+            (price) => price !== null,
+          );
+
+          if (hasPrices) {
+            console.log(`[Q8] Prijzen gevonden: ${station.q8Code}`);
+          } else {
+            console.log(`[Q8] Geen prijzen beschikbaar: ${station.q8Code}`);
+          }
+
+          records.push(
+            toUniformRecord({
+              station_id: station.q8Code,
+              brand: "Q8",
+              name: station.name || "Q8",
+              address: station.street,
+              city: station.city,
+              postal_code: station.postal_code,
+              latitude: station.latitude,
+              longitude: station.longitude,
+              prices,
+              currency: "EUR",
+              updated_at: new Date(),
+              source: "q8_official_scraper",
+            }),
+          );
+        } catch (error) {
+          errors++;
+
+          this.log("warn", `${url} → ${error.message}`);
         }
-
-        /*
-         * Belangrijk:
-         *
-         * We slaan het station ook op wanneer
-         * de Q8 API tijdelijk geen prijzen levert.
-         *
-         * Daardoor verliezen we de stationidentiteit
-         * niet uit stations_v2.
-         */
-        records.push(
-          toUniformRecord({
-            station_id: station.q8Code,
-
-            brand: "Q8",
-
-            name: station.name || "Q8",
-
-            address: station.street || null,
-
-            city: station.city || null,
-
-            postal_code: station.postal_code || null,
-
-            latitude: station.latitude,
-
-            longitude: station.longitude,
-
-            prices,
-
-            currency: "EUR",
-
-            updated_at: new Date(),
-
-            source: "q8_official_scraper",
-          }),
-        );
-      } catch (error) {
-        this.log("warn", `${url} → ${error.message}`);
       }
-    }
+    };
+
+    console.log(`[Q8] Parallelle verwerking: ${CONCURRENCY} workers`);
+
+    await Promise.all(
+      Array.from(
+        {
+          length: Math.min(CONCURRENCY, urls.length),
+        },
+        (_, index) => worker(index + 1),
+      ),
+    );
 
     const withPrices = records.filter((record) =>
       Object.values(record.prices || {}).some((price) => price !== null),
@@ -258,6 +250,32 @@ class Q8Scraper extends BaseScraper {
     this.log("info", `${withPrices} Q8 stations met prijzen`);
 
     this.log("info", `${withoutPrices} Q8 stations zonder prijzen`);
+
+    this.log("info", `Q8 fouten: ${errors}`);
+
+    this.log("info", `Q8 zonder code: ${noQ8Code}`);
+
+    /*
+     * BELANGRIJK:
+     *
+     * Als de sitemap stations bevat maar er komen
+     * uiteindelijk 0 records terug, beschouwen we
+     * dit NIET als een succesvolle run.
+     *
+     * Hierdoor komt er in scheduler_runs:
+     *
+     * Q8 | FAILED | 0
+     *
+     * in plaats van:
+     *
+     * Q8 | SUCCESS | 0
+     */
+    if (urls.length > 0 && records.length === 0) {
+      throw new Error(
+        `Q8 scraper leverde 0 stations op terwijl ${urls.length} station-URLs werden gevonden. ` +
+          `Fouten: ${errors}, zonder Q8-code: ${noQ8Code}`,
+      );
+    }
 
     return records;
   }
