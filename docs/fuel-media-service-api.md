@@ -1,7 +1,7 @@
 # Fuel Media Service API
 
-**Versie:** 1.1  
-**Laatste update:** 22 augustus 2026  
+**Versie:** 1.2  
+**Laatste update:** 23 augustus 2026  
 **Status:** Awaiting response from Fuel Media Service
 
 ---
@@ -10,6 +10,10 @@
 
 Fuel Media Service wordt momenteel geëvalueerd als potentiële externe
 databron voor FuelAlert Belgium.
+
+De FuelAlert backend heeft inmiddels een actieve multi-source scraperarchitectuur
+met meerdere productiebronnen. Fuel Media Service blijft hiervan volledig
+gescheiden totdat de commerciële API technisch en juridisch is geëvalueerd.
 
 Er is een informatieaanvraag verstuurd met de vraag naar toegang tot de
 commerciële Fuel Media Service API.
@@ -23,6 +27,10 @@ Huidige status:
 
 Er is momenteel nog geen actieve Fuel Media Service-integratie in
 FuelAlert.
+
+Fuel Media Service mag niet worden toegevoegd aan de actieve scraper
+registry voordat de API, licentie, kosten, datakwaliteit en technische
+beperkingen zijn beoordeeld.
 
 ---
 
@@ -541,7 +549,65 @@ Fuel Media Service wordt pas Production Ready verklaard wanneer:
 
 ---
 
-# 20. Beslissing
+# 20. Current Project Alignment
+
+De huidige FuelAlert productiearchitectuur werkt met een centrale
+ScraperManager, uniforme scraper-output, Validator Engine,
+PersistenceEngine, StationRepository, RateLimiter, Health Registry,
+Metrics Registry en Scheduler.
+
+De momenteel actieve productiebronnen zijn:
+
+- MAES_NETWORK
+- DATS24
+- SHELL
+- TEXACO
+- Q8
+
+Fuel Media Service is **geen onderdeel van deze actieve registry**.
+
+Een toekomstige Fuel Media Service-integratie moet daarom dezelfde centrale
+infrastructuur gebruiken en mag geen aparte persistence- of
+databaseflow introduceren.
+
+De gewenste flow blijft:
+
+```text
+Fuel Media Service API
+        ↓
+Fuel Media Service Connector
+        ↓
+BaseScraper / uniforme output
+        ↓
+Validator Engine
+        ↓
+PersistenceEngine
+        ↓
+StationRepository
+        ↓
+stations_v2
+```
+
+Wanneer periodieke updates nodig zijn:
+
+```text
+Scheduler
+    ↓
+ScraperManager
+    ↓
+Fuel Media Service Connector
+    ↓
+scheduler_runs
+    ↓
+Scheduler Monitor
+```
+
+De bron krijgt pas een productie-status nadat een volledige end-to-end
+validatie succesvol is afgerond.
+
+---
+
+# 21. Beslissing
 
 **Huidige beslissing:**
 

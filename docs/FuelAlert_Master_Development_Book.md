@@ -2,7 +2,7 @@
 
 # Master Development Book
 
-**Versie:** 8.7.0  
+**Versie:** 8.8.0  
 **Laatste update:** 23 augustus 2026  
 **Status:** Active Development – Single Source of Truth  
 **Project gestart:** 21 juli 2026
@@ -113,9 +113,13 @@ IN ONTWIKKELING
 ⏳ Dealer Portal
 ⏳ Frontend migratie naar stations_v2
 
+ACTIEF GEÏNTEGREERD
+
+✅ Texaco scraper
+✅ Q8 scraper
+
 ON HOLD
 
-⏸ Q8
 ⏸ Esso
 
 FRONTEND
@@ -159,21 +163,26 @@ SHELL ......................... ✅ Productie
 200 stations
 Officiële Shell stationdata + officieel Shell XLSX-prijsbestand
 
+TEXACO ........................ ✅ Productie
+91 stations
+Officiële Texaco stationdata
+
+Q8 ............................ ✅ Productie
+469 stations gevonden
+213 stations met prijzen
+256 stations zonder beschikbare prijzen
+
 Fuel Media Service ........... ⏳ Contact opgenomen
 
 Gabriëls ..................... ⏳ Gepland
 
 TotalEnergies ................ ⏳ Gepland
 
-Texaco ....................... ⏳ Gepland
-
 Lukoil ....................... ⏳ Gepland
 
 Gulf ......................... ⏳ Gepland
 
 Avia ......................... ⏳ Gepland
-
-Q8 ........................... ⏸ On Hold
 
 Esso ......................... ⏸ On Hold
 
@@ -254,6 +263,8 @@ Momenteel actief:
 • MAES_NETWORK
 • DATS24
 • SHELL
+• TEXACO
+• Q8
 
 De ScraperManager voert alle geregistreerde scrapers uit.
 
@@ -749,7 +760,9 @@ Officiële Shell stationdata + officieel Shell XLSX-prijsbestand
 
 ⏳ TotalEnergies
 
-⏳ Texaco
+✅ Texaco
+91 stations
+Productie
 
 ⏳ Lukoil
 
@@ -759,7 +772,9 @@ Officiële Shell stationdata + officieel Shell XLSX-prijsbestand
 
 ⏸ Esso
 
-⏸ Q8
+✅ Q8
+469 stations gevonden
+Productie
 
 DATA SOURCE ENGINE
 
@@ -806,6 +821,8 @@ MONITORING
 ✅ MAES_NETWORK monitoring
 ✅ DATS24 monitoring
 ✅ SHELL monitoring
+✅ TEXACO monitoring
+✅ Q8 monitoring
 ✅ Scraper filtering
 ✅ Pagination
 ✅ Automatische refresh iedere 30 seconden
@@ -911,6 +928,8 @@ Momenteel worden afzonderlijke resultaten geregistreerd voor:
 • MAES_NETWORK
 • DATS24
 • SHELL
+• TEXACO
+• Q8
 
 Smoke tests worden niet in deze historiek opgenomen.
 
@@ -995,6 +1014,23 @@ De resolver bewaart de broninformatie zodat de uiteindelijke prijs
 traceerbaar blijft.
 
 # ====================================================================== 10. CHANGELOG
+
+v8.8.0 — 23 augustus 2026
+
+• TEXACO toegevoegd als actieve productie-scraper.
+• 91 Texaco-stations succesvol verzameld en verwerkt.
+• Q8 scraper volledig geactiveerd en toegevoegd aan de productie registry.
+• Volledige Q8-run gevalideerd met 469 stations.
+• 213 Q8-stations leverden beschikbare prijzen.
+• 256 Q8-stations hadden geen beschikbare prijsdata.
+• 39 Q8-stationpagina's leverden geen Q8-code op.
+• Q8 had 0 scraper-errors tijdens de volledige run.
+• Q8- en Texaco-records worden via dezelfde ScraperManager →
+PersistenceEngine → StationRepository pipeline verwerkt.
+• Schedulerproductiebasis uitgebreid van 3 naar 5 actieve scrapers.
+• Current Production Validation bijgewerkt naar 1082 scraperrecords.
+• Q8 en Texaco verwijderd uit de lijst met geplande/on-hold bronnen.
+• Scheduler Monitor documentatie bijgewerkt met Q8 en Texaco.
 
 v8.7.0 — 23 augustus 2026
 
@@ -1130,10 +1166,9 @@ VOLGENDE DATABRONNEN
 6. Gabriëls scraper
 7. Fuel Media Service API
 8. TotalEnergies
-9. Texaco
-10. Lukoil
-11. Gulf
-12. Avia
+9. Lukoil
+10. Gulf
+11. Avia
 
 PLATFORM
 
@@ -1214,11 +1249,26 @@ Stations: 200
 Updated: 200
 Errors: 0
 
-Totale actieve stationrecords verwerkt tijdens deze run:
+TEXACO
 
-622
+Stations: 91
+Updated: 91
+Errors: 0
 
-Alle drie actieve scrapers:
+Q8
+
+Stations: 469
+Updated: 469
+Errors: 0 scraper-errors
+Met prijzen: 213
+Zonder beschikbare prijzen: 256
+Zonder gevonden Q8-code: 39
+
+Totale scraperrecords verwerkt tijdens deze volledige run:
+
+1082
+
+Alle vijf actieve scrapers:
 
 • succesvol uitgevoerd
 • succesvol door PersistenceEngine verwerkt
@@ -1230,6 +1280,11 @@ Schedulerhistoriek:
 • MAES_NETWORK: actief
 • DATS24: actief
 • SHELL: actief
+• TEXACO: actief
+• Q8: actief
+
+Belangrijk: Q8 heeft 256 records zonder beschikbare prijsdata. Dit
+is geen scraperfout. De stationrecords zijn wel correct verwerkt.
 
 Smoke tests worden afzonderlijk behandeld en worden niet opgenomen
 in de normale schedulerhistoriek.

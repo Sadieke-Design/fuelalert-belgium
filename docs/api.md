@@ -3,10 +3,36 @@
 **Versie:** 8.7.0  
 **Laatste update:** 23 augustus 2026
 
+---
+
+# 1. API-overzicht
+
+FuelAlert Belgium gebruikt een Express/Node.js backend voor:
+
+- brandstofprijzen
+- stations
+- authenticatie
+- scraper-capabilities
+- health monitoring
+- scheduler monitoring
+- metrics
+- validatie
+- rate limiting
+- persistence
+
+De API draait standaard op poort `3001`.
+
+Basis:
+
+```text
+http://localhost:3001
+```
+
+Productie gebruikt de geconfigureerde FuelAlert API-host.
 
 ---
 
-# Dealer Price Override API
+# 2. Dealer Price Override API
 
 FuelAlert ondersteunt naast automatische scraperprijzen ook geverifieerde
 dealerprijzen en dealerkortingen.
@@ -31,8 +57,8 @@ de prijsresolver bepaald.
 
 ## Dealerbevoegdheid
 
-Een dealer mag alleen prijsinformatie aanpassen voor stations waarvoor
-het account geautoriseerd is.
+Een dealer mag alleen prijsinformatie aanpassen voor stations waarvoor het
+account geautoriseerd is.
 
 De API moet daarom altijd de relatie controleren tussen:
 
@@ -42,8 +68,7 @@ De API moet daarom altijd de relatie controleren tussen:
 - brandstof
 - actieve override
 
-Een dealer mag nooit de prijs van een station van een andere dealer
-wijzigen.
+Een dealer mag nooit de prijs van een station van een andere dealer wijzigen.
 
 ## Dealerprijs
 
@@ -128,18 +153,17 @@ De resolver gebruikt dan opnieuw de beschikbare bronprijs.
 
 ## API response prijsinformatie
 
-De prijs-API moet de herkomst van de uiteindelijke prijs kunnen
-onderscheiden.
+De prijs-API moet de herkomst van de uiteindelijke prijs kunnen onderscheiden.
 
 Conceptueel kan een station bijvoorbeeld teruggeven:
 
 ```json
 {
-  "source_price": 1.650,
+  "source_price": 1.65,
   "source": "MAES_NETWORK",
-  "dealer_override": 1.620,
+  "dealer_override": 1.62,
   "dealer_discount": null,
-  "final_price": 1.620,
+  "final_price": 1.62,
   "price_origin": "dealer_override"
 }
 ```
@@ -148,11 +172,11 @@ Bij een dealerkorting:
 
 ```json
 {
-  "source_price": 1.650,
+  "source_price": 1.65,
   "source": "MAES_NETWORK",
   "dealer_override": null,
-  "dealer_discount": 0.030,
-  "final_price": 1.620,
+  "dealer_discount": 0.03,
+  "final_price": 1.62,
   "price_origin": "dealer_discount"
 }
 ```
@@ -161,11 +185,11 @@ Zonder dealeroverride:
 
 ```json
 {
-  "source_price": 1.650,
+  "source_price": 1.65,
   "source": "MAES_NETWORK",
   "dealer_override": null,
   "dealer_discount": null,
-  "final_price": 1.650,
+  "final_price": 1.65,
   "price_origin": "source"
 }
 ```
@@ -173,7 +197,9 @@ Zonder dealeroverride:
 ## Voorgestelde dealer-endpoints
 
 De exacte routes worden vastgelegd wanneer de dealerportal wordt
-geïmplementeerd. De API-architectuur moet minimaal ruimte bieden voor:
+geïmplementeerd.
+
+De API-architectuur moet minimaal ruimte bieden voor:
 
 ```text
 GET    /api/dealer/stations
@@ -184,8 +210,8 @@ DELETE /api/dealer/stations/:stationId/prices/:fuelType
 ```
 
 Deze routes zijn architecturale doelroutes en mogen niet als
-productie-endpoints worden beschouwd zolang de dealerportal nog niet
-is geïmplementeerd.
+productie-endpoints worden beschouwd zolang de dealerportal nog niet is
+geïmplementeerd.
 
 ## Publieke prijs-API
 
@@ -202,8 +228,8 @@ final_price
 price_origin
 ```
 
-Hierdoor kan FuelAlert zowel de actuele publieksprijs tonen als de
-herkomst van die prijs controleren.
+Hierdoor kan FuelAlert zowel de actuele publieksprijs tonen als de herkomst
+van die prijs controleren.
 
 ## Audit
 
@@ -237,26 +263,52 @@ ongeldig
 Resolved source price
 ```
 
-De scraperprijs blijft daardoor altijd de automatische basis en
-fallback van FuelAlert.
-
+De scraperprijs blijft daardoor altijd de automatische basis en fallback
+van FuelAlert.
 
 ---
 
-# Scheduler Monitor API
+# 3. Scheduler Monitor API
 
 ## GET `/api/scheduler-monitor`
 
-Geeft de schedulerhistoriek en monitoringinformatie van de scraperuitvoeringen.
+Geeft de schedulerhistoriek en monitoringinformatie van de
+scraperuitvoeringen.
 
 De endpoint wordt gebruikt door de Scheduler Monitor frontend.
 
-### Query parameters
+De route wordt geregistreerd in:
 
-| Parameter | Type | Standaard | Beschrijving |
-|---|---|---:|---|
-| `page` | number | 1 | Paginanummer |
-| `scraper` | string | geen | Filter op één scraper |
+```text
+backend/server.js
+```
+
+Router:
+
+```text
+backend/routes/schedulerMonitorRoutes.js
+```
+
+Repository:
+
+```text
+backend/repositories/SchedulerRunRepository.js
+```
+
+Database:
+
+```text
+scheduler_runs
+```
+
+---
+
+## Query parameters
+
+| Parameter | Type   | Standaard | Beschrijving          |
+| --------- | ------ | --------: | --------------------- |
+| `page`    | number |         1 | Paginanummer          |
+| `scraper` | string |      geen | Filter op één scraper |
 
 Voorbeelden:
 
@@ -265,7 +317,15 @@ Voorbeelden:
 ```
 
 ```text
+/api/scheduler-monitor?scraper=Q8&page=1
+```
+
+```text
 /api/scheduler-monitor?scraper=SHELL&page=1
+```
+
+```text
+/api/scheduler-monitor?scraper=TEXACO&page=1
 ```
 
 ```text
@@ -276,13 +336,20 @@ Voorbeelden:
 /api/scheduler-monitor?scraper=MAES_NETWORK&page=1
 ```
 
+De scraperfilter wordt intern genormaliseerd naar uppercase.
+
 ---
 
-## Response
+# 4. Scheduler Monitor Response
+
+De endpoint retourneert:
 
 ```json
 {
   "success": true,
+  "filter": {
+    "scraper": "Q8"
+  },
   "pagination": {
     "page": 1,
     "limit": 50,
@@ -294,9 +361,23 @@ Voorbeelden:
 }
 ```
 
+Wanneer geen scraperfilter wordt gebruikt:
+
+```json
+{
+  "success": true,
+  "filter": {
+    "scraper": null
+  },
+  "pagination": {},
+  "summary": {},
+  "runs": []
+}
+```
+
 ---
 
-## Pagination
+# 5. Pagination
 
 De API gebruikt pagination voor de schedulerhistoriek.
 
@@ -327,22 +408,11 @@ Voorbeeld:
 Wanneer een scraperfilter wordt gebruikt, worden de totalen beperkt tot
 de geselecteerde scraper.
 
-Voorbeeld:
-
-```json
-"pagination": {
-  "page": 1,
-  "limit": 50,
-  "totalRuns": 2,
-  "totalPages": 1
-}
-```
-
 ---
 
-# Summary
+# 6. Scheduler Summary
 
-`summary` bevat de algemene schedulerstatistieken.
+`summary` bevat de schedulerstatistieken voor de geselecteerde scraper.
 
 Velden:
 
@@ -351,6 +421,20 @@ Velden:
 - `failedRuns`
 - `averageDuration`
 - `lastRun`
+
+De huidige repository berekent de runstatistieken voor **vandaag**.
+
+Conceptueel:
+
+```text
+COUNT(*)                         → totalRuns
+SUM(status = SUCCESS)            → successRuns
+SUM(status = FAILED)             → failedRuns
+AVG(duration_ms)                 → averageDuration
+```
+
+De `lastRun` wordt bepaald als de meest recente run van de geselecteerde
+scraper.
 
 Voorbeeld:
 
@@ -362,7 +446,7 @@ Voorbeeld:
   "averageDuration": 850,
   "lastRun": {
     "id": 3001,
-    "scraper": "SHELL",
+    "scraper": "Q8",
     "status": "SUCCESS"
   }
 }
@@ -370,11 +454,11 @@ Voorbeeld:
 
 ---
 
-# Runs
+# 7. Scheduler Runs
 
 `runs` bevat de afzonderlijke scraperuitvoeringen.
 
-Iedere run bevat onder andere:
+Iedere run bevat:
 
 - `id`
 - `scraper`
@@ -410,72 +494,184 @@ Voorbeeld:
 
 ---
 
-# Ondersteunde scraperfilters
+# 8. Huidige actieve scrapers
 
-De huidige productie-scrapers zijn:
+De huidige registry bevat vijf actieve scrapers:
 
-- `MAES_NETWORK`
-- `DATS24`
-- `SHELL`
+```text
+MAES_NETWORK
+DATS24
+SHELL
+TEXACO
+Q8
+```
 
-De Scheduler Monitor kan de historie per scraper afzonderlijk ophalen.
+De actieve registry staat in:
 
----
+```text
+backend/scrapers/registry.js
+```
 
-# Scheduler Monitor
+De registry initialiseert momenteel:
 
-De endpoint wordt gebruikt door de Scheduler Monitor.
-
-De monitor toont onder andere:
-
-- runs van vandaag
-- succesvolle runs
-- mislukte runs
-- gemiddelde uitvoeringsduur
-- laatste scraper-run
-- aantal stations
-- aantal updates
-- aantal fouten
-- volledige schedulerhistoriek
-- historie per scraper
-- pagination
-
-De frontend ververst de gegevens automatisch iedere 30 seconden.
+```text
+MaesScraper
+Dats24Scraper
+ShellScraper
+TexacoScraper
+Q8Scraper
+```
 
 ---
 
-# Backend
+# 9. Huidige scraper-output
 
-De route wordt geregistreerd in:
+De huidige productiegegevens tonen dat de scrapers daadwerkelijk
+scheduler-runs registreren.
 
-`backend/server.js`
+Een recente volledige run bevatte:
+
+| Scraper      | Stations | Updated | Errors |
+| ------------ | -------: | ------: | -----: |
+| MAES_NETWORK |      275 |     275 |      0 |
+| DATS24       |      147 |     147 |      0 |
+| SHELL        |      200 |     200 |      0 |
+| TEXACO       |       91 |      91 |      0 |
+| Q8           |      469 |     469 |      0 |
+
+De Q8-scraper leverde tijdens een volledige run:
+
+```text
+469 Q8 stations gevonden
+213 Q8 stations met prijzen
+256 Q8 stations zonder prijzen
+0 fouten
+39 stations zonder Q8-code
+```
+
+De volledige Q8-run duurde ongeveer:
+
+```text
+538700 ms
+```
+
+Dit is ongeveer:
+
+```text
+538,7 seconden
+≈ 9 minuten
+```
+
+Deze waarden zijn runtime-resultaten van de huidige scraper en moeten
+niet als vaste aantallen in de applicatielogica worden beschouwd.
+
+---
+
+# 10. Scheduler
+
+De scheduler wordt geregistreerd in:
+
+```text
+backend/server.js
+```
+
+De huidige scheduler bevat één job:
+
+```text
+Fuel Scrapers
+```
+
+Het huidige interval is:
+
+```text
+15 * 60 * 1000
+```
+
+oftewel:
+
+```text
+15 minuten
+```
+
+Bij het starten van de API wordt de eerste uitvoering onmiddellijk gestart.
+
+Daarna wordt de job volgens het interval opnieuw uitgevoerd.
+
+Flow:
+
+```text
+API start
+    ↓
+Scheduler.start()
+    ↓
+Eerste scraper-run onmiddellijk
+    ↓
+15 minuten wachten
+    ↓
+Volgende scraper-run
+    ↓
+15 minuten wachten
+    ↓
+...
+```
+
+---
+
+# 11. Scheduler API
+
+Naast de scheduler-monitor bestaat een algemene scheduler-status endpoint.
+
+## GET `/api/scheduler`
+
+Deze endpoint retourneert de geregistreerde schedulerjobs.
 
 Route:
 
-`/api/scheduler-monitor`
+```text
+backend/routes/scheduler.js
+```
 
-Router:
+De endpoint gebruikt:
 
-`backend/routes/schedulerMonitorRoutes.js`
+```text
+Scheduler.getJobs()
+```
 
-Database repository:
+Voorbeeld:
 
-`backend/repositories/SchedulerRunRepository.js`
+```json
+[
+  {
+    "name": "Fuel Scrapers",
+    "interval": 900000,
+    "running": true,
+    "lastRun": "2026-08-23T16:00:00.000Z"
+  }
+]
+```
 
-De gegevens worden opgeslagen in:
+`interval` wordt in milliseconden geretourneerd.
 
-`scheduler_runs`
+```text
+900000 ms = 15 minuten
+```
 
 ---
 
-# Scheduler Run Flow
+# 12. Scheduler Run Flow
+
+De normale flow is:
 
 ```text
 Scheduler
     ↓
 ScraperManager
     ↓
-Active Scraper
+Active Scrapers
+    ↓
+BaseScraper
+    ↓
+ValidatorEngine
     ↓
 PersistenceEngine
     ↓
@@ -488,13 +684,200 @@ Scheduler Monitor API
 Frontend
 ```
 
+De `ScraperManager` voert de actieve scrapers parallel uit via
+`Promise.allSettled()`.
+
+Een fout in één scraper verhindert daardoor niet automatisch dat de
+andere scrapers worden verwerkt.
+
 ---
 
-# Foutresponse
+# 13. Scheduler Run registratie
 
-Bij een serverfout retourneert de API HTTP status `500`.
+Na een succesvolle normale scraperuitvoering wordt een record aangemaakt
+via:
 
-Voorbeeld:
+```text
+SchedulerRunRepository.create()
+```
+
+Een succesvolle run wordt opgeslagen met:
+
+```text
+status = SUCCESS
+```
+
+Een mislukte scraperuitvoering wordt opgeslagen met:
+
+```text
+status = FAILED
+```
+
+De registratie bevat onder andere:
+
+```text
+scraper
+status
+stations
+inserted
+updated
+skipped
+duplicates
+errors
+duration_ms
+started_at
+finished_at
+```
+
+---
+
+# 14. Smoke Tests
+
+Smoke tests worden bewust niet geregistreerd in `scheduler_runs`.
+
+In `ScraperManager.run()` wordt gecontroleerd:
+
+```text
+if (!smokeTest)
+```
+
+Alleen wanneer `smokeTest` false is, wordt een scheduler-run opgeslagen.
+
+Hierdoor bevatten de schedulerhistoriek en Scheduler Monitor alleen echte
+productie-uitvoeringen en geen technische testuitvoeringen.
+
+---
+
+# 15. BaseScraper en timing
+
+Elke scraper wordt uitgevoerd via `BaseScraper`.
+
+De scraperflow bevat:
+
+```text
+RateLimiter.wait()
+        ↓
+collectRecords()
+        ↓
+ValidatorEngine.validate()
+        ↓
+validateRecord()
+        ↓
+HealthRegistry.update()
+        ↓
+MetricsRegistry.record()
+        ↓
+return records
+```
+
+De uitvoeringstijd wordt gemeten vanaf het begin van `scrape()`.
+
+Deze duur wordt gebruikt voor:
+
+```text
+HealthRegistry
+MetricsRegistry
+ReportEngine
+SchedulerRunRepository
+```
+
+---
+
+# 16. Rate Limiting
+
+De scrapers gebruiken de centrale `RateLimiter`.
+
+Momenteel zijn onder andere de volgende configuraties geregistreerd:
+
+### MAES_NETWORK
+
+```text
+delay:      1500 ms
+retries:    3
+timeout:    30000 ms
+concurrent: 1
+```
+
+### DATS24
+
+```text
+delay:      500 ms
+retries:    3
+timeout:    30000 ms
+concurrent: 1
+```
+
+De Q8 scraper gebruikt daarnaast intern parallelle stationverwerking.
+
+Bij een volledige Q8-run:
+
+```text
+8 workers
+```
+
+Bij een smoke test:
+
+```text
+5 workers
+```
+
+Het effectieve aantal actieve workers kan lager uitvallen wanneer het aantal
+te verwerken URLs kleiner is dan de ingestelde concurrency.
+
+---
+
+# 17. Publieke API-routes
+
+De backend registreert momenteel onder andere:
+
+```text
+GET /api/fuel-prices
+GET /api/stations
+GET /api/capabilities
+GET /api/health
+
+POST/GET /api/auth/register
+GET /api/auth/verify-email
+POST /api/auth/login
+POST /api/auth/forgot-password
+POST /api/auth/reset-password
+
+GET /api/scheduler
+GET /api/scheduler-monitor
+
+GET /api/metrics
+GET /api/validation
+GET /api/ratelimiter
+GET /api/persistence
+```
+
+De exacte HTTP-methodes van individuele auth- en functionele routes worden
+bepaald door de betreffende routerbestanden.
+
+---
+
+# 18. API health test
+
+De backend bevat een eenvoudige database/API-test:
+
+## GET `/api/test`
+
+Deze endpoint voert uit:
+
+```sql
+SELECT NOW() AS server_time
+```
+
+Bij succes:
+
+```json
+{
+  "success": true,
+  "serverTime": "2026-08-23T16:00:00.000Z"
+}
+```
+
+Bij een databasefout:
 
 ```json
 {
@@ -503,13 +886,270 @@ Voorbeeld:
 }
 ```
 
+HTTP-status:
+
+```text
+500
+```
+
 ---
 
-# Opmerking
+# 19. Foutresponse Scheduler Monitor
 
-Smoke tests worden niet geregistreerd in `scheduler_runs`.
+Bij een server- of databasefout retourneert de Scheduler Monitor:
 
-Alleen normale scraperuitvoeringen worden als scheduler-run opgeslagen.
+```json
+{
+  "success": false,
+  "error": "Database error"
+}
+```
 
-Hierdoor bevat de Scheduler Monitor uitsluitend echte schedulerhistoriek
-en worden technische smoke tests niet als productie-uitvoering weergegeven.
+met HTTP status:
+
+```text
+500
+```
+
+De frontend moet bij een fout een lege/fallback monitoringstatus kunnen
+weergeven.
+
+---
+
+# 20. Scheduler Monitor frontend
+
+De Scheduler Monitor frontend gebruikt:
+
+```text
+GET /api/scheduler-monitor
+```
+
+De frontend haalt twee datasets op:
+
+### Gefilterde dataset
+
+Voor de geselecteerde scraper:
+
+```text
+/api/scheduler-monitor?page=1&scraper=Q8
+```
+
+Deze dataset wordt gebruikt voor:
+
+- summary
+- historiek
+- pagination
+
+### Overview dataset
+
+Zonder scraperfilter:
+
+```text
+/api/scheduler-monitor?page=1
+```
+
+Deze dataset wordt gebruikt om de meest recente run per scraper te tonen.
+
+De frontend ververst automatisch iedere:
+
+```text
+30 seconden
+```
+
+---
+
+# 21. Belangrijke interpretatie van `duration_ms`
+
+`duration_ms` is de gemeten duur van de scraperuitvoering.
+
+Voorbeeld:
+
+```text
+503503 ms
+```
+
+betekent ongeveer:
+
+```text
+503,5 seconden
+≈ 8 minuten 23 seconden
+```
+
+De duur van een scraper kan sterk verschillen per bron.
+
+Vooral Q8 kan aanzienlijk langer duren omdat:
+
+1. de sitemap station-URLs oplevert;
+2. stationpagina's afzonderlijk worden verwerkt;
+3. de officiële Q8-prijs-API per station wordt aangesproken;
+4. meerdere stations parallel worden verwerkt;
+5. rate limiting actief blijft.
+
+---
+
+# 22. Fail-safe gedrag
+
+Een scraperfout mag de andere scrapers niet stoppen.
+
+`ScraperManager` gebruikt:
+
+```text
+Promise.allSettled()
+```
+
+Daardoor wordt per scraper afzonderlijk bepaald:
+
+```text
+SUCCESS
+```
+
+of:
+
+```text
+FAILED
+```
+
+Een gefaalde scraper wordt geregistreerd en de overige scrapers kunnen
+verdergaan.
+
+Ook de persistence- en monitoringlagen zijn gescheiden van de scraperlaag.
+
+---
+
+# 23. Database
+
+Scheduler-runs worden opgeslagen in:
+
+```text
+scheduler_runs
+```
+
+De repository is:
+
+```text
+backend/repositories/SchedulerRunRepository.js
+```
+
+De repository ondersteunt:
+
+```text
+getSummary()
+getRuns()
+getTotalRuns()
+create()
+```
+
+De data wordt gebruikt door de Scheduler Monitor API.
+
+---
+
+# 24. Architectuur
+
+De scheduler-monitoringarchitectuur is:
+
+```text
+                    ┌──────────────────┐
+                    │    Scheduler     │
+                    └────────┬─────────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │ ScraperManager   │
+                    └────────┬─────────┘
+                             │
+              ┌──────────────┼──────────────┐
+              ▼              ▼              ▼
+           MAES           DATS24          SHELL
+              │              │              │
+              └──────────────┼──────────────┘
+                             │
+                       TEXACO / Q8
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │ PersistenceEngine│
+                    └────────┬─────────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │ scheduler_runs   │
+                    └────────┬─────────┘
+                             │
+                             ▼
+                 ┌────────────────────────┐
+                 │ Scheduler Monitor API  │
+                 └────────────┬───────────┘
+                              │
+                              ▼
+                    ┌──────────────────┐
+                    │ Monitor Frontend │
+                    └──────────────────┘
+```
+
+---
+
+# 25. Huidige status
+
+De scheduler-monitoringlaag is operationeel.
+
+De huidige backend registreert normale scraperuitvoeringen in
+`scheduler_runs`.
+
+De huidige actieve scraperregistry bevat:
+
+```text
+MAES_NETWORK
+DATS24
+SHELL
+TEXACO
+Q8
+```
+
+De Scheduler Monitor API ondersteunt:
+
+```text
+✓ globale schedulerhistoriek
+✓ scraperfilter
+✓ pagination
+✓ success/failed statistieken
+✓ gemiddelde duur
+✓ laatste run
+✓ stations
+✓ inserted
+✓ updated
+✓ skipped
+✓ duplicates
+✓ errors
+✓ duration
+✓ starttijd
+✓ eindtijd
+✓ automatische frontend refresh
+```
+
+De monitoring moet steeds worden geïnterpreteerd als runtime-informatie:
+stationaantallen, duur en prijsdekking kunnen per uitvoering wijzigen.
+
+---
+
+# 26. Toekomstige uitbreidingen
+
+Mogelijke toekomstige uitbreidingen:
+
+- authenticated admin access voor scheduler-monitoring
+- handmatige scraper-run vanuit admin
+- individuele scraper starten
+- individuele scraper stoppen
+- scheduler pauzeren
+- live progress per scraper
+- actuele workerstatus
+- laatste foutmelding per scraper
+- historische grafieken
+- dagelijkse/wekelijkse run-statistieken
+- alerts bij meerdere opeenvolgende failures
+- scraper performance monitoring
+- prijsdekking per scraper
+- stationdekking per scraper
+- uitgebreide audit logging
+
+Deze onderdelen zijn niet automatisch productiefunctionaliteit zolang de
+betreffende modules niet geïmplementeerd zijn.

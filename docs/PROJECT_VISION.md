@@ -1,7 +1,7 @@
 # FuelAlert Belgium - Project Vision
 
-**Versie:** 8.6.0  
-**Laatste update:** 22 augustus 2026  
+**Versie:** 8.8.0  
+**Laatste update:** 23 augustus 2026  
 **Status:** Living Document
 
 ---
@@ -308,6 +308,8 @@ Actieve productie-scrapers:
 - `MAES_NETWORK`
 - `DATS24`
 - `SHELL`
+- `TEXACO`
+- `Q8`
 
 De eerste uitvoering gebeurt bij startup.
 
@@ -317,17 +319,19 @@ Daarna worden de actieve scrapers iedere 15 minuten opnieuw uitgevoerd.
 
 # 13. Huidige productiebasis
 
-FuelAlert beschikt momenteel over drie actieve productie-scrapers.
+FuelAlert beschikt momenteel over vijf actieve productie-scrapers.
 
 | Bron         | Stations | Status              |
 | ------------ | -------: | ------------------- |
 | MAES Network |      275 | ✅ Production Ready |
 | DATS24       |      147 | ✅ Production Ready |
 | SHELL        |      200 | ✅ Production Ready |
+| TEXACO       |       91 | ✅ Production Ready |
+| Q8           |      469 | ✅ Production Ready |
 
 Totaal:
 
-**622 gecontroleerde stationrecords**
+**1082 scraperrecords in de laatste volledige gecontroleerde run**
 
 De laatste volledige gecontroleerde run leverde:
 
@@ -346,7 +350,23 @@ SHELL
 200 stations
 200 updates
 0 errors
+
+TEXACO
+91 stations
+91 updates
+0 errors
+
+Q8
+469 stations
+469 updates
+0 scraper-errors
+213 stations met prijzen
+256 stations zonder beschikbare prijzen
+39 stationpagina's zonder gevonden Q8-code
 ```
+
+De Q8-prijsbeschikbaarheid is bronafhankelijk. Een Q8-station zonder
+beschikbare prijs wordt wel als geldig stationrecord verwerkt.
 
 ---
 
@@ -373,12 +393,10 @@ Mogelijke toekomstige bronnen zijn:
 
 - Gabriëls
 - TotalEnergies
-- Texaco
 - Lukoil
 - Gulf
 - Avia
 - Fuel Media Service
-- Q8
 - Esso
 
 Een bron wordt alleen toegevoegd wanneer de kwaliteit en betrouwbaarheid
@@ -518,6 +536,28 @@ De belangrijkste backendfundamenten zijn inmiddels aanwezig:
 
 ---
 
+# Huidige productiestatus — 23 augustus 2026
+
+De DataSource Platform-basis is operationeel met vijf productie-scrapers:
+
+- MAES Network — 275
+- DATS24 — 147
+- SHELL — 200
+- TEXACO — 91
+- Q8 — 469
+
+Laatste volledige gecontroleerde run:
+
+**1082 scraperrecords — 0 scraper-errors**
+
+De productie-Scheduler draait de actieve scrapers iedere 15 minuten.
+Q8 levert momenteel voor 213 van de 469 gevonden stations een prijswaarde;
+256 stations hebben tijdens de gecontroleerde run geen beschikbare
+prijsdata. Dit verhindert niet dat het stationrecord als geldig record
+wordt verwerkt.
+
+---
+
 # 20. Volgende grote mijlpaal
 
 De volgende grote doelstelling is:
@@ -525,15 +565,19 @@ De volgende grote doelstelling is:
 **De stationsmodule volledig afronden en de frontend migreren naar
 `stations_v2`.**
 
+De scraperbasis wordt ondertussen verder uitgebreid met de nog geplande
+relevante databronnen.
+
 Daarna volgen:
 
 1. Price History
 2. Verdere databronnen
 3. Cache Engine
 4. Geavanceerde frontendfunctionaliteit
-5. Premium functies
-6. DataSource Manager
-7. Developer API
+5. Verified Station / Dealer Portal
+6. Premium functies
+7. DataSource Manager
+8. Developer API
 
 ---
 

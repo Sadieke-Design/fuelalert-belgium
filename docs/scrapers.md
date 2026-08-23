@@ -37,10 +37,11 @@ Smoke tests worden bewust niet geregistreerd in `scheduler_runs`.
 | MAES Network | ✅ Production Ready | Sitemap + HTML + JSON-LD | 275 | Batch processing + uniforme output |
 | DATS24 | ✅ Production Ready | HTML + embedded station JSON | 147 | Live prijzen, GPS en adresgegevens |
 | SHELL | ✅ Production Ready | Officiële stationdata + Shell XLSX | 200 | Officiële prijzen + uniforme output |
-| Q8 | ⏸ On Hold | Playwright | - | Niet actief |
+| TEXACO | ✅ Production Ready | Officiële stationdata | 91 | Officiële station discovery + uniforme output |
+| Q8 | ✅ Production Ready | Playwright + officiële Q8 prijs API | 469 | 213 stations met prijzen; 256 zonder beschikbare prijsdata |
 | ESSO Network | ⏸ On Hold | - | - | Niet actief in registry |
 | Gabriëls | ⏳ Planned | - | - | Nog niet ontwikkeld |
-| Fuel Media Service | ⏳ Planned | API / externe bron | - | Contact opgenomen |
+| Fuel Media Service | ⏳ Planned | API / externe bron | - | Nog niet geïmplementeerd |
 
 ---
 
@@ -161,6 +162,34 @@ De huidige gecontroleerde productie-run levert:
 - 0 errors
 
 ---
+
+# TEXACO
+
+Texaco is toegevoegd aan de actieve productie-scraperregistry.
+
+## Eigenschappen
+
+- 91 Belgische stations gevonden
+- 91 uniforme stationrecords verwerkt
+- Integratie met `PersistenceEngine`
+- Integratie met `StationRepository`
+- Automatische uitvoering via de Scheduler
+- Monitoring via de Scheduler Monitor
+- Historiek via `scheduler_runs`
+
+## Productievalidatie
+
+De huidige gecontroleerde productie-run levert:
+
+- 91 stations
+- 91 updates
+- 0 inserts
+- 0 skipped
+- 0 duplicates
+- 0 errors
+
+Texaco gebruikt dezelfde centrale scraperpipeline als de andere
+productiescrapers.
 
 # SHELL
 
@@ -431,8 +460,12 @@ Momenteel actief:
 - `MAES_NETWORK`
 - `DATS24`
 - `SHELL`
+- `TEXACO`
+- `Q8`
 
 Niet-actieve scrapers worden niet door de `ScraperManager` uitgevoerd.
+
+De registry is het centrale activatiepunt voor productie-uitvoering.
 
 Een nieuwe scraper wordt pas actief nadat deze in de registry is
 opgenomen.
@@ -457,6 +490,14 @@ Taken:
 - PersistenceEngine aanroepen
 - execution summary genereren
 - scheduler-runs registreren
+
+De huidige actieve registry bevat vijf scrapers:
+
+- `MAES_NETWORK`
+- `DATS24`
+- `SHELL`
+- `TEXACO`
+- `Q8`
 
 Iedere scraper gebruikt dezelfde execution pipeline.
 
@@ -534,11 +575,13 @@ De huidige schedulerjob is:
 Fuel Scrapers
 ```
 
-Deze job start:
+Deze job start alle scrapers uit de actieve registry:
 
 - `MAES_NETWORK`
 - `DATS24`
 - `SHELL`
+- `TEXACO`
+- `Q8`
 
 ---
 
@@ -621,6 +664,8 @@ Beschikbare scraperhistoriek:
 - `MAES_NETWORK`
 - `DATS24`
 - `SHELL`
+- `TEXACO`
+- `Q8`
 
 ---
 
@@ -784,16 +829,30 @@ SHELL
 Stations : 200
 Updated  : 200
 Errors   : 0
+
+TEXACO
+Stations : 91
+Updated  : 91
+Errors   : 0
+
+Q8
+Stations : 469
+Updated  : 469
+Errors   : 0
 ```
 
 Totaal:
 
 ```text
-622 stationrecords verwerkt
+1082 stationrecords verwerkt
 0 errors
 ```
 
-Alle drie actieve scrapers zijn daarmee succesvol geïntegreerd in:
+Belangrijk: het Q8-aantal van 469 betreft gevonden stations. Tijdens
+dezelfde run hadden 213 stations beschikbare prijzen en 256 stations
+geen beschikbare prijsdata. Dat is geen scraperfout.
+
+De gecontroleerde volledige run is daarmee succesvol door:
 
 - ScraperManager
 - Validator Engine
@@ -803,8 +862,6 @@ Alle drie actieve scrapers zijn daarmee succesvol geïntegreerd in:
 - Scheduler
 - scheduler_runs
 - Scheduler Monitor
-
----
 
 # Nieuwe Scrapers Toevoegen
 
@@ -839,7 +896,6 @@ Gepland:
 
 - Gabriëls
 - TotalEnergies
-- Texaco
 - Lukoil
 - Gulf
 - Avia
@@ -847,8 +903,10 @@ Gepland:
 
 On hold:
 
-- Q8
 - Esso
+
+Q8 en Texaco zijn inmiddels actieve productie-scrapers en staan daarom
+niet meer in de toekomstige of on-hold lijst.
 
 Nieuwe bronnen worden pas als Production Ready gemarkeerd nadat:
 
@@ -926,18 +984,30 @@ monitoringarchitectuur te bouwen.
 
 Laatste gecontroleerde versie:
 
-**FuelAlert Belgium v8.6.0**
+**FuelAlert Belgium — 23 augustus 2026**
 
 Actieve productie-scrapers:
 
 - MAES_NETWORK
 - DATS24
 - SHELL
+- TEXACO
+- Q8
 
-Totale gecontroleerde stations:
+Recente gecontroleerde stationrecords:
 
-**622**
+**1082**
 
 Productiefouten tijdens de laatste volledige run:
 
 **0**
+
+Q8 prijsdekking tijdens de laatste volledige run:
+
+- 469 stations gevonden
+- 213 stations met prijzen
+- 256 stations zonder beschikbare prijzen
+- 39 stationpagina's zonder gevonden Q8-code
+
+Deze aantallen zijn momentopnames en kunnen wijzigen wanneer de
+bronnen hun stationdekking of prijsbeschikbaarheid wijzigen.

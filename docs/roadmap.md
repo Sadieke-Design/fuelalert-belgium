@@ -1,6 +1,6 @@
 # FuelAlert Belgium - Roadmap
 
-**Versie:** 8.7.0  
+**Versie:** 8.8.0  
 **Laatste update:** 23 augustus 2026  
 **Status:** Active Development
 
@@ -83,8 +83,13 @@ Deze fase is inmiddels grotendeels afgerond.
 | MAES Network |      275 | ✅ Production |
 | DATS24       |      147 | ✅ Production |
 | SHELL        |      200 | ✅ Production |
+| TEXACO       |       91 | ✅ Production |
+| Q8           |      469 | ✅ Production |
 
-**Totaal gecontroleerde stations:** 622
+**Totaal gecontroleerde scraperrecords:** 1082
+
+**Opmerking Q8:** 469 stations gevonden; 213 met beschikbare prijzen en
+256 zonder beschikbare prijsdata tijdens de laatste volledige run.
 
 ---
 
@@ -130,6 +135,32 @@ Deze fase is inmiddels grotendeels afgerond.
 - ✅ Historiek
 - ✅ 200 stations
 
+### TEXACO
+
+- ✅ Officiële station discovery
+- ✅ Uniforme output
+- ✅ Persistence
+- ✅ Scheduler
+- ✅ Monitoring
+- ✅ Historiek
+- ✅ 91 stations
+
+### Q8
+
+- ✅ Officiële Q8 sitemap discovery
+- ✅ Playwright/rendered stationpagina's
+- ✅ Q8 stationcode extractie
+- ✅ Officiële Q8 prijs API
+- ✅ Uniforme output
+- ✅ Persistence
+- ✅ Scheduler
+- ✅ Monitoring
+- ✅ Historiek
+- ✅ 469 stations
+- ⚠️ 213 stations met prijzen
+- ⚠️ 256 stations zonder beschikbare prijzen
+- ⚠️ 39 stationpagina's zonder gevonden Q8-code
+
 ---
 
 # Phase 8.4 — DataSource Engine
@@ -159,6 +190,8 @@ Actieve scrapers:
 - `MAES_NETWORK`
 - `DATS24`
 - `SHELL`
+- `TEXACO`
+- `Q8`
 
 Iedere normale run wordt geregistreerd in:
 
@@ -286,9 +319,24 @@ Laatste volledige gecontroleerde productie-run:
 - 200 updates
 - 0 errors
 
+### TEXACO
+
+- 91 stations
+- 91 updates
+- 0 errors
+
+### Q8
+
+- 469 stations
+- 469 updates
+- 0 scraper-errors
+- 213 stations met prijzen
+- 256 stations zonder beschikbare prijzen
+- 39 stationpagina's zonder gevonden Q8-code
+
 ### Totaal
 
-- 622 stationrecords
+- 1082 scraperrecords
 - 0 scraper-errors
 
 ---
@@ -362,14 +410,7 @@ verder naar `stations_v2` te migreren.
 - ⏳ Validatie
 - ⏳ Integratie
 
-### 4. Texaco
-
-- ⏳ Brononderzoek
-- ⏳ Scraper/API
-- ⏳ Validatie
-- ⏳ Integratie
-
-### 5. Lukoil
+### 4. Lukoil
 
 - ⏳ Brononderzoek
 - ⏳ Scraper/API
@@ -383,12 +424,15 @@ verder naar `stations_v2` te migreren.
 - ⏳ Validatie
 - ⏳ Integratie
 
-### 7. Avia
+### 6. Avia
 
 - ⏳ Brononderzoek
 - ⏳ Scraper/API
 - ⏳ Validatie
 - ⏳ Integratie
+
+**Q8 en Texaco zijn inmiddels Production Ready en vallen niet meer
+onder Phase 11.**
 
 ---
 
@@ -718,15 +762,15 @@ Tankstationhouders kunnen in de toekomst:
 De huidige prioriteiten zijn:
 
 1. **Stationsmodule volledig afronden**
-2. **Verder bouwen van scrapers voor de overige relevante stations**
-3. **Frontend migreren naar `stations_v2`**
-4. **Station Detail**
+2. **Frontend migreren naar `stations_v2`**
+3. **Station Detail**
+4. **Kaart en filters**
 5. **Price History**
-6. **Kaart en filters**
-7. **Verified Station / Dealer Portal**
-8. **Dealer Price Authority en dealer-kortingen**
-9. **Gabriëls scraper**
-10. **Fuel Media Service**
+6. **Verder bouwen van scrapers voor de overige relevante stations**
+7. **Gabriëls scraper**
+8. **Fuel Media Service**
+9. **Verified Station / Dealer Portal**
+10. **Dealer Price Authority en dealer-kortingen**
 11. **Extra databronnen**
 12. **Cache Engine**
 13. **DataSource Manager**
@@ -778,11 +822,15 @@ Een actieve dealerinstelling heeft voorrang op die basisprijs.
 De scraper mag een actieve dealerinstelling nooit overschrijven.
 De oorspronkelijke bronprijs blijft bewaard voor transparantie en
 fallback.
-Current Status — v8.6.0
+Current Status — v8.8.0
+
 Productie
+
 ✅ MAES Network — 275
 ✅ DATS24 — 147
 ✅ SHELL — 200
+✅ TEXACO — 91
+✅ Q8 — 469
 ✅ ScraperManager
 ✅ Scheduler
 ✅ PersistenceEngine
@@ -794,8 +842,28 @@ Productie
 ✅ scheduler_runs
 ✅ station_source_links
 ✅ StationPriceResolver
+
+Laatste volledige gecontroleerde run:
+
+**1082 scraperrecords — 0 scraper-errors**
+
+Q8 detail:
+
+- 469 stations gevonden
+- 213 stations met prijzen
+- 256 stations zonder beschikbare prijzen
+- 39 stationpagina's zonder gevonden Q8-code
+
 Volgende grote mijlpaal
 
-Stationsmodule volledig afronden en frontend migreren naar
-stations_v2.
+**Stationsmodule volledig afronden en frontend migreren naar
+`stations_v2`.**
+
+Roadmap-principe:
+
+Scrapers blijven de automatische basisprijs leveren.
+Een actieve dealerinstelling heeft voorrang op die basisprijs.
+De scraper mag een actieve dealerinstelling nooit overschrijven.
+De oorspronkelijke bronprijs blijft bewaard voor transparantie en
+fallback.
 ```
