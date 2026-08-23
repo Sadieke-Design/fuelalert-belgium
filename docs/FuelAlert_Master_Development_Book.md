@@ -2,8 +2,8 @@
 
 # Master Development Book
 
-**Versie:** 8.6.0  
-**Laatste update:** 22 augustus 2026  
+**Versie:** 8.7.0  
+**Laatste update:** 23 augustus 2026  
 **Status:** Active Development – Single Source of Truth  
 **Project gestart:** 21 juli 2026
 
@@ -22,8 +22,7 @@ worden hier bijgehouden.
 
 Iedere ontwikkelsessie eindigt met een update van dit document.
 
-====================================================================== 2. PROJECTVISIE
-======================================================================
+# ====================================================================== 2. PROJECTVISIE
 
 FuelAlert Belgium ontwikkelt een compleet platform voor brandstofprijzen
 en tankstationinformatie in België.
@@ -36,7 +35,7 @@ Databronnen:
 • Officiële API's
 • Commerciële databronnen
 • Eigen scrapers
-• Geverifieerde tankstationhouders (toekomst)
+• Geverifieerde tankstationhouders / dealers (in ontwikkeling)
 • Communitymeldingen (toekomst)
 
 Het platform bestaat uit:
@@ -50,8 +49,7 @@ Het platform bestaat uit:
 • Pushnotificaties
 • Publieke API (toekomst)
 
-====================================================================== 3. PROJECTREGELS
-======================================================================
+# ====================================================================== 3. PROJECTREGELS
 
 DOCUMENTATIE
 
@@ -71,8 +69,7 @@ ONTWIKKELING
 6. Elke scraper gebruikt dezelfde infrastructuur.
 7. Eerst platform, daarna nieuwe databronnen.
 
-====================================================================== 4. PROJECTSTATUS
-======================================================================
+# ====================================================================== 4. PROJECTSTATUS
 
 BACKEND
 
@@ -112,6 +109,8 @@ IN ONTWIKKELING
 ⏳ Gabriëls scraper
 ⏳ Fuel Media Service API
 ⏳ Price History
+⏳ Dealer Price Overrides
+⏳ Dealer Portal
 ⏳ Frontend migratie naar stations_v2
 
 ON HOLD
@@ -145,8 +144,7 @@ ADMIN
 ❌ Analytics
 ❌ Logs
 
-====================================================================== 5. DATA BRONNEN
-======================================================================
+# ====================================================================== 5. DATA BRONNEN
 
 MAES Network ................. ✅ Productie
 275 stations
@@ -217,8 +215,7 @@ De gecontroleerde productie-run leverde:
 0 duplicates
 0 errors
 
-====================================================================== 6. DATA SOURCE ENGINE
-======================================================================
+# ====================================================================== 6. DATA SOURCE ENGINE
 
 De backend gebruikt één centrale DataSource Engine.
 
@@ -366,8 +363,206 @@ De resolver ondersteunt fallback per brandstofveld. Wanneer een live
 bron voor één brandstof geen waarde levert, kan een beschikbare waarde
 uit de oorspronkelijke bron worden gebruikt.
 
-====================================================================== 7. REST API
-======================================================================
+# ====================================================================== 6A. DEALER PRICE OVERRIDE STRATEGY
+
+FuelAlert gebruikt een tweelaagse prijsarchitectuur:
+
+1. Automatische bronprijzen
+2. Geverifieerde dealerprijzen en dealerkortingen
+
+De automatische scraperlaag blijft altijd de basisbron.
+
+Wanneer een geautoriseerde dealer een prijs of korting voor zijn eigen
+station instelt, krijgt deze dealerinformatie voorrang op de
+automatisch verzamelde prijs voor de uiteindelijke publieksprijs.
+
+De oorspronkelijke scraperprijs wordt niet overschreven. Deze blijft
+beschikbaar als bronwaarde en als fallback.
+
+PRIJSVOLGORDE
+
+Dealerprijs
+↓
+Dealerkorting
+↓
+Resolved scraper/source price
+
+Een expliciete dealerprijs heeft voorrang op een dealerkorting.
+
+Voorbeeld:
+
+source_price = €1,650
+dealer_discount = €0,030
+
+final_price = €1,620
+
+Wanneer de dealer een expliciete prijs instelt:
+
+source_price = €1,650
+dealer_price = €1,620
+
+final_price = €1,620
+
+De scraperprijs blijft in beide gevallen traceerbaar.
+
+DEALERBEVOEGDHEID
+
+Een dealer mag uitsluitend prijsinformatie wijzigen voor stations
+waarvoor het dealeraccount geautoriseerd is.
+
+De backend moet daarom bij iedere wijziging controleren:
+
+• dealeraccount
+• station
+• dealerrechten
+• brandstof
+• actieve override
+
+Een dealer mag nooit prijzen van een station van een andere dealer
+wijzigen.
+
+DEALER OVERRIDE
+
+Een dealeroverride kan bestaan uit:
+
+• expliciete dealerprijs
+• dealerkorting
+• geldigheidsperiode
+• actieve/inactieve status
+
+Wanneer een dealeroverride wordt verwijderd, gedeactiveerd of
+vervalt, valt de prijs automatisch terug op de actuele resolved
+scraper/source price.
+
+Een verwijderde override mag nooit als een prijs van €0 worden
+geïnterpreteerd.
+
+PRIJSHERKOMST
+
+De uiteindelijke prijs moet traceerbaar blijven.
+
+De prijsarchitectuur gebruikt daarom conceptueel:
+
+• source_price
+• dealer_override
+• dealer_discount
+• final_price
+• price_origin
+
+Mogelijke price_origin waarden zijn onder andere:
+
+• source
+• dealer_override
+• dealer_discount
+
+De frontend moet uiteindelijk kunnen zien of een weergegeven prijs
+afkomstig is van een automatische bron of door een geverifieerde
+dealer werd aangepast.
+
+SCRAPERS BLIJVEN ACTIEF
+
+Dealerprijzen vervangen de scrapers niet.
+
+De scrapers blijven continu de officiële of beschikbare bronprijzen
+verzamelen.
+
+Flow:
+
+Scraper
+↓
+Source price
+↓
+StationPriceResolver
+↓
+Dealer override indien actief
+↓
+Final price
+↓
+REST API
+↓
+Frontend
+
+Hierdoor blijft FuelAlert automatisch werken wanneer een dealer geen
+eigen prijs heeft ingesteld.
+
+DEALERPORTAAL
+
+Er wordt een aparte dealeromgeving voorzien waarin geverifieerde
+stationhouders hun eigen stations kunnen beheren.
+
+Geplande mogelijkheden:
+
+• eigen stations bekijken
+• brandstofprijzen bekijken
+• prijs handmatig instellen
+• korting instellen
+• override activeren/deactiveren
+• geldigheidsduur instellen
+• actuele bronprijs vergelijken met dealerprijs
+• wijzigingshistoriek bekijken
+
+De dealeromgeving mag geen directe databasewrites buiten de normale
+backendarchitectuur uitvoeren.
+
+Dealerwijzigingen moeten via de REST API en de daarvoor voorziene
+businesslogica verlopen.
+
+AUDIT
+
+Dealerprijswijzigingen moeten volledig traceerbaar worden.
+
+De uiteindelijke implementatie moet minimaal kunnen registreren:
+
+• dealer
+• station
+• brandstof
+• oude waarde
+• nieuwe waarde
+• type wijziging
+• tijdstip
+• actieve status
+
+De auditgegevens worden onderdeel van de toekomstige dealer
+override-laag.
+
+FAIL-SAFE
+
+Een probleem in de dealerlaag mag de automatische scraperlaag niet
+beschadigen.
+
+Wanneer een dealeroverride ongeldig, verlopen of niet beschikbaar is:
+
+Dealer override
+↓
+ongeldig / niet actief
+↓
+Resolved source price
+
+De automatische bronprijs blijft daardoor altijd beschikbaar als
+fallback.
+
+ONTWIKKELINGSSTRATEGIE
+
+FuelAlert blijft eerst de scrapers voor alle relevante Belgische
+tankstations uitbreiden.
+
+Daarna wordt de dealerportal stapsgewijs toegevoegd.
+
+De volgorde is bewust:
+
+1. Brondata verzamelen
+2. Stations correct identificeren
+3. Scraperprijzen opslaan
+4. Cross-source linking en price resolution
+5. Dealerverificatie
+6. Dealerportal
+7. Dealerprijzen en kortingen
+8. Publieke final price
+
+De dealerlaag is dus een aanvullende correctie- en beheerslaag bovenop
+de automatische databronnen en geen vervanging van de scraperstrategie.
+
+# ====================================================================== 7. REST API
 
 Beschikbaar
 
@@ -393,8 +588,7 @@ Gepland
 ⏳ /api/statistics
 ⏳ Publieke API
 
-====================================================================== 8. DECISION LOG
-======================================================================
+# ====================================================================== 8. DECISION LOG
 
 DEC-001
 Genspark-architectuur blijft de basis.
@@ -516,8 +710,23 @@ Smoke tests mogen geen records aanmaken in scheduler_runs.
 DEC-033
 Scheduler Monitor ondersteunt filtering per scraper en pagination.
 
-====================================================================== 9. MASTER CHECKLIST
-======================================================================
+DEC-034
+FuelAlert gebruikt een dealer price override-strategie bovenop de
+automatische scraperprijzen. Scraperprijzen blijven de oorspronkelijke
+bron en fallback. Een geautoriseerde dealer kan voor zijn eigen station
+een expliciete prijs of korting instellen. De uiteindelijke prijs wordt
+bepaald door StationPriceResolver volgens de volgorde dealerprijs,
+dealerkorting en vervolgens resolved scraper/source price. Dealerdata
+overschrijft de bronwaarde niet en moet traceerbaar en fail-safe zijn.
+
+DEC-035
+De ontwikkeling blijft eerst gericht op volledige en betrouwbare
+station- en scraperdekking. De dealerportal wordt daarna als aparte
+beheerlaag toegevoegd zodat dealers hun eigen prijzen en kortingen
+kunnen beheren zonder de automatische scraperinfrastructuur te
+vervangen.
+
+# ====================================================================== 9. MASTER CHECKLIST
 
 SCRAPERS
 
@@ -585,6 +794,8 @@ DATABASE
 ✅ DATS24 import/update pipeline
 ✅ SHELL import/update pipeline
 ⏳ Price History
+⏳ Dealer Price Overrides
+⏳ Dealer Portal
 
 MONITORING
 
@@ -624,6 +835,8 @@ FRONTEND
 ✅ Scheduler Monitor
 
 ⏳ Station Detail
+⏳ Dealer Portal
+⏳ Dealer Price Overrides
 ⏳ Favorieten
 ⏳ Historiek
 ⏳ Premium
@@ -781,8 +994,25 @@ original
 De resolver bewaart de broninformatie zodat de uiteindelijke prijs
 traceerbaar blijft.
 
-====================================================================== 10. CHANGELOG
-======================================================================
+# ====================================================================== 10. CHANGELOG
+
+v8.7.0 — 23 augustus 2026
+
+• Dealer price override-strategie als nieuwe architectuurlaag
+gedocumenteerd.
+• Automatische scraperprijzen blijven de oorspronkelijke bron en
+fallback.
+• Expliciete dealerprijs krijgt voorrang op dealerkorting.
+• Dealerkorting krijgt voorrang op de resolved scraper/source price.
+• Dealerprijs en dealerkorting overschrijven de oorspronkelijke
+scraperwaarde niet.
+• Price origin en traceerbaarheid van dealerprijzen vastgelegd.
+• Dealerbevoegdheid beperkt tot geautoriseerde eigen stations.
+• Fail-safe terugval naar de actuele scraper/source price vastgelegd.
+• Dealerportal toegevoegd als toekomstige beheerlaag.
+• Dealer audit trail als vereiste vastgelegd.
+• Ontwikkelstrategie vastgelegd: eerst volledige scraper- en
+stationdekking, daarna dealerbeheer.
 
 v8.6.0 — 22 augustus 2026
 
@@ -885,8 +1115,7 @@ v8.4.0
 • ARCHITECTURE.md toegevoegd.
 • Fuel Media Service documentatie toegevoegd.
 
-====================================================================== 11. VOLGENDE PRIORITEITEN
-======================================================================
+# ====================================================================== 11. VOLGENDE PRIORITEITEN
 
 HUIDIGE PRIORITEIT
 
@@ -916,8 +1145,7 @@ PLATFORM
 18. Pushnotificaties
 19. Publieke API
 
-====================================================================== 12. LANGE TERMIJNVISIE
-======================================================================
+# ====================================================================== 12. LANGE TERMIJNVISIE
 
 FuelAlert Belgium groeit uit tot een volledig platform voor
 Belgische tankstationinformatie.
@@ -926,7 +1154,9 @@ Toekomstige uitbreidingen:
 
 • Verified Station Portal
 • Bedrijfsaccounts
-• Zelf prijzen beheren
+• Dealer Portal
+• Dealer price overrides
+• Zelf prijzen en kortingen beheren
 • EV-laadprijzen
 • HVO100
 • AdBlue
@@ -939,8 +1169,7 @@ Toekomstige uitbreidingen:
 • Tijdelijke meldingen
 • Publieke Developer API
 
-====================================================================== 13. DATABASE REFERENTIE
-======================================================================
+# ====================================================================== 13. DATABASE REFERENTIE
 
 De volledige databasearchitectuur wordt gedocumenteerd in:
 
@@ -963,8 +1192,7 @@ Belangrijke services:
 • PersistenceEngine
 • StationPriceResolver
 
-====================================================================== 14. CURRENT PRODUCTION VALIDATION
-======================================================================
+# ====================================================================== 14. CURRENT PRODUCTION VALIDATION
 
 Laatste gecontroleerde volledige scraper-run:
 

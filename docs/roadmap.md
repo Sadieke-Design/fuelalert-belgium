@@ -1,7 +1,7 @@
 # FuelAlert Belgium - Roadmap
 
-**Versie:** 8.6.0  
-**Laatste update:** 22 augustus 2026  
+**Versie:** 8.7.0  
+**Laatste update:** 23 augustus 2026  
 **Status:** Active Development
 
 ---
@@ -78,11 +78,11 @@ Deze fase is inmiddels grotendeels afgerond.
 
 ## Huidige productiegegevens
 
-| Bron | Stations | Status |
-|---|---:|---|
-| MAES Network | 275 | ✅ Production |
-| DATS24 | 147 | ✅ Production |
-| SHELL | 200 | ✅ Production |
+| Bron         | Stations | Status        |
+| ------------ | -------: | ------------- |
+| MAES Network |      275 | ✅ Production |
+| DATS24       |      147 | ✅ Production |
+| SHELL        |      200 | ✅ Production |
 
 **Totaal gecontroleerde stations:** 622
 
@@ -420,13 +420,22 @@ Doel:
 Automatisch bepalen welke bron voor een bepaald gegeven de beste
 beschikbare informatie levert.
 
-Prioriteit:
+Basisbron-prioriteit:
 
 1. Officiële API
 2. Commerciële databron
 3. Officiële website
-4. Geverifieerde stationhouder
+4. Scraper van de officiële bron
 5. Communitydata
+
+**Uitzondering — Dealer Authority:**
+
+Een actieve instelling van een geverifieerde stationhouder staat boven de
+automatisch verzamelde bronprijs voor het betreffende station en de
+betreffende brandstof.
+
+De dealerlaag is dus geen gewone databron in deze prioriteitenlijst,
+maar een expliciete override-laag bovenop de brondata.
 
 De bestaande `StationPriceResolver` vormt een eerste stap in deze
 richting.
@@ -496,6 +505,171 @@ richting.
 
 ---
 
+# Phase 17.1 — Dealer Price Authority Strategy
+
+## Strategische beslissing
+
+FuelAlert blijft eerst verdergaan met het bouwen van betrouwbare scrapers
+voor alle relevante tankstationmerken.
+
+De scrapers blijven de **basisbron** voor actuele stationprijzen.
+
+Daarboven komt een afzonderlijke laag voor **geverifieerde dealers /
+stationhouders**. Een dealer kan zijn eigen station claimen en daarna
+prijzen of kortingen beheren.
+
+De dealerlaag vervangt dus niet de scraperarchitectuur, maar vormt een
+hogere, gecontroleerde prijslaag bovenop de automatisch verzamelde
+brondata.
+
+## Prijsstrategie
+
+De uiteindelijke prijs voor een station wordt bepaald volgens:
+
+```text
+Scraper / officiële databron
+            ↓
+       Basisprijs
+            ↓
+   Dealer Price Override
+            ↓
+      Resolved Price
+            ↓
+         Frontend
+```
+
+Zolang een dealer niets heeft aangepast:
+
+**Scraperprijs = getoonde prijs**
+
+Zodra een geverifieerde dealer een prijs of korting voor zijn station
+heeft ingesteld:
+
+**Dealerinstelling = leidende prijsinformatie**
+
+De scraper mag daarna de dealerinstelling niet overschrijven.
+
+Een volgende scraper-run blijft wel de actuele bronprijs verzamelen,
+maar deze wordt alleen als basisinformatie gebruikt zolang er geen
+actieve dealerinstelling is.
+
+## Dealer kan beheren
+
+Een geverifieerde dealer moet in de toekomstige portal minimaal kunnen:
+
+- ⏳ Eigen station claimen
+- ⏳ Benzine 95 prijs aanpassen
+- ⏳ Benzine 98 prijs aanpassen
+- ⏳ Dieselprijs aanpassen
+- ⏳ LPG-prijs aanpassen
+- ⏳ Andere beschikbare brandstoffen aanpassen
+- ⏳ Een korting instellen
+- ⏳ Een prijs handmatig overschrijven
+- ⏳ Een eerder ingestelde override verwijderen
+- ⏳ Zien wanneer de prijs voor het laatst werd aangepast
+
+## Belangrijk onderscheid
+
+FuelAlert bewaart steeds beide concepten:
+
+1. **Bronprijs** — prijs die door scraper/API/andere databron is
+   aangeleverd.
+2. **Dealerprijs / dealerinstelling** — expliciete instelling van een
+   geverifieerde stationhouder.
+
+De oorspronkelijke bronprijs mag dus nooit verloren gaan wanneer een
+dealer een prijs aanpast.
+
+Dit maakt het mogelijk om:
+
+- de bronprijs te blijven controleren
+- dealerprijzen te onderscheiden van scraperprijzen
+- wijzigingen te traceren
+- de dealerinstelling later te verwijderen
+- opnieuw automatisch naar de bronprijs terug te vallen
+
+## Prijsresolutie
+
+De bestaande `StationPriceResolver` wordt in een latere fase uitgebreid
+met dealer authority.
+
+De logische volgorde wordt:
+
+```text
+1. Beschikbare scraper / officiële bronprijs
+2. Dealer override indien actief
+3. Dealer korting indien actief
+4. Resolved price
+```
+
+De precieze technische implementatie van prijs versus korting wordt
+vastgelegd tijdens de database- en API-uitwerking.
+
+## Per brandstof
+
+Dealerinstellingen moeten per brandstof onafhankelijk kunnen worden
+beheerd.
+
+Voorbeeld:
+
+```text
+Diesel:
+  scraperprijs = €1,650
+  dealerprijs  = €1,599
+  → FuelAlert toont €1,599
+
+Benzine 95:
+  scraperprijs = €1,720
+  geen dealerinstelling
+  → FuelAlert toont €1,720
+
+Benzine 98:
+  scraperprijs = €1,820
+  dealer korting = €0,050
+  → FuelAlert toont de volgens de dealerinstelling berekende prijs
+```
+
+Een dealerwijziging voor één brandstof mag de andere brandstoffen dus
+niet overschrijven.
+
+## Bescherming tegen scraper-overschrijving
+
+Dit is een fundamenteel onderdeel van de architectuur.
+
+De scraper mag:
+
+- de bronprijs bijwerken
+- brongegevens vernieuwen
+- nieuwe stationinformatie leveren
+
+De scraper mag **niet**:
+
+- een actieve dealerprijs overschrijven
+- een actieve dealerinstelling verwijderen
+- een actieve dealer korting verwijderen
+
+Alleen een geautoriseerde dealer of een daarvoor bestemde admin-flow
+mag een actieve dealerinstelling wijzigen of verwijderen.
+
+## Volgorde van ontwikkeling
+
+De ontwikkelstrategie blijft bewust:
+
+```text
+1. Scrapers bouwen voor zoveel mogelijk stations
+2. Stationdata en prijzen betrouwbaar verzamelen
+3. Stations volledig op orde brengen
+4. Dealer/Verified Station Portal bouwen
+5. Dealerprijs- en kortingsbeheer toevoegen
+6. StationPriceResolver uitbreiden met dealer authority
+7. Frontend dealerbron transparant tonen
+```
+
+De dealerfunctionaliteit wordt dus **bovenop de scraperarchitectuur**
+gebouwd en niet als vervanging ervan.
+
+---
+
 # Phase 18 — Verified Station Portal
 
 ## Te ontwikkelen
@@ -505,6 +679,13 @@ Tankstationhouders kunnen in de toekomst:
 - ⏳ Station claimen
 - ⏳ Stationsgegevens beheren
 - ⏳ Prijzen controleren
+- ⏳ Eigen brandstofprijzen instellen
+- ⏳ Eigen brandstofkortingen instellen
+- ⏳ Prijzen per brandstof beheren
+- ⏳ Dealerprijs tijdelijk overschrijven
+- ⏳ Dealerinstelling verwijderen en terugvallen op scraperprijs
+- ⏳ Wijzigingshistoriek van dealerprijzen
+- ⏳ Zichtbaar onderscheid tussen scraperprijs en dealerprijs
 - ⏳ Services beheren
 - ⏳ Openingstijden beheren
 - ⏳ Foto's toevoegen
@@ -537,15 +718,18 @@ Tankstationhouders kunnen in de toekomst:
 De huidige prioriteiten zijn:
 
 1. **Stationsmodule volledig afronden**
-2. **Frontend migreren naar `stations_v2`**
-3. **Station Detail**
-4. **Price History**
-5. **Kaart en filters**
-6. **Gabriëls scraper**
-7. **Fuel Media Service**
-8. **Extra databronnen**
-9. **Cache Engine**
-10. **DataSource Manager**
+2. **Verder bouwen van scrapers voor de overige relevante stations**
+3. **Frontend migreren naar `stations_v2`**
+4. **Station Detail**
+5. **Price History**
+6. **Kaart en filters**
+7. **Verified Station / Dealer Portal**
+8. **Dealer Price Authority en dealer-kortingen**
+9. **Gabriëls scraper**
+10. **Fuel Media Service**
+11. **Extra databronnen**
+12. **Cache Engine**
+13. **DataSource Manager**
 
 ---
 
@@ -586,6 +770,14 @@ de Scheduler werkt
 monitoring werkt
 de resultaten gecontroleerd zijn
 de documentatie is bijgewerkt
+
+Dealerprijsstrategie:
+
+Scrapers blijven de automatische basisprijs leveren.
+Een actieve dealerinstelling heeft voorrang op die basisprijs.
+De scraper mag een actieve dealerinstelling nooit overschrijven.
+De oorspronkelijke bronprijs blijft bewaard voor transparantie en
+fallback.
 Current Status — v8.6.0
 Productie
 ✅ MAES Network — 275
@@ -606,3 +798,4 @@ Volgende grote mijlpaal
 
 Stationsmodule volledig afronden en frontend migreren naar
 stations_v2.
+```

@@ -1,5 +1,8 @@
 # Decision Log
 
+**Versie:** 8.7.0  
+**Laatste update:** 23 augustus 2026
+
 ---
 
 ## 2026-07-25
@@ -508,7 +511,137 @@ kwaliteitscriteria gelden als voor andere databronnen.
 
 ---
 
-## DEC-021 — Documentation First
+## DEC-021 — Dealer Price Authority
+
+**Context**
+
+FuelAlert verzamelt brandstofprijzen automatisch via meerdere databronnen
+en scrapers. Daarnaast is het wenselijk om in de toekomst geverifieerde
+dealers / stationhouders hun eigen prijzen en kortingen te laten beheren.
+
+De dealerfunctionaliteit mag de bestaande multi-source scraperarchitectuur
+niet vervangen en mag de oorspronkelijke brondata niet verloren laten gaan.
+
+**Beslissing**
+
+FuelAlert blijft scrapers en andere databronnen gebruiken als automatische
+basis voor stationprijzen.
+
+Daarboven wordt een afzonderlijke **Dealer Price Authority**-laag voorzien.
+
+Wanneer een geverifieerde dealer geen eigen prijsinstelling heeft:
+
+```text
+Scraper / officiële bron
+        ↓
+    Getoonde prijs
+```
+
+Wanneer een geverifieerde dealer een prijs of korting instelt:
+
+```text
+Scraper / officiële bron
+        ↓
+    Basisprijs
+        ↓
+Dealer Price Authority
+        ↓
+    Getoonde prijs
+```
+
+Een actieve dealerinstelling heeft dus **voorrang op de scraperprijs** voor
+het betreffende station en de betreffende brandstof.
+
+**Belangrijke regel**
+
+Een scraper-run mag een actieve dealerprijs of dealerinstelling nooit
+overschrijven.
+
+De scraper blijft de actuele bronprijs verzamelen en opslaan als
+broninformatie.
+
+De dealerinstelling blijft daar onafhankelijk van bestaan.
+
+**Brondata blijft behouden**
+
+FuelAlert bewaart conceptueel altijd het onderscheid tussen:
+
+- automatische bronprijs
+- actieve dealerprijs
+- dealer korting
+- uiteindelijke resolved price
+
+Wanneer een dealer zijn override verwijdert, kan FuelAlert automatisch
+terugvallen op de meest recente geldige bronprijs.
+
+**Per brandstof**
+
+Dealer authority wordt per brandstof toegepast.
+
+Een dealer kan bijvoorbeeld alleen Diesel aanpassen terwijl Benzine 95 en
+Benzine 98 volledig door de automatische bron worden bepaald.
+
+Een dealerwijziging voor één brandstof mag geen andere brandstoffen
+overschrijven.
+
+**Dealerfunctionaliteit**
+
+De toekomstige Verified Station / Dealer Portal moet onder andere kunnen:
+
+- station claimen
+- stationverificatie doorlopen
+- prijzen per brandstof instellen
+- kortingen per brandstof instellen
+- een actieve prijsoverride wijzigen
+- een override verwijderen
+- de eigen actuele instellingen bekijken
+- wijzigingen kunnen traceren
+
+**Prijsresolutie**
+
+De bestaande `StationPriceResolver` wordt hiervoor in een latere fase
+uitgebreid.
+
+De algemene logica wordt:
+
+```text
+Bronprijs beschikbaar
+        ↓
+Dealerinstelling actief?
+   ↓              ↓
+  Nee             Ja
+   ↓              ↓
+Bronprijs      Dealerinstelling
+        \        /
+         ↓      ↓
+       Resolved Price
+```
+
+De exacte databasevelden, API-contracten en authenticatie/verificatie van
+dealers worden pas vastgelegd wanneer deze functionaliteit daadwerkelijk
+wordt geïmplementeerd.
+
+**Ontwikkelstrategie**
+
+De ontwikkeling gebeurt bewust in deze volgorde:
+
+1. Scrapers bouwen voor zoveel mogelijk relevante stations
+2. Stationdata en automatische prijzen betrouwbaar maken
+3. Stationsmodule volledig afronden
+4. Verified Station / Dealer Portal bouwen
+5. Dealer price authority implementeren
+6. `StationPriceResolver` uitbreiden
+7. Frontend transparant laten zien of een prijs automatisch of door een
+   geverifieerde dealer is aangeleverd
+
+**Architectuurprincipe**
+
+Dealer authority is geen vervanging van de scraperlaag.
+
+Het is een gecontroleerde override-laag **bovenop** de automatische
+brondata.
+
+## DEC-022 — Documentation First
 
 Architectuurwijzigingen en belangrijke technische beslissingen moeten worden
 vastgelegd in de projectdocumentatie.
@@ -529,7 +662,7 @@ Truth voor de projectontwikkeling.
 
 ---
 
-## DEC-022 — Stations First
+## DEC-023 — Stations First
 
 De stationsarchitectuur wordt eerst volledig gestabiliseerd voordat
 grotere gebruikersfunctionaliteiten worden uitgebreid.
@@ -583,6 +716,12 @@ De huidige productiebronnen zijn:
 | SHELL        |      200 | ✅ Production Ready |
 
 ---
+
+## Vastgelegde strategische beslissing
+
+De Dealer Price Authority is als architectuurkeuze vastgelegd in DEC-021.
+De technische implementatie blijft gepland voor de Verified Station /
+Dealer Portal-fase.
 
 # Openstaande architectuurbeslissingen
 

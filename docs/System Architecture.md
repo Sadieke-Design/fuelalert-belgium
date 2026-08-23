@@ -1,208 +1,332 @@
-# FuelAlert Belgium - System Architecture
+# FuelAlert Belgium - Systeemarchitectuur
 
-Version: 2.2
-Status: Living Document
-Last Updated: 2026-08-22
+Versie: 2.3
 
----
+Status: Levend document
 
-# Architecture Principles
-
-FuelAlert follows these architectural principles.
-
-1. Modularity
-2. Multi-source data collection
-3. Official APIs preferred over scraping
-4. Fail-safe processing
-5. Documentation-first development
-6. Plug-and-play data sources
-7. Separation of responsibilities
-8. Platform before features
-9. Source independence
-10. Verified source linking
-11. Live price resolution
-12. Monitoring-first operation
+Laatst bijgewerkt: 2026-08-23
 
 ---
 
-# Overview
+# Architectuurprincipes
 
-FuelAlert Belgium is a modular data platform for collecting, validating,
-storing, resolving and distributing Belgian fuel price information.
+FuelAlert volgt deze architectuurprincipes.
 
-Instead of treating every scraper as an isolated component, every data
-source is integrated into a common scraper and persistence architecture.
+1. Modulariteit
+2. Gegevensverzameling uit meerdere bronnen
+3. Officiële API's krijgen voorrang op scraping
+4. Foutveilige verwerking
+5. Ontwikkeling met documentatie als uitgangspunt
+6. Plug-and-play gegevensbronnen
+7. Scheiding van verantwoordelijkheden
+8. Platform vóór functies
+9. Brononafhankelijkheid
+10. Geverifieerde bronkoppeling
+11. Live prijsresolutie
+12. Monitoring als uitgangspunt
+13. Door dealers beheerde prijsoverschrijvingen
+14. Voorrang van dealerprijzen op bronprijzen
+15. Traceerbare prijsoorsprong
 
-The platform focuses on:
+---
 
-- Reliability
-- Scalability
-- Maintainability
-- Modularity
-- Extensibility
-- Source independence
-- Data quality
-- Continuous monitoring
+# Overzicht
 
-Current active data sources:
+FuelAlert Belgium is een modulair dataplatform voor het verzamelen, valideren,
+opslaan, bepalen en verspreiden van Belgische brandstofprijsinformatie.
+
+In plaats van elke scraper als een afzonderlijke component te behandelen, wordt elke
+gegevensbron geïntegreerd in een gemeenschappelijke scraper- en persistentiearchitectuur.
+
+Het platform richt zich op:
+
+- Betrouwbaarheid
+- Schaalbaarheid
+- Onderhoudbaarheid
+- Modulariteit
+- Uitbreidbaarheid
+- Brononafhankelijkheid
+- Datakwaliteit
+- Continue monitoring
+- Dealerdeelname
+- Transparante prijsoorsprong
+
+Huidige actieve gegevensbronnen:
 
 - MAES Network
 - DATS24
 - Shell
 
-The architecture allows additional sources to be added without changing
-the core persistence, monitoring or scheduler infrastructure.
+De architectuur maakt het mogelijk extra bronnen toe te voegen zonder
+de kernarchitectuur voor persistentie, monitoring, scheduler of prijsresolutie
+te wijzigen.
+
+Een belangrijk toekomstig principe is dat FuelAlert scrapers blijft bouwen
+voor stations en netwerken en daarnaast een gecontroleerd
+dealerportaal aanbiedt waarmee geverifieerde stationdealers/operators
+hun eigen prijzen en kortingen handmatig kunnen beheren.
 
 ---
 
-# High Level Architecture
+# Architectuur op hoog niveau
 
                     Frontend (React + Vite)
-                               |
-                               v
-                        REST API (Express)
-                               |
-                +--------------+--------------+
-                |                             |
-          Authentication                Business Services
-                |                             |
-                +--------------+--------------+
-                               |
-                        Scraper Manager
-                               |
-          +--------------------+--------------------+
-          |                    |                    |
-      MAES Network           DATS24              Shell
-          |                    |                    |
-          +--------------------+--------------------+
-                               |
-                       Uniform Scraper Output
-                               |
-                       Validator Framework
-                               |
-                       Persistence Engine
-                               |
-                       Station Repository
-                               |
-                           stations_v2
-                               |
-                       Station Source Links
-                               |
-                    Station Price Resolver
-                               |
-                       REST API / Frontend
 
-Supporting infrastructure:
+                               |
+
+                               v
+
+                        REST API (Express)
+
+                               |
+
+                +--------------+--------------+
+
+                |                             |
+
+          Authenticatie                Bedrijfsdiensten
+
+                |                             |
+
+                +--------------+--------------+
+
+                               |
+
+                        Scraper Manager
+
+                               |
+
+          +--------------------+--------------------+
+
+          |                    |                    |
+
+      MAES Network           DATS24              Shell
+
+          |                    |                    |
+
+          +--------------------+--------------------+
+
+                               |
+
+                       Uniforme scraperuitvoer
+
+                               |
+
+                       Validatiekader
+
+                               |
+
+                       Persistentie-engine
+
+                               |
+
+                       Stationrepository
+
+                               |
+
+                           stations_v2
+
+                               |
+
+                 +-------------+-------------+
+
+                 |                           |
+
+        Stationbronlinks         Dealerprijsgegevens
+
+                 |                           |
+
+                 +-------------+-------------+
+
+                               |
+
+                        Prijsresolatielaag
+
+                               |
+
+                 +-------------+-------------+
+
+                 |                           |
+
+          Scraper-/bronprijs       Dealeroverschrijving
+
+                 |                           |
+
+                 +-------------+-------------+
+
+                               |
+
+                         Bepaalde prijs
+
+                               |
+
+                         REST API / Frontend
+
+Ondersteunende infrastructuur:
 
 - Scheduler
-- Scheduler Run Repository
-- Scheduler Monitor
+- Scheduler-runrepository
+- Scheduler-monitor
 - Health Registry
 - Metrics Registry
 - Capability Registry
 - Rate Limiter
-- Report Engine
+- Rapportage-engine
+- Dealer Authenticatie
+- Dealer-stationverificatie
+- Dealerprijsbeheer
+- Audit van prijsoverschrijvingen
 
 ---
 
-# Core Data Architecture
+# Kerngegevensarchitectuur
 
-FuelAlert separates source collection from station identity and price
-resolution.
+FuelAlert scheidt bronverzameling van stationidentiteit,
+dealeridentiteit en prijsresolutie.
 
-A scraper is responsible for collecting source-specific data.
+Een scraper is verantwoordelijk voor het verzamelen van brongebonden gegevens.
 
-The persistence layer stores the source record.
+De persistentielaag slaat het bronrecord op.
 
-The station linking layer can connect records from different sources
-when they represent the same physical station.
+De stationkoppelingslaag kan records uit verschillende bronnen koppelen
+wanneer ze hetzelfde fysieke station vertegenwoordigen.
 
-The price resolver can then determine which available source should be
-used for the displayed price.
+De dealerlaag identificeert geverifieerde dealers/operators die gemachtigd zijn
+om prijzen voor hun station te beheren.
+
+De prijsresolver bepaalt welke beschikbare prijs moet worden gebruikt voor
+de weergegeven prijs.
 
 The resulting architecture is:
 
-External Source
+External Bron
+
        |
+
        v
+
 Scraper
+
        |
+
        v
+
 Uniform Output
+
        |
+
        v
+
 ScraperManager
+
        |
+
        v
-Validator Framework
+
+Validatiekader
+
        |
+
        v
+
 PersistenceEngine
+
        |
+
        v
+
 StationRepository
+
        |
+
        v
+
 stations_v2
+
        |
+
        +-------------> station_source_links
+
        |
-       v
-StationPriceResolver
+
+       +-------------> dealer_station_relationships
+
        |
+
+       +-------------> dealer_price_overrides
+
+       |
+
        v
+
+PriceResolutionEngine
+
+       |
+
+       v
+
+Bepaalde prijs
+
+       |
+
+       v
+
 REST API
+
        |
+
        v
+
 Frontend
 
 ---
 
-# DataSource Engine
+# DataBron Engine
 
-The DataSource Engine is the central architecture for integrating
-external fuel data sources.
+De DataBron Engine is de centrale architectuur voor het integreren van
+externe brandstofgegevensbronnen.
 
-Every active source uses the same execution, persistence, monitoring
-and reporting infrastructure.
+Elke actieve bron gebruikt dezelfde infrastructuur voor uitvoering, persistentie, monitoring
+and rapportage te wijzigen.
 
-Current components include:
+Huidige componenten:
 
 - Scraper Registry
 - ScraperManager
 - BaseScraper
 - Capability Registry
-- Validator Framework
-- Persistence Engine
-- Station Repository
-- Station Source Link Repository
+- Validatiekader
+- Persistentie-engine
+- Stationrepository
+- Station Bron Link Repository
 - Station Price Resolver
+- Prijsresolutie-engine
 - Scheduler
-- Scheduler Run Repository
-- Scheduler Monitor
+- Scheduler-runrepository
+- Scheduler-monitor
 - Health Registry
 - Metrics Registry
 - Rate Limiter
-- Report Engine
+- Rapportage-engine
 
 ---
 
 # Capability Registry
 
-The Capability Registry describes what each data source supports.
+De Capability Registry beschrijft welke mogelijkheden elke gegevensbron ondersteunt.
 
-Examples:
+Voorbeelden:
 
-- Fuel prices
+- Brandstofprijzen
 - Stations
-- Coordinates
-- Opening hours
-- EV charging
-- Promotions
-- Services
+- Coördinaten
+- Openingsuren
+- EV-laden
+- Promoties
+- Diensten
 
-The capability system allows future sources to expose additional
-information without changing the core architecture.
+Het capabilitiesysteem maakt het mogelijk dat toekomstige bronnen extra
+informatie aanbieden zonder de kernarchitectuur te wijzigen.
 
 Endpoint:
 
@@ -212,28 +336,32 @@ Endpoint:
 
 # Scheduler Engine
 
-The Scheduler automatically executes the registered scraper workflow.
+De Scheduler voert de geregistreerde scraperworkflow automatisch uit.
 
-Responsibilities:
+Verantwoordelijkheden:
 
-- Job scheduling
-- Periodic execution
-- Startup execution
-- Background processing
-- Starting the ScraperManager
+- Taakplanning
+- Periodieke uitvoering
+- Uitvoering bij opstart
+- Achtergrondverwerking
+- Starten van de ScraperManager
 
-Current production interval:
+Huidig productie-interval:
 
 - 15 minutes
 - 900000 ms
 
-The scheduler executes the complete active scraper registry.
+De scheduler voert de volledige actieve scraperregistratie uit.
 
-Current active scrapers:
+Huidig actieve scrapers:
 
 - MAES_NETWORK
 - DATS24
 - SHELL
+
+Dealerprijzen worden niet vervangen alleen omdat een scraper wordt uitgevoerd.
+De scraper werkt de brongegevenslaag bij; de prijsresolatielaag
+bepaalt wat uiteindelijk wordt weergegeven.
 
 Endpoint:
 
@@ -241,120 +369,150 @@ Endpoint:
 
 ---
 
-# Scheduler Execution Flow
+# Uitvoeringsstroom van de Scheduler
 
 The scheduler executes:
 
 Scheduler
-   |
-Registered Job
-   |
+
+|
+
+Geregistreerde taak
+
+|
+
 ScraperManager.run()
-   |
-Active Scrapers
-   |
+
+|
+
+Actieve scrapers
+
+|
+
 PersistenceEngine
-   |
+
+|
+
 StationRepository
-   |
+
+|
+
 Database
-   |
+
+|
+
 SchedulerRunRepository
-   |
+
+|
+
 scheduler_runs
-   |
-Scheduler Monitor
 
-The Scheduler does not contain source-specific scraper logic.
+|
 
-Source-specific logic remains inside the individual scraper.
+Scheduler-monitor
+
+De Scheduler bevat geen brongebonden scraperlogica.
+
+Brongebonden logica blijft in de afzonderlijke scraper.
+
+Dealeroverschrijvingen maken geen deel uit van de scraperuitvoering. Ze worden afzonderlijk beheerd
+en geëvalueerd door de prijsresolatielaag.
 
 ---
 
 # Scraper Registry
 
-Active scrapers are registered in:
+Actieve scrapers worden geregistreerd in:
 
 `backend/scrapers/registry.js`
 
-Current active production scrapers:
+Huidige actieve productiescrapers:
 
 - `MAES_NETWORK`
 - `DATS24`
 - `SHELL`
 
-The registry provides the active scraper collection used by
+De registry levert de actieve scrapercollectie die wordt gebruikt door
 `ScraperManager`.
 
-Adding a new production scraper requires:
+Een nieuwe productiescraper toevoegen vereist:
 
-1. Implementing the scraper
-2. Validating its output
-3. Registering the scraper
-4. Testing persistence
-5. Testing scheduler execution
-6. Activating the scraper
+1. De scraper implementeren
+2. De uitvoer valideren
+3. De scraper registreren
+4. Persistentie testen
+5. Scheduleruitvoering testen
+6. De scraper actieveren
+
+De langetermijnstrategie is om betrouwbare scrapers voor
+aanvullende stationnetwerken te blijven toevoegen en tegelijk geverifieerde dealers
+toe te staan prijzen te beheren wanneer bronprijzen niet beschikbaar, vertraagd of aangevuld
+moeten worden met dealerinformatie.
 
 ---
 
 # Scraper Manager
 
-The ScraperManager is responsible for executing all active scrapers.
+De ScraperManager is verantwoordelijk voor het uitvoeren van alle actieve scrapers te vervangen.
 
 File:
 
 `backend/scrapers/ScraperManager.js`
 
-Responsibilities:
+Verantwoordelijkheden:
 
-- Execute active scrapers
-- Execute scrapers through the common interface
-- Handle scraper failures
-- Update Health Registry
-- Pass records to PersistenceEngine
-- Generate execution summaries
-- Register scheduler run results
-- Prevent smoke tests from creating scheduler history records
+- Actieve scrapers uitvoeren
+- Scrapers uitvoeren via de gemeenschappelijke interface
+- Scraperfouten afhandelen
+- Health Registry bijwerken
+- Records doorgeven aan de PersistenceEngine
+- Uitvoeringssamenvattingen genereren
+- Resultaten van scheduler-runs registreren
+- Voorkomen dat smoketests schedulerhistoriek aanmaken
 
 Scrapers are executed through the common ScraperManager architecture.
 
+De ScraperManager bepaalt niet of een scraperprijs of dealerprijs
+moet worden weergegeven. Die beslissing behoort tot de prijsresolutie-
+laag.
+
 ---
 
-# Smoke Test Behaviour
+# Gedrag van smoketests
 
 The ScraperManager supports a `smokeTest` mode.
 
-Smoke tests can execute the complete scraper pipeline without creating
-persistent scheduler history records.
+Smoketests kunnen de volledige scraperpipeline uitvoeren zonder
+persistente schedulerhistoriekrecords aan te maken.
 
-When:
+Wanneer:
 
 `smokeTest = true`
 
-the scraper execution can still:
+kan de scraperuitvoering nog steeds:
 
 - Execute scrapers
 - Validate records
-- Persist test data when requested
-- Generate execution reports
+- Testgegevens opslaan wanneer gevraagd
+- Uitvoeringsrapporten genereren
 
-but does not create records in:
+maar geen records aanmaken in:
 
 `scheduler_runs`
 
-Normal scheduler executions use:
+Normale scheduleruitvoeringen gebruiken:
 
 `smokeTest = false`
 
-and are recorded in the scheduler history.
+en worden opgenomen in de schedulerhistoriek.
 
 ---
 
-# Uniform Scraper Output
+# Uniforme scraperuitvoer
 
-All active scrapers return a common station record structure.
+Alle actieve scrapers leveren een gemeenschappelijke stationrecordstructuur.
 
-Core fields include:
+Kernvelden zijn onder andere:
 
 - station_id
 - brand
@@ -367,12 +525,12 @@ Core fields include:
 - prices
 - currency
 - source
-- updated_at
+- bijgewerkt_at
 
-Fuel naming differences between sources are normalized before or during
-persistence.
+Verschillen in brandstofbenamingen tussen bronnen worden vóór of tijdens
+de persistentie genormaliseerd.
 
-Examples:
+Voorbeelden:
 
 MAES:
 
@@ -399,102 +557,107 @@ Shell:
 - cng
 - adblue
 
-A fuel field may contain `NULL` when the source does not provide that
-fuel.
+Een brandstofveld kan `NULL` bevatten wanneer de bron die
+brandstof niet aanbiedt.
+
+Scraper output remains the bronprijs laag. It must not overwrite an
+actieve dealer override in the resolved/public price laag.
 
 ---
 
-# Current Scrapers
+# Huidige Scrapers
 
 ## MAES Network
 
-Source identifier:
+Bron identifier:
 
 `MAES_NETWORK`
 
 Status:
 
-Production Ready
+Productieklaar
 
-Current station coverage:
+Huidig station coverage:
 
-Approximately 275 records in the active scraper output.
+Approximately 275 records in the actieve scraper output.
 
 The MAES scraper collects live station information from the MAES
 network.
 
-The scraper is integrated into:
+De scraper is integrated into:
 
 - ScraperManager
 - PersistenceEngine
 - Scheduler
 - Health Registry
 - Metrics Registry
-- Scheduler Monitor
+- Scheduler-monitor
 
 ---
 
 ## DATS24
 
-Source identifier:
+Bron identifier:
 
 `DATS24`
 
 Status:
 
-Production Ready
+Productieklaar
 
-Current station coverage:
+Huidig station coverage:
 
-Approximately 147 stations in the active scraper output.
+Approximately 147 stations in the actieve scraper output.
 
 The DATS24 scraper collects station and fuel price information from
-DATS24 station pages and associated station data.
+DATS24 station pages and associated stationgegevens.
 
-The scraper is integrated into:
+De scraper is integrated into:
 
 - ScraperManager
 - PersistenceEngine
 - Scheduler
 - Health Registry
 - Metrics Registry
-- Scheduler Monitor
+- Scheduler-monitor
 
 ---
 
 ## Shell
 
-Source identifier:
+Bron identifier:
 
 `SHELL`
 
 Status:
 
-Production Ready
+Productieklaar
 
-Current station coverage:
+Huidig station coverage:
 
-200 official Shell station records.
+200 officiële Shell station records.
 
-The Shell scraper retrieves official Shell station information and
-official Shell price information.
+The Shell scraper retrieves officiële Shell station information and
+officiële Shell price information.
 
 The Shell scraper is integrated into the same architecture as MAES and
 DATS24.
 
-The Shell scraper uses the official Shell Belgium price update source
-for its official price dataset.
+The Shell scraper uses the officiële Shell Belgium price update source
+for its officiële price dataset.
 
-The current implementation also supports linking Shell stations to
-corresponding MAES Network station records when a verified station
+The current implementatie also supports linking Shell stations to
+corresponding MAES Network station records when a geverifieerde station
 match exists.
 
 This allows FuelAlert to use live MAES network prices for a physical
 Shell station when the station is represented in both sources.
 
+Dealer overrides remain independent of this cross-source mechanism.
+
 ---
 
-# Shell -> MAES Station Linking
+# Shell -> MAES Stationkoppeling
 
 FuelAlert contains a dedicated station source linking mechanism.
 
@@ -504,7 +667,7 @@ Database table:
 
 Repository:
 
-`backend/repositories/StationSourceLinkRepository.js`
+`backend/repositories/StationBronLinkRepository.js`
 
 The purpose of this system is to connect station records from
 different data sources that represent the same physical station.
@@ -518,13 +681,13 @@ The link contains information such as:
 - distance_m
 - match_type
 - confidence
-- active
-- created_at
-- updated_at
+- actieve
+- aangemaakt_at
+- bijgewerkt_at
 
 ---
 
-# Station Source Matcher
+# Station Bron Matcher
 
 The station source matcher automatically searches for compatible
 station records between sources.
@@ -536,46 +699,46 @@ The matcher evaluates:
 
 - Geographic distance
 - Station identity
-- Source
+- Bron
 - Station coordinates
 - Match confidence
 
-Current Shell matching validation has established:
+Huidig Shell matching validatie has established:
 
-- 200 official Shell stations
+- 200 officiële Shell stations
 - 78 MAES Shell records
-- 35 verified matches
-- 43 MAES Shell records without an official Shell match
+- 35 geverifieerde matches
+- 43 MAES Shell records without an officiële Shell match
 
-The verified matches are stored in:
+The geverifieerde matches are opgeslagen in:
 
 `station_source_links`
 
-A uniqueness check ensures that one official Shell station is not
-linked to multiple active MAES records.
+A uniqueness check ensures that one officiële Shell station is not
+linked to multiple actieve MAES records.
 
 ---
 
-# StationSourceLinkRepository
+# StationBronLinkRepository
 
 File:
 
-`backend/repositories/StationSourceLinkRepository.js`
+`backend/repositories/StationBronLinkRepository.js`
 
-Responsibilities:
+Verantwoordelijkheden:
 
 - Find an existing station link
 - Create or update links
 - Find links for a station
-- Find all active links
+- Find all actieve links
 - Deactivate links
 
-The repository provides the persistence layer for cross-source station
+De repository provides the persistence layer for cross-source station
 relationships.
 
-Active links can be retrieved using:
+Actief links can be retrieved using:
 
-`findAllActive()`
+`findAllActief()`
 
 Station-specific links can be retrieved using:
 
@@ -589,97 +752,479 @@ File:
 
 `backend/services/StationPriceResolver.js`
 
-The Station Price Resolver determines which price source should be
-used when a station has multiple available data sources.
+The Station Price Resolver determines which bronprijs should be used
+when a station has multiple available data sources.
 
 This separates:
 
 - Station identity
-- Source identity
-- Source linking
-- Price selection
+- Bron identity
+- Bron linking
+- Bron price selection
 
 For a Shell station with a valid MAES link, the resolver can select
 the live MAES Network price.
 
-The resolver exposes information about:
+De resolver exposes information about:
 
 - Resolved prices
 - Price source
 - Price priority
 - Linked station
-- Source prices
+- Bron prices
 - Fallback usage
 
----
+The Station Price Resolver must also respect dealer overrides.
 
-# Price Resolution Priority
-
-The resolver supports source-aware price selection.
-
-For a linked Shell station:
-
-Linked live source
-        |
-Official station source
-        |
-Original stored price
-
-When a valid MAES live link exists, the MAES live price can take
-priority for the linked Shell station.
-
-Example:
-
-`price_source = maes_network_live_scraper`
-
-`price_priority = linked_live`
-
-A Shell station without a MAES link uses:
-
-`price_source = shell_official_scraper`
-
-`price_priority = official`
-
-This mechanism prevents unrelated stations from inheriting prices from
-other sources.
+Dealer-entered prices and discounts are evaluated before the final
+resolved price is returned to the API/frontend.
 
 ---
 
-# Fallback Behaviour
+# Dealerprijsbeheer Architecture
 
-If a linked live source does not provide a particular fuel price, the
-resolver can retain the corresponding price from the original station
-source.
+FuelAlert will provide a dedicated mechanism through which geverifieerde
+station dealers/operators can maintain their own station prices and
+discounts.
 
-Example:
+This does not replace the scraper strategy.
+
+The strategy is:
+
+1. Continue building scrapers for all relevant station networks.
+2. Use scraper/brondata as the automatic baseline.
+3. Provide geverifieerde dealers with a station management page.
+4. Allow a geverifieerde dealer to enter or adjust fuel prices.
+5. Allow a geverifieerde dealer to enter applicable discounts.
+6. Once a valid dealer override exists, it takes precedence over
+   scraper/bronprijss for that station and brandstof niet aanbiedt.
+7. Continue collecting scraper prices in the background.
+8. Keep the oorspronkelijke scraper/brondata available for traceability.
+9. Allow the dealer override to be removed or expire according to the
+   configured business rules.
+10. When no actieve dealer override exists, automatically fall back to
+    the normal source-resolution strategy.
+
+This means the scraper remains the automatic data backbone, while the
+dealer becomes the authoritative prijsbron for the station when the
+dealer has explicitly supplied a price or discount.
+
+---
+
+# Dealeridentiteit en Stationverificatie
+
+Dealer price management must never be based solely on an ungeverifieerde
+claim that a user owns or manages een station te beheren.
+
+Het systeem therefore requires a station-dealer verification laag.
+
+Conceptuele relatie:
+
+User
+
+|
+
+Authenticatie
+
+|
+
+Dealer Account
+
+|
+
+Station Verification
+
+|
+
+Verified Station
+
+|
+
+Dealerprijsbeheer
+
+A dealer may only create an actieve price override for stations for
+which the dealer has been geverifieerde/authorized.
+
+The exact verification workflow is a separate implementatie concern
+en kan omvatten:
+
+- Manual administrator verification
+- Business/contact verification
+- Station-specific verification
+- Verification documents
+- Other controlled verification mechanisms
+
+De architectuur must support verification status independently from
+the price data itself.
+
+---
+
+# Dealer-stationrelaties
+
+Dealer ownership/management relationships must be opgeslagen separately
+from station brondata.
+
+Conceptual table:
+
+`dealer_station_relationships`
+
+Belangrijke conceptuele velden zijn onder andere:
+
+- id
+- user_id / dealer_id
+- station_id
+- verification_status
+- verification_method
+- geverifieerde_at
+- geverifieerde_by
+- actieve
+- aangemaakt_at
+- bijgewerkt_at
+
+Deze relatie bepaalt of een dealer gemachtigd is om
+een station te beheren.
+
+---
+
+# Dealerprijsoverschrijvingen
+
+Dealer-entered prices must be opgeslagen separately from scraper/source
+prices.
+
+Conceptual table:
+
+`dealer_price_overrides`
+
+The table should support:
+
+- id
+- station_id
+- dealer_id
+- fuel_type
+- price
+- discount
+- currency
+- actieve
+- valid_from
+- valid_until
+- bijgewerkt_at
+- aangemaakt_at
+
+Optionele velden voor oorsprong/audit kunnen zijn:
+
+- source
+- note
+- bijgewerkt_by
+- previous_price
+- previous_discount
+
+Het exacte databaseschema wordt tijdens de implementatie definitief vastgelegd.
+
+De belangrijke architectuurregel is dat dealeroverschrijvingen de
+oorspronkelijke scraper-/bronprijs in de brongegevenslaag niet mogen
+laag.
+
+---
+
+# Bereik van Dealerprijsoverschrijvingen
+
+Overrides should be granular enough to avoid unnecessarily replacing
+all station prices.
+
+Het voorkeursmodel is:
+
+Station + Fuel Type + Dealeroverschrijving
+
+Voorbeeld:
+
+Station A:
+
+- benzine95 -> dealerprijs
+- benzine98 -> scraper price
+- diesel -> dealer discount
+- lpg -> scraper price
+
+If a dealer changes only diesel, the other fuel prices continue using
+the normal source-resolution logic.
+
+Dit biedt nauwkeurige controle en voorkomt het per ongeluk vervangen van
+geldige brongegevens.
+
+---
+
+# Dealerkortingen
+
+FuelAlert may support dealer-entered discounts separately from the
+base price.
+
+A dealer could therefore provide:
+
+Base scraper price:
+
+€1.700
+
+Dealer discount:
+
+€0.050
+
+Resolved effective price:
+
+€1.650
+
+De architectuur must clearly distinguish between:
+
+- Bron/base price
+- Dealer override price
+- Dealer discount
+- Resolved effective price
+
+Dit onderscheid is belangrijk voor transparantie, controleerbaarheid en toekomstige
+prijshistoriekfunctionaliteit.
+
+If the dealer enters an absolute final price instead of a discount,
+the system must not automatically calculate a discount unless the
+required source/base price is known and the business rules explicitly
+allow it.
+
+---
+
+# Prioriteit van Prijsresolutie
+
+The final price shown by FuelAlert is determined by a dedicated
+price-resolution process.
+
+De beoogde prioriteit is:
+
+1. Actief geverifieerde dealer override
+2. Linked live bronprijs
+3. Official/oorspronkelijke station bronprijs
+4. Stored fallback price
+5. No price available
+
+Voor elk brandstoftype wordt de resolutie afzonderlijk uitgevoerd.
+
+Voorbeeld:
+
+Dealer:
+
+diesel = €1.650
 
 MAES live:
-diesel = value
-e95 = value
-e98 = NULL
 
-Shell official:
-diesel = value
-e95 = value
-e98 = value
+diesel = €1.690
+
+Shell officiële:
+
+diesel = €1.700
 
 Resolved:
 
-diesel = MAES
-e95    = MAES
-e98    = Shell fallback
+diesel = €1.650
 
-This prevents missing values in one source from unnecessarily removing
-available values from another source.
+De dealerprijs wins because the dealer has supplied an actieve,
+geverifieerde override.
+
+Deze regel geldt ongeacht of de onderliggende stationprijs
+afkomstig is van MAES, DATS24, Shell of een toekomstige bron.
 
 ---
 
-# Validator Engine
+# Prijsresolutie met Kortingen
+
+When a dealer supplies a discount instead of an absolute price, the
+resolution process can calculate the effective dealerprijs.
+
+Voorbeeld:
+
+Bron resolved price:
+
+€1.700
+
+Dealer discount:
+
+€0.050
+
+Effective dealerprijs:
+
+€1.650
+
+De resolver moet de onderliggende waarden behouden zodat de API de
+oorsprong kan tonen.
+
+Conceptueel:
+
+- base_price = 1.700
+- dealer_discount = 0.050
+- resolved_price = 1.650
+- price_source = dealer
+- price_priority = dealer_override
+
+If the dealer override is removed or expires, the resolver returns to
+the normal source priority.
+
+---
+
+# Dealeroverschrijving and Scraper Update Behaviour
+
+A scraper continues running normally after a dealer override is
+aangemaakt.
+
+Voorbeeld:
+
+Vóór dealeroverschrijving:
+
+Scraper price:
+
+€1.700
+
+Weergegeven:
+
+€1.700
+
+Dealer voert in:
+
+€1.650
+
+Weergegeven:
+
+€1.650
+
+Volgende scraperuitvoering:
+
+Scraper price:
+
+€1.680
+
+Weergegeven:
+
+€1.650
+
+De scraper price has changed, but the actieve dealer override remains
+bepalend.
+
+Als de dealer de overschrijving later verwijdert of deze vervalt:
+
+Scraper price:
+
+€1.680
+
+Weergegeven:
+
+€1.680
+
+Dit is een fundamentele architectuurregel.
+
+A scraper update must never silently destroy an actieve dealer override.
+
+---
+
+# Dealeroverschrijving Audit Trail
+
+All dealerprijs changes should be traceable.
+
+Het systeem should retain sufficient information to determine:
+
+- Which dealer changed the price
+- Which station was changed
+- Which fuel type was changed
+- Previous value
+- New value
+- Previous discount
+- New discount
+- Timestamp
+- Activation/deactivation state
+
+A future audit table may be implemented as:
+
+`dealer_price_override_historiek`
+
+This is important for:
+
+- Datakwaliteit
+- Dispute handling
+- Abuse detection
+- Administrator review
+- Price historiek
+- Dealer accountability
+
+---
+
+# Prijsoorsprong
+
+Every resolved price should be traceable to its origin.
+
+De API should be able to expose conceptual metadata such as:
+
+- resolved_price
+- base_price
+- dealer_price
+- dealer_discount
+- price_source
+- price_priority
+- source_station_id
+- source_bijgewerkt_at
+- dealer_bijgewerkt_at
+
+Voorbeeld:
+
+resolved_price:
+
+`1.650`
+
+price_source:
+
+`dealer_override`
+
+price_priority:
+
+`dealer`
+
+base_price:
+
+`1.700`
+
+dealer_discount:
+
+`0.050`
+
+Hierdoor kan de frontend duidelijk aangeven dat de prijs
+door de dealer is aangeleverd of gewijzigd.
+
+---
+
+# Strategie voor Bronprioriteit
+
+FuelAlert distinguishes between:
+
+- Original brondata
+- Linked live brondata
+- Official brondata
+- Fallback data
+- Dealer override data
+
+The StationPriceResolver determines which price should be exposed to
+the application.
+
+The oorspronkelijke station/bronrecord remains opgeslagen in its brondata
+laag.
+
+Cross-source relationships are opgeslagen separately in
+`station_source_links`.
+
+Dealer relationships and dealer overrides are opgeslagen separately from
+bronrecords.
+
+The resolved price is therefore a calculated application value rather
+than the replacement of the underlying brondata.
+
+---
+
+# Validatie-engine
 
 The Validator Engine is responsible for validating scraper output
-before database persistence.
+before database de persistentie genormaliseerd.
 
-Current validation architecture includes:
+Huidig validatie architecture includes:
 
 - Price Validator
 - GPS Validator
@@ -694,32 +1239,85 @@ Validation responsibilities include:
 - Invalid addresses
 - Duplicate stations
 - Suspicious records
-- Data quality checks
+- Datakwaliteit checks
 
 The validator framework uses a common validator interface.
 
-The validation layer is designed to be extended with additional
+The validatie layer is designed to be extended with additional
 validators without changing the scraper architecture.
+
+Dealer price validatie is a separate but related responsibility.
+
+Dealer-entered prices should be checked for:
+
+- Valid numeric format
+- Reasonable price range
+- Valid fuel type
+- Authorized station
+- Valid currency
+- Valid discount format
+- Validity period
+- Conflicting actieve overrides
+
+Het systeem should be able to reject or flag obviously invalid dealer
+de brongegevens van de scraper te wijzigen.
 
 ---
 
-# Persistence Architecture
+# Persistentiearchitectuur
 
 Scrapers do not write directly to MySQL.
 
 Architecture:
 
 Scraper
-   |
+
+|
+
 ScraperManager
-   |
-Validator Framework
-   |
+
+|
+
+Validatiekader
+
+|
+
 PersistenceEngine
-   |
+
+|
+
 StationRepository
-   |
+
+|
+
 stations_v2
+
+Dealer data follows a separate persistence path:
+
+Dealer Portal
+
+|
+
+Authenticatie
+
+|
+
+Station Verification
+
+|
+
+Dealer Price Validation
+
+|
+
+Dealer Price Repository
+
+|
+
+dealer_price_overrides
+
+Deze scheiding voorkomt dat scraperupdates rechtstreeks dealer
+overschrijvingsrecords wijzigen.
 
 Files:
 
@@ -727,32 +1325,40 @@ Files:
 
 `backend/repositories/StationRepository.js`
 
+Toekomstig dealer-specific repository examples:
+
+`backend/repositories/DealerStationRepository.js`
+
+`backend/repositories/DealerPriceOverrideRepository.js`
+
 ---
 
 # PersistenceEngine
 
-The Persistence Engine processes scraper records.
+The Persistentie-engine processes scraper records.
 
 For each valid record it calls the StationRepository.
 
 The persistence result is counted as:
 
 - inserted
-- updated
+- bijgewerkt
 - skipped
 - duplicates
 - errors
 
-The execution duration is also recorded.
+The uitvoering duration is also recorded.
 
 The PersistenceEngine provides a common persistence mechanism for all
-active data sources.
+actieve data sources.
+
+It must not delete or overwrite dealer overschrijvingsrecords wijzigen.
 
 ---
 
 # StationRepository
 
-The StationRepository is responsible for storing station data.
+The StationRepository is responsible for storing stationgegevens.
 
 Database table:
 
@@ -762,16 +1368,23 @@ The station identifier is:
 
 `station_id`
 
-The repository performs:
+De repository performs:
 
 Find station
+
      |
+
      +-- Not found -> INSERT
+
      |
+
      +-- Found     -> UPDATE
 
-The repository abstracts direct SQL station persistence from the rest
+De repository abstracts direct SQL station persistence from the rest
 of the application.
+
+Bron updates to station prices remain separate from the dealer
+override laag.
 
 ---
 
@@ -802,20 +1415,23 @@ Important fields include:
 - source
 - website
 - operator
-- active
+- actieve
 - last_update
 - last_price_change
-- created_at
-- updated_at
+- aangemaakt_at
+- bijgewerkt_at
 
 Fuel-specific fields may contain `NULL` when a particular station does
-not provide that fuel.
+not provide that brandstof niet aanbiedt.
+
+De architectuur does not require dealer overrides to be opgeslagen in
+these base station price columns.
 
 ---
 
-# Station Source Links Database
+# Stationbronlinks Database
 
-Cross-source station relationships are stored separately from
+Cross-source station relationships are opgeslagen separately from
 `stations_v2`.
 
 Table:
@@ -823,14 +1439,59 @@ Table:
 `station_source_links`
 
 This table prevents source-specific station identifiers from being
-mixed into the main station identity.
+mixed into the main stationidentiteit.
 
 This architecture allows future sources to be linked without changing
 the station table structure.
 
+Dealer station relationships are separate from source linking.
+
 ---
 
-# Brandstof Mapping
+# Datamodel voor Dealers
+
+Dealer functionality introduces three logically separate concepts:
+
+1. Dealer identity
+2. Dealer authorization for a station
+3. Dealer price override
+
+These must not be collapsed into the station table.
+
+Conceptuele relatie:
+
+Dealer Account
+
+      |
+
+      v
+
+Dealer Station Relationship
+
+      |
+
+      v
+
+Verified Station
+
+      |
+
+      v
+
+Dealer Price Override
+
+      |
+
+      v
+
+Prijsresolutie-engine
+
+This allows a dealer to manage one or more authorized stations without
+mixing authentication, stationidentiteit and price data.
+
+---
+
+# Brandstofmapping
 
 The persistence and resolution layers support different naming
 conventions used by individual data sources.
@@ -855,13 +1516,15 @@ Shell:
 
 This allows multiple scrapers to use the same database structure.
 
+Dealer fuel entries must use the same canonical FuelAlert fuel types.
+
 ---
 
 # Health Registry
 
 The Health Registry provides live source health information.
 
-The ScraperManager updates the registry after each scraper execution.
+The ScraperManager updates the registry after each scraper uitvoering.
 
 Tracked information includes:
 
@@ -870,7 +1533,7 @@ Tracked information includes:
 - Errors
 - Success rate
 
-Current statuses:
+Huidig statuses:
 
 - ONLINE
 - OFFLINE
@@ -879,18 +1542,23 @@ Endpoint:
 
 `/api/health`
 
+Dealer functionality should not affect scraper health rapportage.
+
+A healthy scraper can continue running even when dealer overrides are
+actieve.
+
 ---
 
 # Metrics Registry
 
-The Metrics Registry collects scraper execution information.
+The Metrics Registry collects scraper uitvoering information.
 
 Tracked metrics include:
 
 - Runtime
 - Average duration
-- Total executions
-- Failed executions
+- Total uitvoerings
+- Failed uitvoerings
 - Stations processed
 - Inserted records
 - Updated records
@@ -902,13 +1570,22 @@ Endpoint:
 
 `/api/metrics`
 
+Toekomstige statistieken kunnen dealeractiviteiten afzonderlijk bijhouden, zoals:
+
+- Actief dealer overrides
+- Dealer price updates
+- Override expirations
+- Verification events
+
+These metrics should not be mixed with scraper uitvoering metrics.
+
 ---
 
 # Rate Limiter
 
 The Rate Limiter protects external data sources.
 
-Responsibilities:
+Verantwoordelijkheden:
 
 - Delay requests
 - Retry strategy
@@ -917,7 +1594,7 @@ Responsibilities:
 - Control concurrent requests
 - Configure request timeouts
 
-Current configuration includes:
+De huidige configuratie omvat:
 
 MAES_NETWORK:
 
@@ -934,17 +1611,19 @@ DATS24:
 - concurrent: 1
 
 The Rate Limiter is designed so additional sources can receive
-source-specific configurations.
+source-specific configuraties.
+
+Dealer portal requests do not use scraper rate-limiting rules.
 
 ---
 
-# Report Engine
+# Rapportage-engine
 
-The Report Engine generates standardized scraper execution reports.
+The Rapportage-engine generates standardized scraper uitvoering reports.
 
 Reports contain:
 
-- Source
+- Bron
 - Success status
 - Station count
 - Inserted records
@@ -954,13 +1633,18 @@ Reports contain:
 - Errors
 - Duration
 
-This provides a common operational view for all data sources.
+Toekomstige dealer-rapporten kunnen afzonderlijk omvatten:
+
+- Dealer updates
+- Actief overrides
+- Expired overrides
+- Verification status
 
 ---
 
-# Scheduler Run Repository
+# Scheduler-runrepository
 
-Every normal scraper execution is registered in:
+Every normal scraper uitvoering is registered in:
 
 `scheduler_runs`
 
@@ -974,7 +1658,7 @@ Stored information includes:
 - status
 - stations
 - inserted
-- updated
+- bijgewerkt
 - skipped
 - duplicates
 - errors
@@ -982,14 +1666,17 @@ Stored information includes:
 - started_at
 - finished_at
 
-Smoke-test executions do not create scheduler history records.
+Smoke-test uitvoerings do not create scheduler historiek records.
+
+Dealer price changes are not scheduler runs and must not be opgeslagen as
+scheduler uitvoerings.
 
 ---
 
-# Scheduler Monitor
+# Scheduler-monitor
 
-The Scheduler Monitor provides realtime monitoring of scraper
-execution.
+De Scheduler-monitor provides realtime monitoring of scraper
+uitvoering.
 
 Backend route:
 
@@ -1012,14 +1699,14 @@ Functionaliteiten:
 - Average duration
 - Latest executed run
 - Number of stations
-- Number of updated records
+- Number of bijgewerkt records
 - Error count
-- Scheduler history
+- Scheduler historiek
 - Pagination
 - Per-scraper filtering
-- Separate scraper history
+- Separate scraper historiek
 
-Current scraper histories:
+Huidig scraper histories:
 
 - MAES_NETWORK
 - DATS24
@@ -1029,81 +1716,106 @@ Backend endpoint:
 
 `/api/scheduler-monitor`
 
-The endpoint supports scraper filtering.
+Het endpoint ondersteunt filtering op scraper.
 
-Example:
+Voorbeeld:
 
 `/api/scheduler-monitor?scraper=SHELL&page=1`
 
-The API returns:
+De API returns:
 
 - pagination
 - summary
 - runs
 
-Pagination includes:
+Paginering omvat:
 
 - page
 - limit
 - totalRuns
 - totalPages
 
+Dealer price changes are intentionally outside scheduler historiek.
+
 ---
 
-# Scheduler Monitor Data Flow
+# Scheduler-monitor Data Flow
 
 Scheduler
-    |
-ScraperManager
-    |
-Scraper
-    |
-PersistenceEngine
-    |
-SchedulerRunRepository
-    |
-scheduler_runs
-    |
-Scheduler Monitor API
-    |
-React Scheduler Monitor
 
-The monitor reads actual scheduler execution history from the database
-rather than relying only on temporary runtime state.
+    |
+
+ScraperManager
+
+    |
+
+Scraper
+
+    |
+
+PersistenceEngine
+
+    |
+
+SchedulerRunRepository
+
+    |
+
+scheduler_runs
+
+    |
+
+Scheduler-monitor API
+
+    |
+
+React Scheduler-monitor
+
+The monitor reads actual scheduler uitvoering historiek from the database
+in plaats van alleen te vertrouwen op tijdelijke runtime-status.
 
 ---
 
-# Scheduler History
+# Schedulerhistoriek
 
-The scheduler history records complete production scraper executions.
+The scheduler historiek records complete production scraper uitvoerings.
 
-Example:
+Voorbeeld:
 
 SHELL
+
 stations: 200
-updated: 200
+
+bijgewerkt: 200
+
 status: SUCCESS
 
 DATS24
+
 stations: 147
-updated: 147
+
+bijgewerkt: 147
+
 status: SUCCESS
 
 MAES_NETWORK
+
 stations: 275
-updated: 275
+
+bijgewerkt: 275
+
 status: SUCCESS
 
-A successful execution is visible independently for every active
+A successful uitvoering is visible independently for every actieve
 source.
 
 ---
 
-# Scheduler Configuration
+# Schedulerconfiguratie
 
-The backend scheduler is initialized when the API server starts.
+De backend scheduler is initialized when the API server starts.
 
-Current production job:
+Huidig production job:
 
 `Fuel Scrapers`
 
@@ -1111,109 +1823,358 @@ Interval:
 
 `15 minutes`
 
-The job executes:
+De taak voert uit:
 
 - MAES_NETWORK
 - DATS24
 - SHELL
 
-The scheduler uses the same ScraperManager as manual and diagnostic
-executions.
+De scheduler gebruikt dezelfde ScraperManager als handmatige en diagnostische
+uitvoerings.
 
----
-
-# Data Flow
-
-Complete data flow:
-
-External Source
-      |
-Scraper
-      |
-Uniform Output
-      |
-ScraperManager
-      |
-Validator Framework
-      |
-PersistenceEngine
-      |
-StationRepository
-      |
-stations_v2
-      |
-StationSourceLinkRepository
-      |
-StationPriceResolver
-      |
-REST API
-      |
-Frontend
-
-Monitoring flow:
-
-Scheduler
-      |
-ScraperManager
-      |
-Scraper
-      |
-PersistenceEngine
-      |
-SchedulerRunRepository
-      |
-scheduler_runs
-      |
-Scheduler Monitor API
-      |
-React Scheduler Monitor
+Dealer overrides do not alter scraper scheduling.
 
 ---
 
 # REST API
 
-Current relevant endpoints include:
+Huidig relevant endpoints include:
 
 `/api/fuel-prices`
+
 `/api/stations`
+
 `/api/capabilities`
+
 `/api/health`
+
 `/api/metrics`
-`/api/validation`
+
+`/api/validatie`
+
 `/api/persistence`
+
 `/api/scheduler`
+
 `/api/scheduler-monitor`
 
-Authentication endpoints include:
+Toekomstig dealer endpoints should include a dedicated authenticated API
+laag krijgen, conceptueel:
+
+`/api/dealer/stations`
+
+`/api/dealer/stations/:stationId`
+
+`/api/dealer/prices`
+
+`/api/dealer/prices/:stationId`
+
+`/api/dealer/overrides`
+
+`/api/dealer/overrides/:id`
+
+`/api/dealer/verification`
+
+Dit zijn architectuurdoelen en betekenen niet dat alle endpoints
+al geïmplementeerd zijn.
+
+Authenticatie endpoints include:
 
 `/api/auth/register`
+
 `/api/auth/verify-email`
+
 `/api/auth/login`
+
 `/api/auth/forgot-password`
+
 `/api/auth/reset-password`
 
 ---
 
-# Frontend Architecture
+# Gedrag van de Publieke Prijs-API
 
-The frontend communicates with the backend through REST endpoints.
+The public station/price API should return the resolved price rather
+than blindly exposing the raw station price.
 
-Current frontend components include:
+Conceptueel:
+
+Raw brondata
+
+       |
+
+Bron resolution
+
+       |
+
+Dealer override check
+
+       |
+
+Resolved price
+
+       |
+
+Public API
+
+For each fuel type the API should be able to expose enough provenance
+for the frontend to distinguish:
+
+- Scraper price
+- Linked bronprijs
+- Dealer price
+- Dealer discount
+- Effective resolved price
+
+De frontend mag de logica voor prijsprioriteit niet zelf hoeven te reproduceren.
+
+De backend blijft de enige bron van waarheid voor prijsresolutie.
+
+---
+
+# Frontendarchitectuur
+
+De frontend communicates with the backend through REST endpoints.
+
+Huidig frontend components include:
 
 - Dashboard
 - Stations
 - Map
-- Authentication
-- Scheduler Monitor
+- Authenticatie
+- Scheduler-monitor
 
-The Scheduler Monitor consumes the scheduler monitor API and displays
-the execution history of the active scraper infrastructure.
+Toekomstig dealer components include:
+
+- Dealer Dashboard
+- My Stations
+- Station Price Management
+- Discount Management
+- Price History
+- Verification Status
+- Dealer Account
+
+Dealer pages must use authenticated backend APIs.
+
+Price-resolution rules must remain in the backend and must not be
+implemented independently in the frontend.
 
 ---
 
-# Scalability
+# Dealerworkflow
 
-Adding a new data source should require:
+The intended dealer workflow is:
+
+1. Dealer registers/logs in.
+2. Dealer requests access to een station te beheren.
+3. FuelAlert verifies the dealer/station relationship.
+4. Station becomes available in the dealer portal.
+5. Dealer opens the station price management page.
+6. Dealer enters prices and/or discounts.
+7. FuelAlert validates the values.
+8. Valid overrides become actieve.
+9. Public station prices immediately use the dealer override.
+10. Scrapers continue updating bronprijss in the background.
+11. Dealer override remains authoritative while actieve.
+12. Dealer removes or lets the override expire.
+13. FuelAlert automatically falls back to source-based resolutie.
+
+This workflow is deliberately independent of scraper uitvoering.
+
+---
+
+# Voorbeeld van Dealerprijs
+
+Bron data:
+
+MAES:
+
+- benzine95 = €1.700
+- diesel = €1.690
+
+Dealer:
+
+- diesel = €1.650
+- benzine95 = no override
+
+Resolved:
+
+- benzine95 = €1.700 from MAES
+- diesel = €1.650 from dealer
+
+De dealer has not replaced the MAES record. De dealer has aangemaakt a
+station/fuel-specific override.
+
+---
+
+# Dealeroverschrijving Lifecycle
+
+An override can have the following conceptual states:
+
+- Draft
+- Actief
+- Expired
+- Disabled
+- Rejected
+
+Only an authorized `Actief` override participates in public price
+resolutie.
+
+A future implementatie may add approval requirements for certain
+dealer accounts or unusual price changes.
+
+---
+
+# Dealerbeveiliging en Misbruikpreventie
+
+Because dealerprijss directly affect public information, dealer
+management must be treated as a privileged function.
+
+De architectuur moet ondersteunen:
+
+- Authenticatie
+- Authorization
+- Station verification
+- Input validatie
+- Audit logging
+- Rate limiting
+- Abuse detection
+- Override expiration
+- Administrator review
+- Ability to disable a dealer override
+- Ability to suspend dealer access
+
+Een dealer mag nooit een ander station kunnen wijzigen door simpelweg
+een station-ID in een verzoek te wijzigen.
+
+Autorisatie moet server-side worden afgedwongen.
+
+---
+
+# Architectuur voor Prijshistoriek
+
+Toekomstige prijshistoriek moet onderscheid maken tussen bronprijswijzigingen
+en wijzigingen van dealeroverschrijvingen.
+
+Een historisch record moet antwoord kunnen geven op:
+
+- What was the bronprijs?
+- What was the dealerprijs?
+- Was a dealer discount actieve?
+- What was the resolved public price?
+- When did the change occur?
+- Which source/dealer supplied the value?
+
+Zo voorkomen we dat dealerprijzen de historische brongegevens verbergen.
+
+---
+
+# Datakwaliteitsstrategie
+
+FuelAlert gaat er niet van uit dat alle externe brongegevens even
+betrouwbaar zijn.
+
+De architectuur therefore separates:
+
+- Bron collection
+- Validation
+- Persistence
+- Station linking
+- Dealer verification
+- Dealer price validatie
+- Price resolution
+- Presentation
+
+Hierdoor kan het platform de meest geschikte beschikbare bron gebruiken
+zonder de oorspronkelijke broninformatie te verliezen.
+
+---
+
+# Strategie voor Bronprioriteit
+
+FuelAlert distinguishes between:
+
+- Original brondata
+- Linked live brondata
+- Official brondata
+- Fallback data
+- Dealer override data
+
+The StationPriceResolver determines which price should be exposed to
+the application.
+
+The oorspronkelijke station record remains opgeslagen in `stations_v2`.
+
+Cross-source relationships are opgeslagen separately in
+`station_source_links`.
+
+Dealer relationships and dealer overrides are opgeslagen separately.
+
+The resolved price is a calculated application value rather than the
+replacement of the underlying brondata.
+
+---
+
+# Foutveilige Architectuur
+
+Een scraperfout mag het volledige scrapersysteem niet laten uitvallen.
+
+ScraperManager executes actieve scrapers independently.
+
+De architectuur uses `Promise.allSettled()` so one failing scraper does
+not automatically prevent other scrapers from completing.
+
+A failed scraper:
+
+- Is marked OFFLINE in HealthRegistry
+- Generates an error log
+- Produces a FAILED uitvoering summary
+- Creates a FAILED scheduler historiek record during normal uitvoering
+
+Andere succesvolle scrapers kunnen blijven werken.
+
+Dealeroverschrijvingen blijven onafhankelijk van de scraperuitvoering beschikbaar,
+zolang aan de geldigheids- en autorisatievereisten is voldaan.
+
+Dit betekent dat een tijdelijke scraperstoring niet automatisch een
+geldige dealerprijs uit het publieke resultaat verwijdert.
+
+---
+
+# Architectuur met Monitoring als Uitgangspunt
+
+Van elke productiescraper wordt operationele zichtbaarheid verwacht.
+
+De architectuur therefore tracks:
+
+- Execution status
+- Station count
+- Updated records
+- Inserted records
+- Skipped records
+- Duplicate records
+- Errors
+- Duration
+- Historical runs
+
+Dealer management introduces a separate operational layer that should
+eventually track:
+
+- Verification events
+- Price updates
+- Override activations
+- Override expirations
+- Disabled overrides
+- Dealer activity
+
+This keeps scraper monitoring and dealer activity auditable without
+ongerelateerde statistieken te vermengen.
+
+---
+
+# Schaalbaarheid
+
+Het toevoegen van een nieuwe gegevensbron moet vereisen:
 
 1. New scraper
 2. Registration
@@ -1226,76 +2187,85 @@ Adding a new data source should require:
 
 The existing architecture automatically provides:
 
-- Scraper execution
+- Scraper uitvoering
 - Persistence
 - Health monitoring
 - Metrics
-- Scheduler history
+- Scheduler historiek
 - Scheduler monitoring
 - Reporting
+- Price resolution
 
-A new source should not require a new persistence architecture.
+Een nieuwe bron mag geen nieuwe persistentiearchitectuur vereisen.
+
+Het toevoegen van dealerondersteuning mag evenmin vereisen dat elke
+afzonderlijke scraper wordt aangepast. Dealer functionality operates as a separate layer
+above source collection and below public price presentation.
 
 ---
 
-# Current Production Sources
+# Huidige Productiebronnen
 
-| Source | Status | Stations | Method |
-|---|---|---:|---|
-| MAES Network | Production Ready | 275 | Sitemap + HTML + embedded data |
-| DATS24 | Production Ready | 147 | HTML + embedded station data |
-| Shell | Production Ready | 200 | Official Shell station data + official price dataset |
+| Bron         | Status         | Stations | Methode                                                  |
+| ------------ | -------------- | -------: | -------------------------------------------------------- |
+| MAES Network | Productieklaar |      275 | Sitemap + HTML + embedded data                           |
+| DATS24       | Productieklaar |      147 | HTML + embedded stationgegevens                          |
+| Shell        | Productieklaar |      200 | Official Shell stationgegevens + officiële price dataset |
 
 The station counts represent the current scraper output and can change
 when source coverage changes.
 
 ---
 
-# Source Linking Status
+# Status van Bronkoppelingen
 
-Current cross-source linking:
+Huidige koppeling tussen bronnen:
 
-| Source A | Source B | Status | Matches |
-|---|---|---|---:|
-| MAES_NETWORK | SHELL | Active | 35 |
+| Bron A       | Bron B | Status | Koppelingen |
+| ------------ | ------ | ------ | ----------: |
+| MAES_NETWORK | SHELL  | Actief |          35 |
 
-The current Shell/MAES matching validation found:
+De huidige Shell/MAES-validatie heeft vastgesteld:
 
-- 200 official Shell stations
+- 200 officiële Shell stations
 - 78 MAES Shell stations
-- 35 verified geographic matches
-- 43 MAES Shell records without an official Shell match
+- 35 geverifieerde geographic matches
+- 43 MAES Shell records without an officiële Shell match
 
-Active links are stored in:
+Actief links are opgeslagen in:
 
 `station_source_links`
 
-The system also performs a uniqueness check to ensure that an official
-Shell station does not have multiple active MAES links.
+Het systeem voert ook een uniciteitscontrole uit om ervoor te zorgen dat een officieel
+Shell-station niet meerdere actieve MAES-koppelingen heeft.
 
 ---
 
-# Official Data Sources
+# Officiële Gegevensbronnen
 
-FuelAlert supports both scraper-based and official data integrations.
+FuelAlert supports both scraper-based and officiële data integrations.
 
-Current status:
+Huidig status:
 
-| Source | Status |
-|---|---|
-| MAES | Working |
-| DATS24 | Working |
-| Shell | Working |
-| ESSO | No official public API found |
-| Fuel Media Service | Contacted |
-| CARBU API | Commercial |
+| Bron               | Status                        |
+| ------------------ | ----------------------------- |
+| MAES               | Werkend                       |
+| DATS24             | Werkend                       |
+| Shell              | Werkend                       |
+| ESSO               | No officiële public API found |
+| Fuel Media Service | Gecontacteerd                 |
+| CARBU API          | Commercieel                   |
 
-Official APIs are preferred whenever they are available and suitable
-for the required data.
+Officiële API's krijgen voorrang wanneer ze beschikbaar en geschikt zijn
+voor de benodigde gegevens.
+
+Dealerprijsbeheer is aanvullend op bronverzameling. Het is
+niet bedoeld om het zoeken naar officiële API's of betrouwbare
+scrapers te vervangen.
 
 ---
 
-# Development Sources
+# Ontwikkelingsbronnen
 
 Potential or future sources include:
 
@@ -1304,139 +2274,88 @@ Potential or future sources include:
 - Esso
 - TotalEnergies
 - Fuel Media Service
+- Texaco
+- Additional station networks
 
-A source is not considered production-ready until:
+Een bron wordt pas als productieklaar beschouwd wanneer:
 
 1. Data collection works reliably
-2. Output passes validation
+2. Output passes validatie
 3. Persistence works correctly
-4. Duplicate behaviour is verified
-5. Scheduler execution works
+4. Duplicate behaviour is geverifieerde
+5. Scheduler uitvoering works
 6. Monitoring works
-7. Source-specific failure behaviour is tested
+7. Bron-specific failure behaviour is tested
 
 ---
 
-# Data Quality Strategy
+# Datakwaliteitsstrategie
 
-FuelAlert does not assume that all external source data is equally
-reliable.
+FuelAlert gaat er niet van uit dat alle externe brongegevens even
+betrouwbaar zijn.
 
-The architecture therefore separates:
+De architectuur therefore separates:
 
-- Source collection
+- Bron collection
 - Validation
 - Persistence
 - Station linking
 - Price resolution
+- Dealer verification
+- Dealer price validatie
 - Presentation
 
-This allows the platform to use the most appropriate available source
-without losing the original source information.
+Hierdoor kan het platform de meest geschikte beschikbare bron gebruiken
+zonder de oorspronkelijke broninformatie te verliezen.
 
 ---
 
-# Source Priority Strategy
+# Toekomstige Modules
 
-FuelAlert distinguishes between:
-
-- Original source data
-- Linked live source data
-- Official source data
-- Fallback data
-
-The StationPriceResolver determines which price should be exposed to
-the application.
-
-The original station record remains stored in `stations_v2`.
-
-Cross-source relationships are stored separately in
-`station_source_links`.
-
-This ensures that source data remains traceable.
-
----
-
-# Fail-Safe Architecture
-
-A scraper failure must not bring down the complete scraper system.
-
-ScraperManager executes active scrapers independently.
-
-The architecture uses `Promise.allSettled()` so one failing scraper does
-not automatically prevent other scrapers from completing.
-
-A failed scraper:
-
-- Is marked OFFLINE in HealthRegistry
-- Generates an error log
-- Produces a FAILED execution summary
-- Creates a FAILED scheduler history record during normal execution
-
-Other successful scrapers can continue operating.
-
----
-
-# Monitoring-First Architecture
-
-Every production scraper is expected to provide operational visibility.
-
-The architecture therefore tracks:
-
-- Execution status
-- Station count
-- Updated records
-- Inserted records
-- Skipped records
-- Duplicate records
-- Errors
-- Duration
-- Historical runs
-
-This allows failures and source degradation to be detected without
-manually inspecting scraper code.
-
----
-
-# Future Modules
-
-Planned additions:
+Geplande toevoegingen:
 
 - Verified Station Portal
+- Dealer Portal
+- Dealerprijsbeheer
+- Dealer Verification
 - Fleet Platform
 - Analytics Engine
 - Prediction Engine
 - AI-assisted Validation
 - Developer API
-- Premium Services
+- Premium Diensten
 - Notification Engine
 - Price History
 - Additional source linking
 - Advanced source prioritisation
+- Dealer audit system
 
 ---
 
-# Migration Strategy
+# Migratiestrategie
 
-FuelAlert is being migrated toward the V2 architecture.
+FuelAlert wordt gemigreerd naar de V2-architectuur.
 
 The V2 architecture uses:
 
 - `stations_v2`
 - ScraperManager
-- Validator Framework
+- Validatiekader
 - PersistenceEngine
 - Repository Pattern
 - Scheduler
 - SchedulerRunRepository
-- Scheduler Monitor
-- Station Source Links
+- Scheduler-monitor
+- Stationbronlinks
 - Station Price Resolver
 
-The old station/database architecture remains isolated until all
-required functionality has been migrated and validated.
+De dealerarchitectuur wordt als extra laag toegevoegd en zal
+niet vereisen dat de bronscrapers opnieuw worden geschreven.
 
-The old architecture must not be removed until:
+De oude station-/databasearchitectuur blijft geïsoleerd totdat alle
+vereiste functionaliteit is gemigreerd en gevalideerd.
+
+De oude architectuur mag niet worden verwijderd totdat:
 
 1. All required production scrapers operate on V2
 2. Station coverage has been validated
@@ -1448,21 +2367,82 @@ The old architecture must not be removed until:
 
 ---
 
-# Guiding Principle
+# Implementatievolgorde voor Dealerfunctionaliteit
+
+Dealer functionality should be implemented only after the station
+foundation is stable.
+
+Aanbevolen volgorde:
+
+1. Complete and validate station coverage
+2. Complete and validate all required scrapers
+3. Complete stationidentiteit and source linking
+4. Complete source-based prijsresolutie
+5. Implement dealer authentication/authorization
+6. Implement dealer-station verification
+7. Implement dealerprijs storage
+8. Implement dealerprijs validatie
+9. Implement dealerprijs override resolution
+10. Implement dealerprijs management frontend
+11. Implement dealer audit/historiek
+12. Add dealer monitoring and abuse controls
+13. Expose dealer provenance in the public API
+14. Test scraper/dealer interaction extensively
+
+This preserves the project priority that stationgegevens and station
+identity must first be reliable before higher-level functionality is
+introduced.
+
+---
+
+# Fundamentele Prijsregel
+
+The following rule is fundamental to FuelAlert:
+
+> **Scrapers provide the automatic bronprijs. A geverifieerde dealer can
+> provide a station-specific price or discount. When an actieve geverifieerde
+> dealer override exists, the dealer value takes precedence over the
+> scraper/source value for that station and fuel type.**
+
+De scraper continues running and its data remains opgeslagen.
+
+A scraper update must never silently overwrite an actieve dealer
+override.
+
+When the dealer override becomes inactieve, uitgeschakeld or vervallen, the
+system automatically returns to the normal source-based price
+resolution strategy.
+
+Deze regel geldt afzonderlijk voor elk brandstoftype.
+
+---
+
+# Leidende Principes
 
 FuelAlert is no longer developed as a collection of independent
-scrapers.
+scrapers te vervangen.
 
-FuelAlert is a modular DataSource Platform where every data source
+FuelAlert is a modular DataBron Platform where every data source
 integrates with the same architecture.
 
-Every architectural decision must improve:
+Het platform combines:
 
-- Reliability
-- Maintainability
-- Scalability
-- Extensibility
+- Automated source collection
+- Verified stationidentiteit
+- Cross-source station linking
+- Bron-based prijsresolutie
+- Verified dealerprijs management
+- Dealer-specific price overrides
+- Transparante prijsoorsprong
+- Continue monitoring
+
+Elke architectuurbeslissing moet bijdragen aan:
+
+- Betrouwbaarheid
+- Onderhoudbaarheid
+- Schaalbaarheid
+- Uitbreidbaarheid
 - Reusability
 - Traceability
-- Data quality
+- Datakwaliteit
 - Operational visibility
