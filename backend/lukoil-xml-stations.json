@@ -1,0 +1,1792 @@
+[
+  {
+    "storeId": "11561",
+    "location": "LUKOIL AARSCHOT",
+    "address": "Terheidelaan&#44; 71  AARSCHOT,   3200",
+    "latitude": "50.9921222",
+    "longitude": "4.8188007",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11591",
+    "location": "LUKOIL Anderlecht (Industriel)",
+    "address": "Boulevard Industriel&#44; 71  Brussel,   1070",
+    "latitude": "50.8225859",
+    "longitude": "4.3079713",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11581",
+    "location": "LUKOIL Anderlecht (Rue de Douvres)",
+    "address": "Rue de Douvres&#44; 114  Brussel,   1070",
+    "latitude": "50.8384965",
+    "longitude": "4.3125108",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11562",
+    "location": "LUKOIL ANGLEUR",
+    "address": "Rue d&#39;Ougrée&#44; 61  ANGLEUR,   4031",
+    "latitude": "50.6116017",
+    "longitude": "5.5845062",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11563",
+    "location": "LUKOIL ANTWERPEN",
+    "address": "Schijnpoort&#44; 22  ANTWERPEN,   2060",
+    "latitude": "51.227419",
+    "longitude": "4.4390459",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11564",
+    "location": "LUKOIL ASSE",
+    "address": "Nervierstraat&#44; 108  ASSE,   1730",
+    "latitude": "50.9182041",
+    "longitude": "4.1880862",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11565",
+    "location": "LUKOIL ASSEBROEK",
+    "address": "Baron Ruzettelaan&#44; 6  ASSEBROEK,   8310",
+    "latitude": "51.1981333",
+    "longitude": "3.2306491",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11566",
+    "location": "LUKOIL AUVELAIS",
+    "address": "Rue d&#39;Eghezée&#44; 1  AUVELAIS,   5060",
+    "latitude": "50.4517052",
+    "longitude": "4.6352455",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11567",
+    "location": "LUKOIL AYWAILLE",
+    "address": "Avenue de la Porallée&#44; 53  AYWAILLE,   4920",
+    "latitude": "50.4782276",
+    "longitude": "5.6957861",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11568",
+    "location": "LUKOIL BARVAUX-SUR-OURTHE",
+    "address": "Route de Marche&#44; 68  BARVAUX-SUR-OURTHE,   6940",
+    "latitude": "50.3443996",
+    "longitude": "5.4870039",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11569",
+    "location": "LUKOIL BELGRADE/NAMUR",
+    "address": "Avenue J. Abras&#44; 77  BELGRADE/NAMUR,   5001",
+    "latitude": "50.4724076",
+    "longitude": "4.8246316",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11570",
+    "location": "LUKOIL BERINGEN",
+    "address": "Paalsesteenweg 77  BERINGEN,   3580",
+    "latitude": "51.0457923",
+    "longitude": "5.2075426",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11571",
+    "location": "LUKOIL BIERGES",
+    "address": "Rue de Champles&#44; 32  BIERGES,   1301",
+    "latitude": "50.7200567",
+    "longitude": "4.5774965",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11572",
+    "location": "LUKOIL BORGERHOUT",
+    "address": "Hoek Gijsestraat / Statielei&#44; 177  BORGERHOUT,   2140",
+    "latitude": "51.2188875",
+    "longitude": "4.4444047",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11573",
+    "location": "LUKOIL BOUGE",
+    "address": "Leuvensesteenweg&#44; 171  BOUGE,   5004",
+    "latitude": "50.4719872",
+    "longitude": "4.8915392",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11574",
+    "location": "LUKOIL BRAINE L&#39;ALLEUD",
+    "address": "Chaussée de Tubize&#44; 58  BRAINE L&#39;ALLEUD,   1420",
+    "latitude": "50.6990985",
+    "longitude": "4.3589118",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11575",
+    "location": "LUKOIL BRAINE L&#39;ALLEUD",
+    "address": "Chaussée de Nivelles&#44; 9  BRAINE L&#39;ALLEUD,   1420",
+    "latitude": "50.6882109",
+    "longitude": "4.4060014",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11576",
+    "location": "LUKOIL BREENDONK(PUURS)",
+    "address": "Koning Leopoldlaan&#44; 13  BREENDONK(PUURS),   2870",
+    "latitude": "51.0392527",
+    "longitude": "4.3283597",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11592",
+    "location": "LUKOIL BUIZINGEN",
+    "address": "Alsembergeseteenweg&#44; 19  BUIZINGEN,   1501",
+    "latitude": "50.741419",
+    "longitude": "4.2500475",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11593",
+    "location": "LUKOIL CERFONTAINE",
+    "address": "Rue de la Gare&#44; 24  CERFONTAINE,   5630",
+    "latitude": "50.1709686",
+    "longitude": "4.4098149",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11594",
+    "location": "LUKOIL CHATELINEAU",
+    "address": "Rue de Gilly&#44; 106/126  CHATELINEAU,   6200",
+    "latitude": "50.4105786",
+    "longitude": "4.5121034",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11595",
+    "location": "LUKOIL CORBAIS",
+    "address": "Grand Route&#44; 36  CORBAIS,   1435",
+    "latitude": "50.6426809",
+    "longitude": "4.6473468",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11596",
+    "location": "LUKOIL COUVIN",
+    "address": "Rue du Pont du Roy&#44; 14  COUVIN,   5660",
+    "latitude": "50.0418879",
+    "longitude": "4.5010169",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11597",
+    "location": "LUKOIL DEURNE",
+    "address": "Bisschoppenhoflaan&#44; 315  DEURNE,   2100",
+    "latitude": "51.2337311",
+    "longitude": "4.462635",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11598",
+    "location": "LUKOIL DIEst (Webbekom)",
+    "address": "Halensebaan&#44; 121  Diest (Webbekom),   3290",
+    "latitude": "50.9688483",
+    "longitude": "5.0744777",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11738",
+    "location": "LUKOIL DILBEEK",
+    "address": "Ninoofsesteenweg&#44; 11  DILBEEK,   1700",
+    "latitude": "50.8458793",
+    "longitude": "4.2831439",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11599",
+    "location": "LUKOIL DINANT",
+    "address": "Chaussée d&#39;Yvoir&#44; 1  DINANT,   5500",
+    "latitude": "50.2701089",
+    "longitude": "4.9044752",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11600",
+    "location": "LUKOIL DISON",
+    "address": "Rue Trauty&#44; 27  DISON,   4820",
+    "latitude": "50.6079095",
+    "longitude": "5.8555269",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11717",
+    "location": "LUKOIL Doornik",
+    "address": "Chaussée de Brussel&#44; 149 A  Doornik,   8820",
+    "latitude": "50.8476424",
+    "longitude": "4.3571696",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11601",
+    "location": "LUKOIL DWORP",
+    "address": "Steenweg op Alsemberg&#44; 744  DWORP,   1653",
+    "latitude": "50.7792263",
+    "longitude": "4.3256807",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11602",
+    "location": "LUKOIL EDEGEM",
+    "address": "Kontichstraat-Boniverlei&#44; 206  EDEGEM,   2650",
+    "latitude": "51.1475391",
+    "longitude": "4.4486871",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11603",
+    "location": "LUKOIL EEKLO",
+    "address": "Gentsesteenweg&#44; 73  EEKLO,   9900",
+    "latitude": "51.1756474",
+    "longitude": "3.580663",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11604",
+    "location": "LUKOIL EKEREN",
+    "address": "Ekersestweg 4/Hoek F. Verbieststr.  EKEREN,   2030",
+    "latitude": "51.2718412",
+    "longitude": "4.4171158",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11605",
+    "location": "LUKOIL EKEREN",
+    "address": "Leugenberg&#44; 159-163  EKEREN,   2180",
+    "latitude": "51.2984862",
+    "longitude": "4.4109174",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11606",
+    "location": "LUKOIL EKEREN (Mariaburg)",
+    "address": "Kapellesteenweg&#44; 527  EKEREN (Mariaburg),   2180",
+    "latitude": "51.3745257",
+    "longitude": "4.4724095",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11607",
+    "location": "LUKOIL ENSIVAL",
+    "address": "Route de Pépinster&#44; 98  ENSIVAL,   4800",
+    "latitude": "50.5780362",
+    "longitude": "5.8373265",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11608",
+    "location": "LUKOIL ERPE-MERE",
+    "address": "Oudenaardsesteenweg&#44; 419  ERPE-MERE,   9420",
+    "latitude": "50.9241943",
+    "longitude": "3.9516692",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11587",
+    "location": "LUKOIL Etterbeek",
+    "address": "Rue Gray&#44; 69  Brussel,   1040",
+    "latitude": "50.8347106",
+    "longitude": "4.3794635",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11579",
+    "location": "LUKOIL Evere",
+    "address": "Chaussée de Louvain&#44; 1024  Brussel,   1140",
+    "latitude": "50.8602669",
+    "longitude": "4.4202708",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11582",
+    "location": "LUKOIL Evere (Brits Tweedelegerlaan)",
+    "address": "Brits Tweedelegerlaan 15  Brussel,   1190",
+    "latitude": "50.8200796",
+    "longitude": "4.324581",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11609",
+    "location": "LUKOIL EXPRESS HANNUT",
+    "address": "Rue de Landen 53  Hannut,   4280",
+    "latitude": "50.6799886",
+    "longitude": "5.0817914",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11610",
+    "location": "LUKOIL EXPRESS HASSELT",
+    "address": "st-Truidersteenweg 335  Hasselt,   3500",
+    "latitude": "50.9134978",
+    "longitude": "5.3224322",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11611",
+    "location": "LUKOIL EXPRESS HECHTEL",
+    "address": "Peerderbaan 1  Hechtel,   3940",
+    "latitude": "51.125471",
+    "longitude": "5.3687754",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11612",
+    "location": "LUKOIL EXPRESS KERMT",
+    "address": "Diestersteenweg 238  Kermt,   3510",
+    "latitude": "50.9478571",
+    "longitude": "5.2490205",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11613",
+    "location": "LUKOIL EXPRESS LOMMEL",
+    "address": "Luikersteenweg 313  Lommel,   3920",
+    "latitude": "51.242495",
+    "longitude": "5.3798142",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11614",
+    "location": "LUKOIL EXPRESS METTET",
+    "address": "Rue du Try Joly 2  Mettet,   5640",
+    "latitude": "50.3289879",
+    "longitude": "4.654001",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11615",
+    "location": "LUKOIL EXPRESS NIJLEN",
+    "address": "Bouwelsesteenweg&#44;107   NIJLEN,   2560",
+    "latitude": "51.1651236",
+    "longitude": "4.6831157",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11616",
+    "location": "LUKOIL EXPRESS OPOETEREN",
+    "address": "Zandstraat 10  Opoeteren,   3680",
+    "latitude": "51.067296",
+    "longitude": "5.6592514",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11617",
+    "location": "LUKOIL EXPRESS QUIÉVRAIN",
+    "address": "Rue de Mons 253  Quiévrain,   7380",
+    "latitude": "50.4129759",
+    "longitude": "3.7137412",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11618",
+    "location": "LUKOIL EXPRESS REKEM",
+    "address": "steenweg 287  Rekem,   3621",
+    "latitude": "50.930715",
+    "longitude": "5.6885912",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11619",
+    "location": "LUKOIL EXPRESS WATERSCHEI",
+    "address": "Weg naar As 290  Waterschei,   3600",
+    "latitude": "50.9806533",
+    "longitude": "5.5315665",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11620",
+    "location": "LUKOIL EXPRESS WINTERSLAG",
+    "address": "Vennestraat 32  Winterslag,   3600",
+    "latitude": "50.9830022",
+    "longitude": "5.4956624",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11621",
+    "location": "LUKOIL EXPRESS ZONHOVEN",
+    "address": "Molenweg 95  Zonhoven,   3520",
+    "latitude": "50.9868217",
+    "longitude": "5.4134485",
+    "productsServices": "LUKOIL EXPRESS",
+    "lukoil": "",
+    "lukoil_express": "true"
+  },
+  {
+    "storeId": "11622",
+    "location": "LUKOIL FONTAINE L&#39;EVEQUE",
+    "address": "Route de Mons&#44; 22  FONTAINE L&#39;EVEQUE,   6140",
+    "latitude": "50.4072095",
+    "longitude": "4.3235177",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11623",
+    "location": "LUKOIL GEEL",
+    "address": "Antwerpseweg&#44; 130  GEEL,   2440",
+    "latitude": "51.141914",
+    "longitude": "4.9469924",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11624",
+    "location": "LUKOIL GEMBLOUX",
+    "address": "Chaussée de Charleroi&#44; 247  GEMBLOUX,   5030",
+    "latitude": "50.5517023",
+    "longitude": "4.6669265",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11625",
+    "location": "LUKOIL GENK",
+    "address": "Hasseltweg&#44; 12-14  GENK,   3600",
+    "latitude": "50.9653088",
+    "longitude": "5.476574",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11626",
+    "location": "LUKOIL GENT",
+    "address": "Vlaamsekaai&#44; 106  GENT,   9000",
+    "latitude": "51.0455975",
+    "longitude": "3.7437666",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11627",
+    "location": "LUKOIL GENT",
+    "address": "Nieuve Vaart&#44;152  GENT,   9000",
+    "latitude": "51.0668272",
+    "longitude": "3.7137666",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11264",
+    "location": "LUKOIL GENTBRUGGE",
+    "address": "Brusselsesteenweg&#44; 679  Gent,   9000",
+    "latitude": "51.0307339",
+    "longitude": "3.763613",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11628",
+    "location": "LUKOIL GOSSELIES",
+    "address": "Place des Combattants&#44; 19  GOSSELIES,   9050",
+    "latitude": "50.4647583",
+    "longitude": "4.4318346",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11629",
+    "location": "LUKOIL GOSSELIES",
+    "address": "Chaussée de Courcelles&#44; 222  GOSSELIES,   6041",
+    "latitude": "50.4627378",
+    "longitude": "4.4121665",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11630",
+    "location": "LUKOIL GREMBERGEN/DENDERMONDE",
+    "address": "Martelarenlaan&#44; 36  GREMBERGEN/DENDERMONDE,   6041",
+    "latitude": "51.0382209",
+    "longitude": "4.1025875",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11631",
+    "location": "LUKOIL GROOT-BIJGAARDEN",
+    "address": "Brusselstraat&#44; 12 A  GROOT-BIJGAARDEN,   9200",
+    "latitude": "50.86743",
+    "longitude": "4.2794133",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11632",
+    "location": "LUKOIL HAINE Saint-PAUL",
+    "address": "Rue de la Déportation&#44; 53  HAINE Sint. PAUL,   1702",
+    "latitude": "50.4640516",
+    "longitude": "4.1997922",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11633",
+    "location": "LUKOIL HALLE",
+    "address": "August Demaeghtlaan 195  HALLE,   7100",
+    "latitude": "50.7351274",
+    "longitude": "4.2304077",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11634",
+    "location": "LUKOIL HARELBEKE",
+    "address": "Kortrijksesteenweg&#44; 197  HARELBEKE,   1500",
+    "latitude": "50.8472098",
+    "longitude": "3.2983469",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11590",
+    "location": "LUKOIL Haren",
+    "address": "Chaussée de Haacht&#44; 1463  Brussel,   1130",
+    "latitude": "50.8862124",
+    "longitude": "4.4225626",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11635",
+    "location": "LUKOIL HASSELT",
+    "address": "Luikersteenweg&#44; 119  HASSELT,   8530",
+    "latitude": "50.9226829",
+    "longitude": "5.3402844",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11636",
+    "location": "LUKOIL HEFFEN",
+    "address": "steenweg op Blaasveld&#44; 87  HEFFEN,   3500",
+    "latitude": "51.04705",
+    "longitude": "4.4034158",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11637",
+    "location": "LUKOIL HERENT",
+    "address": "Omleiding&#44; 5  HERENT,   2801",
+    "latitude": "50.9010702",
+    "longitude": "4.6793995",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11638",
+    "location": "LUKOIL HERENTALS",
+    "address": "Aarschotseweg&#44; 22/2  HERENTALS,   3020",
+    "latitude": "51.165916",
+    "longitude": "4.846393",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11639",
+    "location": "LUKOIL HERstAL",
+    "address": "Boulevard Zénobe Gramme&#44; 51  Herstal,   2200",
+    "latitude": "50.6653068",
+    "longitude": "5.6361746",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11640",
+    "location": "LUKOIL HEUSDEN ZOLDER",
+    "address": "Meylandtlaan 169&#44;  HEUSDEN ZOLDER,   4040",
+    "latitude": "51.0128269",
+    "longitude": "5.2949057",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11641",
+    "location": "LUKOIL HOESELT",
+    "address": "Bilzersteenweg&#44; 53 A  HOESELT,   3550",
+    "latitude": "50.8562141",
+    "longitude": "5.4977335",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11642",
+    "location": "LUKOIL HOUTHALEN",
+    "address": "Grote Baan&#44; 5  HOUTHALEN,   3730",
+    "latitude": "51.0237821",
+    "longitude": "5.3743823",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11643",
+    "location": "LUKOIL IEPER",
+    "address": "Meenseweg&#44; 220  IEPER,   3530",
+    "latitude": "50.848949",
+    "longitude": "2.9124862",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11644",
+    "location": "LUKOIL IZEGEM",
+    "address": "Lodewijk de Raetlaan&#44; 1  IZEGEM,   8900",
+    "latitude": "50.9315104",
+    "longitude": "3.186184",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11645",
+    "location": "LUKOIL JAMBES",
+    "address": "Avenue Prince de Liège&#44; 48  JAMBES,   8870",
+    "latitude": "50.4621755",
+    "longitude": "4.8801677",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11646",
+    "location": "LUKOIL JAMBES",
+    "address": "Chaussée de Liège&#44; 561  JAMBES,   5100",
+    "latitude": "50.4641251",
+    "longitude": "4.9017212",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11647",
+    "location": "LUKOIL JEMEPPE-SUR-MEUSE",
+    "address": "Rue Sualem&#44; 2 B  JEMEPPE-SUR-MEUSE,   5100",
+    "latitude": "50.617187",
+    "longitude": "5.4986767",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11583",
+    "location": "LUKOIL Jette",
+    "address": "de Smet de Naeyerlaan 293  Brussel,   1090",
+    "latitude": "50.8789056",
+    "longitude": "4.3331463",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11589",
+    "location": "LUKOIL Jette (Exposition)",
+    "address": "Avenue de l&#39;Exposition&#44; 339  Brussel,   1090",
+    "latitude": "50.8747739",
+    "longitude": "4.3314996",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11648",
+    "location": "LUKOIL JUMET",
+    "address": "Chaussée de Brussel&#44; 415  JUMET,   4101",
+    "latitude": "50.8476424",
+    "longitude": "4.3571696",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11649",
+    "location": "LUKOIL KAGGEVINNE",
+    "address": "steenweg op Leuven&#44; 311  KAGGEVINNE,   6040",
+    "latitude": "50.97937",
+    "longitude": "5.01896",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11650",
+    "location": "LUKOIL KAMPENHOUT",
+    "address": "Haachtsesteenweg&#44; 701  KAMPENHOUT,   3293",
+    "latitude": "50.960707",
+    "longitude": "4.6000161",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11651",
+    "location": "LUKOIL KESSEL-LO",
+    "address": "steenweg op Diest&#44; 718  KESSEL-LO,   1910",
+    "latitude": "50.88514",
+    "longitude": "4.73571",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11652",
+    "location": "LUKOIL KESSEL-LO",
+    "address": "Tiensesteenweg&#44; 235  KESSEL-LO,   3010",
+    "latitude": "50.8710959",
+    "longitude": "4.7263416",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11653",
+    "location": "LUKOIL KETTENIS",
+    "address": "Route de Herbestal&#44; 317  KETTENIS,   3010",
+    "latitude": "50.6404887",
+    "longitude": "6.0143817",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11654",
+    "location": "LUKOIL KINROOI",
+    "address": "Venlosesteenweg&#44; 373  KINROOI,   4701",
+    "latitude": "51.1531541",
+    "longitude": "5.8112363",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11655",
+    "location": "LUKOIL KNOKKE (Heist 1)",
+    "address": "Natienlaan&#44; 116  KNOKKE (Heist 1),   3640",
+    "latitude": "51.333192",
+    "longitude": "3.2911804",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11656",
+    "location": "LUKOIL KONTICH",
+    "address": "Koningin Astridlaan&#44; 36  KONTICH,   8300",
+    "latitude": "51.1288999",
+    "longitude": "4.4549053",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11657",
+    "location": "LUKOIL KURINGEN",
+    "address": "Kuringersteenweg&#44; 319  KURINGEN,   2550",
+    "latitude": "50.9387788",
+    "longitude": "5.3112266",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11658",
+    "location": "LUKOIL KUURNE",
+    "address": "Brugsesteenweg&#44; 204  KUURNE,   3511",
+    "latitude": "50.8580361",
+    "longitude": "3.2705993",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11659",
+    "location": "LUKOIL LA HULPE",
+    "address": "Rue Brodcoorens&#44; 56  LA HULPE,   8520",
+    "latitude": "50.7271483",
+    "longitude": "4.4849057",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11660",
+    "location": "LUKOIL LA LOUVIERE",
+    "address": "Rue du Bosquet&#44; 5-7  LA LOUVIERE,   1310",
+    "latitude": "50.4753144",
+    "longitude": "4.1813277",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11661",
+    "location": "LUKOIL LANAKEN",
+    "address": "Koning Albertlaan&#44; 227  LANAKEN,   7100",
+    "latitude": "50.8954582",
+    "longitude": "5.6661918",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11662",
+    "location": "LUKOIL LASNE",
+    "address": "Chaussée de Louvain&#44; 431  LASNE,   3620",
+    "latitude": "50.7050461",
+    "longitude": "4.4320177",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11663",
+    "location": "LUKOIL LIEGE",
+    "address": "Rue des Vennes&#44; 347  LIEGE,   1380",
+    "latitude": "50.6189452",
+    "longitude": "5.5957491",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11664",
+    "location": "LUKOIL LIER",
+    "address": "steenweg op Aarschot&#44; 79  LIER,   4020",
+    "latitude": "51.133455",
+    "longitude": "4.5675409",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11665",
+    "location": "LUKOIL LODELINSART",
+    "address": "Chaussée de Châtelet&#44; 183  LODELINSART,   2500",
+    "latitude": "50.4296141",
+    "longitude": "4.4488513",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11666",
+    "location": "LUKOIL LOKEREN",
+    "address": "Bergendriesstraat&#44; 75  LOKEREN,   6042",
+    "latitude": "51.112166",
+    "longitude": "3.986851",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11667",
+    "location": "LUKOIL LONDERZEEL",
+    "address": "Kerkhofstraat&#44; 75  LONDERZEEL,   9160",
+    "latitude": "51.0010482",
+    "longitude": "4.3091698",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11668",
+    "location": "LUKOIL MAASMECHELEN",
+    "address": "Rijksweg&#44; 603  MAASMECHELEN,   1840",
+    "latitude": "50.9393443",
+    "longitude": "5.6922242",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11669",
+    "location": "LUKOIL MALMEDY",
+    "address": "Avenue des Alliés&#44; 80  MALMEDY,   3630",
+    "latitude": "50.4235118",
+    "longitude": "6.0177967",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11670",
+    "location": "LUKOIL MARCINELLE",
+    "address": "Avenue Mascaux&#44; 298/314  MARCINELLE,   4960",
+    "latitude": "50.3918993",
+    "longitude": "4.43837",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11671",
+    "location": "LUKOIL MECHELEN",
+    "address": "Antwerpsesteenweg 197&#44;  MECHELEN,   6001",
+    "latitude": "51.0527204",
+    "longitude": "4.4645347",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11672",
+    "location": "LUKOIL MEERBEKE",
+    "address": "Brusselsesteenweg&#44; 252  MEERBEKE,   2800",
+    "latitude": "51.0208132",
+    "longitude": "4.4737954",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11673",
+    "location": "LUKOIL MELSBROEK",
+    "address": "Haachtsesteenweg&#44; 146  MELSBROEK,   9402",
+    "latitude": "50.913647",
+    "longitude": "4.487205",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11674",
+    "location": "LUKOIL MELSELE",
+    "address": "Grote Baan Antwerpen&#44; 31  MELSELE,   1820",
+    "latitude": "51.2208271",
+    "longitude": "4.3000867",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11675",
+    "location": "LUKOIL MERKSEM",
+    "address": "Groenendaallaan&#44; 170  MERKSEM,   9120",
+    "latitude": "51.2437906",
+    "longitude": "4.4298066",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11676",
+    "location": "LUKOIL MONS",
+    "address": "Chaussée de Brussel&#44; 102-114  MONS,   2170",
+    "latitude": "50.8476424",
+    "longitude": "4.3571696",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11677",
+    "location": "LUKOIL MONS",
+    "address": "Chaussée de Binche&#44; 20-22  MONS,   7000",
+    "latitude": "50.4524968",
+    "longitude": "3.9707464",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11678",
+    "location": "LUKOIL MUIZEN",
+    "address": "Leuvensesteenweg&#44; 240  MUIZEN,   7000",
+    "latitude": "51.0136327",
+    "longitude": "4.5018252",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11679",
+    "location": "LUKOIL NANINNE",
+    "address": "Chaussée de Marche&#44; 886  NANINNE,   2812",
+    "latitude": "50.4201844",
+    "longitude": "4.9383737",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11680",
+    "location": "LUKOIL NECHIN",
+    "address": "Rue de la Festingue&#44; 36C  NECHIN,   5100",
+    "latitude": "50.6573528",
+    "longitude": "3.2417686",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11681",
+    "location": "LUKOIL NEUVILLE",
+    "address": "Route de Mariambourg&#44; 39  NEUVILLE,   7730",
+    "latitude": "50.1557966",
+    "longitude": "4.5077298",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11682",
+    "location": "LUKOIL NIVELLES",
+    "address": "Ch. de Mons 4/6  NIVELLES,   5600",
+    "latitude": "50.5901186",
+    "longitude": "4.3136014",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11683",
+    "location": "LUKOIL OHAIN",
+    "address": "Route de Genval  OHAIN,   1400",
+    "latitude": "50.708587",
+    "longitude": "4.4775445",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11684",
+    "location": "LUKOIL OLLIGNIES",
+    "address": "Chaussée Victor Lampe&#44; 186  OLLIGNIES,   1380",
+    "latitude": "50.6724558",
+    "longitude": "3.8680403",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11685",
+    "location": "LUKOIL OOstENDE (Raversijde)",
+    "address": "Nieuwpoortsesteenweg&#44; 540  OostENDE (Raversijde),   7866",
+    "latitude": "51.205761",
+    "longitude": "2.8665858",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11686",
+    "location": "LUKOIL OTTIGNIES",
+    "address": "Avenue Provinciale&#44; 90  OTTIGNIES,   8400",
+    "latitude": "50.656628",
+    "longitude": "4.5627447",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11688",
+    "location": "LUKOIL OUD-TURNHOUT",
+    "address": "steenweg op Turnhout&#44; 153  OUD-TURNHOUT,   9700",
+    "latitude": "51.3208545",
+    "longitude": "4.9692802",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11687",
+    "location": "LUKOIL OUDENAARDE",
+    "address": "Deinzestraat&#44; 163  OUDENAARDE,   1340",
+    "latitude": "50.8600174",
+    "longitude": "3.5795314",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11584",
+    "location": "LUKOIL Oudergem",
+    "address": "Vorstlaan 91  Brussel,   1160",
+    "latitude": "50.813434",
+    "longitude": "4.4272364",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11585",
+    "location": "LUKOIL Oudergem (Triomphe)",
+    "address": "Boulevard du Triomphe&#44; 166  Brussel,   1160",
+    "latitude": "50.8189435",
+    "longitude": "4.403568",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11689",
+    "location": "LUKOIL OVERIJSE (JEZUS-EIK)",
+    "address": "Brusselsesteenweg&#44; 482  OVERIJSE (JEZUS-EIK),   2360",
+    "latitude": "50.7886091",
+    "longitude": "4.4946339",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11690",
+    "location": "LUKOIL OVERIJSE (MALAISE)",
+    "address": "Terhulpensteenweg&#44; 391  OVERIJSE (MALAISE),   3090",
+    "latitude": "50.7515398",
+    "longitude": "4.52393",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11691",
+    "location": "LUKOIL RANSART",
+    "address": "Rue Eau-Sur-Elle&#44; 2  RANSART,   3090",
+    "latitude": "50.4552347",
+    "longitude": "4.4647108",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11692",
+    "location": "LUKOIL RETINNE",
+    "address": "Rue de la Clef&#44; 73  RETINNE,   6043",
+    "latitude": "50.6193127",
+    "longitude": "5.6969191",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11694",
+    "location": "LUKOIL ROESELARE",
+    "address": "Westlaan 217  ROESELARE,   1640",
+    "latitude": "50.9428477",
+    "longitude": "3.1136115",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11695",
+    "location": "LUKOIL RONSE",
+    "address": "Leuzesteenweg&#44; 1  RONSE,   8800",
+    "latitude": "50.7361112",
+    "longitude": "3.5894358",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11696",
+    "location": "LUKOIL RUMES",
+    "address": "Ch. Montgomery 120  RUMES,   9600",
+    "latitude": "50.5311519",
+    "longitude": "3.2874302",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11697",
+    "location": "LUKOIL RUMst",
+    "address": "Bussestraat&#44; 13  Rumst,   7611",
+    "latitude": "51.0855218",
+    "longitude": "4.448809",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11698",
+    "location": "LUKOIL SCHAFFEN",
+    "address": "Schoonaerde&#44; 70  SCHAFFEN,   2840",
+    "latitude": "51.0035338",
+    "longitude": "4.0151259",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11699",
+    "location": "LUKOIL SCHILDE",
+    "address": "Turnhoutsebaan&#44; 478  SCHILDE,   3290",
+    "latitude": "51.2469442",
+    "longitude": "4.5993232",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11700",
+    "location": "LUKOIL SERAING",
+    "address": "Rue du Charbonnage 18  SERAING,   2970",
+    "latitude": "50.6058902",
+    "longitude": "5.5167609",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11701",
+    "location": "LUKOIL SERAING",
+    "address": "Rue du Many&#44; 111  SERAING,   4100",
+    "latitude": "50.6027096",
+    "longitude": "5.4926451",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11586",
+    "location": "LUKOIL Sint-Agatha-Berchem",
+    "address": "Keizer Karellaan 480  Brussel,   1082",
+    "latitude": "50.8713359",
+    "longitude": "4.2944091",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11703",
+    "location": "LUKOIL Sint-AMANDSBERG",
+    "address": "Antwerpsesteenweg&#44; 758  Sint. AMANDSBERG,   7060",
+    "latitude": "51.0669227",
+    "longitude": "3.7593903",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11704",
+    "location": "LUKOIL Sint-ANDRIES/BRUGGE",
+    "address": "Gistelsteenweg&#44; 168  Sint. ANDRIES/BRUGGE,   9040",
+    "latitude": "51.2016137",
+    "longitude": "3.2008269",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11705",
+    "location": "LUKOIL Sint-DENIJS-WestREM",
+    "address": "Kortrijksesteenweg&#44; 1054  Sint. DENIJS-WestREM,   8200",
+    "latitude": "51.0218203",
+    "longitude": "3.6921696",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11706",
+    "location": "LUKOIL Sint-DENIJS-WestREM",
+    "address": "Beukenlaan&#44; 86  Sint. DENIJS-WestREM,   9051",
+    "latitude": "51.0318966",
+    "longitude": "3.6849667",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11710",
+    "location": "LUKOIL Sint-GENESIUS RODE",
+    "address": "Zoniënwoudlaan&#44; 140  Sint-GENESIUS RODE,   1600",
+    "latitude": "50.7452317",
+    "longitude": "4.3541218",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11693",
+    "location": "LUKOIL Sint-Genesius-Rode",
+    "address": "Chaussée de Waterloo&#44; 240  RHODE Sint. GENESE,   4621",
+    "latitude": "50.7420353",
+    "longitude": "4.3943418",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11577",
+    "location": "LUKOIL Sint-Gillis",
+    "address": "Waterloosesteenweg 378  Brussel,   1060",
+    "latitude": "50.8235215",
+    "longitude": "4.3524433",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11730",
+    "location": "LUKOIL Sint-Lambrechts-Woluwe",
+    "address": "Rue Montagne des Cerisiers&#44; 7  Sint-Lambrechts-Woluwe,   3012",
+    "latitude": "50.8443604",
+    "longitude": "4.4195477",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11707",
+    "location": "LUKOIL Sint-NIKLAAS",
+    "address": "Kleibeekstraat&#44; 1  Sint. NIKLAAS,   9051",
+    "latitude": "51.1731182",
+    "longitude": "4.1247574",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11731",
+    "location": "LUKOIL Sint-Pieters-Woluwe",
+    "address": "Avenue de Wezembeek&#44; 20  Sint-Pieters Woluwe,   1200",
+    "latitude": "50.848803",
+    "longitude": "4.4622046",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11708",
+    "location": "LUKOIL Sint-TRUIDEN (MELVEREN)",
+    "address": "Hasseltsesteenweg&#44; 65  Sint. TRUIDEN (MELVEREN),   9100",
+    "latitude": "50.8281109",
+    "longitude": "5.2015545",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11709",
+    "location": "LUKOIL Sint.-PIETERS LEEUW",
+    "address": "steenweg op Bergen&#44; 368  Sint.-PIETERS LEEUW,   3800",
+    "latitude": "50.780993",
+    "longitude": "4.245613",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11702",
+    "location": "LUKOIL SOIGNIES",
+    "address": "Boulevard Roosevelt&#44; 41  SOIGNIES,   4100",
+    "latitude": "50.5796898",
+    "longitude": "4.0670574",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11711",
+    "location": "LUKOIL STROMBEEK-BEVER",
+    "address": "Sint Annalaan&#44; 275  Strombeek-BEVER,   1640",
+    "latitude": "50.9139734",
+    "longitude": "4.3672107",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11712",
+    "location": "LUKOIL TEMSE",
+    "address": "Krijgsbaan&#44; 170  TEMSE,   1853",
+    "latitude": "51.128986",
+    "longitude": "4.232707",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11713",
+    "location": "LUKOIL TERNAT",
+    "address": "Assesteenweg&#44; 113  TERNAT,   9140",
+    "latitude": "50.8776008",
+    "longitude": "4.1647399",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11714",
+    "location": "LUKOIL TERTRE",
+    "address": "Rue de la Rivièrette&#44; 13  TERTRE,   1740",
+    "latitude": "50.4617067",
+    "longitude": "3.8112223",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11715",
+    "location": "LUKOIL TERVUREN",
+    "address": "Leuvensesteenweg&#44; 81  TERVUREN,   7333",
+    "latitude": "50.8380719",
+    "longitude": "4.5426913",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11716",
+    "location": "LUKOIL TORHOUT",
+    "address": "Vredelaan&#44; 76  TORHOUT,   3080",
+    "latitude": "51.0605505",
+    "longitude": "3.0956814",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11580",
+    "location": "LUKOIL Ukkel",
+    "address": "Dieweg/Avenue Wolvendael 130  Brussel,   1180",
+    "latitude": "50.7969399",
+    "longitude": "4.3456313",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11588",
+    "location": "LUKOIL Ukkel (Rue Stalle)",
+    "address": "Rue de Stalle/Rue du Roetaert&#44; 3  Brussel,   1180",
+    "latitude": "50.7964807",
+    "longitude": "4.3277653",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11718",
+    "location": "LUKOIL VERVIERS",
+    "address": "Avenue Reine Astrid 103&#44;  VERVIERS,   7520",
+    "latitude": "50.5845541",
+    "longitude": "5.88399",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11719",
+    "location": "LUKOIL VILVOORDE",
+    "address": "Mechelsesteenweg 271  VILVOORDE,   4802",
+    "latitude": "50.942135",
+    "longitude": "4.437905",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11720",
+    "location": "LUKOIL VISE",
+    "address": "Rue de Jupille&#44; 15 B  VISE,   1800",
+    "latitude": "50.7310983",
+    "longitude": "5.696041",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11578",
+    "location": "LUKOIL Vorst",
+    "address": "Chaussée de Neerstalle&#44; 208  Brussel,   1190",
+    "latitude": "50.8041536",
+    "longitude": "4.3142153",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11721",
+    "location": "LUKOIL WAREMME",
+    "address": "Rue Saint-Eloi&#44; 2A  WAREMME,   4600",
+    "latitude": "50.6965878",
+    "longitude": "5.2646593",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11722",
+    "location": "LUKOIL WASMUEL",
+    "address": "Route de Mons&#44; 81  WASMUEL,   4300",
+    "latitude": "50.4408473",
+    "longitude": "3.8466575",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11723",
+    "location": "LUKOIL WATERMAEL/BOITSFORT",
+    "address": "Av. Foresterie/Heiligenborre  WATERMAEL/BOITSFORT,   7390",
+    "latitude": "50.789658",
+    "longitude": "4.42045",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11724",
+    "location": "LUKOIL WAVRE",
+    "address": "Chaussée de Louvain&#44;199  WAVRE,   1170",
+    "latitude": "50.7171874",
+    "longitude": "4.6224334",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11725",
+    "location": "LUKOIL WAVRE",
+    "address": "Ch. de Namur 155  WAVRE,   1300",
+    "latitude": "50.6967313",
+    "longitude": "4.6148609",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11726",
+    "location": "LUKOIL WEZEMBEEK-OPPEM",
+    "address": "Mechelsesteenweg&#44; 254  WEZEMBEEK-OPPEM,   1300",
+    "latitude": "50.8368093",
+    "longitude": "4.4897463",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11727",
+    "location": "LUKOIL WILRIJK",
+    "address": "Boomsesteenweg&#44; 54  WILRIJK,   1970",
+    "latitude": "51.1796756",
+    "longitude": "4.3889224",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11728",
+    "location": "LUKOIL WILRIJK",
+    "address": "Jules Moretuslei&#44; 419  WILRIJK,   2610",
+    "latitude": "51.1728695",
+    "longitude": "4.4006768",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11729",
+    "location": "LUKOIL WILSELE",
+    "address": "Aarschotsesteenweg&#44; 267  WILSELE,   2610",
+    "latitude": "50.9160162",
+    "longitude": "4.7162816",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11732",
+    "location": "LUKOIL WOMMELGEM",
+    "address": "Autolei&#44; 140  WOMMELGEM,   1150",
+    "latitude": "51.2056798",
+    "longitude": "4.4886533",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11733",
+    "location": "LUKOIL WOMMELGEM",
+    "address": "Kempenlaan&#44; 10  WOMMELGEM,   2160",
+    "latitude": "51.1972685",
+    "longitude": "4.5285416",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11734",
+    "location": "LUKOIL ZAVENTEM",
+    "address": "Leuvensesteenweg&#44; 522  ZAVENTEM,   2160",
+    "latitude": "50.8732563",
+    "longitude": "4.4853167",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11735",
+    "location": "LUKOIL ZELLIK",
+    "address": "Brusselse steenweg&#44; 474  ZELLIK,   1930",
+    "latitude": "50.8906725",
+    "longitude": "4.2583762",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11736",
+    "location": "LUKOIL ZEVERGEM",
+    "address": "Grote steenweg&#44; 16  ZEVERGEM,   1731",
+    "latitude": "50.9947177",
+    "longitude": "3.6829566",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  },
+  {
+    "storeId": "11737",
+    "location": "LUKOIL ZOERSEL",
+    "address": "Rodendijk 58  ZOERSEL,   9840",
+    "latitude": "51.2469223",
+    "longitude": "4.7035849",
+    "productsServices": "LUKOIL",
+    "lukoil": "true",
+    "lukoil_express": ""
+  }
+]

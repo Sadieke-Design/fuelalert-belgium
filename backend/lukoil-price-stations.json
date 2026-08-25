@@ -1,0 +1,722 @@
+[
+  {
+    "priceId": "226",
+    "name": "AARSCHOT (3200 )"
+  },
+  {
+    "priceId": "127",
+    "name": "ANGLEUR (4031 )"
+  },
+  {
+    "priceId": "266",
+    "name": "ANTWERPEN (2060 )"
+  },
+  {
+    "priceId": "64",
+    "name": "ASSE (1730 )"
+  },
+  {
+    "priceId": "151",
+    "name": "ASSEBROEK (8310 )"
+  },
+  {
+    "priceId": "109",
+    "name": "AUVELAIS (5060 )"
+  },
+  {
+    "priceId": "251",
+    "name": "AYWAILLE (4920 )"
+  },
+  {
+    "priceId": "142",
+    "name": "BARVAUX-SUR-OURTHE (6940 )"
+  },
+  {
+    "priceId": "224",
+    "name": "BERINGEN (3580 )"
+  },
+  {
+    "priceId": "181",
+    "name": "BIERGES (1301 )"
+  },
+  {
+    "priceId": "199",
+    "name": "BORGERHOUT (2140 )"
+  },
+  {
+    "priceId": "17",
+    "name": "BRAINE L'ALLEUD (1420 )"
+  },
+  {
+    "priceId": "190",
+    "name": "BRAINE L'ALLEUD (1420 )"
+  },
+  {
+    "priceId": "117",
+    "name": "BREENDONK (Puurs) (2870 )"
+  },
+  {
+    "priceId": "47",
+    "name": "BRUSSEL (Anderlecht) (1070 )"
+  },
+  {
+    "priceId": "253",
+    "name": "BRUSSEL (Anderlecht) (1070 )"
+  },
+  {
+    "priceId": "139",
+    "name": "BRUSSEL (Etterbeek) (1040 )"
+  },
+  {
+    "priceId": "25",
+    "name": "BRUSSEL (Evere) (1140 )"
+  },
+  {
+    "priceId": "252",
+    "name": "BRUSSEL (Haren) (1130 )"
+  },
+  {
+    "priceId": "57",
+    "name": "BRUSSEL (Jette) (1090 )"
+  },
+  {
+    "priceId": "65",
+    "name": "BRUSSEL (Oudergem) (1160 )"
+  },
+  {
+    "priceId": "123",
+    "name": "BRUSSEL (Sint-Agatha-Berchem) (1082 )"
+  },
+  {
+    "priceId": "3",
+    "name": "BRUSSEL (St-Gillis) (1060 )"
+  },
+  {
+    "priceId": "9",
+    "name": "BRUSSEL (Vorst) (1190 )"
+  },
+  {
+    "priceId": "56",
+    "name": "BRUSSEL (Vorst) (1190 )"
+  },
+  {
+    "priceId": "4",
+    "name": "BRUSSEL SINT LAMBRECHTS WOLUWE (1200 )"
+  },
+  {
+    "priceId": "110",
+    "name": "BRUSSEL WATERMAEL-BOSVOORDE (1170 )"
+  },
+  {
+    "priceId": "194",
+    "name": "BRUXELLES (Jette - Expo) (1090 )"
+  },
+  {
+    "priceId": "228",
+    "name": "BUIZINGEN (1501 )"
+  },
+  {
+    "priceId": "269",
+    "name": "CERFONTAINE (5630 )"
+  },
+  {
+    "priceId": "195",
+    "name": "CHATELINEAU (6200 )"
+  },
+  {
+    "priceId": "243",
+    "name": "CORBAIS (1435 )"
+  },
+  {
+    "priceId": "275",
+    "name": "COUVIN (5660 )"
+  },
+  {
+    "priceId": "105",
+    "name": "DEURNE (2100 )"
+  },
+  {
+    "priceId": "18",
+    "name": "DIEST (KAGGEVINNE) (3293 )"
+  },
+  {
+    "priceId": "114",
+    "name": "DIEST (SCHAFFEN) (3290 )"
+  },
+  {
+    "priceId": "214",
+    "name": "DIEST (Webbekom) (3290 )"
+  },
+  {
+    "priceId": "204",
+    "name": "DILBEEK (1700 )"
+  },
+  {
+    "priceId": "274",
+    "name": "DINANT (5500 )"
+  },
+  {
+    "priceId": "197",
+    "name": "DISON (4820 )"
+  },
+  {
+    "priceId": "149",
+    "name": "DWORP (1653 )"
+  },
+  {
+    "priceId": "161",
+    "name": "EDEGEM (2650 )"
+  },
+  {
+    "priceId": "158",
+    "name": "EEKLO (9900 )"
+  },
+  {
+    "priceId": "138",
+    "name": "EKEREN (2180 )"
+  },
+  {
+    "priceId": "35",
+    "name": "EKEREN (Antwerpen) (2030 )"
+  },
+  {
+    "priceId": "68",
+    "name": "EKEREN (Mariaburg) (2180 )"
+  },
+  {
+    "priceId": "241",
+    "name": "ENSIVAL (4800 )"
+  },
+  {
+    "priceId": "75",
+    "name": "ERPE-MERE (9420 )"
+  },
+  {
+    "priceId": "96",
+    "name": "EUPEN (4701 )"
+  },
+  {
+    "priceId": "245",
+    "name": "FONTAINE L'EVEQUE (6140 )"
+  },
+  {
+    "priceId": "171",
+    "name": "GEEL (2440 )"
+  },
+  {
+    "priceId": "273",
+    "name": "GEMBLOUX (5030 )"
+  },
+  {
+    "priceId": "264",
+    "name": "GENK (3600 )"
+  },
+  {
+    "priceId": "292",
+    "name": "GENK (Waterschei) (3600 )"
+  },
+  {
+    "priceId": "293",
+    "name": "GENK (Winterslag) (3600 )"
+  },
+  {
+    "priceId": "10",
+    "name": "GENT (9000 )"
+  },
+  {
+    "priceId": "219",
+    "name": "GENT (9000 )"
+  },
+  {
+    "priceId": "128",
+    "name": "GENTBRUGGE (9050 )"
+  },
+  {
+    "priceId": "221",
+    "name": "GOSSELIES (6041 )"
+  },
+  {
+    "priceId": "103",
+    "name": "GREMBERGEN (9200 )"
+  },
+  {
+    "priceId": "191",
+    "name": "GROOT-BIJGAARDEN (1702 )"
+  },
+  {
+    "priceId": "39",
+    "name": "HAINE SAINT PAUL (7100 )"
+  },
+  {
+    "priceId": "205",
+    "name": "HALLE (1500 )"
+  },
+  {
+    "priceId": "297",
+    "name": "HANNUT (4280 )"
+  },
+  {
+    "priceId": "59",
+    "name": "HARELBEKE (8530 )"
+  },
+  {
+    "priceId": "285",
+    "name": "HASSELT (Hasselt Zuid) (3500 )"
+  },
+  {
+    "priceId": "289",
+    "name": "HASSELT (Kermt) (3510 )"
+  },
+  {
+    "priceId": "99",
+    "name": "HASSELT (Kuringen) (3511 )"
+  },
+  {
+    "priceId": "27",
+    "name": "HASSELT (Luikersteenweg) (3500 )"
+  },
+  {
+    "priceId": "286",
+    "name": "HECHTEL (3940 )"
+  },
+  {
+    "priceId": "230",
+    "name": "HEFFEN (2801 )"
+  },
+  {
+    "priceId": "100",
+    "name": "HERENT (3020 )"
+  },
+  {
+    "priceId": "249",
+    "name": "HERENTALS (2200 )"
+  },
+  {
+    "priceId": "164",
+    "name": "HERSTAL (4040 )"
+  },
+  {
+    "priceId": "265",
+    "name": "HEUSDEN-ZOLDER (3550 )"
+  },
+  {
+    "priceId": "248",
+    "name": "HOESELT (3730 )"
+  },
+  {
+    "priceId": "244",
+    "name": "HOUTHALEN (3530 )"
+  },
+  {
+    "priceId": "302",
+    "name": "HULSHOUT (2235 )"
+  },
+  {
+    "priceId": "119",
+    "name": "IEPER (8900 )"
+  },
+  {
+    "priceId": "233",
+    "name": "IZEGEM (8870 )"
+  },
+  {
+    "priceId": "81",
+    "name": "JAMBES - Avenue Prince de Liège (5100 )"
+  },
+  {
+    "priceId": "258",
+    "name": "JAMBES - Chaussée de Liège (5100 )"
+  },
+  {
+    "priceId": "58",
+    "name": "JEMEPPE-SUR-MEUSE (4101 )"
+  },
+  {
+    "priceId": "148",
+    "name": "JUMET (6040 )"
+  },
+  {
+    "priceId": "137",
+    "name": "KAMPENHOUT (1910 )"
+  },
+  {
+    "priceId": "135",
+    "name": "KESSEL-LO - Diestsesteenweg (3010 )"
+  },
+  {
+    "priceId": "203",
+    "name": "KESSEL-LO - Tiensesteenweg (3010 )"
+  },
+  {
+    "priceId": "276",
+    "name": "KINROOI (3640 )"
+  },
+  {
+    "priceId": "72",
+    "name": "KNOKKE (Heist 1) (8300 )"
+  },
+  {
+    "priceId": "141",
+    "name": "KONTICH (2550 )"
+  },
+  {
+    "priceId": "189",
+    "name": "KUURNE (8520 )"
+  },
+  {
+    "priceId": "69",
+    "name": "LA LOUVIERE (7100 )"
+  },
+  {
+    "priceId": "280",
+    "name": "LANAKEN (3620 )"
+  },
+  {
+    "priceId": "237",
+    "name": "LASNE (1380 )"
+  },
+  {
+    "priceId": "66",
+    "name": "LIEGE (4020 )"
+  },
+  {
+    "priceId": "98",
+    "name": "LIER (2500 )"
+  },
+  {
+    "priceId": "225",
+    "name": "LODELINSART (6042 )"
+  },
+  {
+    "priceId": "87",
+    "name": "LOKEREN (9160 )"
+  },
+  {
+    "priceId": "288",
+    "name": "LOMMEL (3920 )"
+  },
+  {
+    "priceId": "229",
+    "name": "LONDERZEEL (1840 )"
+  },
+  {
+    "priceId": "278",
+    "name": "MAASMECHELEN (3630 )"
+  },
+  {
+    "priceId": "263",
+    "name": "MALMEDY (4960 )"
+  },
+  {
+    "priceId": "222",
+    "name": "MARCINELLE (6001 )"
+  },
+  {
+    "priceId": "239",
+    "name": "MECHELEN (Walem) (2800 )"
+  },
+  {
+    "priceId": "118",
+    "name": "MEERBEKE (9402 )"
+  },
+  {
+    "priceId": "121",
+    "name": "MELSBROEK (1820 )"
+  },
+  {
+    "priceId": "43",
+    "name": "MELSELE (9120 )"
+  },
+  {
+    "priceId": "130",
+    "name": "MERKSEM (2170 )"
+  },
+  {
+    "priceId": "295",
+    "name": "METTET (5640 )"
+  },
+  {
+    "priceId": "116",
+    "name": "MONS (7000 )"
+  },
+  {
+    "priceId": "132",
+    "name": "MONS (7100 )"
+  },
+  {
+    "priceId": "145",
+    "name": "MUIZEN (2812 )"
+  },
+  {
+    "priceId": "23",
+    "name": "NAMEN (BOUGE) (5004 )"
+  },
+  {
+    "priceId": "29",
+    "name": "NAMUR (Belgrade) (5001 )"
+  },
+  {
+    "priceId": "42",
+    "name": "NANINNE (5100 )"
+  },
+  {
+    "priceId": "256",
+    "name": "NECHIN (7730 )"
+  },
+  {
+    "priceId": "270",
+    "name": "NEUVILLE (5600 )"
+  },
+  {
+    "priceId": "283",
+    "name": "NIJLEN (2560 )"
+  },
+  {
+    "priceId": "211",
+    "name": "NIVELLES (1400 )"
+  },
+  {
+    "priceId": "31",
+    "name": "OHAIN (1380 )"
+  },
+  {
+    "priceId": "53",
+    "name": "OLLIGNIES (7866 )"
+  },
+  {
+    "priceId": "51",
+    "name": "OOSTENDE (Raversijde) (8400 )"
+  },
+  {
+    "priceId": "290",
+    "name": "OPOETEREN (3680 )"
+  },
+  {
+    "priceId": "173",
+    "name": "OTTIGNIES (1340 )"
+  },
+  {
+    "priceId": "95",
+    "name": "OUD-TURNHOUT (2360 )"
+  },
+  {
+    "priceId": "246",
+    "name": "OUDENAARDE (9700 )"
+  },
+  {
+    "priceId": "166",
+    "name": "OVERIJSE (3090 )"
+  },
+  {
+    "priceId": "153",
+    "name": "OVERIJSE (Maleizen) (3090 )"
+  },
+  {
+    "priceId": "291",
+    "name": "QUIEVRAIN (7380 )"
+  },
+  {
+    "priceId": "271",
+    "name": "RANSART (6043 )"
+  },
+  {
+    "priceId": "287",
+    "name": "REKEM (3621 )"
+  },
+  {
+    "priceId": "213",
+    "name": "RETINNE (4621 )"
+  },
+  {
+    "priceId": "152",
+    "name": "RODANGE (GDL) (4832 )"
+  },
+  {
+    "priceId": "212",
+    "name": "ROESELARE (8800 )"
+  },
+  {
+    "priceId": "85",
+    "name": "ROMBACH/MARTELANGE (GDL) (8832 )"
+  },
+  {
+    "priceId": "33",
+    "name": "RONSE (9600 )"
+  },
+  {
+    "priceId": "210",
+    "name": "RUMES (7611 )"
+  },
+  {
+    "priceId": "167",
+    "name": "RUMST (2840 )"
+  },
+  {
+    "priceId": "234",
+    "name": "SCHILDE (2970 )"
+  },
+  {
+    "priceId": "268",
+    "name": "SERAING (4100 )"
+  },
+  {
+    "priceId": "272",
+    "name": "SERAING (4100 )"
+  },
+  {
+    "priceId": "21",
+    "name": "SINT AMANDSBERG (9040 )"
+  },
+  {
+    "priceId": "14",
+    "name": "SINT ANDRIES (Brugge) (8200 )"
+  },
+  {
+    "priceId": "187",
+    "name": "SINT DENIJS-WESTREM (9051 )"
+  },
+  {
+    "priceId": "180",
+    "name": "SINT GENESIUS RODE (1640 )"
+  },
+  {
+    "priceId": "193",
+    "name": "SINT NIKLAAS (9100 )"
+  },
+  {
+    "priceId": "172",
+    "name": "SINT PIETERS WOLUWE (1150 )"
+  },
+  {
+    "priceId": "183",
+    "name": "SINT TRUIDEN (Melveren) (3800 )"
+  },
+  {
+    "priceId": "60",
+    "name": "SINT-DENIJS-WESTREM (9051 )"
+  },
+  {
+    "priceId": "36",
+    "name": "SINT-PIETERS LEEUW (1600 )"
+  },
+  {
+    "priceId": "267",
+    "name": "SOIGNIES (7060 )"
+  },
+  {
+    "priceId": "231",
+    "name": "ST-GENESIUS RODE (1640 )"
+  },
+  {
+    "priceId": "38",
+    "name": "STROMBEEK-BEVER (1853 )"
+  },
+  {
+    "priceId": "255",
+    "name": "TEMSE (9140 )"
+  },
+  {
+    "priceId": "63",
+    "name": "TERHULPEN (1310 )"
+  },
+  {
+    "priceId": "61",
+    "name": "TERNAT (1740 )"
+  },
+  {
+    "priceId": "216",
+    "name": "TERTRE (7333 )"
+  },
+  {
+    "priceId": "71",
+    "name": "TERVUREN (3080 )"
+  },
+  {
+    "priceId": "125",
+    "name": "TORHOUT (8820 )"
+  },
+  {
+    "priceId": "92",
+    "name": "TOURNAI (7500 )"
+  },
+  {
+    "priceId": "34",
+    "name": "UKKEL - Dieweg (1180 )"
+  },
+  {
+    "priceId": "178",
+    "name": "UKKEL - Stallestraat/Roetaert (1180 )"
+  },
+  {
+    "priceId": "262",
+    "name": "VERVIERS (4802 )"
+  },
+  {
+    "priceId": "45",
+    "name": "VILVOORDE (1800 )"
+  },
+  {
+    "priceId": "208",
+    "name": "VISE (4600 )"
+  },
+  {
+    "priceId": "220",
+    "name": "WAREMME (4300 )"
+  },
+  {
+    "priceId": "40",
+    "name": "WASMUEL (7390 )"
+  },
+  {
+    "priceId": "120",
+    "name": "WAVRE (1300 )"
+  },
+  {
+    "priceId": "207",
+    "name": "WAVRE (1300 )"
+  },
+  {
+    "priceId": "174",
+    "name": "WEZEMBEEK-OPPEM (1970 )"
+  },
+  {
+    "priceId": "6",
+    "name": "WILRIJK (2610 )"
+  },
+  {
+    "priceId": "67",
+    "name": "WILRIJK (2610 )"
+  },
+  {
+    "priceId": "215",
+    "name": "WILSELE (3012 )"
+  },
+  {
+    "priceId": "70",
+    "name": "WOMMELGEM (2160 )"
+  },
+  {
+    "priceId": "133",
+    "name": "WOMMELGEM (2160 )"
+  },
+  {
+    "priceId": "136",
+    "name": "ZAVENTEM (1930 )"
+  },
+  {
+    "priceId": "129",
+    "name": "ZELLIK (1731 )"
+  },
+  {
+    "priceId": "179",
+    "name": "ZEVERGEM (9840 )"
+  },
+  {
+    "priceId": "261",
+    "name": "ZOERSEL (2980 )"
+  },
+  {
+    "priceId": "294",
+    "name": "ZONHOVEN (3520 )"
+  }
+]

@@ -1,0 +1,5387 @@
+[
+  {
+    "priceId": "226",
+    "listName": "AARSCHOT (3200 )",
+    "name": "LUKOIL AARSCHOT",
+    "address": "Terheidelaan 71",
+    "location": "3200 AARSCHOT",
+    "officialStationId": "226",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,161",
+        "discount": "15,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,785",
+        "discount": "15,1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "127",
+    "listName": "ANGLEUR (4031 )",
+    "name": "LUKOIL ANGLEUR",
+    "address": "Rue d'Ougrée 61",
+    "location": "4031 ANGLEUR",
+    "officialStationId": "127",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,265",
+        "discount": "5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,886",
+        "discount": "5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "266",
+    "listName": "ANTWERPEN (2060 )",
+    "name": "LUKOIL ANTWERPEN",
+    "address": "Schijnpoortweg 22",
+    "location": "2060 ANTWERPEN",
+    "officialStationId": "266",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,220",
+        "discount": "9,5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,846",
+        "discount": "9"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "64",
+    "listName": "ASSE (1730 )",
+    "name": "LUKOIL ASSE",
+    "address": "Nerviërstraat 108",
+    "location": "1730 ASSE",
+    "officialStationId": "64",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,161",
+        "discount": "15,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,778",
+        "discount": "15,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,006",
+        "discount": "8,8"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "151",
+    "listName": "ASSEBROEK (8310 )",
+    "name": "LUKOIL ASSEBROEK",
+    "address": "Baron Ruzettelaan 6",
+    "location": "8310 ASSEBROEK",
+    "officialStationId": "151",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,181",
+        "discount": "13,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "109",
+    "listName": "AUVELAIS (5060 )",
+    "name": "LUKOIL AUVELAIS",
+    "address": "Rue d'Eghezée, 1",
+    "location": "5060 AUVELAIS",
+    "officialStationId": "109",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,255",
+        "discount": "6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,804",
+        "discount": "13,2"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "251",
+    "listName": "AYWAILLE (4920 )",
+    "name": "LUKOIL AYWAILLE",
+    "address": "Avenue de la Porallée, 53",
+    "location": "4920 AYWAILLE",
+    "officialStationId": "251",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,305",
+        "discount": "1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,728",
+        "discount": "20,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "142",
+    "listName": "BARVAUX-SUR-OURTHE (6940 )",
+    "name": "LUKOIL BARVAUX-SUR-OURTHE",
+    "address": "Route de Marche, 68",
+    "location": "6940 BARVAUX-SUR-OURTHE",
+    "officialStationId": "142",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,275",
+        "discount": "4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,921",
+        "discount": "1,5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,074",
+        "discount": "2"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "224",
+    "listName": "BERINGEN (3580 )",
+    "name": "LUKOIL BERINGEN",
+    "address": "Paalsesteenweg 77",
+    "location": "3580 BERINGEN",
+    "officialStationId": "224",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,169",
+        "discount": "14,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,029",
+        "discount": "6,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "181",
+    "listName": "BIERGES (1301 )",
+    "name": "LUKOIL BIERGES",
+    "address": "Rue de Champles 32",
+    "location": "1301 BIERGES",
+    "officialStationId": "181",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,303",
+        "discount": "1,2"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,919",
+        "discount": "1,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "199",
+    "listName": "BORGERHOUT (2140 )",
+    "name": "LUKOIL BORGERHOUT",
+    "address": "Hoek Statielei/Gijselstraat, 177",
+    "location": "2140 BORGERHOUT",
+    "officialStationId": "199",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,305",
+        "discount": "1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,926",
+        "discount": "1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "17",
+    "listName": "BRAINE L'ALLEUD (1420 )",
+    "name": "LUKOIL BRAINE L'ALLEUD",
+    "address": "Chaussée de Tubize 58",
+    "location": "1420 BRAINE L'ALLEUD",
+    "officialStationId": "17",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,181",
+        "discount": "13,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,762",
+        "discount": "3"
+      }
+    ]
+  },
+  {
+    "priceId": "190",
+    "listName": "BRAINE L'ALLEUD (1420 )",
+    "name": "LUKOIL BRAINE L'ALLEUD",
+    "address": "Chaussée de Nivelles 9",
+    "location": "1420 BRAINE L'ALLEUD",
+    "officialStationId": "190",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,179",
+        "discount": "13,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "117",
+    "listName": "BREENDONK (Puurs) (2870 )",
+    "name": "LUKOIL BREENDONK",
+    "address": "Koning Leopoldlaan 13",
+    "location": "2870 BREENDONK (Puurs)",
+    "officialStationId": "117",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,315",
+        "discount": "0"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,936",
+        "discount": "0"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,094",
+        "discount": "0"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "47",
+    "listName": "BRUSSEL (Anderlecht) (1070 )",
+    "name": "LUKOIL ANDERLECHT",
+    "address": "Doverstraat 114",
+    "location": "1070 BRUSSEL (Anderlecht)",
+    "officialStationId": "47",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,315",
+        "discount": "0"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,936",
+        "discount": "0"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,094",
+        "discount": "0"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "253",
+    "listName": "BRUSSEL (Anderlecht) (1070 )",
+    "name": "LUKOIL BRUSSEL",
+    "address": "Industrielaan, 71",
+    "location": "1070 BRUSSEL (Anderlecht)",
+    "officialStationId": "253",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "139",
+    "listName": "BRUSSEL (Etterbeek) (1040 )",
+    "name": "LUKOIL ETTERBEEK",
+    "address": "Graystraat 69",
+    "location": "1040 BRUSSEL (Etterbeek)",
+    "officialStationId": "139",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,315",
+        "discount": "0"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,936",
+        "discount": "0"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "25",
+    "listName": "BRUSSEL (Evere) (1140 )",
+    "name": "LUKOIL EVERE",
+    "address": "Leuvensesteenweg 1024",
+    "location": "1140 BRUSSEL (Evere)",
+    "officialStationId": "25",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,138",
+        "discount": "17,7"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,764",
+        "discount": "17,2"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "252",
+    "listName": "BRUSSEL (Haren) (1130 )",
+    "name": "LUKOIL HAREN",
+    "address": "Haachtsesteenweg 1463",
+    "location": "1130 BRUSSEL (Haren)",
+    "officialStationId": "252",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,218",
+        "discount": "9,7"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,808",
+        "discount": "12,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,032",
+        "discount": "6,2"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "57",
+    "listName": "BRUSSEL (Jette) (1090 )",
+    "name": "LUKOIL JETTE",
+    "address": "de Smet de Nayerlaan 293",
+    "location": "1090 BRUSSEL (Jette)",
+    "officialStationId": "57",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "65",
+    "listName": "BRUSSEL (Oudergem) (1160 )",
+    "name": "LUKOIL BRUSSEL",
+    "address": "Vorstlaan, 91",
+    "location": "1160 BRUSSEL (Oudergem)",
+    "officialStationId": "65",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,233",
+        "discount": "8,2"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,879",
+        "discount": "5,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "123",
+    "listName": "BRUSSEL (Sint-Agatha-Berchem) (1082 )",
+    "name": "LUKOIL CAFÉ SINT-AGATHA BERCHEM",
+    "address": "Keizer Karellaan, 480",
+    "location": "1082 BRUSSEL (Sint-Agatha-Berchem)",
+    "officialStationId": "123",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,826",
+        "discount": "11"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "3",
+    "listName": "BRUSSEL (St-Gillis) (1060 )",
+    "name": "LUKOIL BRUSSEL (Sint-Gillis)",
+    "address": "Waterloosesteenweg 378",
+    "location": "1060 BRUSSEL (St-Gillis)",
+    "officialStationId": "3",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "9",
+    "listName": "BRUSSEL (Vorst) (1190 )",
+    "name": "LUKOIL Express BRUSSEL",
+    "address": "Neerstalle Steenweg 208",
+    "location": "1190 BRUSSEL (Vorst)",
+    "officialStationId": "9",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,265",
+        "discount": "5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,886",
+        "discount": "5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "56",
+    "listName": "BRUSSEL (Vorst) (1190 )",
+    "name": "LUKOIL VORST",
+    "address": "Brits Tweedelegerlaan, 15",
+    "location": "1190 BRUSSEL (Vorst)",
+    "officialStationId": "56",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,305",
+        "discount": "1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,926",
+        "discount": "1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "4",
+    "listName": "BRUSSEL SINT LAMBRECHTS WOLUWE (1200 )",
+    "name": "LUKOIL BRUSSEL SINT LAMBRECHTS WOLUWE",
+    "address": "Kerselarenbergstraat 7",
+    "location": "1200 BRUSSEL SINT LAMBRECHTS WOLUWE",
+    "officialStationId": "4",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,234",
+        "discount": "8,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,860",
+        "discount": "7,6"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "110",
+    "listName": "BRUSSEL WATERMAEL-BOSVOORDE (1170 )",
+    "name": "LUKOIL EXPRESS BRUSSEL WATERMAEL BOSVOORDE",
+    "address": "Vorsteriestraat/Heiligenborre",
+    "location": "1170 BRUSSEL WATERMAEL-BOSVOORDE",
+    "officialStationId": "110",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "194",
+    "listName": "BRUXELLES (Jette - Expo) (1090 )",
+    "name": "LUKOIL JETTE",
+    "address": "Tentoonstellingslaan, 339",
+    "location": "1090 BRUXELLES (Jette - Expo)",
+    "officialStationId": "194",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,209",
+        "discount": "10,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,829",
+        "discount": "10,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "228",
+    "listName": "BUIZINGEN (1501 )",
+    "name": "LUKOIL CAFÉ BUIZINGEN",
+    "address": "Alsembergesesteenweg 19",
+    "location": "1501 BUIZINGEN",
+    "officialStationId": "228",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,181",
+        "discount": "13,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,805",
+        "discount": "13,1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "269",
+    "listName": "CERFONTAINE (5630 )",
+    "name": "LUKOIL CERFONTAINE",
+    "address": "Rue de la Gare 24",
+    "location": "5630 CERFONTAINE",
+    "officialStationId": "269",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,305",
+        "discount": "1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,926",
+        "discount": "1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "195",
+    "listName": "CHATELINEAU (6200 )",
+    "name": "LUKOIL CHATELINEAU",
+    "address": "Rue de Gilly 106/126",
+    "location": "6200 CHATELINEAU",
+    "officialStationId": "195",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,234",
+        "discount": "8,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,856",
+        "discount": "8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "243",
+    "listName": "CORBAIS (1435 )",
+    "name": "LUKOIL CORBAIS",
+    "address": "Grand Route 36",
+    "location": "1435 CORBAIS",
+    "officialStationId": "243",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "275",
+    "listName": "COUVIN (5660 )",
+    "name": "LUKOIL COUVIN",
+    "address": "Rue Pont du Roi 14",
+    "location": "5660 COUVIN",
+    "officialStationId": "275",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,158",
+        "discount": "15,7"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,808",
+        "discount": "12,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "105",
+    "listName": "DEURNE (2100 )",
+    "name": "LUKOIL DEURNE",
+    "address": "Bisschoppenhoflaan 315",
+    "location": "2100 DEURNE",
+    "officialStationId": "105",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,235",
+        "discount": "8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,856",
+        "discount": "8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "18",
+    "listName": "DIEST (KAGGEVINNE) (3293 )",
+    "name": "LUKOIL KAGGEVINNE",
+    "address": "Leuvensesteenweg, 311",
+    "location": "3293 DIEST (KAGGEVINNE)",
+    "officialStationId": "18",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,161",
+        "discount": "15,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,751",
+        "discount": "18,5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,005",
+        "discount": "8,9"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "114",
+    "listName": "DIEST (SCHAFFEN) (3290 )",
+    "name": "LUKOIL SCHAFFEN",
+    "address": "Schoonaarde 70",
+    "location": "3290 DIEST (SCHAFFEN)",
+    "officialStationId": "114",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,291",
+        "discount": "2,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,882",
+        "discount": "5,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "214",
+    "listName": "DIEST (Webbekom) (3290 )",
+    "name": "LUKOIL Express WEBBEKOM",
+    "address": "Halensebaan, 121",
+    "location": "3290 DIEST (Webbekom)",
+    "officialStationId": "214",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,751",
+        "discount": "18,5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "1,999",
+        "discount": "9,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "204",
+    "listName": "DILBEEK (1700 )",
+    "name": "LUKOIL DILBEEK",
+    "address": "Ninoofsesteenweg 11",
+    "location": "1700 DILBEEK",
+    "officialStationId": "204",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,189",
+        "discount": "12,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,829",
+        "discount": "10,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "274",
+    "listName": "DINANT (5500 )",
+    "name": "LUKOIL DINANT",
+    "address": "Avenue Père Pire 45",
+    "location": "5500 DINANT",
+    "officialStationId": "274",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,265",
+        "discount": "5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,886",
+        "discount": "5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "197",
+    "listName": "DISON (4820 )",
+    "name": "LUKOIL DISON",
+    "address": "Rue Trauty, 27",
+    "location": "4820 DISON",
+    "officialStationId": "197",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,154",
+        "discount": "16,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,794",
+        "discount": "14,2"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "1,994",
+        "discount": "10"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "149",
+    "listName": "DWORP (1653 )",
+    "name": "LUKOIL DWORP",
+    "address": "Steenweg op Alsemberg 744",
+    "location": "1653 DWORP",
+    "officialStationId": "149",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,234",
+        "discount": "8,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,815",
+        "discount": "12,1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "161",
+    "listName": "EDEGEM (2650 )",
+    "name": "LUKOIL EDEGEM",
+    "address": "Kontichstraat-Boniverlei 206",
+    "location": "2650 EDEGEM",
+    "officialStationId": "161",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,235",
+        "discount": "8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,856",
+        "discount": "8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "158",
+    "listName": "EEKLO (9900 )",
+    "name": "LUKOIL EEKLO",
+    "address": "Gentsesteenweg, 73",
+    "location": "9900 EEKLO",
+    "officialStationId": "158",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,022",
+        "discount": "7,2"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "138",
+    "listName": "EKEREN (2180 )",
+    "name": "LUKOIL EKEREN",
+    "address": "Leugenberg 159-163",
+    "location": "2180 EKEREN",
+    "officialStationId": "138",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,231",
+        "discount": "8,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,862",
+        "discount": "7,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "35",
+    "listName": "EKEREN (Antwerpen) (2030 )",
+    "name": "LUKOIL EKEREN",
+    "address": "Ekersestwg 4 / Hoek F. Verbieststraat",
+    "location": "2030 EKEREN (Antwerpen)",
+    "officialStationId": "35",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,185",
+        "discount": "13"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,806",
+        "discount": "13"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "68",
+    "listName": "EKEREN (Mariaburg) (2180 )",
+    "name": "LUKOIL EKEREN",
+    "address": "Kapelsesteenweg 527",
+    "location": "2180 EKEREN (Mariaburg)",
+    "officialStationId": "68",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,149",
+        "discount": "16,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,789",
+        "discount": "14,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "241",
+    "listName": "ENSIVAL (4800 )",
+    "name": "LUKOIL ENSIVAL",
+    "address": "Route de Pépinster, 98",
+    "location": "4800 ENSIVAL",
+    "officialStationId": "241",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,154",
+        "discount": "16,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,793",
+        "discount": "14,3"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "75",
+    "listName": "ERPE-MERE (9420 )",
+    "name": "LUKOIL ERPE-MERE",
+    "address": "Oudenaardsesteenweg 419",
+    "location": "9420 ERPE-MERE",
+    "officialStationId": "75",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,019",
+        "discount": "7,5"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,762",
+        "discount": "3"
+      }
+    ]
+  },
+  {
+    "priceId": "96",
+    "listName": "EUPEN (4701 )",
+    "name": "LUKOIL KETTENIS",
+    "address": "Route de Herbestal 317",
+    "location": "4701 EUPEN",
+    "officialStationId": "96",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,202",
+        "discount": "11,3"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,801",
+        "discount": "13,5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,782",
+        "discount": "1"
+      }
+    ]
+  },
+  {
+    "priceId": "245",
+    "listName": "FONTAINE L'EVEQUE (6140 )",
+    "name": "LUKOIL FONTAINE L'EVEQUE",
+    "address": "Chaussée de Mons, 22",
+    "location": "6140 FONTAINE L'EVEQUE",
+    "officialStationId": "245",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,189",
+        "discount": "12,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,796",
+        "discount": "14"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "171",
+    "listName": "GEEL (2440 )",
+    "name": "LUKOIL GEEL",
+    "address": "Antwerpseweg 130",
+    "location": "2440 GEEL",
+    "officialStationId": "171",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,212",
+        "discount": "10,3"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,781",
+        "discount": "15,5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,072",
+        "discount": "2,2"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "273",
+    "listName": "GEMBLOUX (5030 )",
+    "name": "LUKOIL GEMBLOUX",
+    "address": "Chaussée de Charleroi 247",
+    "location": "5030 GEMBLOUX",
+    "officialStationId": "273",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,132",
+        "discount": "18,3"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,756",
+        "discount": "18"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,762",
+        "discount": "3"
+      }
+    ]
+  },
+  {
+    "priceId": "264",
+    "listName": "GENK (3600 )",
+    "name": "LUKOIL GENK",
+    "address": "Hasseltweg 12-14",
+    "location": "3600 GENK",
+    "officialStationId": "264",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,305",
+        "discount": "1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,926",
+        "discount": "1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "292",
+    "listName": "GENK (Waterschei) (3600 )",
+    "name": "LUKOIL Express WATERSCHEI",
+    "address": "Weg naar As 290",
+    "location": "3600 GENK (Waterschei)",
+    "officialStationId": "292",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,209",
+        "discount": "10,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,846",
+        "discount": "9"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,041",
+        "discount": "5,3"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "293",
+    "listName": "GENK (Winterslag) (3600 )",
+    "name": "LUKOIL Express WINTERSLAG",
+    "address": "Vennestraat 32",
+    "location": "3600 GENK (Winterslag)",
+    "officialStationId": "293",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,199",
+        "discount": "11,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,031",
+        "discount": "6,3"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "10",
+    "listName": "GENT (9000 )",
+    "name": "LUKOIL GENT",
+    "address": "Vlaamsekaai 106",
+    "location": "9000 GENT",
+    "officialStationId": "10",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "219",
+    "listName": "GENT (9000 )",
+    "name": "LUKOIL GENT",
+    "address": "Nieuwe Vaart 152",
+    "location": "9000 GENT",
+    "officialStationId": "219",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,151",
+        "discount": "16,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,789",
+        "discount": "14,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "128",
+    "listName": "GENTBRUGGE (9050 )",
+    "name": "LUKOIL GENTBRUGGE",
+    "address": "Brusselsesteenweg 679",
+    "location": "9050 GENTBRUGGE",
+    "officialStationId": "128",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,769",
+        "discount": "16,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "221",
+    "listName": "GOSSELIES (6041 )",
+    "name": "LUKOIL GOSSELIES",
+    "address": "Chaussée de Courcelles, 222",
+    "location": "6041 GOSSELIES",
+    "officialStationId": "221",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,211",
+        "discount": "10,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,832",
+        "discount": "10,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "103",
+    "listName": "GREMBERGEN (9200 )",
+    "name": "LUKOIL GREMBERGEN",
+    "address": "Martelarenlaan, 36",
+    "location": "9200 GREMBERGEN",
+    "officialStationId": "103",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "191",
+    "listName": "GROOT-BIJGAARDEN (1702 )",
+    "name": "LUKOIL GROOT-BIJGAARDEN",
+    "address": "Brusselstraat, 12 A",
+    "location": "1702 GROOT-BIJGAARDEN",
+    "officialStationId": "191",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,199",
+        "discount": "11,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,829",
+        "discount": "10,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "39",
+    "listName": "HAINE SAINT PAUL (7100 )",
+    "name": "LUKOIL EXPRESS HAINE SAINT PAUL",
+    "address": "Rue de la Déportation 53",
+    "location": "7100 HAINE SAINT PAUL",
+    "officialStationId": "39",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,778",
+        "discount": "15,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "205",
+    "listName": "HALLE (1500 )",
+    "name": "LUKOIL CAFÉ HALLE",
+    "address": "August Demaeghtlaan 195",
+    "location": "1500 HALLE",
+    "officialStationId": "205",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,181",
+        "discount": "13,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,805",
+        "discount": "13,1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "297",
+    "listName": "HANNUT (4280 )",
+    "name": "LUKOIL Express HANNUT",
+    "address": "Route de Landen 53",
+    "location": "4280 HANNUT",
+    "officialStationId": "297",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,243",
+        "discount": "7,2"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,854",
+        "discount": "8,2"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "59",
+    "listName": "HARELBEKE (8530 )",
+    "name": "LUKOIL HARELBEKE",
+    "address": "Kortrijksesteenweg 197",
+    "location": "8530 HARELBEKE",
+    "officialStationId": "59",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,778",
+        "discount": "15,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,009",
+        "discount": "8,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "285",
+    "listName": "HASSELT (Hasselt Zuid) (3500 )",
+    "name": "LUKOIL Express HASSELT",
+    "address": "Sint-Truidersteenweg 335",
+    "location": "3500 HASSELT (Hasselt Zuid)",
+    "officialStationId": "285",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,155",
+        "discount": "16"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,776",
+        "discount": "16"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "289",
+    "listName": "HASSELT (Kermt) (3510 )",
+    "name": "LUKOIL Express KERMT",
+    "address": "Diestersteenweg 238",
+    "location": "3510 HASSELT (Kermt)",
+    "officialStationId": "289",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,149",
+        "discount": "16,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,769",
+        "discount": "16,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "1,966",
+        "discount": "12,8"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "99",
+    "listName": "HASSELT (Kuringen) (3511 )",
+    "name": "LUKOIL KURINGEN",
+    "address": "Kuringersteenweg 319",
+    "location": "3511 HASSELT (Kuringen)",
+    "officialStationId": "99",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,147",
+        "discount": "16,8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,769",
+        "discount": "16,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "27",
+    "listName": "HASSELT (Luikersteenweg) (3500 )",
+    "name": "LUKOIL HASSELT",
+    "address": "Luikersteenweg 119",
+    "location": "3500 HASSELT (Luikersteenweg)",
+    "officialStationId": "27",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,149",
+        "discount": "16,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,776",
+        "discount": "16"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,029",
+        "discount": "6,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "286",
+    "listName": "HECHTEL (3940 )",
+    "name": "LUKOIL Express HECHTEL",
+    "address": "Peerderbaan 1",
+    "location": "3940 HECHTEL",
+    "officialStationId": "286",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,235",
+        "discount": "8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,856",
+        "discount": "8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "209,4",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "230",
+    "listName": "HEFFEN (2801 )",
+    "name": "LUKOIL HEFFEN",
+    "address": "Steenweg op Blaasveld, 87",
+    "location": "2801 HEFFEN",
+    "officialStationId": "230",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,237",
+        "discount": "7,8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,869",
+        "discount": "6,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "100",
+    "listName": "HERENT (3020 )",
+    "name": "LUKOIL HERENT",
+    "address": "Omleiding, 5",
+    "location": "3020 HERENT",
+    "officialStationId": "100",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,828",
+        "discount": "10,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "249",
+    "listName": "HERENTALS (2200 )",
+    "name": "LUKOIL HERENTALS",
+    "address": "Aarschotseweg 22/2",
+    "location": "2200 HERENTALS",
+    "officialStationId": "249",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,225",
+        "discount": "9"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,049",
+        "discount": "4,5"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "164",
+    "listName": "HERSTAL (4040 )",
+    "name": "LUKOIL HERSTAL",
+    "address": "Boulevard Zénobe Gramme 51",
+    "location": "4040 HERSTAL",
+    "officialStationId": "164",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,189",
+        "discount": "12,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,806",
+        "discount": "13"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,069",
+        "discount": "2,5"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,700",
+        "discount": "9,2"
+      }
+    ]
+  },
+  {
+    "priceId": "265",
+    "listName": "HEUSDEN-ZOLDER (3550 )",
+    "name": "LUKOIL HEUSDEN-ZOLDER",
+    "address": "Meylandtlaan 169",
+    "location": "3550 HEUSDEN-ZOLDER",
+    "officialStationId": "265",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,221",
+        "discount": "9,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,812",
+        "discount": "12,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,073",
+        "discount": "2,1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "248",
+    "listName": "HOESELT (3730 )",
+    "name": "LUKOIL HOESELT",
+    "address": "Bilzersteenweg 53 A",
+    "location": "3730 HOESELT",
+    "officialStationId": "248",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,140",
+        "discount": "17,5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,768",
+        "discount": "16,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,058",
+        "discount": "3,6"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,732",
+        "discount": "6"
+      }
+    ]
+  },
+  {
+    "priceId": "244",
+    "listName": "HOUTHALEN (3530 )",
+    "name": "LUKOIL HOUTHALEN",
+    "address": "Grote Baan 5",
+    "location": "3530 HOUTHALEN",
+    "officialStationId": "244",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,213",
+        "discount": "10,2"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,839",
+        "discount": "9,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,005",
+        "discount": "8,9"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,752",
+        "discount": "4"
+      }
+    ]
+  },
+  {
+    "priceId": "302",
+    "listName": "HULSHOUT (2235 )",
+    "name": "LUKOIL Hulshout",
+    "address": "Corbeillestraat 1/3",
+    "location": "2235 HULSHOUT",
+    "officialStationId": "302",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,167",
+        "discount": "14,8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,794",
+        "discount": "14,2"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,012",
+        "discount": "8,2"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "119",
+    "listName": "IEPER (8900 )",
+    "name": "LUKOIL IEPER",
+    "address": "Meenseweg, 220",
+    "location": "8900 IEPER",
+    "officialStationId": "119",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,292",
+        "discount": "2,3"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,915",
+        "discount": "2,1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "233",
+    "listName": "IZEGEM (8870 )",
+    "name": "LUKOIL IZEGEM",
+    "address": "Lodewijk de Raetlaan 1",
+    "location": "8870 IZEGEM",
+    "officialStationId": "233",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,157",
+        "discount": "15,8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,052",
+        "discount": "4,2"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "81",
+    "listName": "JAMBES - Avenue Prince de Liège (5100 )",
+    "name": "LUKOIL JAMBES",
+    "address": "Avenue Prince de Liège 48",
+    "location": "5100 JAMBES - Avenue Prince de Liège",
+    "officialStationId": "81",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,145",
+        "discount": "17"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,789",
+        "discount": "14,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "258",
+    "listName": "JAMBES - Chaussée de Liège (5100 )",
+    "name": "LUKOIL JAMBES",
+    "address": "Chaussée de Liège 561",
+    "location": "5100 JAMBES - Chaussée de Liège",
+    "officialStationId": "258",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,145",
+        "discount": "17"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,789",
+        "discount": "14,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "58",
+    "listName": "JEMEPPE-SUR-MEUSE (4101 )",
+    "name": "LUKOIL JEMEPPE-SUR-MEUSE",
+    "address": "Rue Sualem 2 B",
+    "location": "4101 JEMEPPE-SUR-MEUSE",
+    "officialStationId": "58",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,214",
+        "discount": "10,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,862",
+        "discount": "7,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "148",
+    "listName": "JUMET (6040 )",
+    "name": "LUKOIL JUMET",
+    "address": "Chaussée de Bruxelles 415",
+    "location": "6040 JUMET",
+    "officialStationId": "148",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,201",
+        "discount": "11,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,822",
+        "discount": "11,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "137",
+    "listName": "KAMPENHOUT (1910 )",
+    "name": "LUKOIL KAMPENHOUT",
+    "address": "Haachtsesteenweg, 701",
+    "location": "1910 KAMPENHOUT",
+    "officialStationId": "137",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,123",
+        "discount": "19,2"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,748",
+        "discount": "18,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "1,992",
+        "discount": "10,2"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "135",
+    "listName": "KESSEL-LO - Diestsesteenweg (3010 )",
+    "name": "LUKOIL KESSEL-LO",
+    "address": "Diestsesteenweg 718",
+    "location": "3010 KESSEL-LO - Diestsesteenweg",
+    "officialStationId": "135",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,235",
+        "discount": "8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,856",
+        "discount": "8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "203",
+    "listName": "KESSEL-LO - Tiensesteenweg (3010 )",
+    "name": "LUKOIL KESSEL-LO",
+    "address": "Tiensesteenweg 235",
+    "location": "3010 KESSEL-LO - Tiensesteenweg",
+    "officialStationId": "203",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,234",
+        "discount": "8,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,786",
+        "discount": "15"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "276",
+    "listName": "KINROOI (3640 )",
+    "name": "LUKOIL KINROOI",
+    "address": "Venlosesteenweg 373",
+    "location": "3640 KINROOI",
+    "officialStationId": "276",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,315",
+        "discount": "0"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,936",
+        "discount": "0"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,094",
+        "discount": "0"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "72",
+    "listName": "KNOKKE (Heist 1) (8300 )",
+    "name": "LUKOIL KNOKKE",
+    "address": "Natienlaan, 116",
+    "location": "8300 KNOKKE (Heist 1)",
+    "officialStationId": "72",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,789",
+        "discount": "14,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,033",
+        "discount": "6,1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "141",
+    "listName": "KONTICH (2550 )",
+    "name": "LUKOIL KONTICH",
+    "address": "Koningin Astridlaan 36",
+    "location": "2550 KONTICH",
+    "officialStationId": "141",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,285",
+        "discount": "3"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,906",
+        "discount": "3"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "189",
+    "listName": "KUURNE (8520 )",
+    "name": "LUKOIL KUURNE",
+    "address": "Brugsesteenweg 204",
+    "location": "8520 KUURNE",
+    "officialStationId": "189",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,798",
+        "discount": "13,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,061",
+        "discount": "3,3"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "69",
+    "listName": "LA LOUVIERE (7100 )",
+    "name": "LUKOIL LA LOUVIERE",
+    "address": "Rue du Gazomètre 23",
+    "location": "7100 LA LOUVIERE",
+    "officialStationId": "69",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,195",
+        "discount": "12"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,816",
+        "discount": "12"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "280",
+    "listName": "LANAKEN (3620 )",
+    "name": "LUKOIL LANAKEN",
+    "address": "Koning Albertlaan, 227",
+    "location": "3620 LANAKEN",
+    "officialStationId": "280",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,201",
+        "discount": "11,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,819",
+        "discount": "11,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "237",
+    "listName": "LASNE (1380 )",
+    "name": "LUKOIL LASNE",
+    "address": "Chaussée de Louvain, 431",
+    "location": "1380 LASNE",
+    "officialStationId": "237",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,305",
+        "discount": "1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,926",
+        "discount": "1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "66",
+    "listName": "LIEGE (4020 )",
+    "name": "LUKOIL LIEGE",
+    "address": "Rue des Vennes 347",
+    "location": "4020 LIEGE",
+    "officialStationId": "66",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,143",
+        "discount": "17,2"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,752",
+        "discount": "18,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,756",
+        "discount": "3,6"
+      }
+    ]
+  },
+  {
+    "priceId": "98",
+    "listName": "LIER (2500 )",
+    "name": "LUKOIL LIER",
+    "address": "Aarschotsesteenweg 79",
+    "location": "2500 LIER",
+    "officialStationId": "98",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,171",
+        "discount": "14,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,755",
+        "discount": "18,1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "225",
+    "listName": "LODELINSART (6042 )",
+    "name": "LUKOIL LODELINSART",
+    "address": "Chaussée de Châtelet, 183",
+    "location": "6042 LODELINSART",
+    "officialStationId": "225",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,149",
+        "discount": "16,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,769",
+        "discount": "16,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "1,999",
+        "discount": "9,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "87",
+    "listName": "LOKEREN (9160 )",
+    "name": "LUKOIL CAFÉ LOKEREN",
+    "address": "Bergendriesstraat 75",
+    "location": "9160 LOKEREN",
+    "officialStationId": "87",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,165",
+        "discount": "15"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,786",
+        "discount": "15"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "1,999",
+        "discount": "9,5"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "288",
+    "listName": "LOMMEL (3920 )",
+    "name": "LUKOIL Express LOMMEL",
+    "address": "Luikersteenweg 313",
+    "location": "3920 LOMMEL",
+    "officialStationId": "288",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,315",
+        "discount": "0"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,936",
+        "discount": "0"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,094",
+        "discount": "0"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "229",
+    "listName": "LONDERZEEL (1840 )",
+    "name": "LUKOIL LONDERZEEL",
+    "address": "Kerkhofstraat, 75",
+    "location": "1840 LONDERZEEL",
+    "officialStationId": "229",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,291",
+        "discount": "2,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,882",
+        "discount": "5,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "278",
+    "listName": "MAASMECHELEN (3630 )",
+    "name": "LUKOIL MAASMECHELEN",
+    "address": "Rijksweg 603",
+    "location": "3630 MAASMECHELEN",
+    "officialStationId": "278",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,199",
+        "discount": "11,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,809",
+        "discount": "12,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,672",
+        "discount": "12"
+      }
+    ]
+  },
+  {
+    "priceId": "263",
+    "listName": "MALMEDY (4960 )",
+    "name": "LUKOIL MALMEDY",
+    "address": "Avenue des Alliés 80",
+    "location": "4960 MALMEDY",
+    "officialStationId": "263",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,169",
+        "discount": "14,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,809",
+        "discount": "12,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "222",
+    "listName": "MARCINELLE (6001 )",
+    "name": "LUKOIL MARCINELLE",
+    "address": "Avenue Mascaux 298/314",
+    "location": "6001 MARCINELLE",
+    "officialStationId": "222",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,160",
+        "discount": "15,5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,801",
+        "discount": "13,5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,074",
+        "discount": "2"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "239",
+    "listName": "MECHELEN (Walem) (2800 )",
+    "name": "LUKOIL WALEM",
+    "address": "Antwerpsesteenweg 197",
+    "location": "2800 MECHELEN (Walem)",
+    "officialStationId": "239",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,195",
+        "discount": "12"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,816",
+        "discount": "12"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,049",
+        "discount": "4,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "118",
+    "listName": "MEERBEKE (9402 )",
+    "name": "LUKOIL MEERBEKE",
+    "address": "Brusselsesteenweg, 252",
+    "location": "9402 MEERBEKE",
+    "officialStationId": "118",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,169",
+        "discount": "14,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,798",
+        "discount": "13,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,012",
+        "discount": "8,2"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "121",
+    "listName": "MELSBROEK (1820 )",
+    "name": "LUKOIL MELSBROEK",
+    "address": "Haachtsesteenweg 146",
+    "location": "1820 MELSBROEK",
+    "officialStationId": "121",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,291",
+        "discount": "2,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,882",
+        "discount": "5,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "43",
+    "listName": "MELSELE (9120 )",
+    "name": "LUKOIL MELSELE",
+    "address": "Grote Baan Antwerpen 31",
+    "location": "9120 MELSELE",
+    "officialStationId": "43",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,234",
+        "discount": "8,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,819",
+        "discount": "11,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "130",
+    "listName": "MERKSEM (2170 )",
+    "name": "LUKOIL MERKSEM",
+    "address": "Groenendaallaan, 170",
+    "location": "2170 MERKSEM",
+    "officialStationId": "130",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,235",
+        "discount": "8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,856",
+        "discount": "8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "295",
+    "listName": "METTET (5640 )",
+    "name": "LUKOIL Express METTET",
+    "address": "Rue Try Joly, 2",
+    "location": "5640 METTET",
+    "officialStationId": "295",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,221",
+        "discount": "9,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,879",
+        "discount": "5,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "116",
+    "listName": "MONS (7000 )",
+    "name": "LUKOIL MONS",
+    "address": "Chaussée de Bruxelles 102-114",
+    "location": "7000 MONS",
+    "officialStationId": "116",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,183",
+        "discount": "13,2"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,796",
+        "discount": "14"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "132",
+    "listName": "MONS (7100 )",
+    "name": "LUKOIL MONS",
+    "address": "Chaussée de Binche 20-22",
+    "location": "7100 MONS",
+    "officialStationId": "132",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,192",
+        "discount": "12,3"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,796",
+        "discount": "14"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "1,954",
+        "discount": "14"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "145",
+    "listName": "MUIZEN (2812 )",
+    "name": "LUKOIL MUIZEN",
+    "address": "Leuvensesteenweg 240",
+    "location": "2812 MUIZEN",
+    "officialStationId": "145",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "23",
+    "listName": "NAMEN (BOUGE) (5004 )",
+    "name": "LUKOIL BOUGE",
+    "address": "Chaussée de Louvain 171",
+    "location": "5004 NAMEN (BOUGE)",
+    "officialStationId": "23",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,133",
+        "discount": "18,2"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,779",
+        "discount": "15,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "29",
+    "listName": "NAMUR (Belgrade) (5001 )",
+    "name": "LUKOIL NAMUR",
+    "address": "Avenue J. Abras 77",
+    "location": "5001 NAMUR (Belgrade)",
+    "officialStationId": "29",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,305",
+        "discount": "1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,926",
+        "discount": "1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "42",
+    "listName": "NANINNE (5100 )",
+    "name": "LUKOIL NANINNE",
+    "address": "Chaussée de Marche, 886",
+    "location": "5100 NANINNE",
+    "officialStationId": "42",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,166",
+        "discount": "14,9"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,790",
+        "discount": "14,6"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,782",
+        "discount": "1"
+      }
+    ]
+  },
+  {
+    "priceId": "256",
+    "listName": "NECHIN (7730 )",
+    "name": "LUKOIL NECHIN",
+    "address": "Rue de la Festingue 36C",
+    "location": "7730 NECHIN",
+    "officialStationId": "256",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,174",
+        "discount": "14,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,849",
+        "discount": "8,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,027",
+        "discount": "6,7"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "270",
+    "listName": "NEUVILLE (5600 )",
+    "name": "LUKOIL NEUVILLE",
+    "address": "Route de Mariembourg 39B",
+    "location": "5600 NEUVILLE",
+    "officialStationId": "270",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,185",
+        "discount": "13"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,849",
+        "discount": "8,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,712",
+        "discount": "8"
+      }
+    ]
+  },
+  {
+    "priceId": "283",
+    "listName": "NIJLEN (2560 )",
+    "name": "LUKOIL Express NIJLEN",
+    "address": "Bouwelsesteenweg 107",
+    "location": "2560 NIJLEN",
+    "officialStationId": "283",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,191",
+        "discount": "12,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,813",
+        "discount": "12,3"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "211",
+    "listName": "NIVELLES (1400 )",
+    "name": "LUKOIL NIVELLES",
+    "address": "Ch. de Mons 4/6",
+    "location": "1400 NIVELLES",
+    "officialStationId": "211",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,102",
+        "discount": "21,3"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,723",
+        "discount": "21,3"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,081",
+        "discount": "1,3"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "31",
+    "listName": "OHAIN (1380 )",
+    "name": "LUKOIL OHAIN",
+    "address": "Route de Genval",
+    "location": "1380 OHAIN",
+    "officialStationId": "31",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "53",
+    "listName": "OLLIGNIES (7866 )",
+    "name": "LUKOIL OLLIGNIES",
+    "address": "Chaussée Victor Lampe, 186",
+    "location": "7866 OLLIGNIES",
+    "officialStationId": "53",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "51",
+    "listName": "OOSTENDE (Raversijde) (8400 )",
+    "name": "LUKOIL OOSTENDE",
+    "address": "Nieuwpoortsesteenweg 540",
+    "location": "8400 OOSTENDE (Raversijde)",
+    "officialStationId": "51",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,201",
+        "discount": "11,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,801",
+        "discount": "13,5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "290",
+    "listName": "OPOETEREN (3680 )",
+    "name": "LUKOIL Express OPOETEREN",
+    "address": "Zandstraat 10",
+    "location": "3680 OPOETEREN",
+    "officialStationId": "290",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,766",
+        "discount": "17"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "1,994",
+        "discount": "10"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "173",
+    "listName": "OTTIGNIES (1340 )",
+    "name": "LUKOIL OTTIGNIES",
+    "address": "Avenue Provinciale 90",
+    "location": "1340 OTTIGNIES",
+    "officialStationId": "173",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,220",
+        "discount": "9,5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,846",
+        "discount": "9"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "95",
+    "listName": "OUD-TURNHOUT (2360 )",
+    "name": "LUKOIL OUD-TURNHOUT",
+    "address": "Steenweg op Turnhout 153",
+    "location": "2360 OUD-TURNHOUT",
+    "officialStationId": "95",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,171",
+        "discount": "14,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,793",
+        "discount": "14,3"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,005",
+        "discount": "8,9"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "246",
+    "listName": "OUDENAARDE (9700 )",
+    "name": "LUKOIL OUDENAARDE",
+    "address": "Deinzestraat 163",
+    "location": "9700 OUDENAARDE",
+    "officialStationId": "246",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,199",
+        "discount": "11,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,886",
+        "discount": "5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "166",
+    "listName": "OVERIJSE (3090 )",
+    "name": "LUKOIL OVERIJSE",
+    "address": "Brusselsesteenweg 482",
+    "location": "3090 OVERIJSE",
+    "officialStationId": "166",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,149",
+        "discount": "16,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,789",
+        "discount": "14,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,032",
+        "discount": "6,2"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "153",
+    "listName": "OVERIJSE (Maleizen) (3090 )",
+    "name": "LUKOIL OVERIJSE",
+    "address": "Terhulpensteenweg 391",
+    "location": "3090 OVERIJSE (Maleizen)",
+    "officialStationId": "153",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,170",
+        "discount": "14,5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,856",
+        "discount": "8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "291",
+    "listName": "QUIEVRAIN (7380 )",
+    "name": "LUKOIL Express QUIEVRAIN",
+    "address": "Rue de Mons 253",
+    "location": "7380 QUIEVRAIN",
+    "officialStationId": "291",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,149",
+        "discount": "16,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,759",
+        "discount": "17,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,031",
+        "discount": "6,3"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "271",
+    "listName": "RANSART (6043 )",
+    "name": "LUKOIL RANSART",
+    "address": "Rue Eau sur Elle 2",
+    "location": "6043 RANSART",
+    "officialStationId": "271",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,275",
+        "discount": "4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,896",
+        "discount": "4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "287",
+    "listName": "REKEM (3621 )",
+    "name": "LUKOIL Express REKEM",
+    "address": "Steenweg 287",
+    "location": "3621 REKEM",
+    "officialStationId": "287",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,191",
+        "discount": "12,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,809",
+        "discount": "12,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,029",
+        "discount": "6,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "213",
+    "listName": "RETINNE (4621 )",
+    "name": "LUKOIL RETINNE",
+    "address": "Rue de la Clef 73",
+    "location": "4621 RETINNE",
+    "officialStationId": "213",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,210",
+        "discount": "10,5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,816",
+        "discount": "12"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "152",
+    "listName": "RODANGE (GDL) (4832 )",
+    "name": "LUKOIL RODANGE & TRUCK STOP",
+    "address": "Route de Longwy 426",
+    "location": "4832 RODANGE (GDL)",
+    "officialStationId": "152",
+    "prices": [
+      {
+        "official": "1,963",
+        "lukoil": "1,953",
+        "discount": "1"
+      },
+      {
+        "official": "1,727",
+        "lukoil": "1,717",
+        "discount": "1"
+      },
+      {
+        "official": "1,932",
+        "lukoil": "1,922",
+        "discount": "1"
+      }
+    ]
+  },
+  {
+    "priceId": "212",
+    "listName": "ROESELARE (8800 )",
+    "name": "LUKOIL ROESELARE",
+    "address": "Westlaan 217",
+    "location": "8800 ROESELARE",
+    "officialStationId": "212",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,129",
+        "discount": "18,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,769",
+        "discount": "16,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,049",
+        "discount": "4,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "85",
+    "listName": "ROMBACH/MARTELANGE (GDL) (8832 )",
+    "name": "LUKOIL MARTELANGE (GDL)",
+    "address": "Route d'Arlon 15",
+    "location": "8832 ROMBACH/MARTELANGE (GDL)",
+    "officialStationId": "85",
+    "prices": [
+      {
+        "official": "1,963",
+        "lukoil": "1,953",
+        "discount": "1"
+      },
+      {
+        "official": "1,727",
+        "lukoil": "1,717",
+        "discount": "1"
+      },
+      {
+        "official": "1,932",
+        "lukoil": "1,922",
+        "discount": "1"
+      }
+    ]
+  },
+  {
+    "priceId": "33",
+    "listName": "RONSE (9600 )",
+    "name": "LUKOIL RONSE",
+    "address": "Leuzesteenweg, 1",
+    "location": "9600 RONSE",
+    "officialStationId": "33",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,183",
+        "discount": "13,2"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,818",
+        "discount": "11,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "210",
+    "listName": "RUMES (7611 )",
+    "name": "LUKOIL RUMES",
+    "address": "Ch. Montgomery 120",
+    "location": "7611 RUMES",
+    "officialStationId": "210",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,234",
+        "discount": "8,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,868",
+        "discount": "6,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "167",
+    "listName": "RUMST (2840 )",
+    "name": "LUKOIL RUMST",
+    "address": "Bussestraat 13",
+    "location": "2840 RUMST",
+    "officialStationId": "167",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,291",
+        "discount": "2,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,882",
+        "discount": "5,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "234",
+    "listName": "SCHILDE (2970 )",
+    "name": "LUKOIL SCHILDE",
+    "address": "Turnhoutsebaan 478",
+    "location": "2970 SCHILDE",
+    "officialStationId": "234",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,214",
+        "discount": "10,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,851",
+        "discount": "8,5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "268",
+    "listName": "SERAING (4100 )",
+    "name": "LUKOIL SERAING",
+    "address": "Rue du Charbonnage 18",
+    "location": "4100 SERAING",
+    "officialStationId": "268",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,231",
+        "discount": "8,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,812",
+        "discount": "12,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,069",
+        "discount": "2,5"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "272",
+    "listName": "SERAING (4100 )",
+    "name": "LUKOIL SERAING",
+    "address": "Rue de Many 111",
+    "location": "4100 SERAING",
+    "officialStationId": "272",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,231",
+        "discount": "8,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "21",
+    "listName": "SINT AMANDSBERG (9040 )",
+    "name": "LUKOIL SINT AMANDSBERG",
+    "address": "Antwerpsesteenweg, 758",
+    "location": "9040 SINT AMANDSBERG",
+    "officialStationId": "21",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,235",
+        "discount": "8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,856",
+        "discount": "8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "14",
+    "listName": "SINT ANDRIES (Brugge) (8200 )",
+    "name": "LUKOIL SINT ANDRIES",
+    "address": "Gistelsteenweg, 168",
+    "location": "8200 SINT ANDRIES (Brugge)",
+    "officialStationId": "14",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,029",
+        "discount": "6,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "187",
+    "listName": "SINT DENIJS-WESTREM (9051 )",
+    "name": "LUKOIL SINT DENIJS-WESTREM",
+    "address": "Beukenlaan 86",
+    "location": "9051 SINT DENIJS-WESTREM",
+    "officialStationId": "187",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "180",
+    "listName": "SINT GENESIUS RODE (1640 )",
+    "name": "LUKOIL SINT GENESIUS RODE",
+    "address": "Waterloosesteenweg 240",
+    "location": "1640 SINT GENESIUS RODE",
+    "officialStationId": "180",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,179",
+        "discount": "13,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "193",
+    "listName": "SINT NIKLAAS (9100 )",
+    "name": "LUKOIL SINT NIKLAAS",
+    "address": "Kleibeekstraat, 1",
+    "location": "9100 SINT NIKLAAS",
+    "officialStationId": "193",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,009",
+        "discount": "8,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "172",
+    "listName": "SINT PIETERS WOLUWE (1150 )",
+    "name": "LUKOIL CAFÉ SINT-PIETERS-WOLUWE",
+    "address": "Wezembeeklaan 20",
+    "location": "1150 SINT PIETERS WOLUWE",
+    "officialStationId": "172",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,204",
+        "discount": "11,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,810",
+        "discount": "12,6"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "183",
+    "listName": "SINT TRUIDEN (Melveren) (3800 )",
+    "name": "LUKOIL SINT TRUIDEN",
+    "address": "Hasseltsesteenweg 65",
+    "location": "3800 SINT TRUIDEN (Melveren)",
+    "officialStationId": "183",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,190",
+        "discount": "12,5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,826",
+        "discount": "11"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "1,984",
+        "discount": "11"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "60",
+    "listName": "SINT-DENIJS-WESTREM (9051 )",
+    "name": "LUKOIL SINT-DENIJS-WESTREM",
+    "address": "Steenweg op Kortrijk, 1054",
+    "location": "9051 SINT-DENIJS-WESTREM",
+    "officialStationId": "60",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,836",
+        "discount": "10"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,722",
+        "discount": "7"
+      }
+    ]
+  },
+  {
+    "priceId": "36",
+    "listName": "SINT-PIETERS LEEUW (1600 )",
+    "name": "LUKOIL SINT-PIETERS LEEUW",
+    "address": "Steenweg op Bergen, 368",
+    "location": "1600 SINT-PIETERS LEEUW",
+    "officialStationId": "36",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,149",
+        "discount": "16,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,769",
+        "discount": "16,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "1,999",
+        "discount": "9,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "267",
+    "listName": "SOIGNIES (7060 )",
+    "name": "LUKOIL SOIGNIES",
+    "address": "Boulevard Roosevelt 41",
+    "location": "7060 SOIGNIES",
+    "officialStationId": "267",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,215",
+        "discount": "10"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,850",
+        "discount": "8,6"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "231",
+    "listName": "ST-GENESIUS RODE (1640 )",
+    "name": "LUKOIL ST-GENESIUS RODE",
+    "address": "Zoniënwoudlaan, 140",
+    "location": "1640 ST-GENESIUS RODE",
+    "officialStationId": "231",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,247",
+        "discount": "6,8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,824",
+        "discount": "11,2"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "38",
+    "listName": "STROMBEEK-BEVER (1853 )",
+    "name": "LUKOIL STROMBEEK-BEVER",
+    "address": "Sint Annalaan, 275",
+    "location": "1853 STROMBEEK-BEVER",
+    "officialStationId": "38",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,265",
+        "discount": "5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,886",
+        "discount": "5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "255",
+    "listName": "TEMSE (9140 )",
+    "name": "LUKOIL TEMSE",
+    "address": "Krijgsbaan, 170",
+    "location": "9140 TEMSE",
+    "officialStationId": "255",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,179",
+        "discount": "13,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,849",
+        "discount": "8,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,069",
+        "discount": "2,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "63",
+    "listName": "TERHULPEN (1310 )",
+    "name": "LUKOIL TERHULPEN",
+    "address": "Broodcoorensstraat 56",
+    "location": "1310 TERHULPEN",
+    "officialStationId": "63",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,250",
+        "discount": "6,5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,882",
+        "discount": "5,4"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "61",
+    "listName": "TERNAT (1740 )",
+    "name": "LUKOIL TERNAT",
+    "address": "Assesteenweg, 113",
+    "location": "1740 TERNAT",
+    "officialStationId": "61",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,169",
+        "discount": "14,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,769",
+        "discount": "16,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,015",
+        "discount": "7,9"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "216",
+    "listName": "TERTRE (7333 )",
+    "name": "LUKOIL TERTRE",
+    "address": "Rue de la Rivièrette, 13",
+    "location": "7333 TERTRE",
+    "officialStationId": "216",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,167",
+        "discount": "14,8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,072",
+        "discount": "2,2"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "71",
+    "listName": "TERVUREN (3080 )",
+    "name": "LUKOIL TERVUREN",
+    "address": "Leuvensesteenweg 81",
+    "location": "3080 TERVUREN",
+    "officialStationId": "71",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,175",
+        "discount": "14"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,796",
+        "discount": "14"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "125",
+    "listName": "TORHOUT (8820 )",
+    "name": "LUKOIL TORHOUT",
+    "address": "Vredelaan 76",
+    "location": "8820 TORHOUT",
+    "officialStationId": "125",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,161",
+        "discount": "15,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,769",
+        "discount": "16,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,048",
+        "discount": "4,6"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "92",
+    "listName": "TOURNAI (7500 )",
+    "name": "LUKOIL TOURNAI",
+    "address": "Chaussée de Bruxelles, 149 A",
+    "location": "7500 TOURNAI",
+    "officialStationId": "92",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,171",
+        "discount": "14,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,069",
+        "discount": "2,5"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,752",
+        "discount": "4"
+      }
+    ]
+  },
+  {
+    "priceId": "34",
+    "listName": "UKKEL - Dieweg (1180 )",
+    "name": "LUKOIL UKKEL - Dieweg",
+    "address": "Dieweg/Wolvendaellaan",
+    "location": "1180 UKKEL - Dieweg",
+    "officialStationId": "34",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,315",
+        "discount": "0"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,936",
+        "discount": "0"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,094",
+        "discount": "0"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "178",
+    "listName": "UKKEL - Stallestraat/Roetaert (1180 )",
+    "name": "LUKOIL UKKEL - Stallestraat/Roetaert",
+    "address": "Stallestraat/Roetaertstraat, 3",
+    "location": "1180 UKKEL - Stallestraat/Roetaert",
+    "officialStationId": "178",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,265",
+        "discount": "5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,886",
+        "discount": "5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "262",
+    "listName": "VERVIERS (4802 )",
+    "name": "LUKOIL VERVIERS",
+    "address": "Avenue Reine Astrid 99",
+    "location": "4802 VERVIERS",
+    "officialStationId": "262",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,234",
+        "discount": "8,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,860",
+        "discount": "7,6"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "45",
+    "listName": "VILVOORDE (1800 )",
+    "name": "LUKOIL VILVOORDE",
+    "address": "Mechelsesteenweg 271",
+    "location": "1800 VILVOORDE",
+    "officialStationId": "45",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,305",
+        "discount": "1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,926",
+        "discount": "1"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "208",
+    "listName": "VISE (4600 )",
+    "name": "LUKOIL VISE",
+    "address": "Rue de Jupille, 15 B",
+    "location": "4600 VISE",
+    "officialStationId": "208",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,220",
+        "discount": "9,5"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,846",
+        "discount": "9"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "220",
+    "listName": "WAREMME (4300 )",
+    "name": "LUKOIL WAREMME",
+    "address": "Rue Saint-Eloi 2A",
+    "location": "4300 WAREMME",
+    "officialStationId": "220",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,195",
+        "discount": "12"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,816",
+        "discount": "12"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,792",
+        "discount": "0"
+      }
+    ]
+  },
+  {
+    "priceId": "40",
+    "listName": "WASMUEL (7390 )",
+    "name": "LUKOIL WASMUEL",
+    "address": "Route de Mons, 81",
+    "location": "7390 WASMUEL",
+    "officialStationId": "40",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,209",
+        "discount": "10,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,811",
+        "discount": "12,5"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "120",
+    "listName": "WAVRE (1300 )",
+    "name": "LUKOIL WAVRE",
+    "address": "Chaussée de Louvain 199",
+    "location": "1300 WAVRE",
+    "officialStationId": "120",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,193",
+        "discount": "12,2"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,924",
+        "discount": "1,2"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "207",
+    "listName": "WAVRE (1300 )",
+    "name": "LUKOIL WAVRE",
+    "address": "Ch. de Namur 155",
+    "location": "1300 WAVRE",
+    "officialStationId": "207",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,193",
+        "discount": "12,2"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,914",
+        "discount": "2,2"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "174",
+    "listName": "WEZEMBEEK-OPPEM (1970 )",
+    "name": "LUKOIL WEZEMBEEK-OPPEM",
+    "address": "Mechelsesteenweg 254",
+    "location": "1970 WEZEMBEEK-OPPEM",
+    "officialStationId": "174",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,194",
+        "discount": "12,1"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,800",
+        "discount": "13,6"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "6",
+    "listName": "WILRIJK (2610 )",
+    "name": "LUKOIL WILRIJK",
+    "address": "Boomsesteenweg, 54",
+    "location": "2610 WILRIJK",
+    "officialStationId": "6",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,249",
+        "discount": "6,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,879",
+        "discount": "5,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "67",
+    "listName": "WILRIJK (2610 )",
+    "name": "LUKOIL WILRIJK",
+    "address": "Moretuslei, 419",
+    "location": "2610 WILRIJK",
+    "officialStationId": "67",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,259",
+        "discount": "5,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,889",
+        "discount": "4,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "0,792",
+        "lukoil": "0,742",
+        "discount": "5"
+      }
+    ]
+  },
+  {
+    "priceId": "215",
+    "listName": "WILSELE (3012 )",
+    "name": "LUKOIL WILSELE",
+    "address": "Aarschotsesteenweg 267",
+    "location": "3012 WILSELE",
+    "officialStationId": "215",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,161",
+        "discount": "15,4"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,777",
+        "discount": "15,9"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "70",
+    "listName": "WOMMELGEM (2160 )",
+    "name": "LUKOIL WOMMELGEM",
+    "address": "Autolei, 140",
+    "location": "2160 WOMMELGEM",
+    "officialStationId": "70",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,157",
+        "discount": "15,8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,804",
+        "discount": "13,2"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,061",
+        "discount": "3,3"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "133",
+    "listName": "WOMMELGEM (2160 )",
+    "name": "LUKOIL CAFÉ WOMMELGEM",
+    "address": "Kempenlaan 10",
+    "location": "2160 WOMMELGEM",
+    "officialStationId": "133",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,167",
+        "discount": "14,8"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,809",
+        "discount": "12,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,039",
+        "discount": "5,5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "136",
+    "listName": "ZAVENTEM (1930 )",
+    "name": "LUKOIL ZAVENTEM",
+    "address": "Leuvensesteenweg, 522",
+    "location": "1930 ZAVENTEM",
+    "officialStationId": "136",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,196",
+        "discount": "11,9"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,808",
+        "discount": "12,8"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,062",
+        "discount": "3,2"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "129",
+    "listName": "ZELLIK (1731 )",
+    "name": "LUKOIL ZELLIK",
+    "address": "Brusselsesteenweg, 474",
+    "location": "1731 ZELLIK",
+    "officialStationId": "129",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,179",
+        "discount": "13,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "179",
+    "listName": "ZEVERGEM (9840 )",
+    "name": "LUKOIL ZEVERGEM",
+    "address": "Grote Steenweg 16",
+    "location": "9840 ZEVERGEM",
+    "officialStationId": "179",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,159",
+        "discount": "15,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,799",
+        "discount": "13,7"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,084",
+        "discount": "1"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "261",
+    "listName": "ZOERSEL (2980 )",
+    "name": "LUKOIL ZOERSEL",
+    "address": "Rodendijk 58",
+    "location": "2980 ZOERSEL",
+    "officialStationId": "261",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,229",
+        "discount": "8,6"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,826",
+        "discount": "11"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,052",
+        "discount": "4,2"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  },
+  {
+    "priceId": "294",
+    "listName": "ZONHOVEN (3520 )",
+    "name": "LUKOIL Express ZONHOVEN",
+    "address": "Molenweg 95",
+    "location": "3520 ZONHOVEN",
+    "officialStationId": "294",
+    "prices": [
+      {
+        "official": "2,315",
+        "lukoil": "2,228",
+        "discount": "8,7"
+      },
+      {
+        "official": "1,936",
+        "lukoil": "1,874",
+        "discount": "6,2"
+      },
+      {
+        "official": "2,094",
+        "lukoil": "2,044",
+        "discount": "5"
+      },
+      {
+        "official": "-",
+        "lukoil": "-",
+        "discount": "-"
+      }
+    ]
+  }
+]
